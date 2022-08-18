@@ -2,7 +2,7 @@
  * @Description: NetWork相关
  * @Autor: Pi
  * @Date: 2022-08-08 18:24:13
- * @LastEditTime: 2022-08-16 20:58:26
+ * @LastEditTime: 2022-08-18 18:41:47
  */
 #include "Network_Task.h"
 #include "Bsp_Uart.h"
@@ -29,7 +29,7 @@ void Network_Task(void const *argument)
   /*关闭回显*/
   Bsp_ESP8266_Echo(0);
 
-  /*开启按键功能*/
+  /*开启按键功能*/······
   Bsp_ESP8266_KEY_Enable(1);
 
 
