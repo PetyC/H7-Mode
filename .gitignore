@@ -7,3 +7,4 @@ DebugConfig
 RTE
 *.cp
 *.HEX
+*.uvoptx
