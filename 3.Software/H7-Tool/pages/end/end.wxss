@@ -1,0 +1,16 @@
+/* pages/end/end.wxss */
+
+.indexEnd{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+
+.name{
+  width: 400rpx;
+  height: 100rpx;
+  font-size: 50rpx;
+  text-align: center;  
+}

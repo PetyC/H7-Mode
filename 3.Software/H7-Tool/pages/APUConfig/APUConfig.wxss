@@ -1,0 +1,73 @@
+/* pages/APUConfig/APUConfig.wxss */
+page{ 
+  height: 100%; 
+ } 
+   
+ .container { 
+  height: 100%; 
+  display: flex; 
+  flex-direction: column; 
+  padding: 0; 
+  box-sizing: border-box; 
+  background-color: #f2f2f2
+ } 
+   
+ /*提示信息*/
+ .hint {
+   display: flex; 
+   flex-direction:  column;
+   margin-top: 10rpx
+ }
+ 
+ /*表单内容*/
+ .login-from { 
+  margin-top: 50px; 
+  width: 90%;
+  flex: auto; 
+  height:100%; 
+ } 
+   
+ .inputView { 
+  display: flex; 
+  flex-direction:  row; 
+  background-color: #fff; 
+ } 
+   
+ /*Wi-Fi名称和密码两个字*/
+ .loginLab { 
+   margin-left: 10px;
+   margin-top: 15px;
+   margin-bottom: 15px;
+   color: #545454; 
+   font-size: 16px
+ } 
+ 
+ .inputText { 
+  margin-left: 10px;
+  text-align: left; 
+  margin-top: 15px; 
+  color:  black; 
+  font-size: 16px
+ } 
+   
+ .line { 
+  width: 100%; 
+  height: 1px; 
+  background-color: #cccccc; 
+  margin-top: 1px; 
+ } 
+ /*按钮*/
+ .BindClickView { 
+  width: 100%; 
+  height: auto; 
+  background-color: #f2f2f2; 
+  margin-top: 0px; 
+  margin-bottom: 0px; 
+  padding-bottom: 0px; 
+ } 
+   
+ .BindClick { 
+  width: 95%; 
+  margin-top: 35px; 
+ }
+ 

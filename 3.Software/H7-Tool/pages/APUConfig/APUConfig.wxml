@@ -1,0 +1,62 @@
+<!--pages/APUConfig/APUConfig.wxml-->
+
+
+<view class="container"> 
+  <!--提示-->
+
+
+  <view class="hint"> 
+    <text style="color: #545454; font-size:35rpx;">绑定设备前请确定完成以下步骤</text>
+
+    <view> 
+      <text style="color:#09bb07; font-size:35rpx;">①</text>
+      <text style="font-size:35rpx;" space='nbsp'>  请先连接自家路由器热点</text>
+    </view>
+
+    <view> 
+      <text style="color:#09bb07; font-size:35rpx;">②</text>
+      <text style="font-size:35rpx;" space='nbsp'>  给设备上电</text>
+    </view>
+    
+    <view> 
+      <text style="color:#09bb07; font-size:35rpx;">③</text>
+      <text style="font-size:35rpx;" space='nbsp'>  长按"配置按键"大约3S,直至指示灯快闪</text>
+    </view>
+    
+    <view> 
+      <text style="color:#09bb07; font-size:35rpx;">④</text>
+      <text style="font-size:35rpx;" space='nbsp'>  输入路由器密码，点击“添加设备”按钮</text>
+    </view>
+    
+    <view> 
+      <text style="color:#09bb07; font-size:35rpx;" >⑥</text>
+      <text style="font-size:35rpx;" space='nbsp'>  绑定成功后,软件自动跳转到设备页面</text>
+    </view>
+
+  </view> 
+
+
+  <view class="login-from"> 
+    <!--WiFi名称-->
+    <view class="inputView"> 
+      <label class="loginLab">WiFi名称:</label> 
+      <input class="inputText" placeholder="请输入路由器热点" bindinput="ssidInput" value="{{ssidValue}}"/> 
+    </view> 
+    <view class="line"></view> 
+    
+    <!--WiFi密码-->
+    <view class="inputView"> 
+      <label class="loginLab">WiFi密码:</label> 
+      <input class="inputText" placeholder="请输入密码" bindinput="passwordInput"/> 
+    </view> 
+    
+    <!--按钮-->
+    <view class="BindClickView"> 
+      <button class="BindClick" type="primary"  bindtap="BindClick">绑定设备</button> 
+    </view> 
+  </view> 
+</view>
+
+
+
+

@@ -1,0 +1,7 @@
+<view class="indexContainer">
+  <image class = "BaseUrl" src=""></image>
+  <text class = "name"> H7-Tool\n配网工具 </text>
+
+  <button class="Button" bindtap="StartButton">开始配网</button>
+
+</view>

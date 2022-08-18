@@ -1,0 +1,9 @@
+<!--pages/end/end.wxml-->
+<view class="indexEnd">
+ 
+  <text> \n\n\n </text>
+ <text class = "name"> Core-H7\n配网成功 </text>
+
+
+
+</view>
