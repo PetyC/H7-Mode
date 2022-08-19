@@ -29,7 +29,7 @@ void Network_Task(void const *argument)
   /*关闭回显*/
   Bsp_ESP8266_Echo(0);
 
-  /*开启按键功能*/······
+  /*开启按键功能*/
   Bsp_ESP8266_KEY_Enable(1);
 
 
@@ -48,7 +48,7 @@ void Network_Task(void const *argument)
       {
         KEY_Value = str_to_int(&Buff[4]);
 
-        switch (Buff[4])
+        switch (KEY_Value)
         {
         case Key_Right:
 
