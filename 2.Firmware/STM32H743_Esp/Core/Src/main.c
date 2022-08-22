@@ -132,10 +132,10 @@ int main(void)
 //  Bsp_ESP8266_Restore();
 
   Bsp_LCD_Init();
-  Bsp_LCD_FullColor(0xff50);
-  HAL_Delay(1000);
-    Bsp_LCD_FullColor(0x01f0);
-//    ST7735S_Init();
+  Bsp_LCD_FullColor(0x5555);
+  HAL_Delay(10);
+  Bsp_LCD_FullColor(0xffe0);
+ 
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -147,8 +147,12 @@ while (1)
     //HAL_GPIO_WritePin(ESP_POW_GPIO_Port, ESP_POW_Pin, GPIO_PIN_RESET);
 
     //Bsp_ESP8266_PowerOn();
-
-
+    Bsp_LCD_FullColor(0x0000);
+    Bsp_LCD_FullColor(0xfe19 );
+    Bsp_LCD_FullColor(0x8010 );
+    Bsp_LCD_FullColor(0x1f );
+    Bsp_LCD_FullColor(0x400 );
+ 
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

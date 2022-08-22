@@ -509,6 +509,7 @@ void ST7735S_normalMode(void)
     SPI_Transmit(CMD1, sizeof(CMD1));
 }
 
+
 void ST7735S_partialArea(uint16_t from, uint16_t to)
 {
     /* set ml */
