@@ -12,6 +12,9 @@
 #include "lv_port_disp.h"
 #include <stdbool.h>
 
+/*User*/
+#include "st7735s.h"
+
 /*********************
  *      DEFINES
  *********************/
@@ -162,20 +165,21 @@ void disp_disable_update(void)
  *'lv_disp_flush_ready()' has to be called when finished.*/
 static void disp_flush(lv_disp_drv_t * disp_drv, const lv_area_t * area, lv_color_t * color_p)
 {
-    if(disp_flush_enabled) {
-        /*The most simple case (but also the slowest) to put all pixels to the screen one-by-one*/
+//    if(disp_flush_enabled) {
+//        /*The most simple case (but also the slowest) to put all pixels to the screen one-by-one*/
 
-        int32_t x;
-        int32_t y;
-        for(y = area->y1; y <= area->y2; y++) {
-            for(x = area->x1; x <= area->x2; x++) {
-                /*Put a pixel to the display. For example:*/
-                /*put_px(x, y, *color_p)*/
-                color_p++;
-            }
-        }
-    }
-
+//        int32_t x;
+//        int32_t y;
+//        for(y = area->y1; y <= area->y2; y++) {
+//            for(x = area->x1; x <= area->x2; x++) {
+//                /*Put a pixel to the display. For example:*/
+//                /*put_px(x, y, *color_p)*/
+//                color_p++;
+//            }
+//        }
+//    }
+      
+  flushBuffer();
     /*IMPORTANT!!!
      *Inform the graphics library that you are ready with the flushing*/
     lv_disp_flush_ready(disp_drv);

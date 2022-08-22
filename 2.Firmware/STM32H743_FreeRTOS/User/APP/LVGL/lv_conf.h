@@ -28,6 +28,8 @@
 
 #define LV_COLOR_CHROMA_KEY lv_color_hex(0x00ff00)
 
+#define MY_DISP_HOR_RES     128
+#define MY_DISP_VER_RES     128
 /*=========================
    STDLIB WRAPPER SETTINGS
  *=========================*/
