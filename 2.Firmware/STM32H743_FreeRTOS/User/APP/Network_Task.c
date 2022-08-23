@@ -2,12 +2,13 @@
  * @Description: NetWork相关
  * @Autor: Pi
  * @Date: 2022-08-08 18:24:13
- * @LastEditTime: 2022-08-18 18:41:47
+ * @LastEditTime: 2022-08-24 02:05:51
  */
 #include "Network_Task.h"
 #include "Bsp_Uart.h"
 
 extern osMutexId Uart_MutexHandle;
+extern osMessageQId KEY_QueueHandle;
 
 /**
  * @brief FreeRTOS运行的任务
@@ -25,7 +26,9 @@ void Network_Task(void const *argument)
 
   /*ESP8266上电*/
   Bsp_ESP8266_PowerOn();
-
+  
+  osDelay(2000);
+  
   /*关闭回显*/
   Bsp_ESP8266_Echo(0);
 
@@ -39,6 +42,7 @@ void Network_Task(void const *argument)
 
   for (;;)
   {
+    osMutexWait(Uart_MutexHandle, osWaitForever);
 
     while (Bsp_UART_Get_RX_Buff_Occupy(&huart1) != 0)
     {
@@ -48,22 +52,7 @@ void Network_Task(void const *argument)
       {
         KEY_Value = str_to_int(&Buff[4]);
 
-        switch (KEY_Value)
-        {
-        case Key_Right:
-
-          break;
-        case Key_Light:
-
-          break;
-
-        case Key_Press:
-
-          break;
-
-        default:
-          break;
-        }
+        osMessagePut(KEY_QueueHandle , (uint32_t)KEY_Value , osWaitForever) ;
       }
       else if ((memcmp(Buff, "WIFI CONNECTED\r\n", 4) == 0) || (memcmp(Buff, "WIFI GOT IP\r\n", 4) == 0)) // WIFI连接成功
       {
@@ -77,6 +66,7 @@ void Network_Task(void const *argument)
       memset(Buff, NULL, sizeof(Buff));
     }
 
+    osMutexRelease(Uart_MutexHandle);
     osDelay(50);
   }
 }

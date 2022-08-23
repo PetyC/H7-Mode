@@ -13,11 +13,13 @@
 #include <stdbool.h>
 
 /*User*/
+#include "Bsp_st7735s.h"
 #include "st7735s.h"
 
 /*********************
  *      DEFINES
  *********************/
+
 #ifndef MY_DISP_HOR_RES
     #warning Please define or replace the macro MY_DISP_HOR_RES with the actual screen width, default value 320 is used for now.
     #define MY_DISP_HOR_RES    320
@@ -179,7 +181,8 @@ static void disp_flush(lv_disp_drv_t * disp_drv, const lv_area_t * area, lv_colo
 //        }
 //    }
       
-  flushBuffer();
+    //LCD_FillColor(area->x1 , area->y1 , area->x2 , area->y2 , (uint16_t *)color_p);
+    LCD_FillColor_DMA(area->x1 , area->y1 , area->x2 , area->y2 , (uint16_t *)color_p);
     /*IMPORTANT!!!
      *Inform the graphics library that you are ready with the flushing*/
     lv_disp_flush_ready(disp_drv);

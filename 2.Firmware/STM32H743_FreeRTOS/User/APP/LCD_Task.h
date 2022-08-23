@@ -2,7 +2,7 @@
  * @Description: LCD显示任务
  * @Autor: Pi
  * @Date: 2022-06-27 15:20:33
- * @LastEditTime: 2022-08-08 18:47:14
+ * @LastEditTime: 2022-08-23 03:02:06
  */
 #ifndef LCD_TASK_H
 #define LCD_TASK_H
@@ -19,10 +19,12 @@
 
 
 /*BSP相关文件*/
+#include "Bsp_st7735s.h"
 #include "st7735s.h"
-#include "fonts.h"
-#include "gfx.h"
 
+#include "lvgl.h"
+#include "lv_port_disp.h"
+#include "lv_port_indev.h"
 
 
 

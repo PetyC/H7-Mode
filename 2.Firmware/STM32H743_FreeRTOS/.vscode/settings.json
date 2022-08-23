@@ -31,6 +31,9 @@
       "gpio.h": "c",
       "bsp_uart.h": "c",
       "bsp_esp8266.h": "c",
-      "network.h": "c"
+      "network.h": "c",
+      "string.h": "c",
+      "bsp_st7735s.h": "c",
+      "lv_font.h": "c"
     }
 }

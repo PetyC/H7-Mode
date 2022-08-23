@@ -1,47 +1,66 @@
 /*
- * @Description: 
+ * @Description:
  * @Autor: Pi
- * @Date: 2022-06-09 18:54:44
- * @LastEditTime: 2022-06-27 15:05:26
+ * @Date: 2022-08-18 18:50:27
+ * @LastEditTime: 2022-08-23 16:26:05
  */
-#ifndef  BSP_S7735_H
-#define  BSP_S7735_H
+#ifndef BSP_ST7735S_H
+#define BSP_ST7735S_H
 
-#include <inttypes.h>
+#include <string.h>
 #include "main.h"
+#include "stm32h7xx.h"
+#include "spi.h"
 
-/*屏幕尺寸*/
-#define defWIDTH   128
-#define defHEIGHT  128
-#define defXSTART  1
-#define defYSTART  2
+/*SPI句柄*/
+#define SPI_HANDLE (hspi1)
+extern SPI_HandleTypeDef SPI_HANDLE;
+
+/*DMA句柄*/
+#define DMA_HANDLE (hdma_spi1_tx)
+extern DMA_HandleTypeDef DMA_HANDLE;
+
+/*TIM句柄*/
+#define TIM_HANDLE (htim1)
+extern TIM_HandleTypeDef TIM_HANDLE;
+#define TIM_CHANNEL TIM_CHANNEL_1
+
+/*IO操作*/
+#define LCD_RES_Low()  LCD_RES_GPIO_Port->BSRR = (uint32_t)LCD_RES_Pin << 16U
+#define LCD_RES_High() LCD_RES_GPIO_Port->BSRR = LCD_RES_Pin
+
+#define LCD_DC_Low()   LCD_DC_GPIO_Port->BSRR = (uint32_t)LCD_DC_Pin << 16U
+#define LCD_DC_High()  LCD_DC_GPIO_Port->BSRR = LCD_DC_Pin
+
+/*屏幕分辨率*/
+#define X_MAX_PIXEL 128
+#define Y_MAX_PIXEL 128
 
 /*显示方向 0~3*/
 #define USE_HORIZONTAL 2
 
-#define BUFFER     //全帧宽度*高度* 2字节大小。非常快
-//#define BUFFER1        //实际上没有缓冲写，很慢，因为内存有限
-//#define HVBUFFER      //行缓冲区宽度* 2字节大小。用作行或列缓冲区。
+/*是否使用FreeRTOS*/
+#define USE_FreeRTOS 1
 
-/*指定区域存放数据*/
-#define SRAMD3 __attribute__((section(".RAM_D3")))
+/*LCD背光接口*/
+void Bsp_LCD_BacklightPct(uint8_t pct);
 
-/*IO操作*/
-#define Pin_RES_Low()   LCD_RES_GPIO_Port->BSRR = (uint32_t)LCD_RES_Pin << 16U
-#define Pin_RES_High()  LCD_RES_GPIO_Port->BSRR = LCD_RES_Pin
+void Bsp_LCD_Delay(uint16_t delay);
 
-#define Pin_DC_Low()    LCD_DC_GPIO_Port->BSRR = (uint32_t)LCD_DC_Pin << 16U  
-#define Pin_DC_High()   LCD_DC_GPIO_Port->BSRR = LCD_DC_Pin                  
+/*数据长度设置*/
+void Bsp_LCD_SPI_SET8B(void);
+void Bsp_LCD_SPI_SET16B(void);
 
+/*DMA内存设置*/
+void Bsp_LCD_DMA_SetMemInc(uint8_t Enable);
 
-
-void SPI_Transmit(uint8_t *data , uint16_t len);
-void SPI_TransmitCmd(uint8_t *data , uint16_t len);
-void SPI_TransmitData(uint8_t *data , uint16_t len);
-
-void Backlight_Pct(uint8_t pct);
-void _Delay(uint32_t d);
-
-
+/*数据发送API*/
+void Bsp_LCD_SendData_16B(uint16_t data);
+void Bsp_LCD_SendData_8B(uint8_t data);
+void Bsp_LCD_SendCmd_16B(uint16_t data);
+void Bsp_LCD_SendCmd_8B(uint8_t data);
+void Bsp_LCD_SendData(uint8_t *data, uint16_t len);
+void Bsp_LCD_Send_DMA(uint8_t *data, uint16_t len);
+uint8_t Bsp_LCD_TX_InquireFinish(void);
 
 #endif

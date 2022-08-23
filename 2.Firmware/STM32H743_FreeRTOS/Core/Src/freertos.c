@@ -53,9 +53,11 @@ osThreadId defaultTaskHandle;
 osThreadId KEY_TaskHandle;
 osThreadId LCD_TaskHandle;
 osThreadId Network_TaskHandle;
+osMessageQId KEY_QueueHandle;
 osMutexId Uart_MutexHandle;
 osSemaphoreId Key_Binary_SemHandle;
 osSemaphoreId Network_BinarySemHandle;
+osSemaphoreId LCD_BinarySemHandle;
 
 /* Private function prototypes -----------------------------------------------*/
 /* USER CODE BEGIN FunctionPrototypes */
@@ -172,6 +174,10 @@ void MX_FREERTOS_Init(void) {
   osSemaphoreDef(Network_BinarySem);
   Network_BinarySemHandle = osSemaphoreCreate(osSemaphore(Network_BinarySem), 1);
 
+  /* definition and creation of LCD_BinarySem */
+  osSemaphoreDef(LCD_BinarySem);
+  LCD_BinarySemHandle = osSemaphoreCreate(osSemaphore(LCD_BinarySem), 1);
+
   /* USER CODE BEGIN RTOS_SEMAPHORES */
   /* add semaphores, ... */
   /* USER CODE END RTOS_SEMAPHORES */
@@ -179,6 +185,11 @@ void MX_FREERTOS_Init(void) {
   /* USER CODE BEGIN RTOS_TIMERS */
   /* start timers, add new ones, ... */
   /* USER CODE END RTOS_TIMERS */
+
+  /* Create the queue(s) */
+  /* definition and creation of KEY_Queue */
+  osMessageQDef(KEY_Queue, 3, uint8_t);
+  KEY_QueueHandle = osMessageCreate(osMessageQ(KEY_Queue), NULL);
 
   /* USER CODE BEGIN RTOS_QUEUES */
   /* add queues, ... */
@@ -194,7 +205,7 @@ void MX_FREERTOS_Init(void) {
   KEY_TaskHandle = osThreadCreate(osThread(KEY_Task), NULL);
 
   /* definition and creation of LCD_Task */
-  osThreadDef(LCD_Task, Start_LCD_Task, osPriorityNormal, 0, 256);
+  osThreadDef(LCD_Task, Start_LCD_Task, osPriorityNormal, 0, 1024);
   LCD_TaskHandle = osThreadCreate(osThread(LCD_Task), NULL);
 
   /* definition and creation of Network_Task */
