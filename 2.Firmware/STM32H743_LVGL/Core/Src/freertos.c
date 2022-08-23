@@ -56,6 +56,7 @@ osThreadId Network_TaskHandle;
 osMutexId Uart_MutexHandle;
 osSemaphoreId Key_Binary_SemHandle;
 osSemaphoreId Network_BinarySemHandle;
+osSemaphoreId LCD_BinarySemHandle;
 
 /* Private function prototypes -----------------------------------------------*/
 /* USER CODE BEGIN FunctionPrototypes */
@@ -172,6 +173,10 @@ void MX_FREERTOS_Init(void) {
   osSemaphoreDef(Network_BinarySem);
   Network_BinarySemHandle = osSemaphoreCreate(osSemaphore(Network_BinarySem), 1);
 
+  /* definition and creation of LCD_BinarySem */
+  osSemaphoreDef(LCD_BinarySem);
+  LCD_BinarySemHandle = osSemaphoreCreate(osSemaphore(LCD_BinarySem), 1);
+
   /* USER CODE BEGIN RTOS_SEMAPHORES */
   /* add semaphores, ... */
   /* USER CODE END RTOS_SEMAPHORES */
@@ -194,7 +199,7 @@ void MX_FREERTOS_Init(void) {
   KEY_TaskHandle = osThreadCreate(osThread(KEY_Task), NULL);
 
   /* definition and creation of LCD_Task */
-  osThreadDef(LCD_Task, Start_LCD_Task, osPriorityNormal, 0, 1024);
+  osThreadDef(LCD_Task, Start_LCD_Task, osPriorityAboveNormal, 0, 2048);
   LCD_TaskHandle = osThreadCreate(osThread(LCD_Task), NULL);
 
   /* definition and creation of Network_Task */

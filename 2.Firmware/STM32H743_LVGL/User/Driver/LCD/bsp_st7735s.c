@@ -2,19 +2,21 @@
  * @Description:
  * @Autor: Pi
  * @Date: 2022-08-18 18:50:19
- * @LastEditTime: 2022-08-22 17:47:43
+ * @LastEditTime: 2022-08-23 16:25:15
  */
 #include "bsp_st7735s.h"
 
 #if USE_FreeRTOS == 1
 #include "FreeRTOS.h"
 #include "task.h"
-#endif
+#include "cmsis_os.h"
 
+extern osSemaphoreId LCD_BinarySemHandle;
+
+#else
 /*发送完成标志*/
-extern uint8_t LCD_TX_DMA_FLAG;
-
-
+uint8_t LCD_TX_DMA_FLAG = 0;
+#endif
 
 /**
  * @brief LCD延时函数
@@ -23,16 +25,8 @@ extern uint8_t LCD_TX_DMA_FLAG;
  */
 void Bsp_LCD_Delay(uint16_t delay)
 {
-//#if (USE_FreeRTOS == 0)
-//  HAL_Delay(delay);
-//#else
-//  vTaskDelay(1000);
-//#endif
-  
   HAL_Delay(delay);
 }
-
-
 
 /**
  * @brief 发送1个8位命令
@@ -54,10 +48,6 @@ void Bsp_LCD_SendCmd_8B(uint8_t data)
  */
 void Bsp_LCD_SendCmd_16B(uint16_t data)
 {
-  /* uint8_t CMD[2] = {0};
-    CMD[0] = data >> 8;
-    CMD[1] = data & 0XFF;
-  */
   LCD_DC_Low();
   Bsp_LCD_SPI_SET16B();
   HAL_SPI_Transmit(&SPI_HANDLE, (uint8_t *)&data, 1, 0xFF);
@@ -84,10 +74,6 @@ void Bsp_LCD_SendData_8B(uint8_t data)
  */
 void Bsp_LCD_SendData_16B(uint16_t data)
 {
-  /* uint8_t CMD[2] = {0};
-  CMD[0] = data >> 8;
-  CMD[1] = data & 0XFF;
-*/
   LCD_DC_High();
   Bsp_LCD_SPI_SET16B();
   HAL_SPI_Transmit(&SPI_HANDLE, (uint8_t *)&data, 1, 0xFF);
@@ -185,9 +171,31 @@ void Bsp_LCD_BacklightPct(uint8_t pct)
   __HAL_TIM_SET_COMPARE(&TIM_HANDLE, TIM_CHANNEL, New_CCR);
 }
 
-
-
+/**
+ * @brief 查询DMA发送是否完成
+ * @return {*}
+ */
+uint8_t Bsp_LCD_TX_InquireFinish(void)
+{
 #if (USE_FreeRTOS == 0)
+  if (LCD_TX_DMA_FLAG == 0)
+  {
+    return 0;
+  }
+  else
+  {
+    LCD_TX_DMA_FLAG = 0;
+    return 1;
+  }
+#else
+
+  osSemaphoreWait(LCD_BinarySemHandle, osWaitForever);
+
+  return 1;
+
+#endif
+}
+
 /**
  * @brief SPI发送完成中断
  * @param {SPI_HandleTypeDef} *hspi
@@ -197,9 +205,11 @@ void HAL_SPI_TxCpltCallback(SPI_HandleTypeDef *hspi)
 {
   if (hspi->Instance == SPI1)
   {
+#if (USE_FreeRTOS == 0)
     LCD_TX_DMA_FLAG = 1;
-  }
-}  
-  
+#else
+    osSemaphoreRelease(LCD_BinarySemHandle);
+    portYIELD_FROM_ISR(pdTRUE);
 #endif
-
+  }
+}

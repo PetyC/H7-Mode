@@ -3,23 +3,22 @@
         {
             "name": "STM32",
             "includePath": [
-               // "D:/Software/IDE/Keil5/ARM/ARMCC/**",		//keil5 目录
-                "E:/software/IDE/Keil_v5/ARM/ARMCC/**", //keil5 目录
+                "E:/software/IDE/Keil_v5/ARM/ARMCC/**",
                 "${workspaceFolder}/**",
-                "${workspaceFolder}/User/**"
+                "${workspaceFolder}/User/**",
+                "${workspaceFolder}/Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS"
             ],
             "defines": [
                 "_DEBUG",
                 "UNICODE",
                 "_UNICODE",
                 "USE_HAL_DRIVER",
-                "STM32H743xx" //替换成相对应的单片机型号宏定义
+                "STM32H743xx"
             ],
             "intelliSenseMode": "${default}",
             "cStandard": "c99",
             "cppStandard": "c++11",
-            "compilerPath": "E:\\software\\Code_Tool\\mingw64\\bin\\gcc.exe"        //替换成自己GCC所在目录
-            //"compilerPath": "D:\\Software\\CodeTool\\mingw64\\bin\\gcc.exe"        //替换成自己GCC所在目录
+            "compilerPath": "E:\\software\\Code_Tool\\mingw64\\bin\\gcc.exe"
         }
     ],
     "version": 4

@@ -1,12 +1,13 @@
 #include "st7735s.h"
 
+#if USE_FreeRTOS == 1
+#include "FreeRTOS.h"
+#include "task.h"
+#include "cmsis_os.h"
+#endif
 
-#define LCD_Buff_Len (uint16_t)(X_MAX_PIXEL * Y_MAX_PIXEL)
-static uint16_t LCD_Buff[LCD_Buff_Len] __attribute__((section(".ARM.__at_0x24000000")));
-
-/*发送完成标志*/
-uint8_t LCD_TX_DMA_FLAG = 0;
-
+#define LCD_PIX_Len (uint16_t)(X_MAX_PIXEL * Y_MAX_PIXEL)
+//static uint16_t LCD_Buff[LCD_PIX_Len] __attribute__((section(".ARM.__at_0x24000000")));
 
 /**
  * @brief LCD背光控制
@@ -179,15 +180,15 @@ void LCD_FullColor(uint16_t Color)
 
   LCD_DC_High();
 
-  LCD_TX_DMA_FLAG = 0;
   Bsp_LCD_SPI_SET16B();
   Bsp_LCD_DMA_SetMemInc(0);
-  
-  Bsp_LCD_Send_DMA( (uint8_t *)&Color, LCD_Buff_Len);
-  
+
+  Bsp_LCD_Send_DMA((uint8_t *)&Color, LCD_PIX_Len);
+
   /*等待发送完成*/
-  while (LCD_TX_DMA_FLAG == 0);
-  
+  while (Bsp_LCD_TX_InquireFinish() == 0)
+    ;
+
   /*发送完毕后拉低命令引脚*/
   LCD_DC_Low();
 
@@ -204,21 +205,22 @@ void LCD_DisplayImages(uint16_t *Images)
   LCD_SetRegion(0, 0, X_MAX_PIXEL - 1, Y_MAX_PIXEL - 1);
   LCD_DC_High();
 
-  LCD_TX_DMA_FLAG = 0;
   Bsp_LCD_SPI_SET16B();
   Bsp_LCD_DMA_SetMemInc(1);
 
-  Bsp_LCD_Send_DMA( (uint8_t *)&Images, LCD_Buff_Len);
+  Bsp_LCD_Send_DMA((uint8_t *)&Images, LCD_PIX_Len);
 
   /*等待发送完成*/
-  while (LCD_TX_DMA_FLAG == 0);
+  while (Bsp_LCD_TX_InquireFinish() == 0)
+    ;
 
-  
   /*发送完毕后拉低命令引脚*/
   LCD_DC_Low();
 
   Bsp_LCD_SPI_SET8B();
 }
+
+
 
 
 /**
@@ -230,26 +232,64 @@ void LCD_DisplayImages(uint16_t *Images)
  * @param {uint16_t} *data
  * @return {*}
  */
-void LCD_FillColor(uint16_t x_start, uint16_t y_start, uint16_t x_end, uint16_t y_end , uint16_t *data)
+void LCD_FillColor(uint16_t x_start, uint16_t y_start, uint16_t x_end, uint16_t y_end, uint16_t *data)
 {
-  LCD_SetRegion(x_start,  y_start,  x_end,  y_end);
+  LCD_SetRegion(x_start, y_start, x_end, y_end);
 
   uint16_t height = 0;
   uint16_t width = 0;
 
-  width = x_end- x_start + 1;
+  width = x_end - x_start + 1;
   height = y_end - y_start + 1;
 
-
-  LCD_DC_High();
-  //Bsp_LCD_DMA_SetMemInc(1);
   Bsp_LCD_SPI_SET16B();
 
-  HAL_SPI_Transmit(&SPI_HANDLE , (uint8_t *)data, (width * height) , 0XFF);
- // Bsp_LCD_Send_DMA((uint8_t *)data, (width * height));
+  Bsp_LCD_SendData( (uint8_t *)data, (width * height));
+
+  LCD_DC_Low();
+}
+
+
+/**
+ * @brief 某个区域填充颜色 DMA方式
+ * @param {uint16_t} x_start
+ * @param {uint16_t} y_start
+ * @param {uint16_t} x_end
+ * @param {uint16_t} y_end
+ * @param {uint16_t} *data
+ * @return {*}
+ */
+void LCD_FillColor_DMA(uint16_t x_start, uint16_t y_start, uint16_t x_end, uint16_t y_end, uint16_t *data)
+{
+  LCD_SetRegion(x_start, y_start, x_end, y_end);
+
+  uint16_t height = 0;
+  uint16_t width = 0;
+
+  width = x_end - x_start + 1;
+  height = y_end - y_start + 1;
+
+  LCD_DC_High();
+  Bsp_LCD_DMA_SetMemInc(1);
+  Bsp_LCD_SPI_SET16B();
+
+
+  /*等待发送完成*/
+#if (USE_FreeRTOS == 0)
+    Bsp_LCD_Send_DMA((uint8_t *)data, (width * height));
+    while (Bsp_LCD_TX_InquireFinish() == 0);
+#else
+    taskENTER_CRITICAL();
+    Bsp_LCD_Send_DMA((uint8_t *)data, (width * height));
+    taskEXIT_CRITICAL();
+
+    Bsp_LCD_TX_InquireFinish();
+#endif
+
+
   /*发送完毕后拉低命令引脚*/
   LCD_DC_Low();
-
-  Bsp_LCD_SPI_SET8B();
-
 }
+
+
+

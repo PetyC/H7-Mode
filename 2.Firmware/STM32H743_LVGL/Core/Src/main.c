@@ -31,13 +31,8 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "Bsp_st7735s.h"
 #include "st7735s.h"
 #include "Bsp_ESP8266.h"
-
-#include "lvgl.h"
-#include "lv_port_disp.h"
-#include "lv_port_indev.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -83,7 +78,6 @@ int main(void)
   /*设置中断偏移*/
  // SCB->VTOR = FLASH_BASE | 0x100000;  
   
- // g_JumpInit = 2;
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -120,17 +114,10 @@ int main(void)
 
   /*打开网络超时定时器*/
   HAL_TIM_Base_Start_IT(&htim13);
-
+  
   //LCD初始化
   LCD_Init();
-//  uint16_t Data[2500];
-//   for(uint16_t i = 0 ; i<sizeof(Data) ; i ++)
-//   {
-//     Data[i] = 0x5566;
-//   }
-//  
-//  LCD_FillColor(0,0,50,50,Data);
-//   while(1);
+
   /* USER CODE END 2 */
 
   /* Call init function for freertos objects (in freertos.c) */
@@ -228,15 +215,16 @@ extern volatile uint32_t ulHighFrequencyTimerTicks;
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
   /* USER CODE BEGIN Callback 0 */
+
+  /* USER CODE END Callback 0 */
   if (htim->Instance == TIM17) {
     HAL_IncTick();
-    lv_tick_inc(1);
   }
-  /* USER CODE END Callback 1 */
-  if (htim->Instance == TIM14) {
+  /* USER CODE BEGIN Callback 1 */
+  if (htim->Instance == TIM14) 
+  {
     ulHighFrequencyTimerTicks++;
   }
-  /* USER CODE BEGIN Callback 2 */
   if(htim->Instance == TIM13)
   {
     Bsp_ESP8266_Timer();
