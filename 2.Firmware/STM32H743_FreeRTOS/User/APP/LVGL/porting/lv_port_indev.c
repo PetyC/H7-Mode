@@ -29,10 +29,10 @@ static void touchpad_read(lv_indev_drv_t * indev_drv, lv_indev_data_t * data);
 static bool touchpad_is_pressed(void);
 static void touchpad_get_xy(lv_coord_t * x, lv_coord_t * y);
 */
-static void mouse_init(void);
-static void mouse_read(lv_indev_drv_t * indev_drv, lv_indev_data_t * data);
-static bool mouse_is_pressed(void);
-static void mouse_get_xy(lv_coord_t * x, lv_coord_t * y);
+//static void mouse_init(void);
+//static void mouse_read(lv_indev_drv_t * indev_drv, lv_indev_data_t * data);
+//static bool mouse_is_pressed(void);
+//static void mouse_get_xy(lv_coord_t * x, lv_coord_t * y);
 
 static void keypad_init(void);
 static void keypad_read(lv_indev_drv_t * indev_drv, lv_indev_data_t * data);
@@ -139,42 +139,42 @@ void lv_port_indev_init(void)
  * -----------------*/
 
 /*Initialize your mouse*/
-static void mouse_init(void)
-{
-    /*Your code comes here*/
-}
+//static void mouse_init(void)
+//{
+//    /*Your code comes here*/
+//}
 
 /*Will be called by the library to read the mouse*/
-static void mouse_read(lv_indev_drv_t * indev_drv, lv_indev_data_t * data)
-{
-    /*Get the current x and y coordinates*/
-    mouse_get_xy(&data->point.x, &data->point.y);
+//static void mouse_read(lv_indev_drv_t * indev_drv, lv_indev_data_t * data)
+//{
+//    /*Get the current x and y coordinates*/
+//    mouse_get_xy(&data->point.x, &data->point.y);
 
-    /*Get whether the mouse button is pressed or released*/
-    if(mouse_is_pressed()) {
-        data->state = LV_INDEV_STATE_PR;
-    }
-    else {
-        data->state = LV_INDEV_STATE_REL;
-    }
-}
+//    /*Get whether the mouse button is pressed or released*/
+//    if(mouse_is_pressed()) {
+//        data->state = LV_INDEV_STATE_PR;
+//    }
+//    else {
+//        data->state = LV_INDEV_STATE_REL;
+//    }
+//}
 
 /*Return true is the mouse button is pressed*/
-static bool mouse_is_pressed(void)
-{
-    /*Your code comes here*/
+//static bool mouse_is_pressed(void)
+//{
+//    /*Your code comes here*/
 
-    return false;
-}
+//    return false;
+//}
 
 /*Get the x and y coordinates if the mouse is pressed*/
-static void mouse_get_xy(lv_coord_t * x, lv_coord_t * y)
-{
-    /*Your code comes here*/
+//static void mouse_get_xy(lv_coord_t * x, lv_coord_t * y)
+//{
+//    /*Your code comes here*/
 
-    (*x) = 0;
-    (*y) = 0;
-}
+//    (*x) = 0;
+//    (*y) = 0;
+//}
 
 /*------------------
  * Keypad
@@ -192,7 +192,7 @@ static void keypad_read(lv_indev_drv_t * indev_drv, lv_indev_data_t * data)
     static uint32_t last_key = 0;
 
     /*Get the current x and y coordinates*/
-    mouse_get_xy(&data->point.x, &data->point.y);
+    //mouse_get_xy(&data->point.x, &data->point.y);
 
     /*Get whether the a key is pressed and save the pressed key*/
     uint32_t act_key = keypad_get_key();
