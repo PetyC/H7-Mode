@@ -184,12 +184,16 @@ void lv_port_indev_init(void)
 static void keypad_init(void)
 {
     /*Your code comes here*/
+   
+
+ 
+  
 }
 
 /*Will be called by the library to read the mouse*/
 static void keypad_read(lv_indev_drv_t * indev_drv, lv_indev_data_t * data)
 {
-    static uint32_t last_key = 0;
+    static uint32_t last_key = 3;
 
     /*Get the current x and y coordinates*/
     //mouse_get_xy(&data->point.x, &data->point.y);
@@ -230,8 +234,8 @@ static uint32_t keypad_get_key(void)
 {
     /*Your code comes here*/
     osEvent Even = osMessageGet(KEY_QueueHandle , 0);
-
-    if(Even.value.v != NULL)
+    
+    if(osEventMessage == Even.status)
     {
       return Even.value.v;
     }

@@ -11,6 +11,11 @@
 extern osSemaphoreId Key_Binary_SemHandle;
 extern osSemaphoreId LCD_BinarySemHandle;
 
+extern lv_ui guider_ui;
+extern lv_indev_t * indev_keypad;
+
+static void Key_Demo(lv_event_t *e);
+
 /**
  * @brief LCD任务
  * @param {void*} argument
@@ -22,13 +27,39 @@ void LCD_Task(void const *argument)
   osSemaphoreWait(LCD_BinarySemHandle, osWaitForever);
   
   lv_init();
+  /*初始化显示*/
   lv_port_disp_init();
+  /*初始化输入设备*/
+  lv_port_indev_init();
   
-  lv_demo_benchmark();
-  //lv_ui guider_ui;
+  setup_ui(&guider_ui);
+  events_init(&guider_ui);
+
+
+  /*创建对象分组*/
+  lv_group_t * key_group = lv_group_create();
+  /*将对象分组分配至输入设备*/
+  lv_indev_set_group(indev_keypad , key_group);
   
-  //setup_ui(&guider_ui);
-  //events_init(&guider_ui);
+ /*将被控制的对象添加进group*/
+  lv_group_add_obj(key_group , guider_ui.main_screen);
+  
+  lv_obj_add_event_cb(guider_ui.main_screen , Key_Demo , LV_EVENT_ALL , NULL );
+  //lv_obj_add_event_cb(ui->main_screen_Wifi_Set_btn, main_screen_Wifi_Set_btn_event_handler, LV_EVENT_ALL, NULL);
+  /*按键处理事件回调*/
+
+  
+//  lv_obj_t * container = lv_obj_create(lv_scr_act());
+//  lv_obj_set_size(container, 320, 240);
+//  lv_obj_center(container);
+
+//  lv_obj_t * button = lv_btn_create(container);
+//  lv_obj_set_size(button, 60, 35);
+//  // lv_obj_center(button);
+//  lv_obj_set_pos(button, 50, 125);
+//  lv_obj_add_event_cb(button, btn_event_cb_1, LV_EVENT_ALL, NULL);
+//  lv_group_add_obj(group, button);
+
 
   /* Infinite loop */
   for (;;)
@@ -38,6 +69,15 @@ void LCD_Task(void const *argument)
     osDelay(1);
   }
 }
+
+
+static void Key_Demo(lv_event_t *e)
+{
+  	lv_event_code_t code = lv_event_get_code(e);
+    
+  return;
+}
+
 
 
 

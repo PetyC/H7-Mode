@@ -1,0 +1,77 @@
+<html>
+<body>
+<pre>
+<h1>礦ision Build Log</h1>
+<h2>Tool Versions:</h2>
+IDE-Version: μVision V5.29.0.0
+Copyright (C) 2019 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: C P, C, LIC=HF82M-XVVXE-QI05M-XXTSP-0VQYB-3D1EC
+ 
+Tool Versions:
+Toolchain:       MDK-ARM Professional  Version: 5.29.0.0
+Toolchain Path:  E:\software\IDE\Keil_v5\ARM\ARMCC\Bin
+C Compiler:      Armcc.exe V5.06 update 6 (build 750)
+Assembler:       Armasm.exe V5.06 update 6 (build 750)
+Linker/Locator:  ArmLink.exe V5.06 update 6 (build 750)
+Library Manager: ArmAr.exe V5.06 update 6 (build 750)
+Hex Converter:   FromElf.exe V5.06 update 6 (build 750)
+CPU DLL:         SARMCM3.DLL V5.29.0.0
+Dialog DLL:      DCM.DLL V1.17.3.0
+Target DLL:      CMSIS_AGDI.dll V1.32.0.0
+Dialog DLL:      TCM.DLL V1.36.5.0
+ 
+<h2>Project:</h2>
+C:\Users\39810\Desktop\DIY_Project\H7-Mode\2.Firmware\STM32H743_FreeRTOS\MDK-ARM\STM32H743_FreeRTOS.uvprojx
+Project File Date:  08/25/2022
+
+<h2>Output:</h2>
+*** Using Compiler 'V5.06 update 6 (build 750)', folder: 'E:\software\IDE\Keil_v5\ARM\ARMCC\Bin'
+Build target 'STM32H743_FreeRTOS'
+After Build - User command #2: CopyHex_Flash.bat
+C:\Users\39810\Desktop\DIY_Project\H7-Mode\2.Firmware\STM32H743_FreeRTOS\MDK-ARM>copy STM32H743_FreeRTOS\STM32H743_FreeRTOS.hex .\output.hex 
+已复制         1 个文件。
+C:\Users\39810\Desktop\DIY_Project\H7-Mode\2.Firmware\STM32H743_FreeRTOS\MDK-ARM>hex2bin output.hex 
+hex2bin v2.2, Copyright (C) 2015 Jacques Pelletier & contributors
+Allocate_Memory_and_Rewind:
+Lowest address:   08000000
+Highest address:  0804875B
+Starting address: 08000000
+Max Length:       296796
+Binary file start = 08000000
+Records start     = 08000000
+Highest address   = 0804875B
+Pad Byte          = FF
+Force/Check address outside of memory range
+C:\Users\39810\Desktop\DIY_Project\H7-Mode\2.Firmware\STM32H743_FreeRTOS\MDK-ARM>for /F %i in ('dir /b output.bin') do (set indexdx=%~zi ) 
+C:\Users\39810\Desktop\DIY_Project\H7-Mode\2.Firmware\STM32H743_FreeRTOS\MDK-ARM>(set indexdx=296796 ) 
+C:\Users\39810\Desktop\DIY_Project\H7-Mode\2.Firmware\STM32H743_FreeRTOS\MDK-ARM>ECHO 296796 
+296796
+C:\Users\39810\Desktop\DIY_Project\H7-Mode\2.Firmware\STM32H743_FreeRTOS\MDK-ARM>srec_cat.exe output.bin -Binary -crop 0 296796  -STM32_Little_Endian 296796  -o app.bin -Binary 
+"STM32H743_FreeRTOS\STM32H743_FreeRTOS.axf" - 0 Error(s), 0 Warning(s).
+
+<h2>Software Packages used:</h2>
+
+Package Vendor: ARM
+                http://www.keil.com/pack/ARM.CMSIS.5.9.0.pack
+                ARM.CMSIS.5.9.0
+                CMSIS (Common Microcontroller Software Interface Standard)
+   * Component: CORE Version: 5.6.0
+
+Package Vendor: Keil
+                http://www.keil.com/pack/Keil.STM32H7xx_DFP.3.0.0.pack
+                Keil.STM32H7xx_DFP.3.0.0
+                STMicroelectronics STM32H7 Series Device Support and Examples
+
+<h2>Collection of Component include folders:</h2>
+  .\RTE\_STM32H743_FreeRTOS
+  E:\software\IDE\Keil_v5\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include
+  E:\software\IDE\Keil_v5\Packs\Keil\STM32H7xx_DFP\3.0.0\Drivers\CMSIS\Device\ST\STM32H7xx\Include
+
+<h2>Collection of Component Files used:</h2>
+
+   * Component: ARM::CMSIS:CORE:5.6.0
+      Include file:  CMSIS\Core\Include\tz_context.h
+Build Time Elapsed:  00:00:07
+</pre>
+</body>
+</html>

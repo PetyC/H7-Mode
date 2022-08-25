@@ -42,7 +42,7 @@ void Network_Task(void const *argument)
 
   for (;;)
   {
-    osMutexWait(Uart_MutexHandle, osWaitForever);
+    //osMutexWait(Uart_MutexHandle, osWaitForever);
 
     while (Bsp_UART_Get_RX_Buff_Occupy(&huart1) != 0)
     {
@@ -52,7 +52,7 @@ void Network_Task(void const *argument)
       {
         KEY_Value = str_to_int(&Buff[4]);
 
-        osMessagePut(KEY_QueueHandle , (uint32_t)KEY_Value , osWaitForever) ;
+        osMessagePut(KEY_QueueHandle , KEY_Value , osWaitForever) ;
       }
       else if ((memcmp(Buff, "WIFI CONNECTED\r\n", 4) == 0) || (memcmp(Buff, "WIFI GOT IP\r\n", 4) == 0)) // WIFI连接成功
       {
@@ -66,7 +66,7 @@ void Network_Task(void const *argument)
       memset(Buff, NULL, sizeof(Buff));
     }
 
-    osMutexRelease(Uart_MutexHandle);
+    //osMutexRelease(Uart_MutexHandle);
     osDelay(50);
   }
 }

@@ -6,9 +6,7 @@
 
 #ifndef GUI_GUIDER_H
 #define GUI_GUIDER_H
-#ifdef __cplusplus
-extern "C" {
-#endif
+
 
 #include "lvgl/lvgl.h"
 #include "guider_fonts.h"
@@ -35,7 +33,5 @@ extern lv_ui guider_ui;
 void setup_scr_main_screen(lv_ui *ui);
 void setup_scr_Wifi_screen(lv_ui *ui);
 
-#ifdef __cplusplus
-}
-#endif
+
 #endif

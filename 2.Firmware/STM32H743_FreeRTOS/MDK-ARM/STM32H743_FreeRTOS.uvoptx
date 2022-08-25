@@ -140,7 +140,7 @@
         <SetRegEntry>
           <Number>0</Number>
           <Key>CMSIS_AGDI</Key>
-          <Name>-X"CMSIS-DAP-HS-MuseLab" -U1101360250203120394e335233303631 -O206 -S8 -C0 -P00000000 -N00("ARM CoreSight SW-DP") -D00(6BA02477) -L00(0) -TO65554 -TC10000000 -TT10000000 -TP20 -TDS8007 -TDT0 -TDC1F -TIEFFFFFFFF -TIP8 -FO15 -FD20000000 -FC8000 -FN1 -FF0STM32H7x_2048.FLM -FS08000000 -FL0200000 -FP0($$Device:STM32H743VITx$CMSIS\Flash\STM32H7x_2048.FLM)</Name>
+          <Name>-X"CMSIS-DAP-HS-MuseLab" -U1101360250203120394e335232303631 -O206 -S8 -C0 -P00000000 -N00("ARM CoreSight SW-DP") -D00(6BA02477) -L00(0) -TO65554 -TC10000000 -TT10000000 -TP20 -TDS8007 -TDT0 -TDC1F -TIEFFFFFFFF -TIP8 -FO15 -FD20000000 -FC8000 -FN1 -FF0STM32H7x_2048.FLM -FS08000000 -FL0200000 -FP0($$Device:STM32H743VITx$CMSIS\Flash\STM32H7x_2048.FLM)</Name>
         </SetRegEntry>
         <SetRegEntry>
           <Number>0</Number>
@@ -157,34 +157,18 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>55</LineNumber>
+          <LineNumber>76</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134246694</Address>
+          <Address>134252468</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>..\User\APP\Network_Task.c</Filename>
+          <Filename>..\User\APP\LCD_Task.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\STM32H743_FreeRTOS\../User/APP/Network_Task.c\55</Expression>
-        </Bp>
-        <Bp>
-          <Number>1</Number>
-          <Type>0</Type>
-          <LineNumber>125</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>0</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>0</BreakIfRCount>
-          <Filename>../Core/Src/main.c</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression></Expression>
+          <Expression>\\STM32H743_FreeRTOS\../User/APP/LCD_Task.c\76</Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>
@@ -196,27 +180,22 @@
         <Ww>
           <count>1</count>
           <WinNumber>1</WinNumber>
-          <ItemText>Buff</ItemText>
+          <ItemText>Even</ItemText>
         </Ww>
         <Ww>
           <count>2</count>
           <WinNumber>1</WinNumber>
-          <ItemText>WIFI_Connect_Flag</ItemText>
+          <ItemText>KEY_Value</ItemText>
         </Ww>
         <Ww>
           <count>3</count>
           <WinNumber>1</WinNumber>
-          <ItemText>KEY_Value</ItemText>
+          <ItemText>code</ItemText>
         </Ww>
         <Ww>
           <count>4</count>
           <WinNumber>1</WinNumber>
-          <ItemText>Key_Right</ItemText>
-        </Ww>
-        <Ww>
-          <count>5</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>Buff[4]</ItemText>
+          <ItemText>code</ItemText>
         </Ww>
       </WatchWindow1>
       <WatchWindow2>
@@ -300,7 +279,7 @@
 
   <Group>
     <GroupName>Application/User/Core</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -596,7 +575,7 @@
 
   <Group>
     <GroupName>User/LCD</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -3415,7 +3394,7 @@
   </Group>
 
   <Group>
-    <GroupName>Lvgl_Demo</GroupName>
+    <GroupName>Lvgl_GUI</GroupName>
     <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
@@ -3427,20 +3406,20 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\User\APP\LVGL\demos\benchmark\lv_demo_benchmark.c</PathWithFileName>
-      <FilenameWithoutPath>lv_demo_benchmark.c</FilenameWithoutPath>
+      <PathWithFileName>..\User\APP\LVGL\GUI\events_init.c</PathWithFileName>
+      <FilenameWithoutPath>events_init.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
     <File>
       <GroupNumber>12</GroupNumber>
       <FileNumber>256</FileNumber>
-      <FileType>1</FileType>
+      <FileType>5</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\User\APP\LVGL\demos\benchmark\assets\img_benchmark_cogwheel_alpha16.c</PathWithFileName>
-      <FilenameWithoutPath>img_benchmark_cogwheel_alpha16.c</FilenameWithoutPath>
+      <PathWithFileName>..\User\APP\LVGL\GUI\events_init.h</PathWithFileName>
+      <FilenameWithoutPath>events_init.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -3451,32 +3430,32 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\User\APP\LVGL\demos\benchmark\assets\img_benchmark_cogwheel_argb.c</PathWithFileName>
-      <FilenameWithoutPath>img_benchmark_cogwheel_argb.c</FilenameWithoutPath>
+      <PathWithFileName>..\User\APP\LVGL\GUI\gui_guider.c</PathWithFileName>
+      <FilenameWithoutPath>gui_guider.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
     <File>
       <GroupNumber>12</GroupNumber>
       <FileNumber>258</FileNumber>
-      <FileType>1</FileType>
+      <FileType>5</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\User\APP\LVGL\demos\benchmark\assets\img_benchmark_cogwheel_chroma_keyed.c</PathWithFileName>
-      <FilenameWithoutPath>img_benchmark_cogwheel_chroma_keyed.c</FilenameWithoutPath>
+      <PathWithFileName>..\User\APP\LVGL\GUI\gui_guider.h</PathWithFileName>
+      <FilenameWithoutPath>gui_guider.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
     <File>
       <GroupNumber>12</GroupNumber>
       <FileNumber>259</FileNumber>
-      <FileType>1</FileType>
+      <FileType>5</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\User\APP\LVGL\demos\benchmark\assets\img_benchmark_cogwheel_indexed16.c</PathWithFileName>
-      <FilenameWithoutPath>img_benchmark_cogwheel_indexed16.c</FilenameWithoutPath>
+      <PathWithFileName>..\User\APP\LVGL\GUI\guider_lv_conf.h</PathWithFileName>
+      <FilenameWithoutPath>guider_lv_conf.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -3487,8 +3466,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\User\APP\LVGL\demos\benchmark\assets\img_benchmark_cogwheel_rgb.c</PathWithFileName>
-      <FilenameWithoutPath>img_benchmark_cogwheel_rgb.c</FilenameWithoutPath>
+      <PathWithFileName>..\User\APP\LVGL\GUI\setup_scr_main_screen.c</PathWithFileName>
+      <FilenameWithoutPath>setup_scr_main_screen.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -3499,47 +3478,103 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\User\APP\LVGL\demos\benchmark\assets\img_benchmark_cogwheel_rgb565a8.c</PathWithFileName>
-      <FilenameWithoutPath>img_benchmark_cogwheel_rgb565a8.c</FilenameWithoutPath>
+      <PathWithFileName>..\User\APP\LVGL\GUI\setup_scr_Wifi_screen.c</PathWithFileName>
+      <FilenameWithoutPath>setup_scr_Wifi_screen.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
+  </Group>
+
+  <Group>
+    <GroupName>Lvgl_GUI_Custom</GroupName>
+    <tvExp>0</tvExp>
+    <tvExpOptDlg>0</tvExpOptDlg>
+    <cbSel>0</cbSel>
+    <RteFlg>0</RteFlg>
     <File>
-      <GroupNumber>12</GroupNumber>
+      <GroupNumber>13</GroupNumber>
       <FileNumber>262</FileNumber>
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\User\APP\LVGL\demos\benchmark\assets\lv_font_bechmark_montserrat_12_compr_az.c.c</PathWithFileName>
-      <FilenameWithoutPath>lv_font_bechmark_montserrat_12_compr_az.c.c</FilenameWithoutPath>
+      <PathWithFileName>..\User\APP\LVGL\GUI\custom\custom.c</PathWithFileName>
+      <FilenameWithoutPath>custom.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
+  </Group>
+
+  <Group>
+    <GroupName>Lvgl_GUI_guider_customer_fonts</GroupName>
+    <tvExp>0</tvExp>
+    <tvExpOptDlg>0</tvExpOptDlg>
+    <cbSel>0</cbSel>
+    <RteFlg>0</RteFlg>
+  </Group>
+
+  <Group>
+    <GroupName>Lvgl_GUI_guider_fonts</GroupName>
+    <tvExp>0</tvExp>
+    <tvExpOptDlg>0</tvExpOptDlg>
+    <cbSel>0</cbSel>
+    <RteFlg>0</RteFlg>
     <File>
-      <GroupNumber>12</GroupNumber>
+      <GroupNumber>15</GroupNumber>
       <FileNumber>263</FileNumber>
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\User\APP\LVGL\demos\benchmark\assets\lv_font_bechmark_montserrat_16_compr_az.c.c</PathWithFileName>
-      <FilenameWithoutPath>lv_font_bechmark_montserrat_16_compr_az.c.c</FilenameWithoutPath>
+      <PathWithFileName>..\User\APP\LVGL\GUI\guider_fonts\lv_font_simsun_8.c</PathWithFileName>
+      <FilenameWithoutPath>lv_font_simsun_8.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
     <File>
-      <GroupNumber>12</GroupNumber>
+      <GroupNumber>15</GroupNumber>
       <FileNumber>264</FileNumber>
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\User\APP\LVGL\demos\benchmark\assets\lv_font_bechmark_montserrat_28_compr_az.c.c</PathWithFileName>
-      <FilenameWithoutPath>lv_font_bechmark_montserrat_28_compr_az.c.c</FilenameWithoutPath>
+      <PathWithFileName>..\User\APP\LVGL\GUI\guider_fonts\lv_font_simsun_12.c</PathWithFileName>
+      <FilenameWithoutPath>lv_font_simsun_12.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
+    <File>
+      <GroupNumber>15</GroupNumber>
+      <FileNumber>265</FileNumber>
+      <FileType>1</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>..\User\APP\LVGL\GUI\guider_fonts\lv_font_simsun_20.c</PathWithFileName>
+      <FilenameWithoutPath>lv_font_simsun_20.c</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>15</GroupNumber>
+      <FileNumber>266</FileNumber>
+      <FileType>1</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>..\User\APP\LVGL\GUI\guider_fonts\lv_font_simsun_10.c</PathWithFileName>
+      <FilenameWithoutPath>lv_font_simsun_10.c</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+  </Group>
+
+  <Group>
+    <GroupName>Lvgl_GUI_images</GroupName>
+    <tvExp>0</tvExp>
+    <tvExpOptDlg>0</tvExpOptDlg>
+    <cbSel>0</cbSel>
+    <RteFlg>0</RteFlg>
   </Group>
 
   <Group>

@@ -312,7 +312,7 @@
           </ArmAdsMisc>
           <Cads>
             <interw>1</interw>
-            <Optim>4</Optim>
+            <Optim>1</Optim>
             <oTime>0</oTime>
             <SplitLS>0</SplitLS>
             <OneElfS>1</OneElfS>
@@ -335,10 +335,10 @@
             <v6WtE>0</v6WtE>
             <v6Rtti>0</v6Rtti>
             <VariousControls>
-              <MiscControls></MiscControls>
+              <MiscControls>--locale=english</MiscControls>
               <Define>USE_HAL_DRIVER,STM32H743xx,LV_LVGL_H_INCLUDE_SIMPLE,LV_CONF_INCLUDE_SIMPLE</Define>
               <Undefine></Undefine>
-              <IncludePath>../Core/Inc;../Drivers/STM32H7xx_HAL_Driver/Inc;../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy;../Middlewares/Third_Party/FreeRTOS/Source/include;../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS;../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F;../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../Drivers/CMSIS/Include;../User/Driver/LCD;../User/APP;../User/Driver/Bsp_ESP8266;../User/Driver/Bsp_Uart;../User/APP/LVGL;../User/APP/LVGL/src;../User/APP/LVGL/porting;../User/APP/LVGL/demos/benchmark;../User/APP/LVGL/generated;../User/APP/LVGL/generated/guider_customer_fonts;../User/APP/LVGL/generated/guider_fonts;../User/APP/LVGL/src/font</IncludePath>
+              <IncludePath>../Core/Inc;../Drivers/STM32H7xx_HAL_Driver/Inc;../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy;../Middlewares/Third_Party/FreeRTOS/Source/include;../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS;../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F;../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../Drivers/CMSIS/Include;../User/Driver/LCD;../User/APP;../User/Driver/Bsp_ESP8266;../User/Driver/Bsp_Uart;../User/APP/LVGL;../User/APP/LVGL/src;../User/APP/LVGL/porting;../User/APP/LVGL/src/font;..\User\APP\LVGL\GUI\custom;..\User\APP\LVGL\GUI\guider_customer_fonts;..\User\APP\LVGL\GUI\guider_fonts;..\User\APP\LVGL\GUI</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -2164,59 +2164,85 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>Lvgl_Demo</GroupName>
+          <GroupName>Lvgl_GUI</GroupName>
           <Files>
             <File>
-              <FileName>lv_demo_benchmark.c</FileName>
+              <FileName>events_init.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\User\APP\LVGL\demos\benchmark\lv_demo_benchmark.c</FilePath>
+              <FilePath>..\User\APP\LVGL\GUI\events_init.c</FilePath>
             </File>
             <File>
-              <FileName>img_benchmark_cogwheel_alpha16.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User\APP\LVGL\demos\benchmark\assets\img_benchmark_cogwheel_alpha16.c</FilePath>
+              <FileName>events_init.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\User\APP\LVGL\GUI\events_init.h</FilePath>
             </File>
             <File>
-              <FileName>img_benchmark_cogwheel_argb.c</FileName>
+              <FileName>gui_guider.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\User\APP\LVGL\demos\benchmark\assets\img_benchmark_cogwheel_argb.c</FilePath>
+              <FilePath>..\User\APP\LVGL\GUI\gui_guider.c</FilePath>
             </File>
             <File>
-              <FileName>img_benchmark_cogwheel_chroma_keyed.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User\APP\LVGL\demos\benchmark\assets\img_benchmark_cogwheel_chroma_keyed.c</FilePath>
+              <FileName>gui_guider.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\User\APP\LVGL\GUI\gui_guider.h</FilePath>
             </File>
             <File>
-              <FileName>img_benchmark_cogwheel_indexed16.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User\APP\LVGL\demos\benchmark\assets\img_benchmark_cogwheel_indexed16.c</FilePath>
+              <FileName>guider_lv_conf.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\User\APP\LVGL\GUI\guider_lv_conf.h</FilePath>
             </File>
             <File>
-              <FileName>img_benchmark_cogwheel_rgb.c</FileName>
+              <FileName>setup_scr_main_screen.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\User\APP\LVGL\demos\benchmark\assets\img_benchmark_cogwheel_rgb.c</FilePath>
+              <FilePath>..\User\APP\LVGL\GUI\setup_scr_main_screen.c</FilePath>
             </File>
             <File>
-              <FileName>img_benchmark_cogwheel_rgb565a8.c</FileName>
+              <FileName>setup_scr_Wifi_screen.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\User\APP\LVGL\demos\benchmark\assets\img_benchmark_cogwheel_rgb565a8.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_font_bechmark_montserrat_12_compr_az.c.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User\APP\LVGL\demos\benchmark\assets\lv_font_bechmark_montserrat_12_compr_az.c.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_font_bechmark_montserrat_16_compr_az.c.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User\APP\LVGL\demos\benchmark\assets\lv_font_bechmark_montserrat_16_compr_az.c.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_font_bechmark_montserrat_28_compr_az.c.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User\APP\LVGL\demos\benchmark\assets\lv_font_bechmark_montserrat_28_compr_az.c.c</FilePath>
+              <FilePath>..\User\APP\LVGL\GUI\setup_scr_Wifi_screen.c</FilePath>
             </File>
           </Files>
+        </Group>
+        <Group>
+          <GroupName>Lvgl_GUI_Custom</GroupName>
+          <Files>
+            <File>
+              <FileName>custom.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\APP\LVGL\GUI\custom\custom.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Lvgl_GUI_guider_customer_fonts</GroupName>
+        </Group>
+        <Group>
+          <GroupName>Lvgl_GUI_guider_fonts</GroupName>
+          <Files>
+            <File>
+              <FileName>lv_font_simsun_8.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\APP\LVGL\GUI\guider_fonts\lv_font_simsun_8.c</FilePath>
+            </File>
+            <File>
+              <FileName>lv_font_simsun_12.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\APP\LVGL\GUI\guider_fonts\lv_font_simsun_12.c</FilePath>
+            </File>
+            <File>
+              <FileName>lv_font_simsun_20.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\APP\LVGL\GUI\guider_fonts\lv_font_simsun_20.c</FilePath>
+            </File>
+            <File>
+              <FileName>lv_font_simsun_10.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\APP\LVGL\GUI\guider_fonts\lv_font_simsun_10.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Lvgl_GUI_images</GroupName>
         </Group>
         <Group>
           <GroupName>::CMSIS</GroupName>

@@ -27,6 +27,9 @@
 #include "lv_port_indev.h"
 
 
+#include "gui_guider.h"
+#include "events_init.h"
+
 
 void LCD_Task(void const * argument);
 
