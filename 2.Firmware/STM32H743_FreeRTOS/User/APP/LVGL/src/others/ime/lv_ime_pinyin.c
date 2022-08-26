@@ -562,8 +562,7 @@ static void lv_ime_pinyin_constructor(const lv_obj_class_t * class_p, lv_obj_t *
     lv_memzero(pinyin_ime->py_num, sizeof(pinyin_ime->py_num));
     lv_memzero(pinyin_ime->py_pos, sizeof(pinyin_ime->py_pos));
 
-    lv_obj_set_size(obj, LV_PCT(100), LV_PCT(55));
-    lv_obj_align(obj, LV_ALIGN_BOTTOM_MID, 0, 0);
+    lv_obj_add_flag(obj, LV_OBJ_FLAG_HIDDEN);
 
 #if LV_IME_PINYIN_USE_DEFAULT_DICT
     init_pinyin_dict(obj, lv_ime_pinyin_def_dict);
@@ -975,6 +974,8 @@ static void pinyin_ime_clear_data(lv_obj_t * obj)
 #if LV_IME_PINYIN_USE_K9_MODE
 static void pinyin_k9_init_data(lv_obj_t * obj)
 {
+    LV_UNUSED(obj);
+
     uint16_t py_str_i = 0;
     uint16_t btnm_i = 0;
     for(btnm_i = 19; btnm_i < (LV_IME_PINYIN_K9_CAND_TEXT_NUM + 21); btnm_i++) {
@@ -1016,7 +1017,7 @@ static void pinyin_k9_get_legal_py(lv_obj_t * obj, char * k9_input, const char *
     int mark[LV_IME_PINYIN_K9_MAX_INPUT] = {0};
     int index = 0;
     int flag = 0;
-    int count = 0;
+    uint16_t count = 0;
 
     uint32_t ll_len = 0;
     ime_pinyin_k9_py_str_t * ll_index = NULL;
@@ -1041,7 +1042,7 @@ static void pinyin_k9_get_legal_py(lv_obj_t * obj, char * k9_input, const char *
         }
         else {
             flag = mark[index];
-            if(flag < strlen(py9_map[k9_input[index] - '2'])) {
+            if((size_t)flag < strlen(py9_map[k9_input[index] - '2'])) {
                 py_comp[index] = py9_map[k9_input[index] - '2'][flag];
                 mark[index] = mark[index] + 1;
                 index++;

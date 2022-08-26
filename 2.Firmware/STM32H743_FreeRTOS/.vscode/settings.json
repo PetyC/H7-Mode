@@ -34,6 +34,7 @@
       "network.h": "c",
       "string.h": "c",
       "bsp_st7735s.h": "c",
-      "lv_font.h": "c"
+      "lv_font.h": "c",
+      "gui_guider.h": "c"
     }
 }

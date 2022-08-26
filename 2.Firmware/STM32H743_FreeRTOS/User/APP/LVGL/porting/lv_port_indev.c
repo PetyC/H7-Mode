@@ -197,20 +197,22 @@ static void keypad_read(lv_indev_drv_t * indev_drv, lv_indev_data_t * data)
 
     /*Get the current x and y coordinates*/
     //mouse_get_xy(&data->point.x, &data->point.y);
+    data->point.x = 0;
+    data->point.y = 0;
 
     /*Get whether the a key is pressed and save the pressed key*/
     uint32_t act_key = keypad_get_key();
-    if(act_key != 3) {
+    if(act_key != 0) {
         data->state = LV_INDEV_STATE_PR;
 
         /*Translate the keys to LVGL control characters according to your key definitions*/
         switch(act_key) {
-            case 0:
-                act_key = LV_KEY_DOWN;
             case 1:
-                act_key = LV_KEY_UP;
-                break;
+                act_key = LV_KEY_NEXT;
             case 2:
+                act_key = LV_KEY_PREV ;
+                break;
+            case 3:
                 act_key = LV_KEY_ENTER;
                 break;
         }
@@ -229,7 +231,7 @@ static void keypad_read(lv_indev_drv_t * indev_drv, lv_indev_data_t * data)
 #include "cmsis_os.h"
 extern osMessageQId KEY_QueueHandle;
 
-/*Get the currently being pressed key.  3 if no key is pressed*/
+/*Get the currently being pressed key.  0 if no key is pressed*/
 static uint32_t keypad_get_key(void)
 {
     /*Your code comes here*/
@@ -241,7 +243,7 @@ static uint32_t keypad_get_key(void)
     }
     else
     {
-      return 3;
+      return 0;
     }
 
 

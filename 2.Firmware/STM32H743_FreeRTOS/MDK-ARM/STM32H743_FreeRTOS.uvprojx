@@ -81,7 +81,7 @@
           </BeforeMake>
           <AfterMake>
             <RunUserProg1>0</RunUserProg1>
-            <RunUserProg2>1</RunUserProg2>
+            <RunUserProg2>0</RunUserProg2>
             <UserProg1Name>fromelf --bin -o "$L@L.bin" "$L@L.axf"</UserProg1Name>
             <UserProg2Name>CopyHex_Flash.bat</UserProg2Name>
             <UserProg1Dos16Mode>0</UserProg1Dos16Mode>
@@ -2185,11 +2185,6 @@
               <FileName>gui_guider.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\User\APP\LVGL\GUI\gui_guider.h</FilePath>
-            </File>
-            <File>
-              <FileName>guider_lv_conf.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\User\APP\LVGL\GUI\guider_lv_conf.h</FilePath>
             </File>
             <File>
               <FileName>setup_scr_main_screen.c</FileName>

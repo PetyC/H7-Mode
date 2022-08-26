@@ -23,7 +23,7 @@ static void main_screen_Wifi_Set_btn_event_handler(lv_event_t *e)
 			setup_scr_Wifi_screen(&guider_ui);
 		lv_disp_t * d = lv_obj_get_disp(lv_scr_act());
 		if (d->prev_scr == NULL && d->scr_to_load == NULL)
-			lv_scr_load_anim(guider_ui.Wifi_screen, LV_SCR_LOAD_ANIM_FADE_ON, 200, 0, true);
+			lv_scr_load_anim(guider_ui.Wifi_screen, LV_SCR_LOAD_ANIM_NONE, 0, 0, true);
 	}
 		break;
 	default:

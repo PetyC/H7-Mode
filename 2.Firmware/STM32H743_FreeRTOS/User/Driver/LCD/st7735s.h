@@ -2,7 +2,7 @@
  * @Description: 
  * @Autor: Pi
  * @Date: 2022-08-22 17:12:15
- * @LastEditTime: 2022-08-23 14:27:46
+ * @LastEditTime: 2022-08-26 17:14:16
  */
 #ifndef ST7735S_H
 #define ST7735S_H

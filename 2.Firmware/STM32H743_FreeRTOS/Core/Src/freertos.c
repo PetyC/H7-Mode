@@ -205,7 +205,7 @@ void MX_FREERTOS_Init(void) {
   KEY_TaskHandle = osThreadCreate(osThread(KEY_Task), NULL);
 
   /* definition and creation of LCD_Task */
-  osThreadDef(LCD_Task, Start_LCD_Task, osPriorityNormal, 0, 1024);
+  osThreadDef(LCD_Task, Start_LCD_Task, osPriorityNormal, 0, 2048);
   LCD_TaskHandle = osThreadCreate(osThread(LCD_Task), NULL);
 
   /* definition and creation of Network_Task */

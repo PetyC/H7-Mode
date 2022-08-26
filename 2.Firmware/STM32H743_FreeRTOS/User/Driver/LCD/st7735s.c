@@ -44,6 +44,7 @@ void LCD_Init(void)
   Bsp_LCD_Delay(120);
 
   /*ST7735S Frame Rate*/
+ 
   Bsp_LCD_SendCmd_8B(0xB1);
   Bsp_LCD_SendData_8B(0x02);
   Bsp_LCD_SendData_8B(0x35);
@@ -62,9 +63,11 @@ void LCD_Init(void)
   Bsp_LCD_SendData_8B(0x35);
   Bsp_LCD_SendData_8B(0x36);
 
+
   /*开启反转*/
   Bsp_LCD_SendCmd_8B(0xB4);
   Bsp_LCD_SendData_8B(0x03);
+
 
   /*电源设置*/
   Bsp_LCD_SendCmd_8B(0xC0);
@@ -79,6 +82,7 @@ void LCD_Init(void)
   Bsp_LCD_SendData_8B(0x0D);
   Bsp_LCD_SendData_8B(0x00);
 
+
   Bsp_LCD_SendCmd_8B(0xC3);
   Bsp_LCD_SendData_8B(0x8D);
   Bsp_LCD_SendData_8B(0x2A);
@@ -89,7 +93,8 @@ void LCD_Init(void)
 
   /*VCOM*/
   Bsp_LCD_SendCmd_8B(0xC5);
-  Bsp_LCD_SendData_8B(0x0a);
+ Bsp_LCD_SendData_8B(0x0a);
+
 
   /*显示方向*/
   Bsp_LCD_SendCmd_8B(0x36);
@@ -133,8 +138,25 @@ void LCD_Init(void)
  */
 void LCD_SetRegion(uint16_t x_start, uint16_t y_start, uint16_t x_end, uint16_t y_end)
 {
-  uint8_t Points_X[4] = {0x00, x_start, 0x00, x_end};
-  uint8_t Points_Y[4] = {0x00, y_start, 0x00, y_end};
+#if USE_HORIZONTAL == 0
+  x_start += 2;x_end += 2;
+  y_start += 1;y_end += 1;
+#endif
+#if USE_HORIZONTAL == 1
+  x_start += 2;x_end += 2;
+  y_start += 3;y_end += 3;
+#endif
+#if USE_HORIZONTAL == 2
+  x_start += 1;x_end += 1;
+  y_start += 2;y_end += 2;
+#endif
+#if USE_HORIZONTAL == 3
+  x_start += 3;x_end += 3;
+  y_start += 2;y_end += 2;
+#endif
+
+  uint8_t Points_X[] = {0,x_start, 0,x_end};
+  uint8_t Points_Y[] = {0,y_start, 0,y_end};
 
   Bsp_LCD_SendCmd_8B(0x2a);
   Bsp_LCD_SendData(Points_X, sizeof(Points_X));
@@ -279,11 +301,14 @@ void LCD_FillColor_DMA(uint16_t x_start, uint16_t y_start, uint16_t x_end, uint1
     Bsp_LCD_Send_DMA((uint8_t *)data, (width * height));
     while (Bsp_LCD_TX_InquireFinish() == 0);
 #else
-    taskENTER_CRITICAL();
-    Bsp_LCD_Send_DMA((uint8_t *)data, (width * height));
-    taskEXIT_CRITICAL();
+  taskENTER_CRITICAL();
+  Bsp_LCD_Send_DMA((uint8_t *)data, (width * height));
+  taskEXIT_CRITICAL();
 
-    Bsp_LCD_TX_InquireFinish();
+
+
+  Bsp_LCD_TX_InquireFinish();
+
 #endif
 
 

@@ -16,9 +16,12 @@ extern "C" {
 typedef struct
 {
 	lv_obj_t *main_screen;
+	lv_obj_t *main_screen_tileview;
+	lv_obj_t *main_screen_tileview_tileview;
 	lv_obj_t *main_screen_Wifi_Set_btn;
 	lv_obj_t *main_screen_Wifi_Set_btn_label;
-	lv_obj_t *main_screen_Wifi_State_label;
+	lv_obj_t *main_screen_Demo_btn;
+	lv_obj_t *main_screen_Demo_btn_label;
 	lv_obj_t *Wifi_screen;
 	lv_obj_t *Wifi_screen_APU_btn;
 	lv_obj_t *Wifi_screen_APU_btn_label;
