@@ -32,6 +32,9 @@
 /* USER CODE BEGIN Includes */
 #include "Bsp_ESP8266.h"
 #include "Network.h"
+#include "bsp_Demo.h"
+
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -105,8 +108,8 @@ int main(void)
   MX_TIM13_Init();
   MX_TIM12_Init();
   /* USER CODE BEGIN 2 */
-     HAL_TIMEx_PWMN_Start(&htim1 , TIM_CHANNEL_1);
-  HAL_TIM_Base_Start_IT(&htim12);
+//     HAL_TIMEx_PWMN_Start(&htim1 , TIM_CHANNEL_1);
+//  HAL_TIM_Base_Start_IT(&htim12);
  
 
 //    HAL_GPIO_WritePin(ESP_POW_GPIO_Port, ESP_POW_Pin, GPIO_PIN_SET);
@@ -124,9 +127,15 @@ int main(void)
 //  Bsp_ESP8266_JoinAP("Moujiti" , "moujiti7222" , 5000);
 //  Bsp_ESP8266_GetLocalIP(ip , mac);
 
-  HAL_GPIO_WritePin(ESP_POW_GPIO_Port, ESP_POW_Pin, GPIO_PIN_RESET);
-  Bsp_ESP8266_PowerOn();
+//  HAL_GPIO_WritePin(ESP_POW_GPIO_Port, ESP_POW_Pin, GPIO_PIN_RESET);
+//  Bsp_ESP8266_PowerOn();
 //  Bsp_ESP8266_Restore();
+
+  Bsp_LCD_Init();
+  Bsp_LCD_FullColor(0x5555);
+  HAL_Delay(10);
+  Bsp_LCD_FullColor(0xffe0);
+ 
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -138,8 +147,12 @@ while (1)
     //HAL_GPIO_WritePin(ESP_POW_GPIO_Port, ESP_POW_Pin, GPIO_PIN_RESET);
 
     //Bsp_ESP8266_PowerOn();
-
-
+    Bsp_LCD_FullColor(0x0000);
+    Bsp_LCD_FullColor(0xfe19 );
+    Bsp_LCD_FullColor(0x8010 );
+    Bsp_LCD_FullColor(0x1f );
+    Bsp_LCD_FullColor(0x400 );
+ 
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

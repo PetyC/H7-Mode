@@ -32,9 +32,6 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "st7735s.h"
-#include "fonts.h"
-#include "gfx.h"
-
 #include "Bsp_ESP8266.h"
 /* USER CODE END Includes */
 
@@ -81,7 +78,6 @@ int main(void)
   /*设置中断偏移*/
  // SCB->VTOR = FLASH_BASE | 0x100000;  
   
- // g_JumpInit = 2;
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -113,14 +109,14 @@ int main(void)
   MX_TIM1_Init();
   MX_TIM13_Init();
   /* USER CODE BEGIN 2 */
-  /*MCU系统占用率*/
+  /*MCU系统占用�?*/
   HAL_TIM_Base_Start_IT(&htim14);
 
-  /*打开网络超时定时器*/
+  /*打开网络超时定时�?*/
   HAL_TIM_Base_Start_IT(&htim13);
-
-  //LCD初始化
-  ST7735S_Init();
+  
+  //LCD初始�?
+  LCD_Init();
 
   /* USER CODE END 2 */
 
@@ -219,14 +215,16 @@ extern volatile uint32_t ulHighFrequencyTimerTicks;
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
   /* USER CODE BEGIN Callback 0 */
+
+  /* USER CODE END Callback 0 */
   if (htim->Instance == TIM17) {
     HAL_IncTick();
   }
-  /* USER CODE END Callback 1 */
-  if (htim->Instance == TIM14) {
+  /* USER CODE BEGIN Callback 1 */
+  if (htim->Instance == TIM14) 
+  {
     ulHighFrequencyTimerTicks++;
   }
-  /* USER CODE BEGIN Callback 2 */
   if(htim->Instance == TIM13)
   {
     Bsp_ESP8266_Timer();

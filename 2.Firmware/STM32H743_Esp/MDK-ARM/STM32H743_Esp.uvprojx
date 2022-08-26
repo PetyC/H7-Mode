@@ -338,7 +338,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32H743xx</Define>
               <Undefine></Undefine>
-              <IncludePath>../Core/Inc;../Drivers/STM32H7xx_HAL_Driver/Inc;../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../Drivers/CMSIS/Include;..\User\Drive\Bsp_LCD;..\User\Drive\Bsp_Uart;..\User\Drive\Bsp_ESP8266</IncludePath>
+              <IncludePath>../Core/Inc;../Drivers/STM32H7xx_HAL_Driver/Inc;../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../Drivers/CMSIS/Include;../User/Drive/Bsp_LCD;../User/Drive/Bsp_Uart;../User/Drive/Bsp_ESP8266;../User/Drive/LCD</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -636,6 +636,16 @@
               <FileName>Fifo.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\User\Drive\Bsp_Uart\Fifo.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>User/Drive/LCD</GroupName>
+          <Files>
+            <File>
+              <FileName>bsp_Demo.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\Drive\LCD\bsp_Demo.c</FilePath>
             </File>
           </Files>
         </Group>
