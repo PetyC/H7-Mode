@@ -111,13 +111,13 @@ int main(void)
   MX_TIM13_Init();
   MX_ADC3_Init();
   /* USER CODE BEGIN 2 */
-  /*MCU系统占用�?*/
+  /*MCU系统占用�?*/
   HAL_TIM_Base_Start_IT(&htim14);
 
-  /*打开网络超时定时�?*/
+  /*打开网络超时定时�?*/
   HAL_TIM_Base_Start_IT(&htim13);
   
-  //LCD初始�?
+  //LCD初始�?
   LCD_Init();
 
   /* USER CODE END 2 */
