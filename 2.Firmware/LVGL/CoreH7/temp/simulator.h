@@ -51,13 +51,13 @@
 typedef void * lv_anim_user_data_t;
 #endif /* LV_USE_ANIMATION */
 
-#define LV_USE_SHADOW 1
+#define LV_DRAW_COMPLEX 1
 
-#if LV_USE_SHADOW
+#if LV_DRAW_COMPLEX != 0
 #define LV_SHADOW_CACHE_SIZE 0
-#endif /* LV_USE_SHADOW */
+#define LV_CIRCLE_CACHE_SIZE 4
+#endif    /* LV_DRAW_COMPLEX */
 
-#define LV_USE_OUTLINE 1
 #define LV_USE_PATTERN 1
 #define LV_USE_VALUE_STR 1
 #define LV_USE_BLEND_MODES 1
@@ -78,9 +78,17 @@ typedef void * lv_fs_drv_user_data_t;
 
 #define LV_USE_USER_DATA 0
 #define LV_USE_PERF_MONITOR 0
-#define LV_USE_API_EXTENSION_V6 1
-#define LV_USE_API_EXTENSION_V7 1
-#define LV_IMG_CF_INDEXED 1
+
+#if LV_USE_PERF_MONITOR
+#define LV_USE_PERF_MONITOR_POS LV_ALIGN_BOTTOM_RIGHT
+#endif /* LV_USE_PERF_MONITOR */
+
+#define LV_USE_MEM_MONITOR 0
+
+#if LV_USE_MEM_MONITOR
+#define LV_USE_MEM_MONITOR_POS LV_ALIGN_BOTTOM_LEFT
+#endif /* LV_USE_MEM_MONITOR */
+
 #define LV_IMG_CF_ALPHA 1
 #define LV_IMG_CACHE_DEF_SIZE 1
 typedef void * lv_img_decoder_user_data_t;
@@ -88,7 +96,11 @@ typedef void * lv_img_decoder_user_data_t;
 #define LV_ATTRIBUTE_TICK_INC
 #define LV_ATTRIBUTE_TASK_HANDLER
 #define LV_ATTRIBUTE_FLUSH_READY
+
+#ifndef LV_ATTRIBUTE_LARGE_CONST
 #define LV_ATTRIBUTE_LARGE_CONST
+#endif
+
 #define LV_ATTRIBUTE_FAST_MEM
 #define LV_EXPORT_CONST_INT(int_value) struct _silence_gcc_warning
 #define LV_ATTRIBUTE_DMA
@@ -202,41 +214,41 @@ typedef void * lv_font_user_data_t;
 
 #define LV_USE_OBJ_REALIGN 1
 #define LV_USE_EXT_CLICK_AREA LV_EXT_CLICK_AREA_TINY
-#define LV_USE_ARC 1
+#define LV_USE_ARC 0
 #define LV_USE_BAR 1
 #define LV_USE_BTN 1
-#define LV_USE_BTNMATRIX 1
-#define LV_USE_CALENDAR 1
+#define LV_USE_BTNMATRIX 0
+#define LV_USE_CALENDAR 0
 
 #if LV_USE_CALENDAR
 #define LV_CALENDAR_WEEK_STARTS_MONDAY 0
 #endif /* LV_USE_CALENDAR */
 
-#define LV_USE_CANVAS 1
-#define LV_USE_CHECKBOX 1
-#define LV_USE_CHART 1
+#define LV_USE_CANVAS 0
+#define LV_USE_CHECKBOX 0
+#define LV_USE_CHART 0
 
 #if LV_USE_CHART
 #define LV_CHART_AXIS_TICK_LABEL_MAX_LEN 256
 #endif /* LV_USE_CHART */
 
 #define LV_USE_CONT 1
-#define LV_USE_CPICKER 1
-#define LV_USE_DROPDOWN 1
+#define LV_USE_CPICKER 0
+#define LV_USE_DROPDOWN 0
 
 #if LV_USE_DROPDOWN
 #define LV_DROPDOWN_DEF_ANIM_TIME 200
 #endif /* LV_USE_DROPDOWN */
 
-#define LV_USE_GAUGE 1
+#define LV_USE_GAUGE 0
 #define LV_USE_IMG 1
-#define LV_USE_IMGBTN 1
+#define LV_USE_IMGBTN 0
 
 #if LV_USE_IMGBTN
 #define LV_IMGBTN_TILED 0
 #endif /* LV_USE_IMGBTN */
 
-#define LV_USE_KEYBOARD 1
+#define LV_USE_KEYBOARD 0
 #define LV_USE_LABEL 1
 
 #if LV_USE_LABEL != 0
@@ -248,32 +260,28 @@ typedef void * lv_font_user_data_t;
 #define LV_USE_LED 1
 
 #if LV_USE_LED
-#define LV_LED_BRIGHT_MIN 120
+#define LV_LED_BRIGHT_MIN 80
 #define LV_LED_BRIGHT_MAX 255
 #endif /* LV_USE_LED */
 
-#define LV_USE_LINE 1
-#define LV_USE_LIST 1
+#define LV_USE_LINE 0
+#define LV_USE_LIST 0
 
 #if LV_USE_LIST != 0
 #define LV_LIST_DEF_ANIM_TIME 100
 #endif /* LV_USE_LIST */
 
-#define LV_USE_LINEMETER 1
-
-#if LV_USE_LINEMETER
-#define LV_LINEMETER_PRECISE 1
-#endif /* LV_USE_LINEMETER */
-
+#define LV_USE_MENU 0
+#define LV_USE_METER 0
 #define LV_USE_OBJMASK 1
-#define LV_USE_MSGBOX 1
-#define LV_USE_PAGE 1
+#define LV_USE_MSGBOX 0
+#define LV_USE_SPAN 0
 
-#if LV_USE_PAGE != 0
-#define LV_PAGE_DEF_ANIM_TIME 400
-#endif /* LV_USE_PAGE */
+#if LV_USE_SPAN
+#define LV_SPAN_SNIPPET_STACK_SIZE 64
+#endif /* LV_USE_SPAN */
 
-#define LV_USE_SPINNER 1
+#define LV_USE_SPINNER 0
 
 #if LV_USE_SPINNER != 0
 #define LV_SPINNER_DEF_ARC_LENGTH 60
@@ -281,49 +289,59 @@ typedef void * lv_font_user_data_t;
 #define LV_SPINNER_DEF_ANIM LV_SPINNER_TYPE_SPINNING_ARC
 #endif /* LV_USE_SPINNER */
 
-#define LV_USE_ROLLER 1
+#define LV_USE_ROLLER 0
 
 #if LV_USE_ROLLER != 0
 #define LV_ROLLER_DEF_ANIM_TIME 200
 #define LV_ROLLER_INF_PAGES 7
 #endif /* LV_USE_ROLLER */
 
-#define LV_USE_SLIDER 1
-#define LV_USE_SPINBOX 1
+#define LV_USE_SLIDER 0
+#define LV_USE_SPINBOX 0
 #define LV_USE_SWITCH 1
-#define LV_USE_TEXTAREA 1
+#define LV_USE_TEXTAREA 0
 
 #if LV_USE_TEXTAREA != 0
 #define LV_TEXTAREA_DEF_CURSOR_BLINK_TIME 400
 #define LV_TEXTAREA_DEF_PWD_SHOW_TIME 1500
 #endif /* LV_USE_TEXTAREA */
 
-#define LV_USE_TABLE 1
+#define LV_USE_TABLE 0
 
 #if LV_USE_TABLE
 #define LV_TABLE_COL_MAX 12
 #define LV_TABLE_CELL_STYLE_CNT 4
 #endif /* LV_USE_TABLE */
 
-#define LV_USE_TABVIEW 1
+#define LV_USE_TABVIEW 0
 
 #if LV_USE_TABVIEW != 0
 #define LV_TABVIEW_DEF_ANIM_TIME 300
 #endif /* LV_USE_TABVIEW */
 
-#define LV_USE_TILEVIEW 1
+#define LV_USE_TILEVIEW 0
 
 #if LV_USE_TILEVIEW
 #define LV_TILEVIEW_DEF_ANIM_TIME 300
 #endif /* LV_USE_TILEVIEW */
 
-#define LV_USE_WIN 1
+#define LV_USE_WIN 0
 
 #if  defined(_MSC_VER) && !defined(_CRT_SECURE_NO_WARNINGS)    /* Disable warnings for Visual Studio*/
 #define _CRT_SECURE_NO_WARNINGS
 #endif
 
-#define LV_USE_ANIM_IMG 1
+#define LV_USE_ANIMIMG 0
 #define LV_USE_GUIDER_SIMULATOR 1
+#define LV_USE_ANALOGCLOCK 0
+#define LV_USE_CAROUSEL 0
+#define LV_USE_DCLOCK 0
+#define LV_USE_RADIOBTN 0
+#define LV_USE_ZH_KEYBOARD 0
+
+#if LV_USE_ZH_KEYBOARD
+#define LV_ZH_KEYBOARD_MINI 0
+#endif /* LV_USE_ZH_KEYBOARD */
+
 
 #endif

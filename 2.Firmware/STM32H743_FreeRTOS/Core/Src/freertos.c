@@ -54,6 +54,7 @@ osThreadId KEY_TaskHandle;
 osThreadId LCD_TaskHandle;
 osThreadId Network_TaskHandle;
 osMessageQId KEY_QueueHandle;
+osMessageQId Tempe_QueueHandle;
 osMutexId Uart_MutexHandle;
 osSemaphoreId Key_Binary_SemHandle;
 osSemaphoreId Network_BinarySemHandle;
@@ -188,8 +189,12 @@ void MX_FREERTOS_Init(void) {
 
   /* Create the queue(s) */
   /* definition and creation of KEY_Queue */
-  osMessageQDef(KEY_Queue, 3, uint8_t);
+  osMessageQDef(KEY_Queue, 1, uint8_t);
   KEY_QueueHandle = osMessageCreate(osMessageQ(KEY_Queue), NULL);
+
+  /* definition and creation of Tempe_Queue */
+  osMessageQDef(Tempe_Queue, 8, uint16_t);
+  Tempe_QueueHandle = osMessageCreate(osMessageQ(Tempe_Queue), NULL);
 
   /* USER CODE BEGIN RTOS_QUEUES */
   /* add queues, ... */
@@ -205,7 +210,7 @@ void MX_FREERTOS_Init(void) {
   KEY_TaskHandle = osThreadCreate(osThread(KEY_Task), NULL);
 
   /* definition and creation of LCD_Task */
-  osThreadDef(LCD_Task, Start_LCD_Task, osPriorityNormal, 0, 2048);
+  osThreadDef(LCD_Task, Start_LCD_Task, osPriorityNormal, 0, 1024);
   LCD_TaskHandle = osThreadCreate(osThread(LCD_Task), NULL);
 
   /* definition and creation of Network_Task */

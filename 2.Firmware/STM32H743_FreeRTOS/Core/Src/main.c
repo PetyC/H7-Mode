@@ -19,6 +19,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "cmsis_os.h"
+#include "adc.h"
 #include "dma.h"
 #include "mdma.h"
 #include "quadspi.h"
@@ -108,6 +109,7 @@ int main(void)
   MX_TIM14_Init();
   MX_TIM1_Init();
   MX_TIM13_Init();
+  MX_ADC3_Init();
   /* USER CODE BEGIN 2 */
   /*MCU系统占用�?*/
   HAL_TIM_Base_Start_IT(&htim14);

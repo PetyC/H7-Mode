@@ -6,15 +6,17 @@
 
 makefile_name := $(abspath $(lastword $(MAKEFILE_LIST)))
 makefile_path := $(strip $(patsubst %/,% , $(dir $(makefile_name))))
-
+libfile_path := $(makefile_path)/../lib/x86
 
 CC := gcc
+LDFLAGS := -L$(libfile_path) -ladvanced_widgets
 PRJ_DIR := $(makefile_path)/..
 LVGL_DIR := $(PRJ_DIR)
 SIMULATOR_DIR := $(makefile_path)
 LVGL_DIR_NAME ?= lvgl
 CFLAGS := -O3 -g0 -I$(LVGL_DIR)/ -I$(makefile_path)/ -c -fmessage-length=0
-LDFLAGS := -lSDL2 -lm
+CFLAGS += -I$(LVGL_DIR)/$(LVGL_DIR_NAME)/ -I$(LVGL_DIR)/$(LVGL_DIR_NAME)/src
+LDFLAGS += -lSDL2 -lm
 
 BUILD_DIR := build/
 OBJ_DIR := $(BUILD_DIR)object/
@@ -41,7 +43,7 @@ endif
 CFLAGS += -DLV_CONF_INCLUDE_SIMPLE=1
 
 #Collect the files to compile
--include $(LVGL_DIR)/lvgl/lvgl.mk
+-include $(LVGL_DIR)/$(LVGL_DIR_NAME)/lvgl.mk
 -include $(SIMULATOR_DIR)/lv_drivers/lv_drivers.mk
 -include $(PRJ_DIR)/generated/generated.mk
 -include $(PRJ_DIR)/custom/custom.mk

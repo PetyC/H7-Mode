@@ -124,14 +124,17 @@ def ta_event_cb(e,kb):
     ta = e.get_target()
     if code == lv.EVENT.FOCUSED:
         kb.set_textarea(ta)
+        kb.move_foreground()
         kb.clear_flag(lv.obj.FLAG.HIDDEN)
 
     if code == lv.EVENT.DEFOCUSED:
         kb.set_textarea(None)
+        kb.move_background()
         kb.add_flag(lv.obj.FLAG.HIDDEN)
 
 
 main_screen = lv.obj()
+main_screen.set_scrollbar_mode(lv.SCROLLBAR_MODE.OFF)
 # create style style_main_screen_main_main_default
 style_main_screen_main_main_default = lv.style_t()
 style_main_screen_main_main_default.init()
@@ -141,97 +144,215 @@ style_main_screen_main_main_default.set_bg_opa(255)
 # add style for main_screen
 main_screen.add_style(style_main_screen_main_main_default, lv.PART.MAIN|lv.STATE.DEFAULT)
 
-main_screen_tileview = lv.tileview(main_screen)
-main_screen_tileview.set_pos(0,0)
-main_screen_tileview.set_size(128,128)
-main_screen_tileview_tileview = main_screen_tileview.add_tile(0, 0, lv.DIR.RIGHT)
-main_screen_Wifi_Set_btn = lv.btn(main_screen_tileview_tileview)
-main_screen_Wifi_Set_btn.set_pos(34,20)
-main_screen_Wifi_Set_btn.set_size(60,20)
-main_screen_Wifi_Set_btn_label = lv.label(main_screen_Wifi_Set_btn)
-main_screen_Wifi_Set_btn_label.set_text("WIFI设置")
-main_screen_Wifi_Set_btn.set_style_pad_all(0, lv.STATE.DEFAULT)
-main_screen_Wifi_Set_btn_label.align(lv.ALIGN.CENTER,0,0)
-main_screen_Wifi_Set_btn_label.set_style_text_color(lv.color_make(0x00,0x00,0x00), lv.STATE.DEFAULT)
-try:
-    main_screen_Wifi_Set_btn_label.set_style_text_font(lv.font_simsun_12, lv.STATE.DEFAULT)
-except AttributeError:
-    try:
-        main_screen_Wifi_Set_btn_label.set_style_text_font(lv.font_montserrat_12, lv.STATE.DEFAULT)
-    except AttributeError:
-        main_screen_Wifi_Set_btn_label.set_style_text_font(lv.font_montserrat_16, lv.STATE.DEFAULT)
+main_screen_wifi_set_btn = lv.btn(main_screen)
+main_screen_wifi_set_btn.set_pos(int(14),int(35))
+main_screen_wifi_set_btn.set_size(100,20)
+main_screen_wifi_set_btn.set_scrollbar_mode(lv.SCROLLBAR_MODE.OFF)
+main_screen_wifi_set_btn_label = lv.label(main_screen_wifi_set_btn)
+main_screen_wifi_set_btn_label.set_text("WIFI设置")
+main_screen_wifi_set_btn.set_style_pad_all(0, lv.STATE.DEFAULT)
+main_screen_wifi_set_btn_label.align(lv.ALIGN.CENTER,0,0)
 # create style style_main_screen_wifi_set_btn_main_main_default
 style_main_screen_wifi_set_btn_main_main_default = lv.style_t()
 style_main_screen_wifi_set_btn_main_main_default.init()
-style_main_screen_wifi_set_btn_main_main_default.set_radius(50)
+style_main_screen_wifi_set_btn_main_main_default.set_radius(5)
 style_main_screen_wifi_set_btn_main_main_default.set_bg_color(lv.color_make(0x21,0x95,0xf6))
 style_main_screen_wifi_set_btn_main_main_default.set_bg_grad_color(lv.color_make(0x21,0x95,0xf6))
-style_main_screen_wifi_set_btn_main_main_default.set_bg_grad_dir(lv.GRAD_DIR.VER)
-style_main_screen_wifi_set_btn_main_main_default.set_bg_opa(255)
-style_main_screen_wifi_set_btn_main_main_default.set_shadow_color(lv.color_make(0x21,0x95,0xf6))
-style_main_screen_wifi_set_btn_main_main_default.set_shadow_opa(255)
+style_main_screen_wifi_set_btn_main_main_default.set_bg_grad_dir(lv.GRAD_DIR.NONE)
+style_main_screen_wifi_set_btn_main_main_default.set_bg_opa(109)
+style_main_screen_wifi_set_btn_main_main_default.set_shadow_width(1)
+style_main_screen_wifi_set_btn_main_main_default.set_shadow_color(lv.color_make(0x00,0x00,0x00))
+style_main_screen_wifi_set_btn_main_main_default.set_shadow_opa(0)
+style_main_screen_wifi_set_btn_main_main_default.set_shadow_spread(1)
+style_main_screen_wifi_set_btn_main_main_default.set_shadow_ofs_x(0)
+style_main_screen_wifi_set_btn_main_main_default.set_shadow_ofs_y(0)
 style_main_screen_wifi_set_btn_main_main_default.set_border_color(lv.color_make(0x21,0x95,0xf6))
 style_main_screen_wifi_set_btn_main_main_default.set_border_width(0)
-style_main_screen_wifi_set_btn_main_main_default.set_border_opa(255)
-
-# add style for main_screen_Wifi_Set_btn
-main_screen_Wifi_Set_btn.add_style(style_main_screen_wifi_set_btn_main_main_default, lv.PART.MAIN|lv.STATE.DEFAULT)
-
-main_screen_Demo_btn = lv.btn(main_screen_tileview_tileview)
-main_screen_Demo_btn.set_pos(34,70)
-main_screen_Demo_btn.set_size(60,20)
-main_screen_Demo_btn_label = lv.label(main_screen_Demo_btn)
-main_screen_Demo_btn_label.set_text("Demo")
-main_screen_Demo_btn.set_style_pad_all(0, lv.STATE.DEFAULT)
-main_screen_Demo_btn_label.align(lv.ALIGN.CENTER,0,0)
-main_screen_Demo_btn_label.set_style_text_color(lv.color_make(0x00,0x00,0x00), lv.STATE.DEFAULT)
+style_main_screen_wifi_set_btn_main_main_default.set_border_opa(0)
+style_main_screen_wifi_set_btn_main_main_default.set_text_color(lv.color_make(0x00,0x00,0x00))
 try:
-    main_screen_Demo_btn_label.set_style_text_font(lv.font_simsun_12, lv.STATE.DEFAULT)
+    style_main_screen_wifi_set_btn_main_main_default.set_text_font(lv.font_simsun_12)
 except AttributeError:
     try:
-        main_screen_Demo_btn_label.set_style_text_font(lv.font_montserrat_12, lv.STATE.DEFAULT)
+        style_main_screen_wifi_set_btn_main_main_default.set_text_font(lv.font_montserrat_12)
     except AttributeError:
-        main_screen_Demo_btn_label.set_style_text_font(lv.font_montserrat_16, lv.STATE.DEFAULT)
+        style_main_screen_wifi_set_btn_main_main_default.set_text_font(lv.font_montserrat_16)
+style_main_screen_wifi_set_btn_main_main_default.set_text_align(lv.TEXT_ALIGN.CENTER)
+
+# add style for main_screen_wifi_set_btn
+main_screen_wifi_set_btn.add_style(style_main_screen_wifi_set_btn_main_main_default, lv.PART.MAIN|lv.STATE.DEFAULT)
+
+# create style style_main_screen_wifi_set_btn_main_main_focused
+style_main_screen_wifi_set_btn_main_main_focused = lv.style_t()
+style_main_screen_wifi_set_btn_main_main_focused.init()
+style_main_screen_wifi_set_btn_main_main_focused.set_radius(5)
+style_main_screen_wifi_set_btn_main_main_focused.set_bg_color(lv.color_make(0x21,0x95,0xf6))
+style_main_screen_wifi_set_btn_main_main_focused.set_bg_grad_color(lv.color_make(0x21,0x95,0xf6))
+style_main_screen_wifi_set_btn_main_main_focused.set_bg_grad_dir(lv.GRAD_DIR.NONE)
+style_main_screen_wifi_set_btn_main_main_focused.set_bg_opa(255)
+style_main_screen_wifi_set_btn_main_main_focused.set_border_color(lv.color_make(0x21,0x95,0xf6))
+style_main_screen_wifi_set_btn_main_main_focused.set_border_width(0)
+style_main_screen_wifi_set_btn_main_main_focused.set_border_opa(255)
+style_main_screen_wifi_set_btn_main_main_focused.set_text_color(lv.color_make(0x00,0x00,0x00))
+try:
+    style_main_screen_wifi_set_btn_main_main_focused.set_text_font(lv.font_simsun_12)
+except AttributeError:
+    try:
+        style_main_screen_wifi_set_btn_main_main_focused.set_text_font(lv.font_montserrat_12)
+    except AttributeError:
+        style_main_screen_wifi_set_btn_main_main_focused.set_text_font(lv.font_montserrat_16)
+
+# add style for main_screen_wifi_set_btn
+main_screen_wifi_set_btn.add_style(style_main_screen_wifi_set_btn_main_main_focused, lv.PART.MAIN|lv.STATE.FOCUSED)
+
+# create style style_main_screen_wifi_set_btn_main_main_pressed
+style_main_screen_wifi_set_btn_main_main_pressed = lv.style_t()
+style_main_screen_wifi_set_btn_main_main_pressed.init()
+style_main_screen_wifi_set_btn_main_main_pressed.set_radius(5)
+style_main_screen_wifi_set_btn_main_main_pressed.set_bg_color(lv.color_make(0x21,0x95,0xf6))
+style_main_screen_wifi_set_btn_main_main_pressed.set_bg_grad_color(lv.color_make(0x21,0x95,0xf6))
+style_main_screen_wifi_set_btn_main_main_pressed.set_bg_grad_dir(lv.GRAD_DIR.NONE)
+style_main_screen_wifi_set_btn_main_main_pressed.set_bg_opa(255)
+style_main_screen_wifi_set_btn_main_main_pressed.set_border_color(lv.color_make(0x21,0x95,0xf6))
+style_main_screen_wifi_set_btn_main_main_pressed.set_border_width(0)
+style_main_screen_wifi_set_btn_main_main_pressed.set_border_opa(255)
+style_main_screen_wifi_set_btn_main_main_pressed.set_text_color(lv.color_make(0x00,0x00,0x00))
+try:
+    style_main_screen_wifi_set_btn_main_main_pressed.set_text_font(lv.font_simsun_12)
+except AttributeError:
+    try:
+        style_main_screen_wifi_set_btn_main_main_pressed.set_text_font(lv.font_montserrat_12)
+    except AttributeError:
+        style_main_screen_wifi_set_btn_main_main_pressed.set_text_font(lv.font_montserrat_16)
+
+# add style for main_screen_wifi_set_btn
+main_screen_wifi_set_btn.add_style(style_main_screen_wifi_set_btn_main_main_pressed, lv.PART.MAIN|lv.STATE.PRESSED)
+
+main_screen_demo_btn = lv.btn(main_screen)
+main_screen_demo_btn.set_pos(int(14),int(70))
+main_screen_demo_btn.set_size(100,20)
+main_screen_demo_btn.set_scrollbar_mode(lv.SCROLLBAR_MODE.OFF)
+main_screen_demo_btn_label = lv.label(main_screen_demo_btn)
+main_screen_demo_btn_label.set_text("Demo")
+main_screen_demo_btn.set_style_pad_all(0, lv.STATE.DEFAULT)
+main_screen_demo_btn_label.align(lv.ALIGN.CENTER,0,0)
 # create style style_main_screen_demo_btn_main_main_default
 style_main_screen_demo_btn_main_main_default = lv.style_t()
 style_main_screen_demo_btn_main_main_default.init()
-style_main_screen_demo_btn_main_main_default.set_radius(50)
+style_main_screen_demo_btn_main_main_default.set_radius(5)
 style_main_screen_demo_btn_main_main_default.set_bg_color(lv.color_make(0x21,0x95,0xf6))
 style_main_screen_demo_btn_main_main_default.set_bg_grad_color(lv.color_make(0x21,0x95,0xf6))
-style_main_screen_demo_btn_main_main_default.set_bg_grad_dir(lv.GRAD_DIR.VER)
-style_main_screen_demo_btn_main_main_default.set_bg_opa(255)
-style_main_screen_demo_btn_main_main_default.set_shadow_color(lv.color_make(0x21,0x95,0xf6))
-style_main_screen_demo_btn_main_main_default.set_shadow_opa(255)
+style_main_screen_demo_btn_main_main_default.set_bg_grad_dir(lv.GRAD_DIR.NONE)
+style_main_screen_demo_btn_main_main_default.set_bg_opa(109)
+style_main_screen_demo_btn_main_main_default.set_shadow_width(1)
+style_main_screen_demo_btn_main_main_default.set_shadow_color(lv.color_make(0xff,0xff,0xff))
+style_main_screen_demo_btn_main_main_default.set_shadow_opa(0)
+style_main_screen_demo_btn_main_main_default.set_shadow_spread(1)
+style_main_screen_demo_btn_main_main_default.set_shadow_ofs_x(0)
+style_main_screen_demo_btn_main_main_default.set_shadow_ofs_y(0)
 style_main_screen_demo_btn_main_main_default.set_border_color(lv.color_make(0x21,0x95,0xf6))
 style_main_screen_demo_btn_main_main_default.set_border_width(0)
-style_main_screen_demo_btn_main_main_default.set_border_opa(255)
+style_main_screen_demo_btn_main_main_default.set_border_opa(0)
+style_main_screen_demo_btn_main_main_default.set_text_color(lv.color_make(0x00,0x00,0x00))
+try:
+    style_main_screen_demo_btn_main_main_default.set_text_font(lv.font_simsun_12)
+except AttributeError:
+    try:
+        style_main_screen_demo_btn_main_main_default.set_text_font(lv.font_montserrat_12)
+    except AttributeError:
+        style_main_screen_demo_btn_main_main_default.set_text_font(lv.font_montserrat_16)
+style_main_screen_demo_btn_main_main_default.set_text_align(lv.TEXT_ALIGN.CENTER)
 
-# add style for main_screen_Demo_btn
-main_screen_Demo_btn.add_style(style_main_screen_demo_btn_main_main_default, lv.PART.MAIN|lv.STATE.DEFAULT)
+# add style for main_screen_demo_btn
+main_screen_demo_btn.add_style(style_main_screen_demo_btn_main_main_default, lv.PART.MAIN|lv.STATE.DEFAULT)
 
-# create style style_main_screen_tileview_main_main_default
-style_main_screen_tileview_main_main_default = lv.style_t()
-style_main_screen_tileview_main_main_default.init()
-style_main_screen_tileview_main_main_default.set_radius(0)
-style_main_screen_tileview_main_main_default.set_bg_color(lv.color_make(0xf6,0xf6,0xf6))
-style_main_screen_tileview_main_main_default.set_bg_grad_color(lv.color_make(0xf6,0xf6,0xf6))
-style_main_screen_tileview_main_main_default.set_bg_grad_dir(lv.GRAD_DIR.VER)
-style_main_screen_tileview_main_main_default.set_bg_opa(255)
+# create style style_main_screen_demo_btn_main_main_focused
+style_main_screen_demo_btn_main_main_focused = lv.style_t()
+style_main_screen_demo_btn_main_main_focused.init()
+style_main_screen_demo_btn_main_main_focused.set_radius(5)
+style_main_screen_demo_btn_main_main_focused.set_bg_color(lv.color_make(0x21,0x95,0xf6))
+style_main_screen_demo_btn_main_main_focused.set_bg_grad_color(lv.color_make(0x21,0x95,0xf6))
+style_main_screen_demo_btn_main_main_focused.set_bg_grad_dir(lv.GRAD_DIR.NONE)
+style_main_screen_demo_btn_main_main_focused.set_bg_opa(255)
+style_main_screen_demo_btn_main_main_focused.set_border_color(lv.color_make(0x21,0x95,0xf6))
+style_main_screen_demo_btn_main_main_focused.set_border_width(0)
+style_main_screen_demo_btn_main_main_focused.set_border_opa(255)
+style_main_screen_demo_btn_main_main_focused.set_text_color(lv.color_make(0x00,0x00,0x00))
+try:
+    style_main_screen_demo_btn_main_main_focused.set_text_font(lv.font_simsun_12)
+except AttributeError:
+    try:
+        style_main_screen_demo_btn_main_main_focused.set_text_font(lv.font_montserrat_12)
+    except AttributeError:
+        style_main_screen_demo_btn_main_main_focused.set_text_font(lv.font_montserrat_16)
 
-# add style for main_screen_tileview
-main_screen_tileview.add_style(style_main_screen_tileview_main_main_default, lv.PART.MAIN|lv.STATE.DEFAULT)
+# add style for main_screen_demo_btn
+main_screen_demo_btn.add_style(style_main_screen_demo_btn_main_main_focused, lv.PART.MAIN|lv.STATE.FOCUSED)
 
-# create style style_main_screen_tileview_main_scrollbar_default
-style_main_screen_tileview_main_scrollbar_default = lv.style_t()
-style_main_screen_tileview_main_scrollbar_default.init()
-style_main_screen_tileview_main_scrollbar_default.set_radius(0)
-style_main_screen_tileview_main_scrollbar_default.set_bg_color(lv.color_make(0xea,0xef,0xf3))
-style_main_screen_tileview_main_scrollbar_default.set_bg_opa(255)
+# create style style_main_screen_demo_btn_main_main_pressed
+style_main_screen_demo_btn_main_main_pressed = lv.style_t()
+style_main_screen_demo_btn_main_main_pressed.init()
+style_main_screen_demo_btn_main_main_pressed.set_radius(5)
+style_main_screen_demo_btn_main_main_pressed.set_bg_color(lv.color_make(0x21,0x95,0xf6))
+style_main_screen_demo_btn_main_main_pressed.set_bg_grad_color(lv.color_make(0x21,0x95,0xf6))
+style_main_screen_demo_btn_main_main_pressed.set_bg_grad_dir(lv.GRAD_DIR.NONE)
+style_main_screen_demo_btn_main_main_pressed.set_bg_opa(255)
+style_main_screen_demo_btn_main_main_pressed.set_border_color(lv.color_make(0x21,0x95,0xf6))
+style_main_screen_demo_btn_main_main_pressed.set_border_width(0)
+style_main_screen_demo_btn_main_main_pressed.set_border_opa(255)
+style_main_screen_demo_btn_main_main_pressed.set_text_color(lv.color_make(0x00,0x00,0x00))
+try:
+    style_main_screen_demo_btn_main_main_pressed.set_text_font(lv.font_simsun_12)
+except AttributeError:
+    try:
+        style_main_screen_demo_btn_main_main_pressed.set_text_font(lv.font_montserrat_12)
+    except AttributeError:
+        style_main_screen_demo_btn_main_main_pressed.set_text_font(lv.font_montserrat_16)
 
-# add style for main_screen_tileview
-main_screen_tileview.add_style(style_main_screen_tileview_main_scrollbar_default, lv.PART.SCROLLBAR|lv.STATE.DEFAULT)
+# add style for main_screen_demo_btn
+main_screen_demo_btn.add_style(style_main_screen_demo_btn_main_main_pressed, lv.PART.MAIN|lv.STATE.PRESSED)
 
+main_screen_wifi_state_label = lv.label(main_screen)
+main_screen_wifi_state_label.set_pos(int(14),int(5))
+main_screen_wifi_state_label.set_size(100,15)
+main_screen_wifi_state_label.set_scrollbar_mode(lv.SCROLLBAR_MODE.OFF)
+main_screen_wifi_state_label.set_text("WIFI:Connect")
+main_screen_wifi_state_label.set_long_mode(lv.label.LONG.WRAP)
+# create style style_main_screen_wifi_state_label_main_main_default
+style_main_screen_wifi_state_label_main_main_default = lv.style_t()
+style_main_screen_wifi_state_label_main_main_default.init()
+style_main_screen_wifi_state_label_main_main_default.set_radius(0)
+style_main_screen_wifi_state_label_main_main_default.set_bg_color(lv.color_make(0x21,0x95,0xf6))
+style_main_screen_wifi_state_label_main_main_default.set_bg_grad_color(lv.color_make(0x21,0x95,0xf6))
+style_main_screen_wifi_state_label_main_main_default.set_bg_grad_dir(lv.GRAD_DIR.NONE)
+style_main_screen_wifi_state_label_main_main_default.set_bg_opa(0)
+style_main_screen_wifi_state_label_main_main_default.set_text_color(lv.color_make(0x00,0x00,0x00))
+try:
+    style_main_screen_wifi_state_label_main_main_default.set_text_font(lv.font_simsun_12)
+except AttributeError:
+    try:
+        style_main_screen_wifi_state_label_main_main_default.set_text_font(lv.font_montserrat_12)
+    except AttributeError:
+        style_main_screen_wifi_state_label_main_main_default.set_text_font(lv.font_montserrat_16)
+style_main_screen_wifi_state_label_main_main_default.set_text_letter_space(0)
+style_main_screen_wifi_state_label_main_main_default.set_text_line_space(0)
+style_main_screen_wifi_state_label_main_main_default.set_text_align(lv.TEXT_ALIGN.CENTER)
+style_main_screen_wifi_state_label_main_main_default.set_pad_left(0)
+style_main_screen_wifi_state_label_main_main_default.set_pad_right(0)
+style_main_screen_wifi_state_label_main_main_default.set_pad_top(0)
+style_main_screen_wifi_state_label_main_main_default.set_pad_bottom(0)
+
+# add style for main_screen_wifi_state_label
+main_screen_wifi_state_label.add_style(style_main_screen_wifi_state_label_main_main_default, lv.PART.MAIN|lv.STATE.DEFAULT)
+
+main_screen_led_1 = lv.led(main_screen)
+main_screen_led_1.set_pos(int(54),int(100))
+main_screen_led_1.set_size(20,20)
+main_screen_led_1.set_scrollbar_mode(lv.SCROLLBAR_MODE.OFF)
+main_screen_led_1.set_brightness(0)
+main_screen_led_1.set_color(lv.color_make(0x00,0xa1,0xb5))
 Wifi_screen = lv.obj()
+Wifi_screen.set_scrollbar_mode(lv.SCROLLBAR_MODE.OFF)
 # create style style_wifi_screen_main_main_default
 style_wifi_screen_main_main_default = lv.style_t()
 style_wifi_screen_main_main_default.init()
@@ -242,20 +363,13 @@ style_wifi_screen_main_main_default.set_bg_opa(255)
 Wifi_screen.add_style(style_wifi_screen_main_main_default, lv.PART.MAIN|lv.STATE.DEFAULT)
 
 Wifi_screen_APU_btn = lv.btn(Wifi_screen)
-Wifi_screen_APU_btn.set_pos(4,70)
-Wifi_screen_APU_btn.set_size(120,10)
+Wifi_screen_APU_btn.set_pos(int(14),int(65))
+Wifi_screen_APU_btn.set_size(100,20)
+Wifi_screen_APU_btn.set_scrollbar_mode(lv.SCROLLBAR_MODE.OFF)
 Wifi_screen_APU_btn_label = lv.label(Wifi_screen_APU_btn)
 Wifi_screen_APU_btn_label.set_text("启动APU配网")
 Wifi_screen_APU_btn.set_style_pad_all(0, lv.STATE.DEFAULT)
 Wifi_screen_APU_btn_label.align(lv.ALIGN.CENTER,0,0)
-Wifi_screen_APU_btn_label.set_style_text_color(lv.color_make(0x00,0x00,0x00), lv.STATE.DEFAULT)
-try:
-    Wifi_screen_APU_btn_label.set_style_text_font(lv.font_simsun_8, lv.STATE.DEFAULT)
-except AttributeError:
-    try:
-        Wifi_screen_APU_btn_label.set_style_text_font(lv.font_montserrat_8, lv.STATE.DEFAULT)
-    except AttributeError:
-        Wifi_screen_APU_btn_label.set_style_text_font(lv.font_montserrat_16, lv.STATE.DEFAULT)
 # create style style_wifi_screen_apu_btn_main_main_default
 style_wifi_screen_apu_btn_main_main_default = lv.style_t()
 style_wifi_screen_apu_btn_main_main_default.init()
@@ -264,91 +378,34 @@ style_wifi_screen_apu_btn_main_main_default.set_bg_color(lv.color_make(0x21,0x95
 style_wifi_screen_apu_btn_main_main_default.set_bg_grad_color(lv.color_make(0x21,0x95,0xf6))
 style_wifi_screen_apu_btn_main_main_default.set_bg_grad_dir(lv.GRAD_DIR.VER)
 style_wifi_screen_apu_btn_main_main_default.set_bg_opa(108)
+style_wifi_screen_apu_btn_main_main_default.set_shadow_width(1)
 style_wifi_screen_apu_btn_main_main_default.set_shadow_color(lv.color_make(0x21,0x95,0xf6))
 style_wifi_screen_apu_btn_main_main_default.set_shadow_opa(0)
+style_wifi_screen_apu_btn_main_main_default.set_shadow_spread(1)
+style_wifi_screen_apu_btn_main_main_default.set_shadow_ofs_x(0)
+style_wifi_screen_apu_btn_main_main_default.set_shadow_ofs_y(0)
 style_wifi_screen_apu_btn_main_main_default.set_border_color(lv.color_make(0x21,0x95,0xf6))
 style_wifi_screen_apu_btn_main_main_default.set_border_width(0)
 style_wifi_screen_apu_btn_main_main_default.set_border_opa(0)
+style_wifi_screen_apu_btn_main_main_default.set_text_color(lv.color_make(0x00,0x00,0x00))
+try:
+    style_wifi_screen_apu_btn_main_main_default.set_text_font(lv.font_simsun_12)
+except AttributeError:
+    try:
+        style_wifi_screen_apu_btn_main_main_default.set_text_font(lv.font_montserrat_12)
+    except AttributeError:
+        style_wifi_screen_apu_btn_main_main_default.set_text_font(lv.font_montserrat_16)
+style_wifi_screen_apu_btn_main_main_default.set_text_align(lv.TEXT_ALIGN.CENTER)
 
 # add style for Wifi_screen_APU_btn
 Wifi_screen_APU_btn.add_style(style_wifi_screen_apu_btn_main_main_default, lv.PART.MAIN|lv.STATE.DEFAULT)
 
-Wifi_screen_label_1 = lv.label(Wifi_screen)
-Wifi_screen_label_1.set_pos(0,3)
-Wifi_screen_label_1.set_size(128,10)
-Wifi_screen_label_1.set_text("WIFI")
-Wifi_screen_label_1.set_long_mode(lv.label.LONG.WRAP)
-Wifi_screen_label_1.set_style_text_align(lv.TEXT_ALIGN.CENTER, 0)
-# create style style_wifi_screen_label_1_main_main_default
-style_wifi_screen_label_1_main_main_default = lv.style_t()
-style_wifi_screen_label_1_main_main_default.init()
-style_wifi_screen_label_1_main_main_default.set_radius(0)
-style_wifi_screen_label_1_main_main_default.set_bg_color(lv.color_make(0x21,0x95,0xf6))
-style_wifi_screen_label_1_main_main_default.set_bg_grad_color(lv.color_make(0x21,0x95,0xf6))
-style_wifi_screen_label_1_main_main_default.set_bg_grad_dir(lv.GRAD_DIR.VER)
-style_wifi_screen_label_1_main_main_default.set_bg_opa(0)
-style_wifi_screen_label_1_main_main_default.set_text_color(lv.color_make(0x00,0x00,0x00))
-try:
-    style_wifi_screen_label_1_main_main_default.set_text_font(lv.font_simsun_8)
-except AttributeError:
-    try:
-        style_wifi_screen_label_1_main_main_default.set_text_font(lv.font_montserrat_8)
-    except AttributeError:
-        style_wifi_screen_label_1_main_main_default.set_text_font(lv.font_montserrat_16)
-style_wifi_screen_label_1_main_main_default.set_text_letter_space(2)
-style_wifi_screen_label_1_main_main_default.set_pad_left(0)
-style_wifi_screen_label_1_main_main_default.set_pad_right(0)
-style_wifi_screen_label_1_main_main_default.set_pad_top(0)
-style_wifi_screen_label_1_main_main_default.set_pad_bottom(0)
-
-# add style for Wifi_screen_label_1
-Wifi_screen_label_1.add_style(style_wifi_screen_label_1_main_main_default, lv.PART.MAIN|lv.STATE.DEFAULT)
-
-Wifi_screen_Wifi_sw = lv.switch(Wifi_screen)
-Wifi_screen_Wifi_sw.set_pos(44,20)
-Wifi_screen_Wifi_sw.set_size(40,15)
-# create style style_wifi_screen_wifi_sw_main_main_default
-style_wifi_screen_wifi_sw_main_main_default = lv.style_t()
-style_wifi_screen_wifi_sw_main_main_default.init()
-style_wifi_screen_wifi_sw_main_main_default.set_radius(100)
-style_wifi_screen_wifi_sw_main_main_default.set_bg_color(lv.color_make(0xe6,0xe2,0xe6))
-style_wifi_screen_wifi_sw_main_main_default.set_bg_grad_color(lv.color_make(0xe6,0xe2,0xe6))
-style_wifi_screen_wifi_sw_main_main_default.set_bg_grad_dir(lv.GRAD_DIR.VER)
-style_wifi_screen_wifi_sw_main_main_default.set_bg_opa(255)
-
-# add style for Wifi_screen_Wifi_sw
-Wifi_screen_Wifi_sw.add_style(style_wifi_screen_wifi_sw_main_main_default, lv.PART.MAIN|lv.STATE.DEFAULT)
-
-# create style style_wifi_screen_wifi_sw_main_indicator_checked
-style_wifi_screen_wifi_sw_main_indicator_checked = lv.style_t()
-style_wifi_screen_wifi_sw_main_indicator_checked.init()
-style_wifi_screen_wifi_sw_main_indicator_checked.set_radius(100)
-style_wifi_screen_wifi_sw_main_indicator_checked.set_bg_color(lv.color_make(0x21,0x95,0xf6))
-style_wifi_screen_wifi_sw_main_indicator_checked.set_bg_grad_color(lv.color_make(0x21,0x95,0xf6))
-style_wifi_screen_wifi_sw_main_indicator_checked.set_bg_grad_dir(lv.GRAD_DIR.VER)
-style_wifi_screen_wifi_sw_main_indicator_checked.set_bg_opa(255)
-
-# add style for Wifi_screen_Wifi_sw
-Wifi_screen_Wifi_sw.add_style(style_wifi_screen_wifi_sw_main_indicator_checked, lv.PART.INDICATOR|lv.STATE.CHECKED)
-
-# create style style_wifi_screen_wifi_sw_main_knob_default
-style_wifi_screen_wifi_sw_main_knob_default = lv.style_t()
-style_wifi_screen_wifi_sw_main_knob_default.init()
-style_wifi_screen_wifi_sw_main_knob_default.set_radius(100)
-style_wifi_screen_wifi_sw_main_knob_default.set_bg_color(lv.color_make(0xff,0xff,0xff))
-style_wifi_screen_wifi_sw_main_knob_default.set_bg_grad_color(lv.color_make(0xff,0xff,0xff))
-style_wifi_screen_wifi_sw_main_knob_default.set_bg_grad_dir(lv.GRAD_DIR.VER)
-style_wifi_screen_wifi_sw_main_knob_default.set_bg_opa(255)
-
-# add style for Wifi_screen_Wifi_sw
-Wifi_screen_Wifi_sw.add_style(style_wifi_screen_wifi_sw_main_knob_default, lv.PART.KNOB|lv.STATE.DEFAULT)
-
 Wifi_screen_label_2 = lv.label(Wifi_screen)
-Wifi_screen_label_2.set_pos(0,40)
-Wifi_screen_label_2.set_size(128,8)
+Wifi_screen_label_2.set_pos(int(0),int(25))
+Wifi_screen_label_2.set_size(128,15)
+Wifi_screen_label_2.set_scrollbar_mode(lv.SCROLLBAR_MODE.OFF)
 Wifi_screen_label_2.set_text("已连接WIFI:")
 Wifi_screen_label_2.set_long_mode(lv.label.LONG.WRAP)
-Wifi_screen_label_2.set_style_text_align(lv.TEXT_ALIGN.CENTER, 0)
 # create style style_wifi_screen_label_2_main_main_default
 style_wifi_screen_label_2_main_main_default = lv.style_t()
 style_wifi_screen_label_2_main_main_default.init()
@@ -359,13 +416,15 @@ style_wifi_screen_label_2_main_main_default.set_bg_grad_dir(lv.GRAD_DIR.VER)
 style_wifi_screen_label_2_main_main_default.set_bg_opa(0)
 style_wifi_screen_label_2_main_main_default.set_text_color(lv.color_make(0x00,0x00,0x00))
 try:
-    style_wifi_screen_label_2_main_main_default.set_text_font(lv.font_simsun_8)
+    style_wifi_screen_label_2_main_main_default.set_text_font(lv.font_simsun_12)
 except AttributeError:
     try:
-        style_wifi_screen_label_2_main_main_default.set_text_font(lv.font_montserrat_8)
+        style_wifi_screen_label_2_main_main_default.set_text_font(lv.font_montserrat_12)
     except AttributeError:
         style_wifi_screen_label_2_main_main_default.set_text_font(lv.font_montserrat_16)
 style_wifi_screen_label_2_main_main_default.set_text_letter_space(2)
+style_wifi_screen_label_2_main_main_default.set_text_line_space(0)
+style_wifi_screen_label_2_main_main_default.set_text_align(lv.TEXT_ALIGN.CENTER)
 style_wifi_screen_label_2_main_main_default.set_pad_left(0)
 style_wifi_screen_label_2_main_main_default.set_pad_right(0)
 style_wifi_screen_label_2_main_main_default.set_pad_top(0)
@@ -375,11 +434,11 @@ style_wifi_screen_label_2_main_main_default.set_pad_bottom(0)
 Wifi_screen_label_2.add_style(style_wifi_screen_label_2_main_main_default, lv.PART.MAIN|lv.STATE.DEFAULT)
 
 Wifi_screen_wifi_name_now_label = lv.label(Wifi_screen)
-Wifi_screen_wifi_name_now_label.set_pos(4,55)
-Wifi_screen_wifi_name_now_label.set_size(120,10)
+Wifi_screen_wifi_name_now_label.set_pos(int(4),int(45))
+Wifi_screen_wifi_name_now_label.set_size(120,15)
+Wifi_screen_wifi_name_now_label.set_scrollbar_mode(lv.SCROLLBAR_MODE.OFF)
 Wifi_screen_wifi_name_now_label.set_text("Moujiti")
 Wifi_screen_wifi_name_now_label.set_long_mode(lv.label.LONG.WRAP)
-Wifi_screen_wifi_name_now_label.set_style_text_align(lv.TEXT_ALIGN.CENTER, 0)
 # create style style_wifi_screen_wifi_name_now_label_main_main_default
 style_wifi_screen_wifi_name_now_label_main_main_default = lv.style_t()
 style_wifi_screen_wifi_name_now_label_main_main_default.init()
@@ -387,16 +446,18 @@ style_wifi_screen_wifi_name_now_label_main_main_default.set_radius(50)
 style_wifi_screen_wifi_name_now_label_main_main_default.set_bg_color(lv.color_make(0xe6,0xe2,0xe6))
 style_wifi_screen_wifi_name_now_label_main_main_default.set_bg_grad_color(lv.color_make(0xe6,0xe2,0xe6))
 style_wifi_screen_wifi_name_now_label_main_main_default.set_bg_grad_dir(lv.GRAD_DIR.VER)
-style_wifi_screen_wifi_name_now_label_main_main_default.set_bg_opa(108)
+style_wifi_screen_wifi_name_now_label_main_main_default.set_bg_opa(109)
 style_wifi_screen_wifi_name_now_label_main_main_default.set_text_color(lv.color_make(0x00,0x00,0x00))
 try:
-    style_wifi_screen_wifi_name_now_label_main_main_default.set_text_font(lv.font_simsun_8)
+    style_wifi_screen_wifi_name_now_label_main_main_default.set_text_font(lv.font_simsun_12)
 except AttributeError:
     try:
-        style_wifi_screen_wifi_name_now_label_main_main_default.set_text_font(lv.font_montserrat_8)
+        style_wifi_screen_wifi_name_now_label_main_main_default.set_text_font(lv.font_montserrat_12)
     except AttributeError:
         style_wifi_screen_wifi_name_now_label_main_main_default.set_text_font(lv.font_montserrat_16)
 style_wifi_screen_wifi_name_now_label_main_main_default.set_text_letter_space(1)
+style_wifi_screen_wifi_name_now_label_main_main_default.set_text_line_space(3)
+style_wifi_screen_wifi_name_now_label_main_main_default.set_text_align(lv.TEXT_ALIGN.CENTER)
 style_wifi_screen_wifi_name_now_label_main_main_default.set_pad_left(0)
 style_wifi_screen_wifi_name_now_label_main_main_default.set_pad_right(0)
 style_wifi_screen_wifi_name_now_label_main_main_default.set_pad_top(0)
@@ -422,6 +483,8 @@ except AttributeError:
     except AttributeError:
         style_wifi_screen_wifi_name_now_label_main_main_disabled.set_text_font(lv.font_montserrat_16)
 style_wifi_screen_wifi_name_now_label_main_main_disabled.set_text_letter_space(2)
+style_wifi_screen_wifi_name_now_label_main_main_disabled.set_text_line_space(0)
+style_wifi_screen_wifi_name_now_label_main_main_disabled.set_text_align(lv.TEXT_ALIGN.CENTER)
 style_wifi_screen_wifi_name_now_label_main_main_disabled.set_pad_left(0)
 style_wifi_screen_wifi_name_now_label_main_main_disabled.set_pad_right(0)
 style_wifi_screen_wifi_name_now_label_main_main_disabled.set_pad_top(0)
@@ -430,52 +493,163 @@ style_wifi_screen_wifi_name_now_label_main_main_disabled.set_pad_bottom(0)
 # add style for Wifi_screen_wifi_name_now_label
 Wifi_screen_wifi_name_now_label.add_style(style_wifi_screen_wifi_name_now_label_main_main_disabled, lv.PART.MAIN|lv.STATE.DISABLED)
 
-Wifi_screen_btn_1 = lv.btn(Wifi_screen)
-Wifi_screen_btn_1.set_pos(4,85)
-Wifi_screen_btn_1.set_size(120,10)
-Wifi_screen_btn_1_label = lv.label(Wifi_screen_btn_1)
-Wifi_screen_btn_1_label.set_text("返回")
-Wifi_screen_btn_1.set_style_pad_all(0, lv.STATE.DEFAULT)
-Wifi_screen_btn_1_label.align(lv.ALIGN.CENTER,0,0)
-Wifi_screen_btn_1_label.set_style_text_color(lv.color_make(0x00,0x00,0x00), lv.STATE.DEFAULT)
+Wifi_screen_return_btn = lv.btn(Wifi_screen)
+Wifi_screen_return_btn.set_pos(int(14),int(90))
+Wifi_screen_return_btn.set_size(100,20)
+Wifi_screen_return_btn.set_scrollbar_mode(lv.SCROLLBAR_MODE.OFF)
+Wifi_screen_return_btn_label = lv.label(Wifi_screen_return_btn)
+Wifi_screen_return_btn_label.set_text("返回")
+Wifi_screen_return_btn.set_style_pad_all(0, lv.STATE.DEFAULT)
+Wifi_screen_return_btn_label.align(lv.ALIGN.CENTER,0,0)
+# create style style_wifi_screen_return_btn_main_main_default
+style_wifi_screen_return_btn_main_main_default = lv.style_t()
+style_wifi_screen_return_btn_main_main_default.init()
+style_wifi_screen_return_btn_main_main_default.set_radius(5)
+style_wifi_screen_return_btn_main_main_default.set_bg_color(lv.color_make(0x21,0x95,0xf6))
+style_wifi_screen_return_btn_main_main_default.set_bg_grad_color(lv.color_make(0x21,0x95,0xf6))
+style_wifi_screen_return_btn_main_main_default.set_bg_grad_dir(lv.GRAD_DIR.VER)
+style_wifi_screen_return_btn_main_main_default.set_bg_opa(108)
+style_wifi_screen_return_btn_main_main_default.set_shadow_width(1)
+style_wifi_screen_return_btn_main_main_default.set_shadow_color(lv.color_make(0x21,0x95,0xf6))
+style_wifi_screen_return_btn_main_main_default.set_shadow_opa(0)
+style_wifi_screen_return_btn_main_main_default.set_shadow_spread(1)
+style_wifi_screen_return_btn_main_main_default.set_shadow_ofs_x(0)
+style_wifi_screen_return_btn_main_main_default.set_shadow_ofs_y(0)
+style_wifi_screen_return_btn_main_main_default.set_border_color(lv.color_make(0x21,0x95,0xf6))
+style_wifi_screen_return_btn_main_main_default.set_border_width(0)
+style_wifi_screen_return_btn_main_main_default.set_border_opa(0)
+style_wifi_screen_return_btn_main_main_default.set_text_color(lv.color_make(0x00,0x00,0x00))
 try:
-    Wifi_screen_btn_1_label.set_style_text_font(lv.font_simsun_8, lv.STATE.DEFAULT)
+    style_wifi_screen_return_btn_main_main_default.set_text_font(lv.font_simsun_12)
 except AttributeError:
     try:
-        Wifi_screen_btn_1_label.set_style_text_font(lv.font_montserrat_8, lv.STATE.DEFAULT)
+        style_wifi_screen_return_btn_main_main_default.set_text_font(lv.font_montserrat_12)
     except AttributeError:
-        Wifi_screen_btn_1_label.set_style_text_font(lv.font_montserrat_16, lv.STATE.DEFAULT)
-# create style style_wifi_screen_btn_1_main_main_default
-style_wifi_screen_btn_1_main_main_default = lv.style_t()
-style_wifi_screen_btn_1_main_main_default.init()
-style_wifi_screen_btn_1_main_main_default.set_radius(5)
-style_wifi_screen_btn_1_main_main_default.set_bg_color(lv.color_make(0x21,0x95,0xf6))
-style_wifi_screen_btn_1_main_main_default.set_bg_grad_color(lv.color_make(0x21,0x95,0xf6))
-style_wifi_screen_btn_1_main_main_default.set_bg_grad_dir(lv.GRAD_DIR.VER)
-style_wifi_screen_btn_1_main_main_default.set_bg_opa(108)
-style_wifi_screen_btn_1_main_main_default.set_shadow_color(lv.color_make(0x21,0x95,0xf6))
-style_wifi_screen_btn_1_main_main_default.set_shadow_opa(0)
-style_wifi_screen_btn_1_main_main_default.set_border_color(lv.color_make(0x21,0x95,0xf6))
-style_wifi_screen_btn_1_main_main_default.set_border_width(0)
-style_wifi_screen_btn_1_main_main_default.set_border_opa(109)
+        style_wifi_screen_return_btn_main_main_default.set_text_font(lv.font_montserrat_16)
+style_wifi_screen_return_btn_main_main_default.set_text_align(lv.TEXT_ALIGN.CENTER)
 
-# add style for Wifi_screen_btn_1
-Wifi_screen_btn_1.add_style(style_wifi_screen_btn_1_main_main_default, lv.PART.MAIN|lv.STATE.DEFAULT)
+# add style for Wifi_screen_return_btn
+Wifi_screen_return_btn.add_style(style_wifi_screen_return_btn_main_main_default, lv.PART.MAIN|lv.STATE.DEFAULT)
+
+Wifi_screen_cont = lv.obj(Wifi_screen)
+Wifi_screen_cont.set_pos(int(0),int(0))
+Wifi_screen_cont.set_size(128,20)
+Wifi_screen_cont.set_scrollbar_mode(lv.SCROLLBAR_MODE.OFF)
+Wifi_screen_sw_1 = lv.switch(Wifi_screen_cont)
+Wifi_screen_sw_1.set_pos(int(65),int(5))
+Wifi_screen_sw_1.set_size(40,12)
+Wifi_screen_sw_1.set_scrollbar_mode(lv.SCROLLBAR_MODE.OFF)
+# create style style_wifi_screen_sw_1_main_main_default
+style_wifi_screen_sw_1_main_main_default = lv.style_t()
+style_wifi_screen_sw_1_main_main_default.init()
+style_wifi_screen_sw_1_main_main_default.set_radius(100)
+style_wifi_screen_sw_1_main_main_default.set_bg_color(lv.color_make(0xe6,0xe2,0xe6))
+style_wifi_screen_sw_1_main_main_default.set_bg_grad_color(lv.color_make(0xe6,0xe2,0xe6))
+style_wifi_screen_sw_1_main_main_default.set_bg_grad_dir(lv.GRAD_DIR.NONE)
+style_wifi_screen_sw_1_main_main_default.set_bg_opa(255)
+style_wifi_screen_sw_1_main_main_default.set_border_color(lv.color_make(0x21,0x95,0xf6))
+style_wifi_screen_sw_1_main_main_default.set_border_width(0)
+style_wifi_screen_sw_1_main_main_default.set_border_opa(0)
+
+# add style for Wifi_screen_sw_1
+Wifi_screen_sw_1.add_style(style_wifi_screen_sw_1_main_main_default, lv.PART.MAIN|lv.STATE.DEFAULT)
+
+# create style style_wifi_screen_sw_1_main_indicator_checked
+style_wifi_screen_sw_1_main_indicator_checked = lv.style_t()
+style_wifi_screen_sw_1_main_indicator_checked.init()
+style_wifi_screen_sw_1_main_indicator_checked.set_bg_color(lv.color_make(0x21,0x95,0xf6))
+style_wifi_screen_sw_1_main_indicator_checked.set_bg_grad_color(lv.color_make(0x21,0x95,0xf6))
+style_wifi_screen_sw_1_main_indicator_checked.set_bg_grad_dir(lv.GRAD_DIR.NONE)
+style_wifi_screen_sw_1_main_indicator_checked.set_bg_opa(255)
+style_wifi_screen_sw_1_main_indicator_checked.set_border_color(lv.color_make(0x21,0x95,0xf6))
+style_wifi_screen_sw_1_main_indicator_checked.set_border_width(0)
+style_wifi_screen_sw_1_main_indicator_checked.set_border_opa(255)
+
+# add style for Wifi_screen_sw_1
+Wifi_screen_sw_1.add_style(style_wifi_screen_sw_1_main_indicator_checked, lv.PART.INDICATOR|lv.STATE.CHECKED)
+
+# create style style_wifi_screen_sw_1_main_knob_default
+style_wifi_screen_sw_1_main_knob_default = lv.style_t()
+style_wifi_screen_sw_1_main_knob_default.init()
+style_wifi_screen_sw_1_main_knob_default.set_radius(100)
+style_wifi_screen_sw_1_main_knob_default.set_bg_color(lv.color_make(0xff,0xff,0xff))
+style_wifi_screen_sw_1_main_knob_default.set_bg_grad_color(lv.color_make(0xff,0xff,0xff))
+style_wifi_screen_sw_1_main_knob_default.set_bg_grad_dir(lv.GRAD_DIR.NONE)
+style_wifi_screen_sw_1_main_knob_default.set_bg_opa(255)
+style_wifi_screen_sw_1_main_knob_default.set_border_color(lv.color_make(0x21,0x95,0xf6))
+style_wifi_screen_sw_1_main_knob_default.set_border_width(0)
+style_wifi_screen_sw_1_main_knob_default.set_border_opa(255)
+
+# add style for Wifi_screen_sw_1
+Wifi_screen_sw_1.add_style(style_wifi_screen_sw_1_main_knob_default, lv.PART.KNOB|lv.STATE.DEFAULT)
+
+Wifi_screen_label_3 = lv.label(Wifi_screen_cont)
+Wifi_screen_label_3.set_pos(int(20),int(5))
+Wifi_screen_label_3.set_size(50,15)
+Wifi_screen_label_3.set_scrollbar_mode(lv.SCROLLBAR_MODE.OFF)
+Wifi_screen_label_3.set_text("WIFI")
+Wifi_screen_label_3.set_long_mode(lv.label.LONG.WRAP)
+# create style style_wifi_screen_label_3_main_main_default
+style_wifi_screen_label_3_main_main_default = lv.style_t()
+style_wifi_screen_label_3_main_main_default.init()
+style_wifi_screen_label_3_main_main_default.set_radius(0)
+style_wifi_screen_label_3_main_main_default.set_bg_color(lv.color_make(0x21,0x95,0xf6))
+style_wifi_screen_label_3_main_main_default.set_bg_grad_color(lv.color_make(0x21,0x95,0xf6))
+style_wifi_screen_label_3_main_main_default.set_bg_grad_dir(lv.GRAD_DIR.NONE)
+style_wifi_screen_label_3_main_main_default.set_bg_opa(0)
+style_wifi_screen_label_3_main_main_default.set_text_color(lv.color_make(0x00,0x00,0x00))
+try:
+    style_wifi_screen_label_3_main_main_default.set_text_font(lv.font_simsun_12)
+except AttributeError:
+    try:
+        style_wifi_screen_label_3_main_main_default.set_text_font(lv.font_montserrat_12)
+    except AttributeError:
+        style_wifi_screen_label_3_main_main_default.set_text_font(lv.font_montserrat_16)
+style_wifi_screen_label_3_main_main_default.set_text_letter_space(2)
+style_wifi_screen_label_3_main_main_default.set_text_line_space(0)
+style_wifi_screen_label_3_main_main_default.set_text_align(lv.TEXT_ALIGN.CENTER)
+style_wifi_screen_label_3_main_main_default.set_pad_left(0)
+style_wifi_screen_label_3_main_main_default.set_pad_right(0)
+style_wifi_screen_label_3_main_main_default.set_pad_top(0)
+style_wifi_screen_label_3_main_main_default.set_pad_bottom(0)
+
+# add style for Wifi_screen_label_3
+Wifi_screen_label_3.add_style(style_wifi_screen_label_3_main_main_default, lv.PART.MAIN|lv.STATE.DEFAULT)
+
+# create style style_wifi_screen_cont_main_main_default
+style_wifi_screen_cont_main_main_default = lv.style_t()
+style_wifi_screen_cont_main_main_default.init()
+style_wifi_screen_cont_main_main_default.set_radius(0)
+style_wifi_screen_cont_main_main_default.set_bg_color(lv.color_make(0x21,0x95,0xf6))
+style_wifi_screen_cont_main_main_default.set_bg_grad_color(lv.color_make(0x21,0x95,0xf6))
+style_wifi_screen_cont_main_main_default.set_bg_grad_dir(lv.GRAD_DIR.NONE)
+style_wifi_screen_cont_main_main_default.set_bg_opa(0)
+style_wifi_screen_cont_main_main_default.set_border_color(lv.color_make(0x21,0x95,0xf6))
+style_wifi_screen_cont_main_main_default.set_border_width(0)
+style_wifi_screen_cont_main_main_default.set_border_opa(0)
+style_wifi_screen_cont_main_main_default.set_pad_left(0)
+style_wifi_screen_cont_main_main_default.set_pad_right(0)
+style_wifi_screen_cont_main_main_default.set_pad_top(0)
+style_wifi_screen_cont_main_main_default.set_pad_bottom(0)
+
+# add style for Wifi_screen_cont
+Wifi_screen_cont.add_style(style_wifi_screen_cont_main_main_default, lv.PART.MAIN|lv.STATE.DEFAULT)
 
 
 
-def main_screen_Wifi_Set_btn_clicked_1_event_cb(e,Wifi_screen):
+def main_screen_wifi_set_btn_clicked_1_event_cb(e,Wifi_screen):
     src = e.get_target()
     code = e.get_code()
-    lv.scr_load_anim(Wifi_screen, lv.SCR_LOAD_ANIM.NONE, 0, 0, False)
-main_screen_Wifi_Set_btn.add_event_cb(lambda e: main_screen_Wifi_Set_btn_clicked_1_event_cb(e,Wifi_screen), lv.EVENT.CLICKED, None)
+    lv.scr_load_anim(Wifi_screen, lv.SCR_LOAD_ANIM.OVER_LEFT, 0, 0, False)
+main_screen_wifi_set_btn.add_event_cb(lambda e: main_screen_wifi_set_btn_clicked_1_event_cb(e,Wifi_screen), lv.EVENT.CLICKED, None)
 
 
-def Wifi_screen_btn_1_clicked_1_event_cb(e,main_screen):
+def Wifi_screen_return_btn_clicked_1_event_cb(e,main_screen):
     src = e.get_target()
     code = e.get_code()
-    lv.scr_load_anim(main_screen, lv.SCR_LOAD_ANIM.NONE, 500, 0, False)
-Wifi_screen_btn_1.add_event_cb(lambda e: Wifi_screen_btn_1_clicked_1_event_cb(e,main_screen), lv.EVENT.CLICKED, None)
+    lv.scr_load_anim(main_screen, lv.SCR_LOAD_ANIM.OVER_TOP, 0, 0, False)
+Wifi_screen_return_btn.add_event_cb(lambda e: Wifi_screen_return_btn_clicked_1_event_cb(e,main_screen), lv.EVENT.CLICKED, None)
+
 
 
 

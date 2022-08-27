@@ -161,10 +161,9 @@ void lv_txt_get_size(lv_point_t * size_res, const char * text, const lv_font_t *
  * @param txt a '\0' terminated string
  * @param font pointer to a font
  * @param letter_space letter space
- * @param max_width max width of the text (break the lines to fit this size). Set COORD_MAX to avoid line breaks
+ * @param max_width max with of the text (break the lines to fit this size) Set CORD_MAX to avoid line breaks
  * @param flags settings for the text from 'txt_flag_type' enum
  * @param[out] word_w_ptr width (in pixels) of the parsed word. May be NULL.
- * @param cmd_state pointer to a txt_cmd_state_t variable which stores the current state of command processing
  * @param force Force return the fraction of the word that can fit in the provided space.
  * @return the index of the first char of the next word (in byte index not letter index. With UTF-8 they are different)
  */
@@ -428,7 +427,7 @@ void _lv_txt_ins(char * txt_buf, uint32_t pos, const char * ins_txt)
     }
 
     /*Copy the text into the new space*/
-    lv_memcpy(txt_buf + pos, ins_txt, ins_len);
+    lv_memcpy_small(txt_buf + pos, ins_txt, ins_len);
 }
 
 void _lv_txt_cut(char * txt, uint32_t pos, uint32_t len)
@@ -458,7 +457,7 @@ char * _lv_txt_set_text_vfmt(const char * fmt, va_list ap)
     char * text = 0;
 #if LV_USE_ARABIC_PERSIAN_CHARS
     /*Put together the text according to the format string*/
-    char * raw_txt = lv_malloc(len + 1);
+    char * raw_txt = lv_mem_buf_get(len + 1);
     LV_ASSERT_MALLOC(raw_txt);
     if(raw_txt == NULL) {
         return NULL;
@@ -468,16 +467,16 @@ char * _lv_txt_set_text_vfmt(const char * fmt, va_list ap)
 
     /*Get the size of the Arabic text and process it*/
     size_t len_ap = _lv_txt_ap_calc_bytes_cnt(raw_txt);
-    text = lv_malloc(len_ap + 1);
+    text = lv_mem_alloc(len_ap + 1);
     LV_ASSERT_MALLOC(text);
     if(text == NULL) {
         return NULL;
     }
     _lv_txt_ap_proc(raw_txt, text);
 
-    lv_free(raw_txt);
+    lv_mem_buf_release(raw_txt);
 #else
-    text = lv_malloc(len + 1);
+    text = lv_mem_alloc(len + 1);
     LV_ASSERT_MALLOC(text);
     if(text == NULL) {
         return NULL;
@@ -520,8 +519,8 @@ static uint8_t lv_txt_utf8_size(const char * str)
 }
 
 /**
- * Convert a Unicode letter to UTF-8.
- * @param letter_uni a Unicode letter
+ * Convert an Unicode letter to UTF-8.
+ * @param letter_uni an Unicode letter
  * @return UTF-8 coded character in Little Endian to be compatible with C chars (e.g. 'Á', 'Ű')
  */
 static uint32_t lv_txt_unicode_to_utf8(uint32_t letter_uni)
@@ -547,9 +546,6 @@ static uint32_t lv_txt_unicode_to_utf8(uint32_t letter_uni)
         bytes[2] = ((letter_uni >> 6) & 0x3F) | 0x80;
         bytes[3] = ((letter_uni >> 0) & 0x3F) | 0x80;
     }
-    else {
-        return 0;
-    }
 
     uint32_t * res_p = (uint32_t *)bytes;
     return *res_p;
@@ -567,7 +563,7 @@ static uint32_t lv_txt_utf8_conv_wc(uint32_t c)
     if((c & 0x80) != 0) {
         uint32_t swapped;
         uint8_t c8[4];
-        lv_memcpy(c8, &c, 4);
+        lv_memcpy_small(c8, &c, 4);
         swapped = (c8[0] << 24) + (c8[1] << 16) + (c8[2] << 8) + (c8[3]);
         uint8_t i;
         for(i = 0; i < 4; i++) {
@@ -765,8 +761,8 @@ static uint8_t lv_txt_iso8859_1_size(const char * str)
 }
 
 /**
- * Convert a Unicode letter to ISO8859-1.
- * @param letter_uni a Unicode letter
+ * Convert an Unicode letter to ISO8859-1.
+ * @param letter_uni an Unicode letter
  * @return ISO8859-1 coded character in Little Endian to be compatible with C chars (e.g. 'Á', 'Ű')
  */
 static uint32_t lv_txt_unicode_to_iso8859_1(uint32_t letter_uni)
@@ -798,7 +794,7 @@ static uint32_t lv_txt_iso8859_1_conv_wc(uint32_t c)
  */
 static uint32_t lv_txt_iso8859_1_next(const char * txt, uint32_t * i)
 {
-    if(i == NULL) return txt[0]; /*Get the next char*/
+    if(i == NULL) return txt[1]; /*Get the next char*/
 
     uint8_t letter = txt[*i];
     (*i)++;

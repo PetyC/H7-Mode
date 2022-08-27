@@ -11,7 +11,7 @@
 extern osSemaphoreId Key_Binary_SemHandle;
 extern osSemaphoreId LCD_BinarySemHandle;
 
-extern lv_ui guider_ui;
+//extern lv_ui guider_ui;
 
 /**
  * @brief LCD任务
@@ -34,13 +34,14 @@ void LCD_Task(void const *argument)
   setup_ui(&guider_ui);
   events_init(&guider_ui);
 
-
+  TickType_t xLastWakeTime = 0;
+  xLastWakeTime = xTaskGetTickCount(); 
   /* Infinite loop */
   for (;;)
   {
-    
+    vTaskDelayUntil( &xLastWakeTime,5);
     lv_task_handler();
-    osDelay(10);
+    
   }
 }
 

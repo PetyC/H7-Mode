@@ -2,7 +2,7 @@
  * @Description: 
  * @Autor: Pi
  * @Date: 2022-08-25 15:31:45
- * @LastEditTime: 2022-08-26 19:31:35
+ * @LastEditTime: 2022-08-27 02:13:59
  */
 /*
  * Copyright 2022 NXP
@@ -20,6 +20,7 @@ lv_ui guider_ui;
 void init_scr_del_flag(lv_ui *ui){
 	ui->main_screen_del = true;
 	ui->Wifi_screen_del = true;
+  ui->QR_screen_del = true;
 }
 
 void setup_ui(lv_ui *ui){
