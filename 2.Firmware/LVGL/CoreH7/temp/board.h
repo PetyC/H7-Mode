@@ -320,7 +320,7 @@ typedef void * lv_font_user_data_t;
 #define LV_TABVIEW_DEF_ANIM_TIME 300
 #endif /* LV_USE_TABVIEW */
 
-#define LV_USE_TILEVIEW 0
+#define LV_USE_TILEVIEW 1
 
 #if LV_USE_TILEVIEW
 #define LV_TILEVIEW_DEF_ANIM_TIME 300

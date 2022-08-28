@@ -233,7 +233,7 @@ main_screen_demo_btn.set_pos(int(14),int(70))
 main_screen_demo_btn.set_size(100,20)
 main_screen_demo_btn.set_scrollbar_mode(lv.SCROLLBAR_MODE.OFF)
 main_screen_demo_btn_label = lv.label(main_screen_demo_btn)
-main_screen_demo_btn_label.set_text("Demo")
+main_screen_demo_btn_label.set_text("关于设备")
 main_screen_demo_btn.set_style_pad_all(0, lv.STATE.DEFAULT)
 main_screen_demo_btn_label.align(lv.ALIGN.CENTER,0,0)
 # create style style_main_screen_demo_btn_main_main_default
@@ -351,6 +351,337 @@ main_screen_led_1.set_size(20,20)
 main_screen_led_1.set_scrollbar_mode(lv.SCROLLBAR_MODE.OFF)
 main_screen_led_1.set_brightness(0)
 main_screen_led_1.set_color(lv.color_make(0x00,0xa1,0xb5))
+device_screen = lv.obj()
+device_screen.set_scrollbar_mode(lv.SCROLLBAR_MODE.OFF)
+# create style style_device_screen_main_main_default
+style_device_screen_main_main_default = lv.style_t()
+style_device_screen_main_main_default.init()
+style_device_screen_main_main_default.set_bg_color(lv.color_make(0xff,0xff,0xff))
+style_device_screen_main_main_default.set_bg_opa(255)
+
+# add style for device_screen
+device_screen.add_style(style_device_screen_main_main_default, lv.PART.MAIN|lv.STATE.DEFAULT)
+
+device_screen_about_tileview = lv.tileview(device_screen)
+device_screen_about_tileview.set_pos(int(0),int(0))
+device_screen_about_tileview.set_size(128,128)
+device_screen_about_tileview.set_scrollbar_mode(lv.SCROLLBAR_MODE.ON)
+about_tileview_about_name_0 = device_screen_about_tileview.add_tile(0, 0, lv.DIR.BOTTOM)
+device_screen_label_3 = lv.label(about_tileview_about_name_0)
+device_screen_label_3.set_pos(int(0),int(90))
+device_screen_label_3.set_size(128,15)
+device_screen_label_3.set_scrollbar_mode(lv.SCROLLBAR_MODE.OFF)
+device_screen_label_3.set_text("版本号")
+device_screen_label_3.set_long_mode(lv.label.LONG.WRAP)
+# create style style_device_screen_label_3_main_main_default
+style_device_screen_label_3_main_main_default = lv.style_t()
+style_device_screen_label_3_main_main_default.init()
+style_device_screen_label_3_main_main_default.set_radius(0)
+style_device_screen_label_3_main_main_default.set_bg_color(lv.color_make(0xe6,0xe2,0xe6))
+style_device_screen_label_3_main_main_default.set_bg_grad_color(lv.color_make(0x21,0x95,0xf6))
+style_device_screen_label_3_main_main_default.set_bg_grad_dir(lv.GRAD_DIR.NONE)
+style_device_screen_label_3_main_main_default.set_bg_opa(0)
+style_device_screen_label_3_main_main_default.set_shadow_width(1)
+style_device_screen_label_3_main_main_default.set_shadow_color(lv.color_make(0x21,0x95,0xf6))
+style_device_screen_label_3_main_main_default.set_shadow_opa(0)
+style_device_screen_label_3_main_main_default.set_shadow_spread(1)
+style_device_screen_label_3_main_main_default.set_shadow_ofs_x(0)
+style_device_screen_label_3_main_main_default.set_shadow_ofs_y(0)
+style_device_screen_label_3_main_main_default.set_text_color(lv.color_make(0x00,0x00,0x00))
+try:
+    style_device_screen_label_3_main_main_default.set_text_font(lv.font_simsun_12)
+except AttributeError:
+    try:
+        style_device_screen_label_3_main_main_default.set_text_font(lv.font_montserrat_12)
+    except AttributeError:
+        style_device_screen_label_3_main_main_default.set_text_font(lv.font_montserrat_16)
+style_device_screen_label_3_main_main_default.set_text_letter_space(2)
+style_device_screen_label_3_main_main_default.set_text_line_space(0)
+style_device_screen_label_3_main_main_default.set_text_align(lv.TEXT_ALIGN.CENTER)
+style_device_screen_label_3_main_main_default.set_pad_left(0)
+style_device_screen_label_3_main_main_default.set_pad_right(0)
+style_device_screen_label_3_main_main_default.set_pad_top(0)
+style_device_screen_label_3_main_main_default.set_pad_bottom(0)
+
+# add style for device_screen_label_3
+device_screen_label_3.add_style(style_device_screen_label_3_main_main_default, lv.PART.MAIN|lv.STATE.DEFAULT)
+
+device_screen_version_label = lv.label(about_tileview_about_name_0)
+device_screen_version_label.set_pos(int(7),int(110))
+device_screen_version_label.set_size(114,15)
+device_screen_version_label.set_scrollbar_mode(lv.SCROLLBAR_MODE.OFF)
+device_screen_version_label.set_text("0.0.1")
+device_screen_version_label.set_long_mode(lv.label.LONG.WRAP)
+# create style style_device_screen_version_label_main_main_default
+style_device_screen_version_label_main_main_default = lv.style_t()
+style_device_screen_version_label_main_main_default.init()
+style_device_screen_version_label_main_main_default.set_radius(0)
+style_device_screen_version_label_main_main_default.set_bg_color(lv.color_make(0xe6,0xe2,0xe6))
+style_device_screen_version_label_main_main_default.set_bg_grad_color(lv.color_make(0x21,0x95,0xf6))
+style_device_screen_version_label_main_main_default.set_bg_grad_dir(lv.GRAD_DIR.NONE)
+style_device_screen_version_label_main_main_default.set_bg_opa(109)
+style_device_screen_version_label_main_main_default.set_shadow_width(1)
+style_device_screen_version_label_main_main_default.set_shadow_color(lv.color_make(0x21,0x95,0xf6))
+style_device_screen_version_label_main_main_default.set_shadow_opa(0)
+style_device_screen_version_label_main_main_default.set_shadow_spread(1)
+style_device_screen_version_label_main_main_default.set_shadow_ofs_x(0)
+style_device_screen_version_label_main_main_default.set_shadow_ofs_y(0)
+style_device_screen_version_label_main_main_default.set_text_color(lv.color_make(0x00,0x00,0x00))
+try:
+    style_device_screen_version_label_main_main_default.set_text_font(lv.font_simsun_12)
+except AttributeError:
+    try:
+        style_device_screen_version_label_main_main_default.set_text_font(lv.font_montserrat_12)
+    except AttributeError:
+        style_device_screen_version_label_main_main_default.set_text_font(lv.font_montserrat_16)
+style_device_screen_version_label_main_main_default.set_text_letter_space(2)
+style_device_screen_version_label_main_main_default.set_text_line_space(0)
+style_device_screen_version_label_main_main_default.set_text_align(lv.TEXT_ALIGN.CENTER)
+style_device_screen_version_label_main_main_default.set_pad_left(0)
+style_device_screen_version_label_main_main_default.set_pad_right(0)
+style_device_screen_version_label_main_main_default.set_pad_top(0)
+style_device_screen_version_label_main_main_default.set_pad_bottom(0)
+
+# add style for device_screen_version_label
+device_screen_version_label.add_style(style_device_screen_version_label_main_main_default, lv.PART.MAIN|lv.STATE.DEFAULT)
+
+device_screen_mcu_label = lv.label(about_tileview_about_name_0)
+device_screen_mcu_label.set_pos(int(7),int(70))
+device_screen_mcu_label.set_size(110,15)
+device_screen_mcu_label.set_scrollbar_mode(lv.SCROLLBAR_MODE.OFF)
+device_screen_mcu_label.set_text("STM32H743VIT6")
+device_screen_mcu_label.set_long_mode(lv.label.LONG.WRAP)
+# create style style_device_screen_mcu_label_main_main_default
+style_device_screen_mcu_label_main_main_default = lv.style_t()
+style_device_screen_mcu_label_main_main_default.init()
+style_device_screen_mcu_label_main_main_default.set_radius(0)
+style_device_screen_mcu_label_main_main_default.set_bg_color(lv.color_make(0xe6,0xe2,0xe6))
+style_device_screen_mcu_label_main_main_default.set_bg_grad_color(lv.color_make(0x21,0x95,0xf6))
+style_device_screen_mcu_label_main_main_default.set_bg_grad_dir(lv.GRAD_DIR.NONE)
+style_device_screen_mcu_label_main_main_default.set_bg_opa(109)
+style_device_screen_mcu_label_main_main_default.set_shadow_width(1)
+style_device_screen_mcu_label_main_main_default.set_shadow_color(lv.color_make(0x21,0x95,0xf6))
+style_device_screen_mcu_label_main_main_default.set_shadow_opa(0)
+style_device_screen_mcu_label_main_main_default.set_shadow_spread(1)
+style_device_screen_mcu_label_main_main_default.set_shadow_ofs_x(0)
+style_device_screen_mcu_label_main_main_default.set_shadow_ofs_y(0)
+style_device_screen_mcu_label_main_main_default.set_text_color(lv.color_make(0x00,0x00,0x00))
+try:
+    style_device_screen_mcu_label_main_main_default.set_text_font(lv.font_simsun_12)
+except AttributeError:
+    try:
+        style_device_screen_mcu_label_main_main_default.set_text_font(lv.font_montserrat_12)
+    except AttributeError:
+        style_device_screen_mcu_label_main_main_default.set_text_font(lv.font_montserrat_16)
+style_device_screen_mcu_label_main_main_default.set_text_letter_space(2)
+style_device_screen_mcu_label_main_main_default.set_text_line_space(0)
+style_device_screen_mcu_label_main_main_default.set_text_align(lv.TEXT_ALIGN.CENTER)
+style_device_screen_mcu_label_main_main_default.set_pad_left(0)
+style_device_screen_mcu_label_main_main_default.set_pad_right(0)
+style_device_screen_mcu_label_main_main_default.set_pad_top(0)
+style_device_screen_mcu_label_main_main_default.set_pad_bottom(0)
+
+# add style for device_screen_mcu_label
+device_screen_mcu_label.add_style(style_device_screen_mcu_label_main_main_default, lv.PART.MAIN|lv.STATE.DEFAULT)
+
+device_screen_label_2 = lv.label(about_tileview_about_name_0)
+device_screen_label_2.set_pos(int(0),int(50))
+device_screen_label_2.set_size(128,15)
+device_screen_label_2.set_scrollbar_mode(lv.SCROLLBAR_MODE.OFF)
+device_screen_label_2.set_text("主控芯片")
+device_screen_label_2.set_long_mode(lv.label.LONG.WRAP)
+# create style style_device_screen_label_2_main_main_default
+style_device_screen_label_2_main_main_default = lv.style_t()
+style_device_screen_label_2_main_main_default.init()
+style_device_screen_label_2_main_main_default.set_radius(0)
+style_device_screen_label_2_main_main_default.set_bg_color(lv.color_make(0x21,0x95,0xf6))
+style_device_screen_label_2_main_main_default.set_bg_grad_color(lv.color_make(0x21,0x95,0xf6))
+style_device_screen_label_2_main_main_default.set_bg_grad_dir(lv.GRAD_DIR.NONE)
+style_device_screen_label_2_main_main_default.set_bg_opa(0)
+style_device_screen_label_2_main_main_default.set_text_color(lv.color_make(0x00,0x00,0x00))
+try:
+    style_device_screen_label_2_main_main_default.set_text_font(lv.font_simsun_12)
+except AttributeError:
+    try:
+        style_device_screen_label_2_main_main_default.set_text_font(lv.font_montserrat_12)
+    except AttributeError:
+        style_device_screen_label_2_main_main_default.set_text_font(lv.font_montserrat_16)
+style_device_screen_label_2_main_main_default.set_text_letter_space(2)
+style_device_screen_label_2_main_main_default.set_text_line_space(0)
+style_device_screen_label_2_main_main_default.set_text_align(lv.TEXT_ALIGN.CENTER)
+style_device_screen_label_2_main_main_default.set_pad_left(0)
+style_device_screen_label_2_main_main_default.set_pad_right(0)
+style_device_screen_label_2_main_main_default.set_pad_top(0)
+style_device_screen_label_2_main_main_default.set_pad_bottom(0)
+
+# add style for device_screen_label_2
+device_screen_label_2.add_style(style_device_screen_label_2_main_main_default, lv.PART.MAIN|lv.STATE.DEFAULT)
+
+device_screen_type_label = lv.label(about_tileview_about_name_0)
+device_screen_type_label.set_pos(int(7),int(30))
+device_screen_type_label.set_size(110,15)
+device_screen_type_label.set_scrollbar_mode(lv.SCROLLBAR_MODE.OFF)
+device_screen_type_label.set_text("H7-Mode")
+device_screen_type_label.set_long_mode(lv.label.LONG.WRAP)
+# create style style_device_screen_type_label_main_main_default
+style_device_screen_type_label_main_main_default = lv.style_t()
+style_device_screen_type_label_main_main_default.init()
+style_device_screen_type_label_main_main_default.set_radius(0)
+style_device_screen_type_label_main_main_default.set_bg_color(lv.color_make(0xe6,0xe2,0xe6))
+style_device_screen_type_label_main_main_default.set_bg_grad_color(lv.color_make(0x21,0x95,0xf6))
+style_device_screen_type_label_main_main_default.set_bg_grad_dir(lv.GRAD_DIR.NONE)
+style_device_screen_type_label_main_main_default.set_bg_opa(109)
+style_device_screen_type_label_main_main_default.set_text_color(lv.color_make(0x00,0x00,0x00))
+try:
+    style_device_screen_type_label_main_main_default.set_text_font(lv.font_simsun_12)
+except AttributeError:
+    try:
+        style_device_screen_type_label_main_main_default.set_text_font(lv.font_montserrat_12)
+    except AttributeError:
+        style_device_screen_type_label_main_main_default.set_text_font(lv.font_montserrat_16)
+style_device_screen_type_label_main_main_default.set_text_letter_space(2)
+style_device_screen_type_label_main_main_default.set_text_line_space(0)
+style_device_screen_type_label_main_main_default.set_text_align(lv.TEXT_ALIGN.CENTER)
+style_device_screen_type_label_main_main_default.set_pad_left(0)
+style_device_screen_type_label_main_main_default.set_pad_right(0)
+style_device_screen_type_label_main_main_default.set_pad_top(0)
+style_device_screen_type_label_main_main_default.set_pad_bottom(0)
+
+# add style for device_screen_type_label
+device_screen_type_label.add_style(style_device_screen_type_label_main_main_default, lv.PART.MAIN|lv.STATE.DEFAULT)
+
+device_screen_label_1 = lv.label(about_tileview_about_name_0)
+device_screen_label_1.set_pos(int(0),int(10))
+device_screen_label_1.set_size(128,15)
+device_screen_label_1.set_scrollbar_mode(lv.SCROLLBAR_MODE.OFF)
+device_screen_label_1.set_text("设备型号")
+device_screen_label_1.set_long_mode(lv.label.LONG.WRAP)
+# create style style_device_screen_label_1_main_main_default
+style_device_screen_label_1_main_main_default = lv.style_t()
+style_device_screen_label_1_main_main_default.init()
+style_device_screen_label_1_main_main_default.set_radius(0)
+style_device_screen_label_1_main_main_default.set_bg_color(lv.color_make(0x21,0x95,0xf6))
+style_device_screen_label_1_main_main_default.set_bg_grad_color(lv.color_make(0x21,0x95,0xf6))
+style_device_screen_label_1_main_main_default.set_bg_grad_dir(lv.GRAD_DIR.NONE)
+style_device_screen_label_1_main_main_default.set_bg_opa(0)
+style_device_screen_label_1_main_main_default.set_text_color(lv.color_make(0x00,0x00,0x00))
+try:
+    style_device_screen_label_1_main_main_default.set_text_font(lv.font_simsun_12)
+except AttributeError:
+    try:
+        style_device_screen_label_1_main_main_default.set_text_font(lv.font_montserrat_12)
+    except AttributeError:
+        style_device_screen_label_1_main_main_default.set_text_font(lv.font_montserrat_16)
+style_device_screen_label_1_main_main_default.set_text_letter_space(2)
+style_device_screen_label_1_main_main_default.set_text_line_space(0)
+style_device_screen_label_1_main_main_default.set_text_align(lv.TEXT_ALIGN.CENTER)
+style_device_screen_label_1_main_main_default.set_pad_left(0)
+style_device_screen_label_1_main_main_default.set_pad_right(0)
+style_device_screen_label_1_main_main_default.set_pad_top(0)
+style_device_screen_label_1_main_main_default.set_pad_bottom(0)
+
+# add style for device_screen_label_1
+device_screen_label_1.add_style(style_device_screen_label_1_main_main_default, lv.PART.MAIN|lv.STATE.DEFAULT)
+
+about_tileview_about_name_1 = device_screen_about_tileview.add_tile(0 , 1, lv.DIR.TOP)
+device_screen_return_btn = lv.btn(about_tileview_about_name_1)
+device_screen_return_btn.set_pos(int(14),int(35))
+device_screen_return_btn.set_size(100,20)
+device_screen_return_btn.set_scrollbar_mode(lv.SCROLLBAR_MODE.OFF)
+device_screen_return_btn_label = lv.label(device_screen_return_btn)
+device_screen_return_btn_label.set_text("返回")
+device_screen_return_btn.set_style_pad_all(0, lv.STATE.DEFAULT)
+device_screen_return_btn_label.align(lv.ALIGN.CENTER,0,0)
+# create style style_device_screen_return_btn_main_main_default
+style_device_screen_return_btn_main_main_default = lv.style_t()
+style_device_screen_return_btn_main_main_default.init()
+style_device_screen_return_btn_main_main_default.set_radius(5)
+style_device_screen_return_btn_main_main_default.set_bg_color(lv.color_make(0x21,0x95,0xf6))
+style_device_screen_return_btn_main_main_default.set_bg_grad_color(lv.color_make(0x21,0x95,0xf6))
+style_device_screen_return_btn_main_main_default.set_bg_grad_dir(lv.GRAD_DIR.NONE)
+style_device_screen_return_btn_main_main_default.set_bg_opa(112)
+style_device_screen_return_btn_main_main_default.set_shadow_width(1)
+style_device_screen_return_btn_main_main_default.set_shadow_color(lv.color_make(0x21,0x95,0xf6))
+style_device_screen_return_btn_main_main_default.set_shadow_opa(0)
+style_device_screen_return_btn_main_main_default.set_shadow_spread(1)
+style_device_screen_return_btn_main_main_default.set_shadow_ofs_x(0)
+style_device_screen_return_btn_main_main_default.set_shadow_ofs_y(0)
+style_device_screen_return_btn_main_main_default.set_border_color(lv.color_make(0x21,0x95,0xf6))
+style_device_screen_return_btn_main_main_default.set_border_width(0)
+style_device_screen_return_btn_main_main_default.set_border_opa(0)
+style_device_screen_return_btn_main_main_default.set_text_color(lv.color_make(0x00,0x00,0x00))
+try:
+    style_device_screen_return_btn_main_main_default.set_text_font(lv.font_simsun_12)
+except AttributeError:
+    try:
+        style_device_screen_return_btn_main_main_default.set_text_font(lv.font_montserrat_12)
+    except AttributeError:
+        style_device_screen_return_btn_main_main_default.set_text_font(lv.font_montserrat_16)
+style_device_screen_return_btn_main_main_default.set_text_align(lv.TEXT_ALIGN.CENTER)
+
+# add style for device_screen_return_btn
+device_screen_return_btn.add_style(style_device_screen_return_btn_main_main_default, lv.PART.MAIN|lv.STATE.DEFAULT)
+
+device_screen_check_btn = lv.btn(about_tileview_about_name_1)
+device_screen_check_btn.set_pos(int(14),int(10))
+device_screen_check_btn.set_size(100,20)
+device_screen_check_btn.set_scrollbar_mode(lv.SCROLLBAR_MODE.OFF)
+device_screen_check_btn_label = lv.label(device_screen_check_btn)
+device_screen_check_btn_label.set_text("检查更新")
+device_screen_check_btn.set_style_pad_all(0, lv.STATE.DEFAULT)
+device_screen_check_btn_label.align(lv.ALIGN.CENTER,0,0)
+# create style style_device_screen_check_btn_main_main_default
+style_device_screen_check_btn_main_main_default = lv.style_t()
+style_device_screen_check_btn_main_main_default.init()
+style_device_screen_check_btn_main_main_default.set_radius(5)
+style_device_screen_check_btn_main_main_default.set_bg_color(lv.color_make(0x21,0x95,0xf6))
+style_device_screen_check_btn_main_main_default.set_bg_grad_color(lv.color_make(0x21,0x95,0xf6))
+style_device_screen_check_btn_main_main_default.set_bg_grad_dir(lv.GRAD_DIR.NONE)
+style_device_screen_check_btn_main_main_default.set_bg_opa(112)
+style_device_screen_check_btn_main_main_default.set_shadow_width(1)
+style_device_screen_check_btn_main_main_default.set_shadow_color(lv.color_make(0x21,0x95,0xf6))
+style_device_screen_check_btn_main_main_default.set_shadow_opa(0)
+style_device_screen_check_btn_main_main_default.set_shadow_spread(1)
+style_device_screen_check_btn_main_main_default.set_shadow_ofs_x(0)
+style_device_screen_check_btn_main_main_default.set_shadow_ofs_y(0)
+style_device_screen_check_btn_main_main_default.set_border_color(lv.color_make(0x21,0x95,0xf6))
+style_device_screen_check_btn_main_main_default.set_border_width(0)
+style_device_screen_check_btn_main_main_default.set_border_opa(0)
+style_device_screen_check_btn_main_main_default.set_text_color(lv.color_make(0x00,0x00,0x00))
+try:
+    style_device_screen_check_btn_main_main_default.set_text_font(lv.font_simsun_12)
+except AttributeError:
+    try:
+        style_device_screen_check_btn_main_main_default.set_text_font(lv.font_montserrat_12)
+    except AttributeError:
+        style_device_screen_check_btn_main_main_default.set_text_font(lv.font_montserrat_16)
+style_device_screen_check_btn_main_main_default.set_text_align(lv.TEXT_ALIGN.CENTER)
+
+# add style for device_screen_check_btn
+device_screen_check_btn.add_style(style_device_screen_check_btn_main_main_default, lv.PART.MAIN|lv.STATE.DEFAULT)
+
+# create style style_device_screen_about_tileview_main_main_default
+style_device_screen_about_tileview_main_main_default = lv.style_t()
+style_device_screen_about_tileview_main_main_default.init()
+style_device_screen_about_tileview_main_main_default.set_radius(0)
+style_device_screen_about_tileview_main_main_default.set_bg_color(lv.color_make(0xf6,0xf6,0xf6))
+style_device_screen_about_tileview_main_main_default.set_bg_grad_color(lv.color_make(0xf6,0xf6,0xf6))
+style_device_screen_about_tileview_main_main_default.set_bg_grad_dir(lv.GRAD_DIR.NONE)
+style_device_screen_about_tileview_main_main_default.set_bg_opa(255)
+
+# add style for device_screen_about_tileview
+device_screen_about_tileview.add_style(style_device_screen_about_tileview_main_main_default, lv.PART.MAIN|lv.STATE.DEFAULT)
+
+# create style style_device_screen_about_tileview_main_scrollbar_default
+style_device_screen_about_tileview_main_scrollbar_default = lv.style_t()
+style_device_screen_about_tileview_main_scrollbar_default.init()
+style_device_screen_about_tileview_main_scrollbar_default.set_radius(0)
+style_device_screen_about_tileview_main_scrollbar_default.set_bg_color(lv.color_make(0xea,0xef,0xf3))
+style_device_screen_about_tileview_main_scrollbar_default.set_bg_opa(255)
+
+# add style for device_screen_about_tileview
+device_screen_about_tileview.add_style(style_device_screen_about_tileview_main_scrollbar_default, lv.PART.SCROLLBAR|lv.STATE.DEFAULT)
+
 Wifi_screen = lv.obj()
 Wifi_screen.set_scrollbar_mode(lv.SCROLLBAR_MODE.OFF)
 # create style style_wifi_screen_main_main_default
@@ -635,6 +966,79 @@ style_wifi_screen_cont_main_main_default.set_pad_bottom(0)
 # add style for Wifi_screen_cont
 Wifi_screen_cont.add_style(style_wifi_screen_cont_main_main_default, lv.PART.MAIN|lv.STATE.DEFAULT)
 
+QR_screen = lv.obj()
+QR_screen.set_scrollbar_mode(lv.SCROLLBAR_MODE.OFF)
+# create style style_qr_screen_main_main_default
+style_qr_screen_main_main_default = lv.style_t()
+style_qr_screen_main_main_default.init()
+style_qr_screen_main_main_default.set_bg_color(lv.color_make(0xff,0xff,0xff))
+style_qr_screen_main_main_default.set_bg_opa(255)
+
+# add style for QR_screen
+QR_screen.add_style(style_qr_screen_main_main_default, lv.PART.MAIN|lv.STATE.DEFAULT)
+
+QR_screen_img_1 = lv.img(QR_screen)
+QR_screen_img_1.set_pos(int(14),int(5))
+QR_screen_img_1.set_size(100,100)
+QR_screen_img_1.set_scrollbar_mode(lv.SCROLLBAR_MODE.OFF)
+QR_screen_img_1.add_flag(lv.obj.FLAG.CLICKABLE)
+try:
+    with open('C:\\Users\\39810\\Desktop\\H7-Mode\\2.Firmware\\LVGL\\CoreH7\\generated\\mPythonImages\\mp-1380144639.png','rb') as f:
+        QR_screen_img_1_img_data = f.read()
+except:
+    print('Could not open C:\\Users\\39810\\Desktop\\H7-Mode\\2.Firmware\\LVGL\\CoreH7\\generated\\mPythonImages\\mp-1380144639.png')
+    sys.exit()
+
+QR_screen_img_1_img = lv.img_dsc_t({
+  'data_size': len(QR_screen_img_1_img_data),
+  'header': {'always_zero': 0, 'w': 100, 'h': 100, 'cf': lv.img.CF.TRUE_COLOR_ALPHA},
+  'data': QR_screen_img_1_img_data
+})
+
+QR_screen_img_1.set_src(QR_screen_img_1_img)
+QR_screen_img_1.set_pivot(0,0)
+QR_screen_img_1.set_angle(0)
+# create style style_qr_screen_img_1_main_main_default
+style_qr_screen_img_1_main_main_default = lv.style_t()
+style_qr_screen_img_1_main_main_default.init()
+style_qr_screen_img_1_main_main_default.set_img_recolor(lv.color_make(0xff,0xff,0xff))
+style_qr_screen_img_1_main_main_default.set_img_recolor_opa(0)
+style_qr_screen_img_1_main_main_default.set_img_opa(255)
+
+# add style for QR_screen_img_1
+QR_screen_img_1.add_style(style_qr_screen_img_1_main_main_default, lv.PART.MAIN|lv.STATE.DEFAULT)
+
+QR_screen_QR_bar = lv.bar(QR_screen)
+QR_screen_QR_bar.set_pos(int(0),int(114))
+QR_screen_QR_bar.set_size(128,10)
+QR_screen_QR_bar.set_scrollbar_mode(lv.SCROLLBAR_MODE.OFF)
+QR_screen_QR_bar.set_style_anim_time(1000, 0)
+QR_screen_QR_bar.set_mode(lv.bar.MODE.NORMAL)
+QR_screen_QR_bar.set_value(0, lv.ANIM.ON)
+# create style style_qr_screen_qr_bar_main_main_default
+style_qr_screen_qr_bar_main_main_default = lv.style_t()
+style_qr_screen_qr_bar_main_main_default.init()
+style_qr_screen_qr_bar_main_main_default.set_radius(10)
+style_qr_screen_qr_bar_main_main_default.set_bg_color(lv.color_make(0x21,0x95,0xf6))
+style_qr_screen_qr_bar_main_main_default.set_bg_grad_color(lv.color_make(0x21,0x95,0xf6))
+style_qr_screen_qr_bar_main_main_default.set_bg_grad_dir(lv.GRAD_DIR.NONE)
+style_qr_screen_qr_bar_main_main_default.set_bg_opa(60)
+
+# add style for QR_screen_QR_bar
+QR_screen_QR_bar.add_style(style_qr_screen_qr_bar_main_main_default, lv.PART.MAIN|lv.STATE.DEFAULT)
+
+# create style style_qr_screen_qr_bar_main_indicator_default
+style_qr_screen_qr_bar_main_indicator_default = lv.style_t()
+style_qr_screen_qr_bar_main_indicator_default.init()
+style_qr_screen_qr_bar_main_indicator_default.set_radius(10)
+style_qr_screen_qr_bar_main_indicator_default.set_bg_color(lv.color_make(0x21,0x95,0xf6))
+style_qr_screen_qr_bar_main_indicator_default.set_bg_grad_color(lv.color_make(0x21,0x95,0xf6))
+style_qr_screen_qr_bar_main_indicator_default.set_bg_grad_dir(lv.GRAD_DIR.NONE)
+style_qr_screen_qr_bar_main_indicator_default.set_bg_opa(255)
+
+# add style for QR_screen_QR_bar
+QR_screen_QR_bar.add_style(style_qr_screen_qr_bar_main_indicator_default, lv.PART.INDICATOR|lv.STATE.DEFAULT)
+
 
 
 def main_screen_wifi_set_btn_clicked_1_event_cb(e,Wifi_screen):
@@ -644,12 +1048,32 @@ def main_screen_wifi_set_btn_clicked_1_event_cb(e,Wifi_screen):
 main_screen_wifi_set_btn.add_event_cb(lambda e: main_screen_wifi_set_btn_clicked_1_event_cb(e,Wifi_screen), lv.EVENT.CLICKED, None)
 
 
+def Wifi_screen_APU_btn_clicked_1_event_cb(e,QR_screen):
+    src = e.get_target()
+    code = e.get_code()
+    lv.scr_load_anim(QR_screen, lv.SCR_LOAD_ANIM.OVER_LEFT, 0, 0, False)
+Wifi_screen_APU_btn.add_event_cb(lambda e: Wifi_screen_APU_btn_clicked_1_event_cb(e,QR_screen), lv.EVENT.CLICKED, None)
+
+
 def Wifi_screen_return_btn_clicked_1_event_cb(e,main_screen):
     src = e.get_target()
     code = e.get_code()
     lv.scr_load_anim(main_screen, lv.SCR_LOAD_ANIM.OVER_TOP, 0, 0, False)
 Wifi_screen_return_btn.add_event_cb(lambda e: Wifi_screen_return_btn_clicked_1_event_cb(e,main_screen), lv.EVENT.CLICKED, None)
 
+
+def device_screen_return_btn_clicked_1_event_cb(e,main_screen):
+    src = e.get_target()
+    code = e.get_code()
+    lv.scr_load_anim(main_screen, lv.SCR_LOAD_ANIM.OVER_TOP, 0, 0, False)
+device_screen_return_btn.add_event_cb(lambda e: device_screen_return_btn_clicked_1_event_cb(e,main_screen), lv.EVENT.CLICKED, None)
+
+
+def main_screen_demo_btn_clicked_1_event_cb(e,device_screen):
+    src = e.get_target()
+    code = e.get_code()
+    lv.scr_load_anim(device_screen, lv.SCR_LOAD_ANIM.OVER_TOP, 0, 0, False)
+main_screen_demo_btn.add_event_cb(lambda e: main_screen_demo_btn_clicked_1_event_cb(e,device_screen), lv.EVENT.CLICKED, None)
 
 
 

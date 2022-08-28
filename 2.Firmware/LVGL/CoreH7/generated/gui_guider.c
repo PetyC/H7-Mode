@@ -11,6 +11,7 @@
 
 void init_scr_del_flag(lv_ui *ui){
 	ui->main_screen_del = true;
+	ui->device_screen_del = true;
 	ui->Wifi_screen_del = true;
 	ui->QR_screen_del = true;
 }

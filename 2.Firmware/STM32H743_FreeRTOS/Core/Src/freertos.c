@@ -193,7 +193,7 @@ void MX_FREERTOS_Init(void) {
 
   /* Create the queue(s) */
   /* definition and creation of KEY_Queue */
-  osMessageQDef(KEY_Queue, 1, uint8_t);
+  osMessageQDef(KEY_Queue, 10, uint8_t);
   KEY_QueueHandle = osMessageCreate(osMessageQ(KEY_Queue), NULL);
 
   /* definition and creation of Temper_Queue */

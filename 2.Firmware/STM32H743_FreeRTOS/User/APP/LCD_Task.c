@@ -2,7 +2,7 @@
  * @Description: LCD显示任务
  * @Autor: Pi
  * @Date: 2022-06-27 15:14:05
- * @LastEditTime: 2022-08-26 17:27:53
+ * @LastEditTime: 2022-08-28 17:37:18
  */
 #include "LCD_Task.h"
 #include "stdio.h"
@@ -11,8 +11,7 @@
 extern osSemaphoreId Key_Binary_SemHandle;
 extern osSemaphoreId LCD_BinarySemHandle;
 
-//extern lv_ui guider_ui;
-
+#include "lv_demo_keypad_encoder.h"
 /**
  * @brief LCD任务
  * @param {void*} argument
@@ -33,12 +32,16 @@ void LCD_Task(void const *argument)
   /*初始化自定义UI*/
   setup_ui(&guider_ui);
   events_init(&guider_ui);
-
+  
+  //lv_demo_keypad_encoder();
+  
   TickType_t xLastWakeTime = 0;
   xLastWakeTime = xTaskGetTickCount(); 
   /* Infinite loop */
   for (;;)
   {
+    
+    
     vTaskDelayUntil( &xLastWakeTime,5);
     lv_task_handler();
     

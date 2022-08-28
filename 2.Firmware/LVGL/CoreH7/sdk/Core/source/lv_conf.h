@@ -216,7 +216,7 @@ typedef void * lv_font_user_data_t;
 #define LV_USE_OBJ_REALIGN 1
 #define LV_USE_EXT_CLICK_AREA LV_EXT_CLICK_AREA_TINY
 #define LV_USE_ARC 0
-#define LV_USE_BAR 0
+#define LV_USE_BAR 1
 #define LV_USE_BTN 1
 #define LV_USE_BTNMATRIX 0
 #define LV_USE_CALENDAR 0
@@ -242,7 +242,7 @@ typedef void * lv_font_user_data_t;
 #endif /* LV_USE_DROPDOWN */
 
 #define LV_USE_GAUGE 0
-#define LV_USE_IMG 0
+#define LV_USE_IMG 1
 #define LV_USE_IMGBTN 0
 
 #if LV_USE_IMGBTN
@@ -320,7 +320,7 @@ typedef void * lv_font_user_data_t;
 #define LV_TABVIEW_DEF_ANIM_TIME 300
 #endif /* LV_USE_TABVIEW */
 
-#define LV_USE_TILEVIEW 0
+#define LV_USE_TILEVIEW 1
 
 #if LV_USE_TILEVIEW
 #define LV_TILEVIEW_DEF_ANIM_TIME 300

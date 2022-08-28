@@ -29,7 +29,7 @@
 
 #include "gui_guider.h"
 #include "events_init.h"
-
+#include "custom.h"
 
 void LCD_Task(void const * argument);
 

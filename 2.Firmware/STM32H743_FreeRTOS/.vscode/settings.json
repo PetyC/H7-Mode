@@ -35,6 +35,15 @@
       "string.h": "c",
       "bsp_st7735s.h": "c",
       "lv_font.h": "c",
-      "gui_guider.h": "c"
+      "gui_guider.h": "c",
+      "cstddef": "c",
+      "limits": "c",
+      "memory": "c",
+      "system_error": "c",
+      "vector": "c",
+      "xiosbase": "c",
+      "xlocale": "c",
+      "xstring": "c",
+      "xutility": "c"
     }
 }

@@ -165,7 +165,7 @@ void setup_scr_main_screen(lv_ui *ui){
 	lv_style_set_text_font(&style_main_screen_demo_btn_main_main_pressed, &lv_font_simsun_12);
 	lv_obj_add_style(ui->main_screen_demo_btn, &style_main_screen_demo_btn_main_main_pressed, LV_PART_MAIN|LV_STATE_PRESSED);
 	ui->main_screen_demo_btn_label = lv_label_create(ui->main_screen_demo_btn);
-	lv_label_set_text(ui->main_screen_demo_btn_label, "Demo");
+	lv_label_set_text(ui->main_screen_demo_btn_label, "关于设备");
 	lv_obj_set_style_pad_all(ui->main_screen_demo_btn, 0, LV_STATE_DEFAULT);
 	lv_obj_align(ui->main_screen_demo_btn_label, LV_ALIGN_CENTER, 0, 0);
 
