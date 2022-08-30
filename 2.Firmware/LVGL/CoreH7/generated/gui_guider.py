@@ -351,6 +351,37 @@ main_screen_led_1.set_size(20,20)
 main_screen_led_1.set_scrollbar_mode(lv.SCROLLBAR_MODE.OFF)
 main_screen_led_1.set_brightness(0)
 main_screen_led_1.set_color(lv.color_make(0x00,0xa1,0xb5))
+main_screen_img_1 = lv.img(main_screen)
+main_screen_img_1.set_pos(int(112),int(2))
+main_screen_img_1.set_size(15,14)
+main_screen_img_1.set_scrollbar_mode(lv.SCROLLBAR_MODE.OFF)
+main_screen_img_1.add_flag(lv.obj.FLAG.CLICKABLE)
+try:
+    with open('C:\\Users\\39810\\Desktop\\DIY_Project\\H7-Mode\\2.Firmware\\LVGL\\CoreH7\\generated\\mPythonImages\\mp963516183.png','rb') as f:
+        main_screen_img_1_img_data = f.read()
+except:
+    print('Could not open C:\\Users\\39810\\Desktop\\DIY_Project\\H7-Mode\\2.Firmware\\LVGL\\CoreH7\\generated\\mPythonImages\\mp963516183.png')
+    sys.exit()
+
+main_screen_img_1_img = lv.img_dsc_t({
+  'data_size': len(main_screen_img_1_img_data),
+  'header': {'always_zero': 0, 'w': 15, 'h': 14, 'cf': lv.img.CF.TRUE_COLOR_ALPHA},
+  'data': main_screen_img_1_img_data
+})
+
+main_screen_img_1.set_src(main_screen_img_1_img)
+main_screen_img_1.set_pivot(0,0)
+main_screen_img_1.set_angle(0)
+# create style style_main_screen_img_1_main_main_default
+style_main_screen_img_1_main_main_default = lv.style_t()
+style_main_screen_img_1_main_main_default.init()
+style_main_screen_img_1_main_main_default.set_img_recolor(lv.color_make(0xff,0xff,0xff))
+style_main_screen_img_1_main_main_default.set_img_recolor_opa(0)
+style_main_screen_img_1_main_main_default.set_img_opa(255)
+
+# add style for main_screen_img_1
+main_screen_img_1.add_style(style_main_screen_img_1_main_main_default, lv.PART.MAIN|lv.STATE.DEFAULT)
+
 device_screen = lv.obj()
 device_screen.set_scrollbar_mode(lv.SCROLLBAR_MODE.OFF)
 # create style style_device_screen_main_main_default
@@ -983,10 +1014,10 @@ QR_screen_img_1.set_size(100,100)
 QR_screen_img_1.set_scrollbar_mode(lv.SCROLLBAR_MODE.OFF)
 QR_screen_img_1.add_flag(lv.obj.FLAG.CLICKABLE)
 try:
-    with open('C:\\Users\\39810\\Desktop\\H7-Mode\\2.Firmware\\LVGL\\CoreH7\\generated\\mPythonImages\\mp-1380144639.png','rb') as f:
+    with open('C:\\Users\\39810\\Desktop\\DIY_Project\\H7-Mode\\2.Firmware\\LVGL\\CoreH7\\generated\\mPythonImages\\mp-899909521.png','rb') as f:
         QR_screen_img_1_img_data = f.read()
 except:
-    print('Could not open C:\\Users\\39810\\Desktop\\H7-Mode\\2.Firmware\\LVGL\\CoreH7\\generated\\mPythonImages\\mp-1380144639.png')
+    print('Could not open C:\\Users\\39810\\Desktop\\DIY_Project\\H7-Mode\\2.Firmware\\LVGL\\CoreH7\\generated\\mPythonImages\\mp-899909521.png')
     sys.exit()
 
 QR_screen_img_1_img = lv.img_dsc_t({

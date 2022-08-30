@@ -207,6 +207,27 @@ void setup_scr_main_screen(lv_ui *ui){
 	lv_led_set_brightness(ui->main_screen_led_1, 0);
 	lv_led_set_color(ui->main_screen_led_1, lv_color_make(0x00, 0xa1, 0xb5));
 
+	//Write codes main_screen_img_1
+	ui->main_screen_img_1 = lv_img_create(ui->main_screen);
+	lv_obj_set_pos(ui->main_screen_img_1, 112, 2);
+	lv_obj_set_size(ui->main_screen_img_1, 15, 14);
+	lv_obj_set_scrollbar_mode(ui->main_screen_img_1, LV_SCROLLBAR_MODE_OFF);
+
+	//Write style state: LV_STATE_DEFAULT for style_main_screen_img_1_main_main_default
+	static lv_style_t style_main_screen_img_1_main_main_default;
+	if (style_main_screen_img_1_main_main_default.prop_cnt > 1)
+		lv_style_reset(&style_main_screen_img_1_main_main_default);
+	else
+		lv_style_init(&style_main_screen_img_1_main_main_default);
+	lv_style_set_img_recolor(&style_main_screen_img_1_main_main_default, lv_color_make(0xff, 0xff, 0xff));
+	lv_style_set_img_recolor_opa(&style_main_screen_img_1_main_main_default, 0);
+	lv_style_set_img_opa(&style_main_screen_img_1_main_main_default, 255);
+	lv_obj_add_style(ui->main_screen_img_1, &style_main_screen_img_1_main_main_default, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_add_flag(ui->main_screen_img_1, LV_OBJ_FLAG_CLICKABLE);
+	lv_img_set_src(ui->main_screen_img_1,&_WIFI_con_15x14);
+	lv_img_set_pivot(ui->main_screen_img_1, 0,0);
+	lv_img_set_angle(ui->main_screen_img_1, 0);
+
 	//Init events for screen
 	events_init_main_screen(ui);
 }

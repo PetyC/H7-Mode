@@ -58,6 +58,7 @@ osThreadId Network_TaskHandle;
 osThreadId Temper_TaskHandle;
 osMessageQId KEY_QueueHandle;
 osMessageQId Temper_QueueHandle;
+osMessageQId Network_QueueHandle;
 osMutexId Uart_MutexHandle;
 osSemaphoreId Key_Binary_SemHandle;
 osSemaphoreId Network_BinarySemHandle;
@@ -130,7 +131,7 @@ __weak void vApplicationStackOverflowHook(xTaskHandle xTask, signed char *pcTask
 static StaticTask_t xIdleTaskTCBBuffer;
 static StackType_t xIdleStack[configMINIMAL_STACK_SIZE];
 
-void vApplicationGetIdleTaskMemory(StaticTask_t **ppxIdleTaskTCBBuffer, StackType_t **ppxIdleTaskStackBuffer, uint32_t *pulIdleTaskStackSize)
+void vApplicationGetIdleTaskMemory( StaticTask_t **ppxIdleTaskTCBBuffer, StackType_t **ppxIdleTaskStackBuffer, uint32_t *pulIdleTaskStackSize )
 {
   *ppxIdleTaskTCBBuffer = &xIdleTaskTCBBuffer;
   *ppxIdleTaskStackBuffer = &xIdleStack[0];
@@ -143,7 +144,7 @@ void vApplicationGetIdleTaskMemory(StaticTask_t **ppxIdleTaskTCBBuffer, StackTyp
 static StaticTask_t xTimerTaskTCBBuffer;
 static StackType_t xTimerStack[configTIMER_TASK_STACK_DEPTH];
 
-void vApplicationGetTimerTaskMemory(StaticTask_t **ppxTimerTaskTCBBuffer, StackType_t **ppxTimerTaskStackBuffer, uint32_t *pulTimerTaskStackSize)
+void vApplicationGetTimerTaskMemory( StaticTask_t **ppxTimerTaskTCBBuffer, StackType_t **ppxTimerTaskStackBuffer, uint32_t *pulTimerTaskStackSize )
 {
   *ppxTimerTaskTCBBuffer = &xTimerTaskTCBBuffer;
   *ppxTimerTaskStackBuffer = &xTimerStack[0];
@@ -193,12 +194,16 @@ void MX_FREERTOS_Init(void) {
 
   /* Create the queue(s) */
   /* definition and creation of KEY_Queue */
-  osMessageQDef(KEY_Queue, 10, uint8_t);
+  osMessageQDef(KEY_Queue, 1, uint8_t);
   KEY_QueueHandle = osMessageCreate(osMessageQ(KEY_Queue), NULL);
 
   /* definition and creation of Temper_Queue */
   osMessageQDef(Temper_Queue, 1, uint16_t);
   Temper_QueueHandle = osMessageCreate(osMessageQ(Temper_Queue), NULL);
+
+  /* definition and creation of Network_Queue */
+  osMessageQDef(Network_Queue, 16, uint8_t);
+  Network_QueueHandle = osMessageCreate(osMessageQ(Network_Queue), NULL);
 
   /* USER CODE BEGIN RTOS_QUEUES */
   /* add queues, ... */
@@ -218,7 +223,7 @@ void MX_FREERTOS_Init(void) {
   LCD_TaskHandle = osThreadCreate(osThread(LCD_Task), NULL);
 
   /* definition and creation of Network_Task */
-  osThreadDef(Network_Task, Start_Network_Task, osPriorityIdle, 0, 512);
+  osThreadDef(Network_Task, Start_Network_Task, osPriorityLow, 0, 512);
   Network_TaskHandle = osThreadCreate(osThread(Network_Task), NULL);
 
   /* definition and creation of Temper_Task */

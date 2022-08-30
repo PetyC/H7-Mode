@@ -3371,7 +3371,7 @@
 
   <Group>
     <GroupName>Lvgl_GUI_images</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -3384,6 +3384,30 @@
       <bDave2>0</bDave2>
       <PathWithFileName>..\User\APP\LVGL\GUI\images\_QR_100x100.c</PathWithFileName>
       <FilenameWithoutPath>_QR_100x100.c</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>16</GroupNumber>
+      <FileNumber>254</FileNumber>
+      <FileType>1</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>..\User\APP\LVGL\GUI\images\_WIFI_con_15x14.c</PathWithFileName>
+      <FilenameWithoutPath>_WIFI_con_15x14.c</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>16</GroupNumber>
+      <FileNumber>255</FileNumber>
+      <FileType>1</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>..\User\APP\LVGL\GUI\images\_WIFI_discon_15x14.c</PathWithFileName>
+      <FilenameWithoutPath>_WIFI_discon_15x14.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

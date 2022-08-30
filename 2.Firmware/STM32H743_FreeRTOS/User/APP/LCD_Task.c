@@ -2,10 +2,14 @@
  * @Description: LCD显示任务
  * @Autor: Pi
  * @Date: 2022-06-27 15:14:05
- * @LastEditTime: 2022-08-28 17:37:18
+ * @LastEditTime: 2022-08-30 20:01:40
  */
 #include "LCD_Task.h"
 #include "stdio.h"
+
+
+
+
 
 /*FreeRTOS相关变量*/
 extern osSemaphoreId Key_Binary_SemHandle;
@@ -37,10 +41,16 @@ void LCD_Task(void const *argument)
   
   TickType_t xLastWakeTime = 0;
   xLastWakeTime = xTaskGetTickCount(); 
+
+  uint32_t Network_EventGroup = 0;
   /* Infinite loop */
   for (;;)
   {
-    
+    xTaskNotifyWait( pdFALSE,    /* Don't clear bits on entry. */
+                  ULONG_MAX,        /* Clear all bits on exit. */
+                  &Network_EventGroup, /* Stores the notified value. */
+                  0);
+
     
     vTaskDelayUntil( &xLastWakeTime,5);
     lv_task_handler();

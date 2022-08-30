@@ -2,7 +2,7 @@
  * @Description: NetWork相关
  * @Autor: Pi
  * @Date: 2022-08-08 18:24:22
- * @LastEditTime: 2022-08-16 20:21:30
+ * @LastEditTime: 2022-08-30 19:49:25
  */
  
 #ifndef NETWORK_TASK_H
@@ -14,6 +14,11 @@
 #include "task.h"
 #include "cmsis_os.h"
 
+/*任务通知*/
+#define NETWORK_CONNECT_BIT0  (1)
+#define NETWORK_DISCONNECT_BIT1 (1 << 1)
+
+
 /*相关微库*/
 #include "string.h"
 #include "stdio.h"
@@ -22,17 +27,6 @@
 #include "main.h"
 #include "Bsp_ESP8266.h"
 #include "Network.h"
-
-
-
-
-enum
-{
-  Key_Right = 0,
-  Key_Light = 1,
-  Key_Press = 2
-};
-
 
 void Network_Task(void const * argument);
 

@@ -2,7 +2,7 @@
  * @Description: LCD显示任务
  * @Autor: Pi
  * @Date: 2022-06-27 15:20:33
- * @LastEditTime: 2022-08-23 03:02:06
+ * @LastEditTime: 2022-08-30 19:49:09
  */
 #ifndef LCD_TASK_H
 #define LCD_TASK_H
@@ -11,6 +11,8 @@
 #include "FreeRTOS.h"
 #include "task.h"
 #include "cmsis_os.h"
+#include "limits.h"
+
 
 
 /*相关微库*/

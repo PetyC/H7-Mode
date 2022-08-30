@@ -21,8 +21,8 @@ typedef struct
 	lv_obj_t *main_screen_wifi_set_btn_label;
 	lv_obj_t *main_screen_demo_btn;
 	lv_obj_t *main_screen_demo_btn_label;
-	lv_obj_t *main_screen_wifi_state_label;
 	lv_obj_t *main_screen_led_1;
+	lv_obj_t *main_screen_wifi_img;
 	lv_obj_t *device_screen;
 	bool device_screen_del;
 	lv_obj_t *device_screen_about_tileview;
@@ -63,6 +63,7 @@ void setup_scr_device_screen(lv_ui *ui);
 void setup_scr_Wifi_screen(lv_ui *ui);
 void setup_scr_QR_screen(lv_ui *ui);
 LV_IMG_DECLARE(_QR_100x100);
+LV_IMG_DECLARE(_WIFI_discon_15x14);
 
 #ifdef __cplusplus
 }
