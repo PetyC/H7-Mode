@@ -2,7 +2,7 @@
  * @Description:
  * @Autor: Pi
  * @Date: 2022-08-26 22:53:22
- * @LastEditTime: 2022-08-29 01:07:11
+ * @LastEditTime: 2022-08-30 23:32:31
  */
 // SPDX-License-Identifier: MIT
 // Copyright 2020 NXP
@@ -86,7 +86,7 @@ void encoder_wifi_init(void)
   /*移除原先所有对象*/
   lv_group_remove_all_objs(encoder_group);
 
-  lv_group_add_obj(encoder_group, guider_ui.Wifi_screen_sw_1);
+  lv_group_add_obj(encoder_group, guider_ui.Wifi_screen_wifi_en_sw);
   lv_group_add_obj(encoder_group, guider_ui.Wifi_screen_APU_btn);
   lv_group_add_obj(encoder_group, guider_ui.Wifi_screen_return_btn);
 }
@@ -113,27 +113,40 @@ void encoder_device_init(void)
   lv_group_remove_all_objs(encoder_group);
   
   lv_group_add_obj(encoder_group, guider_ui.device_screen_about_tileview);
-  //lv_group_add_obj(encoder_group, guider_ui.about_tileview_about_name_1);
-
   
   lv_group_add_obj(encoder_group, guider_ui.device_screen_check_btn);
   lv_group_add_obj(encoder_group, guider_ui.device_screen_return_btn);
   
-  //lv_obj_add_event_cb(guider_ui.device_screen_about_tileview, ta_event_cb, LV_EVENT_ALL, NULL);
-
 }
 
 
 
-void ta_event_cb(lv_event_t * e)
+
+/**
+ * @brief Wifi连接状态图标控制
+ * @param {uint8_t} Enagle
+ * @return {*}
+ */
+void UI_Wifi_ImagesDispaly(uint8_t Enagle)
 {
-  lv_event_code_t code = lv_event_get_code(e);
-
-
-  if(code == LV_EVENT_CLICKED ) 
+  if(Enagle == 1)
   {
-   lv_event_code_t code2 = lv_event_get_code(e);
-
+    lv_img_set_src(guider_ui.main_screen_wifi_img, &_WIFI_con_15x14);
   }
-  return ;
+  else
+  {
+    lv_img_set_src(guider_ui.main_screen_wifi_img, &_WIFI_discon_15x14);
+  }
+}
+
+
+
+/**
+ * @brief WIFI设置界面初始化
+ * @return {*}
+ */
+void UI_Wifi_Set_ScreenInit(void)
+{
+  lv_obj_add_state(  guider_ui.Wifi_screen_wifi_en_sw , LV_STATE_CHECKED );
+ 
 }

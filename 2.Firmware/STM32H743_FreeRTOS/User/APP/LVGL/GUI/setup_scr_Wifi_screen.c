@@ -205,58 +205,90 @@ void setup_scr_Wifi_screen(lv_ui *ui){
 	lv_style_set_pad_bottom(&style_wifi_screen_cont_main_main_default, 0);
 	lv_obj_add_style(ui->Wifi_screen_cont, &style_wifi_screen_cont_main_main_default, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write codes Wifi_screen_sw_1
-	ui->Wifi_screen_sw_1 = lv_switch_create(ui->Wifi_screen_cont);
-	lv_obj_set_pos(ui->Wifi_screen_sw_1, 65, 5);
-	lv_obj_set_size(ui->Wifi_screen_sw_1, 40, 12);
-	lv_obj_set_scrollbar_mode(ui->Wifi_screen_sw_1, LV_SCROLLBAR_MODE_OFF);
+	//Write codes Wifi_screen_wifi_en_sw
+	ui->Wifi_screen_wifi_en_sw = lv_switch_create(ui->Wifi_screen_cont);
+	lv_obj_set_pos(ui->Wifi_screen_wifi_en_sw, 65, 5);
+	lv_obj_set_size(ui->Wifi_screen_wifi_en_sw, 40, 12);
+	lv_obj_set_scrollbar_mode(ui->Wifi_screen_wifi_en_sw, LV_SCROLLBAR_MODE_OFF);
 
-	//Write style state: LV_STATE_DEFAULT for style_wifi_screen_sw_1_main_main_default
-	static lv_style_t style_wifi_screen_sw_1_main_main_default;
-	if (style_wifi_screen_sw_1_main_main_default.prop_cnt > 1)
-		lv_style_reset(&style_wifi_screen_sw_1_main_main_default);
+	//Write style state: LV_STATE_DEFAULT for style_wifi_screen_wifi_en_sw_main_main_default
+	static lv_style_t style_wifi_screen_wifi_en_sw_main_main_default;
+	if (style_wifi_screen_wifi_en_sw_main_main_default.prop_cnt > 1)
+		lv_style_reset(&style_wifi_screen_wifi_en_sw_main_main_default);
 	else
-		lv_style_init(&style_wifi_screen_sw_1_main_main_default);
-	lv_style_set_radius(&style_wifi_screen_sw_1_main_main_default, 100);
-	lv_style_set_bg_color(&style_wifi_screen_sw_1_main_main_default, lv_color_make(0xe6, 0xe2, 0xe6));
-	lv_style_set_bg_grad_color(&style_wifi_screen_sw_1_main_main_default, lv_color_make(0xe6, 0xe2, 0xe6));
-	lv_style_set_bg_grad_dir(&style_wifi_screen_sw_1_main_main_default, LV_GRAD_DIR_NONE);
-	lv_style_set_bg_opa(&style_wifi_screen_sw_1_main_main_default, 255);
-	lv_style_set_border_color(&style_wifi_screen_sw_1_main_main_default, lv_color_make(0x21, 0x95, 0xf6));
-	lv_style_set_border_width(&style_wifi_screen_sw_1_main_main_default, 0);
-	lv_style_set_border_opa(&style_wifi_screen_sw_1_main_main_default, 0);
-	lv_obj_add_style(ui->Wifi_screen_sw_1, &style_wifi_screen_sw_1_main_main_default, LV_PART_MAIN|LV_STATE_DEFAULT);
+		lv_style_init(&style_wifi_screen_wifi_en_sw_main_main_default);
+	lv_style_set_radius(&style_wifi_screen_wifi_en_sw_main_main_default, 100);
+	lv_style_set_bg_color(&style_wifi_screen_wifi_en_sw_main_main_default, lv_color_make(0xe6, 0xe2, 0xe6));
+	lv_style_set_bg_grad_color(&style_wifi_screen_wifi_en_sw_main_main_default, lv_color_make(0xe6, 0xe2, 0xe6));
+	lv_style_set_bg_grad_dir(&style_wifi_screen_wifi_en_sw_main_main_default, LV_GRAD_DIR_NONE);
+	lv_style_set_bg_opa(&style_wifi_screen_wifi_en_sw_main_main_default, 255);
+	lv_style_set_border_color(&style_wifi_screen_wifi_en_sw_main_main_default, lv_color_make(0x21, 0x95, 0xf6));
+	lv_style_set_border_width(&style_wifi_screen_wifi_en_sw_main_main_default, 0);
+	lv_style_set_border_opa(&style_wifi_screen_wifi_en_sw_main_main_default, 0);
+	lv_obj_add_style(ui->Wifi_screen_wifi_en_sw, &style_wifi_screen_wifi_en_sw_main_main_default, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-	//Write style state: LV_STATE_CHECKED for style_wifi_screen_sw_1_main_indicator_checked
-	static lv_style_t style_wifi_screen_sw_1_main_indicator_checked;
-	if (style_wifi_screen_sw_1_main_indicator_checked.prop_cnt > 1)
-		lv_style_reset(&style_wifi_screen_sw_1_main_indicator_checked);
+	//Write style state: LV_STATE_FOCUSED for style_wifi_screen_wifi_en_sw_main_main_focused
+	static lv_style_t style_wifi_screen_wifi_en_sw_main_main_focused;
+	if (style_wifi_screen_wifi_en_sw_main_main_focused.prop_cnt > 1)
+		lv_style_reset(&style_wifi_screen_wifi_en_sw_main_main_focused);
 	else
-		lv_style_init(&style_wifi_screen_sw_1_main_indicator_checked);
-	lv_style_set_bg_color(&style_wifi_screen_sw_1_main_indicator_checked, lv_color_make(0x21, 0x95, 0xf6));
-	lv_style_set_bg_grad_color(&style_wifi_screen_sw_1_main_indicator_checked, lv_color_make(0x21, 0x95, 0xf6));
-	lv_style_set_bg_grad_dir(&style_wifi_screen_sw_1_main_indicator_checked, LV_GRAD_DIR_NONE);
-	lv_style_set_bg_opa(&style_wifi_screen_sw_1_main_indicator_checked, 255);
-	lv_style_set_border_color(&style_wifi_screen_sw_1_main_indicator_checked, lv_color_make(0x21, 0x95, 0xf6));
-	lv_style_set_border_width(&style_wifi_screen_sw_1_main_indicator_checked, 0);
-	lv_style_set_border_opa(&style_wifi_screen_sw_1_main_indicator_checked, 255);
-	lv_obj_add_style(ui->Wifi_screen_sw_1, &style_wifi_screen_sw_1_main_indicator_checked, LV_PART_INDICATOR|LV_STATE_CHECKED);
+		lv_style_init(&style_wifi_screen_wifi_en_sw_main_main_focused);
+	lv_style_set_radius(&style_wifi_screen_wifi_en_sw_main_main_focused, 100);
+	lv_style_set_bg_color(&style_wifi_screen_wifi_en_sw_main_main_focused, lv_color_make(0xe6, 0xe2, 0xe6));
+	lv_style_set_bg_grad_color(&style_wifi_screen_wifi_en_sw_main_main_focused, lv_color_make(0xe6, 0xe2, 0xe6));
+	lv_style_set_bg_grad_dir(&style_wifi_screen_wifi_en_sw_main_main_focused, LV_GRAD_DIR_NONE);
+	lv_style_set_bg_opa(&style_wifi_screen_wifi_en_sw_main_main_focused, 255);
+	lv_style_set_border_color(&style_wifi_screen_wifi_en_sw_main_main_focused, lv_color_make(0x21, 0x95, 0xf6));
+	lv_style_set_border_width(&style_wifi_screen_wifi_en_sw_main_main_focused, 0);
+	lv_style_set_border_opa(&style_wifi_screen_wifi_en_sw_main_main_focused, 255);
+	lv_obj_add_style(ui->Wifi_screen_wifi_en_sw, &style_wifi_screen_wifi_en_sw_main_main_focused, LV_PART_MAIN|LV_STATE_FOCUSED);
 
-	//Write style state: LV_STATE_DEFAULT for style_wifi_screen_sw_1_main_knob_default
-	static lv_style_t style_wifi_screen_sw_1_main_knob_default;
-	if (style_wifi_screen_sw_1_main_knob_default.prop_cnt > 1)
-		lv_style_reset(&style_wifi_screen_sw_1_main_knob_default);
+	//Write style state: LV_STATE_DISABLED for style_wifi_screen_wifi_en_sw_main_main_disabled
+	static lv_style_t style_wifi_screen_wifi_en_sw_main_main_disabled;
+	if (style_wifi_screen_wifi_en_sw_main_main_disabled.prop_cnt > 1)
+		lv_style_reset(&style_wifi_screen_wifi_en_sw_main_main_disabled);
 	else
-		lv_style_init(&style_wifi_screen_sw_1_main_knob_default);
-	lv_style_set_radius(&style_wifi_screen_sw_1_main_knob_default, 100);
-	lv_style_set_bg_color(&style_wifi_screen_sw_1_main_knob_default, lv_color_make(0xff, 0xff, 0xff));
-	lv_style_set_bg_grad_color(&style_wifi_screen_sw_1_main_knob_default, lv_color_make(0xff, 0xff, 0xff));
-	lv_style_set_bg_grad_dir(&style_wifi_screen_sw_1_main_knob_default, LV_GRAD_DIR_NONE);
-	lv_style_set_bg_opa(&style_wifi_screen_sw_1_main_knob_default, 255);
-	lv_style_set_border_color(&style_wifi_screen_sw_1_main_knob_default, lv_color_make(0x21, 0x95, 0xf6));
-	lv_style_set_border_width(&style_wifi_screen_sw_1_main_knob_default, 0);
-	lv_style_set_border_opa(&style_wifi_screen_sw_1_main_knob_default, 255);
-	lv_obj_add_style(ui->Wifi_screen_sw_1, &style_wifi_screen_sw_1_main_knob_default, LV_PART_KNOB|LV_STATE_DEFAULT);
+		lv_style_init(&style_wifi_screen_wifi_en_sw_main_main_disabled);
+	lv_style_set_radius(&style_wifi_screen_wifi_en_sw_main_main_disabled, 100);
+	lv_style_set_bg_color(&style_wifi_screen_wifi_en_sw_main_main_disabled, lv_color_make(0xe6, 0xe2, 0xe6));
+	lv_style_set_bg_grad_color(&style_wifi_screen_wifi_en_sw_main_main_disabled, lv_color_make(0xe6, 0xe2, 0xe6));
+	lv_style_set_bg_grad_dir(&style_wifi_screen_wifi_en_sw_main_main_disabled, LV_GRAD_DIR_NONE);
+	lv_style_set_bg_opa(&style_wifi_screen_wifi_en_sw_main_main_disabled, 255);
+	lv_style_set_border_color(&style_wifi_screen_wifi_en_sw_main_main_disabled, lv_color_make(0x21, 0x95, 0xf6));
+	lv_style_set_border_width(&style_wifi_screen_wifi_en_sw_main_main_disabled, 0);
+	lv_style_set_border_opa(&style_wifi_screen_wifi_en_sw_main_main_disabled, 255);
+	lv_obj_add_style(ui->Wifi_screen_wifi_en_sw, &style_wifi_screen_wifi_en_sw_main_main_disabled, LV_PART_MAIN|LV_STATE_DISABLED);
+
+	//Write style state: LV_STATE_CHECKED for style_wifi_screen_wifi_en_sw_main_indicator_checked
+	static lv_style_t style_wifi_screen_wifi_en_sw_main_indicator_checked;
+	if (style_wifi_screen_wifi_en_sw_main_indicator_checked.prop_cnt > 1)
+		lv_style_reset(&style_wifi_screen_wifi_en_sw_main_indicator_checked);
+	else
+		lv_style_init(&style_wifi_screen_wifi_en_sw_main_indicator_checked);
+	lv_style_set_bg_color(&style_wifi_screen_wifi_en_sw_main_indicator_checked, lv_color_make(0x21, 0x95, 0xf6));
+	lv_style_set_bg_grad_color(&style_wifi_screen_wifi_en_sw_main_indicator_checked, lv_color_make(0x21, 0x95, 0xf6));
+	lv_style_set_bg_grad_dir(&style_wifi_screen_wifi_en_sw_main_indicator_checked, LV_GRAD_DIR_NONE);
+	lv_style_set_bg_opa(&style_wifi_screen_wifi_en_sw_main_indicator_checked, 255);
+	lv_style_set_border_color(&style_wifi_screen_wifi_en_sw_main_indicator_checked, lv_color_make(0x21, 0x95, 0xf6));
+	lv_style_set_border_width(&style_wifi_screen_wifi_en_sw_main_indicator_checked, 0);
+	lv_style_set_border_opa(&style_wifi_screen_wifi_en_sw_main_indicator_checked, 255);
+	lv_obj_add_style(ui->Wifi_screen_wifi_en_sw, &style_wifi_screen_wifi_en_sw_main_indicator_checked, LV_PART_INDICATOR|LV_STATE_CHECKED);
+
+	//Write style state: LV_STATE_DEFAULT for style_wifi_screen_wifi_en_sw_main_knob_default
+	static lv_style_t style_wifi_screen_wifi_en_sw_main_knob_default;
+	if (style_wifi_screen_wifi_en_sw_main_knob_default.prop_cnt > 1)
+		lv_style_reset(&style_wifi_screen_wifi_en_sw_main_knob_default);
+	else
+		lv_style_init(&style_wifi_screen_wifi_en_sw_main_knob_default);
+	lv_style_set_radius(&style_wifi_screen_wifi_en_sw_main_knob_default, 100);
+	lv_style_set_bg_color(&style_wifi_screen_wifi_en_sw_main_knob_default, lv_color_make(0xff, 0xff, 0xff));
+	lv_style_set_bg_grad_color(&style_wifi_screen_wifi_en_sw_main_knob_default, lv_color_make(0xff, 0xff, 0xff));
+	lv_style_set_bg_grad_dir(&style_wifi_screen_wifi_en_sw_main_knob_default, LV_GRAD_DIR_NONE);
+	lv_style_set_bg_opa(&style_wifi_screen_wifi_en_sw_main_knob_default, 255);
+	lv_style_set_border_color(&style_wifi_screen_wifi_en_sw_main_knob_default, lv_color_make(0x21, 0x95, 0xf6));
+	lv_style_set_border_width(&style_wifi_screen_wifi_en_sw_main_knob_default, 0);
+	lv_style_set_border_opa(&style_wifi_screen_wifi_en_sw_main_knob_default, 255);
+	lv_obj_add_style(ui->Wifi_screen_wifi_en_sw, &style_wifi_screen_wifi_en_sw_main_knob_default, LV_PART_KNOB|LV_STATE_DEFAULT);
 
 	//Write codes Wifi_screen_label_3
 	ui->Wifi_screen_label_3 = lv_label_create(ui->Wifi_screen_cont);

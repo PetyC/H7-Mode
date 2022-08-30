@@ -8,6 +8,7 @@
 #include <stdio.h>
 #include "lvgl.h"
 
+
 void events_init(lv_ui *ui)
 {
 }
@@ -133,8 +134,24 @@ static void Wifi_screen_return_btn_event_handler(lv_event_t *e)
 	}
 }
 
+static void Wifi_screen_wifi_en_sw_event_handler(lv_event_t *e)
+{
+	lv_event_code_t code = lv_event_get_code(e);
+	switch (code)
+	{
+	case LV_EVENT_VALUE_CHANGED:
+	{
+		
+	}
+		break;
+	default:
+		break;
+	}
+}
+
 void events_init_Wifi_screen(lv_ui *ui)
 {
 	lv_obj_add_event_cb(ui->Wifi_screen_APU_btn, Wifi_screen_APU_btn_event_handler, LV_EVENT_ALL, NULL);
 	lv_obj_add_event_cb(ui->Wifi_screen_return_btn, Wifi_screen_return_btn_event_handler, LV_EVENT_ALL, NULL);
+	lv_obj_add_event_cb(ui->Wifi_screen_wifi_en_sw, Wifi_screen_wifi_en_sw_event_handler, LV_EVENT_ALL, NULL);
 }

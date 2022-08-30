@@ -29,6 +29,7 @@ static void main_screen_wifi_set_btn_event_handler(lv_event_t *e)
 				setup_scr_Wifi_screen(&guider_ui);
 			lv_scr_load_anim(guider_ui.Wifi_screen, LV_SCR_LOAD_ANIM_OVER_LEFT, 0, 0, true);
       encoder_wifi_init();
+      UI_Wifi_Set_ScreenInit();
 		}
 		guider_ui.main_screen_del = true;
 	}
@@ -141,9 +142,43 @@ static void Wifi_screen_return_btn_event_handler(lv_event_t *e)
 	}
 }
 
+
+#include "FreeRTOS.h"
+#include "task.h"
+#include "cmsis_os.h"
+extern osThreadId Network_TaskHandle;
+
+static void Wifi_screen_wifi_en_sw_event_handler(lv_event_t *e)
+{
+	lv_event_code_t code = lv_event_get_code(e);
+  uint32_t EventGroup;
+
+	switch (code)
+	{
+	case LV_EVENT_VALUE_CHANGED:
+	{
+		if(lv_obj_has_state(guider_ui.Wifi_screen_wifi_en_sw , LV_STATE_CHECKED) == 1)      //wifi开
+    {
+      EventGroup = 1;
+    }
+    else                                                                                //wifi关
+    {
+      EventGroup = 0;
+    }
+
+    xTaskNotify( Network_TaskHandle, EventGroup, eSetBits);
+	}
+		break;
+	default:
+		break;
+	}
+}
+
+
 void events_init_Wifi_screen(lv_ui *ui)
 {
 	lv_obj_add_event_cb(ui->Wifi_screen_APU_btn, Wifi_screen_APU_btn_event_handler, LV_EVENT_ALL, NULL);
 	lv_obj_add_event_cb(ui->Wifi_screen_return_btn, Wifi_screen_return_btn_event_handler, LV_EVENT_ALL, NULL);
+  lv_obj_add_event_cb(ui->Wifi_screen_wifi_en_sw, Wifi_screen_wifi_en_sw_event_handler, LV_EVENT_ALL, NULL);
 }
 

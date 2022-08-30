@@ -47,7 +47,7 @@ typedef struct
 	lv_obj_t *Wifi_screen_return_btn;
 	lv_obj_t *Wifi_screen_return_btn_label;
 	lv_obj_t *Wifi_screen_cont;
-	lv_obj_t *Wifi_screen_sw_1;
+	lv_obj_t *Wifi_screen_wifi_en_sw;
 	lv_obj_t *Wifi_screen_label_3;
 	lv_obj_t *QR_screen;
 	bool QR_screen_del;

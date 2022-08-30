@@ -312,75 +312,42 @@ except AttributeError:
 # add style for main_screen_demo_btn
 main_screen_demo_btn.add_style(style_main_screen_demo_btn_main_main_pressed, lv.PART.MAIN|lv.STATE.PRESSED)
 
-main_screen_wifi_state_label = lv.label(main_screen)
-main_screen_wifi_state_label.set_pos(int(14),int(5))
-main_screen_wifi_state_label.set_size(100,15)
-main_screen_wifi_state_label.set_scrollbar_mode(lv.SCROLLBAR_MODE.OFF)
-main_screen_wifi_state_label.set_text("WIFI:Connect")
-main_screen_wifi_state_label.set_long_mode(lv.label.LONG.WRAP)
-# create style style_main_screen_wifi_state_label_main_main_default
-style_main_screen_wifi_state_label_main_main_default = lv.style_t()
-style_main_screen_wifi_state_label_main_main_default.init()
-style_main_screen_wifi_state_label_main_main_default.set_radius(0)
-style_main_screen_wifi_state_label_main_main_default.set_bg_color(lv.color_make(0x21,0x95,0xf6))
-style_main_screen_wifi_state_label_main_main_default.set_bg_grad_color(lv.color_make(0x21,0x95,0xf6))
-style_main_screen_wifi_state_label_main_main_default.set_bg_grad_dir(lv.GRAD_DIR.NONE)
-style_main_screen_wifi_state_label_main_main_default.set_bg_opa(0)
-style_main_screen_wifi_state_label_main_main_default.set_text_color(lv.color_make(0x00,0x00,0x00))
-try:
-    style_main_screen_wifi_state_label_main_main_default.set_text_font(lv.font_simsun_12)
-except AttributeError:
-    try:
-        style_main_screen_wifi_state_label_main_main_default.set_text_font(lv.font_montserrat_12)
-    except AttributeError:
-        style_main_screen_wifi_state_label_main_main_default.set_text_font(lv.font_montserrat_16)
-style_main_screen_wifi_state_label_main_main_default.set_text_letter_space(0)
-style_main_screen_wifi_state_label_main_main_default.set_text_line_space(0)
-style_main_screen_wifi_state_label_main_main_default.set_text_align(lv.TEXT_ALIGN.CENTER)
-style_main_screen_wifi_state_label_main_main_default.set_pad_left(0)
-style_main_screen_wifi_state_label_main_main_default.set_pad_right(0)
-style_main_screen_wifi_state_label_main_main_default.set_pad_top(0)
-style_main_screen_wifi_state_label_main_main_default.set_pad_bottom(0)
-
-# add style for main_screen_wifi_state_label
-main_screen_wifi_state_label.add_style(style_main_screen_wifi_state_label_main_main_default, lv.PART.MAIN|lv.STATE.DEFAULT)
-
 main_screen_led_1 = lv.led(main_screen)
 main_screen_led_1.set_pos(int(54),int(100))
 main_screen_led_1.set_size(20,20)
 main_screen_led_1.set_scrollbar_mode(lv.SCROLLBAR_MODE.OFF)
 main_screen_led_1.set_brightness(0)
 main_screen_led_1.set_color(lv.color_make(0x00,0xa1,0xb5))
-main_screen_img_1 = lv.img(main_screen)
-main_screen_img_1.set_pos(int(112),int(2))
-main_screen_img_1.set_size(15,14)
-main_screen_img_1.set_scrollbar_mode(lv.SCROLLBAR_MODE.OFF)
-main_screen_img_1.add_flag(lv.obj.FLAG.CLICKABLE)
+main_screen_wifi_img = lv.img(main_screen)
+main_screen_wifi_img.set_pos(int(112),int(2))
+main_screen_wifi_img.set_size(15,14)
+main_screen_wifi_img.set_scrollbar_mode(lv.SCROLLBAR_MODE.OFF)
+main_screen_wifi_img.add_flag(lv.obj.FLAG.CLICKABLE)
 try:
-    with open('C:\\Users\\39810\\Desktop\\DIY_Project\\H7-Mode\\2.Firmware\\LVGL\\CoreH7\\generated\\mPythonImages\\mp963516183.png','rb') as f:
-        main_screen_img_1_img_data = f.read()
+    with open('C:\\Users\\39810\\Desktop\\H7-Mode\\2.Firmware\\LVGL\\CoreH7\\generated\\mPythonImages\\mp571497797.png','rb') as f:
+        main_screen_wifi_img_img_data = f.read()
 except:
-    print('Could not open C:\\Users\\39810\\Desktop\\DIY_Project\\H7-Mode\\2.Firmware\\LVGL\\CoreH7\\generated\\mPythonImages\\mp963516183.png')
+    print('Could not open C:\\Users\\39810\\Desktop\\H7-Mode\\2.Firmware\\LVGL\\CoreH7\\generated\\mPythonImages\\mp571497797.png')
     sys.exit()
 
-main_screen_img_1_img = lv.img_dsc_t({
-  'data_size': len(main_screen_img_1_img_data),
+main_screen_wifi_img_img = lv.img_dsc_t({
+  'data_size': len(main_screen_wifi_img_img_data),
   'header': {'always_zero': 0, 'w': 15, 'h': 14, 'cf': lv.img.CF.TRUE_COLOR_ALPHA},
-  'data': main_screen_img_1_img_data
+  'data': main_screen_wifi_img_img_data
 })
 
-main_screen_img_1.set_src(main_screen_img_1_img)
-main_screen_img_1.set_pivot(0,0)
-main_screen_img_1.set_angle(0)
-# create style style_main_screen_img_1_main_main_default
-style_main_screen_img_1_main_main_default = lv.style_t()
-style_main_screen_img_1_main_main_default.init()
-style_main_screen_img_1_main_main_default.set_img_recolor(lv.color_make(0xff,0xff,0xff))
-style_main_screen_img_1_main_main_default.set_img_recolor_opa(0)
-style_main_screen_img_1_main_main_default.set_img_opa(255)
+main_screen_wifi_img.set_src(main_screen_wifi_img_img)
+main_screen_wifi_img.set_pivot(0,0)
+main_screen_wifi_img.set_angle(0)
+# create style style_main_screen_wifi_img_main_main_default
+style_main_screen_wifi_img_main_main_default = lv.style_t()
+style_main_screen_wifi_img_main_main_default.init()
+style_main_screen_wifi_img_main_main_default.set_img_recolor(lv.color_make(0xff,0xff,0xff))
+style_main_screen_wifi_img_main_main_default.set_img_recolor_opa(0)
+style_main_screen_wifi_img_main_main_default.set_img_opa(255)
 
-# add style for main_screen_img_1
-main_screen_img_1.add_style(style_main_screen_img_1_main_main_default, lv.PART.MAIN|lv.STATE.DEFAULT)
+# add style for main_screen_wifi_img
+main_screen_wifi_img.add_style(style_main_screen_wifi_img_main_main_default, lv.PART.MAIN|lv.STATE.DEFAULT)
 
 device_screen = lv.obj()
 device_screen.set_scrollbar_mode(lv.SCROLLBAR_MODE.OFF)
@@ -897,53 +864,83 @@ Wifi_screen_cont = lv.obj(Wifi_screen)
 Wifi_screen_cont.set_pos(int(0),int(0))
 Wifi_screen_cont.set_size(128,20)
 Wifi_screen_cont.set_scrollbar_mode(lv.SCROLLBAR_MODE.OFF)
-Wifi_screen_sw_1 = lv.switch(Wifi_screen_cont)
-Wifi_screen_sw_1.set_pos(int(65),int(5))
-Wifi_screen_sw_1.set_size(40,12)
-Wifi_screen_sw_1.set_scrollbar_mode(lv.SCROLLBAR_MODE.OFF)
-# create style style_wifi_screen_sw_1_main_main_default
-style_wifi_screen_sw_1_main_main_default = lv.style_t()
-style_wifi_screen_sw_1_main_main_default.init()
-style_wifi_screen_sw_1_main_main_default.set_radius(100)
-style_wifi_screen_sw_1_main_main_default.set_bg_color(lv.color_make(0xe6,0xe2,0xe6))
-style_wifi_screen_sw_1_main_main_default.set_bg_grad_color(lv.color_make(0xe6,0xe2,0xe6))
-style_wifi_screen_sw_1_main_main_default.set_bg_grad_dir(lv.GRAD_DIR.NONE)
-style_wifi_screen_sw_1_main_main_default.set_bg_opa(255)
-style_wifi_screen_sw_1_main_main_default.set_border_color(lv.color_make(0x21,0x95,0xf6))
-style_wifi_screen_sw_1_main_main_default.set_border_width(0)
-style_wifi_screen_sw_1_main_main_default.set_border_opa(0)
+Wifi_screen_wifi_en_sw = lv.switch(Wifi_screen_cont)
+Wifi_screen_wifi_en_sw.set_pos(int(65),int(5))
+Wifi_screen_wifi_en_sw.set_size(40,12)
+Wifi_screen_wifi_en_sw.set_scrollbar_mode(lv.SCROLLBAR_MODE.OFF)
+# create style style_wifi_screen_wifi_en_sw_main_main_default
+style_wifi_screen_wifi_en_sw_main_main_default = lv.style_t()
+style_wifi_screen_wifi_en_sw_main_main_default.init()
+style_wifi_screen_wifi_en_sw_main_main_default.set_radius(100)
+style_wifi_screen_wifi_en_sw_main_main_default.set_bg_color(lv.color_make(0xe6,0xe2,0xe6))
+style_wifi_screen_wifi_en_sw_main_main_default.set_bg_grad_color(lv.color_make(0xe6,0xe2,0xe6))
+style_wifi_screen_wifi_en_sw_main_main_default.set_bg_grad_dir(lv.GRAD_DIR.NONE)
+style_wifi_screen_wifi_en_sw_main_main_default.set_bg_opa(255)
+style_wifi_screen_wifi_en_sw_main_main_default.set_border_color(lv.color_make(0x21,0x95,0xf6))
+style_wifi_screen_wifi_en_sw_main_main_default.set_border_width(0)
+style_wifi_screen_wifi_en_sw_main_main_default.set_border_opa(0)
 
-# add style for Wifi_screen_sw_1
-Wifi_screen_sw_1.add_style(style_wifi_screen_sw_1_main_main_default, lv.PART.MAIN|lv.STATE.DEFAULT)
+# add style for Wifi_screen_wifi_en_sw
+Wifi_screen_wifi_en_sw.add_style(style_wifi_screen_wifi_en_sw_main_main_default, lv.PART.MAIN|lv.STATE.DEFAULT)
 
-# create style style_wifi_screen_sw_1_main_indicator_checked
-style_wifi_screen_sw_1_main_indicator_checked = lv.style_t()
-style_wifi_screen_sw_1_main_indicator_checked.init()
-style_wifi_screen_sw_1_main_indicator_checked.set_bg_color(lv.color_make(0x21,0x95,0xf6))
-style_wifi_screen_sw_1_main_indicator_checked.set_bg_grad_color(lv.color_make(0x21,0x95,0xf6))
-style_wifi_screen_sw_1_main_indicator_checked.set_bg_grad_dir(lv.GRAD_DIR.NONE)
-style_wifi_screen_sw_1_main_indicator_checked.set_bg_opa(255)
-style_wifi_screen_sw_1_main_indicator_checked.set_border_color(lv.color_make(0x21,0x95,0xf6))
-style_wifi_screen_sw_1_main_indicator_checked.set_border_width(0)
-style_wifi_screen_sw_1_main_indicator_checked.set_border_opa(255)
+# create style style_wifi_screen_wifi_en_sw_main_main_focused
+style_wifi_screen_wifi_en_sw_main_main_focused = lv.style_t()
+style_wifi_screen_wifi_en_sw_main_main_focused.init()
+style_wifi_screen_wifi_en_sw_main_main_focused.set_radius(100)
+style_wifi_screen_wifi_en_sw_main_main_focused.set_bg_color(lv.color_make(0xe6,0xe2,0xe6))
+style_wifi_screen_wifi_en_sw_main_main_focused.set_bg_grad_color(lv.color_make(0xe6,0xe2,0xe6))
+style_wifi_screen_wifi_en_sw_main_main_focused.set_bg_grad_dir(lv.GRAD_DIR.NONE)
+style_wifi_screen_wifi_en_sw_main_main_focused.set_bg_opa(255)
+style_wifi_screen_wifi_en_sw_main_main_focused.set_border_color(lv.color_make(0x21,0x95,0xf6))
+style_wifi_screen_wifi_en_sw_main_main_focused.set_border_width(0)
+style_wifi_screen_wifi_en_sw_main_main_focused.set_border_opa(255)
 
-# add style for Wifi_screen_sw_1
-Wifi_screen_sw_1.add_style(style_wifi_screen_sw_1_main_indicator_checked, lv.PART.INDICATOR|lv.STATE.CHECKED)
+# add style for Wifi_screen_wifi_en_sw
+Wifi_screen_wifi_en_sw.add_style(style_wifi_screen_wifi_en_sw_main_main_focused, lv.PART.MAIN|lv.STATE.FOCUSED)
 
-# create style style_wifi_screen_sw_1_main_knob_default
-style_wifi_screen_sw_1_main_knob_default = lv.style_t()
-style_wifi_screen_sw_1_main_knob_default.init()
-style_wifi_screen_sw_1_main_knob_default.set_radius(100)
-style_wifi_screen_sw_1_main_knob_default.set_bg_color(lv.color_make(0xff,0xff,0xff))
-style_wifi_screen_sw_1_main_knob_default.set_bg_grad_color(lv.color_make(0xff,0xff,0xff))
-style_wifi_screen_sw_1_main_knob_default.set_bg_grad_dir(lv.GRAD_DIR.NONE)
-style_wifi_screen_sw_1_main_knob_default.set_bg_opa(255)
-style_wifi_screen_sw_1_main_knob_default.set_border_color(lv.color_make(0x21,0x95,0xf6))
-style_wifi_screen_sw_1_main_knob_default.set_border_width(0)
-style_wifi_screen_sw_1_main_knob_default.set_border_opa(255)
+# create style style_wifi_screen_wifi_en_sw_main_main_disabled
+style_wifi_screen_wifi_en_sw_main_main_disabled = lv.style_t()
+style_wifi_screen_wifi_en_sw_main_main_disabled.init()
+style_wifi_screen_wifi_en_sw_main_main_disabled.set_radius(100)
+style_wifi_screen_wifi_en_sw_main_main_disabled.set_bg_color(lv.color_make(0xe6,0xe2,0xe6))
+style_wifi_screen_wifi_en_sw_main_main_disabled.set_bg_grad_color(lv.color_make(0xe6,0xe2,0xe6))
+style_wifi_screen_wifi_en_sw_main_main_disabled.set_bg_grad_dir(lv.GRAD_DIR.NONE)
+style_wifi_screen_wifi_en_sw_main_main_disabled.set_bg_opa(255)
+style_wifi_screen_wifi_en_sw_main_main_disabled.set_border_color(lv.color_make(0x21,0x95,0xf6))
+style_wifi_screen_wifi_en_sw_main_main_disabled.set_border_width(0)
+style_wifi_screen_wifi_en_sw_main_main_disabled.set_border_opa(255)
 
-# add style for Wifi_screen_sw_1
-Wifi_screen_sw_1.add_style(style_wifi_screen_sw_1_main_knob_default, lv.PART.KNOB|lv.STATE.DEFAULT)
+# add style for Wifi_screen_wifi_en_sw
+Wifi_screen_wifi_en_sw.add_style(style_wifi_screen_wifi_en_sw_main_main_disabled, lv.PART.MAIN|lv.STATE.DISABLED)
+
+# create style style_wifi_screen_wifi_en_sw_main_indicator_checked
+style_wifi_screen_wifi_en_sw_main_indicator_checked = lv.style_t()
+style_wifi_screen_wifi_en_sw_main_indicator_checked.init()
+style_wifi_screen_wifi_en_sw_main_indicator_checked.set_bg_color(lv.color_make(0x21,0x95,0xf6))
+style_wifi_screen_wifi_en_sw_main_indicator_checked.set_bg_grad_color(lv.color_make(0x21,0x95,0xf6))
+style_wifi_screen_wifi_en_sw_main_indicator_checked.set_bg_grad_dir(lv.GRAD_DIR.NONE)
+style_wifi_screen_wifi_en_sw_main_indicator_checked.set_bg_opa(255)
+style_wifi_screen_wifi_en_sw_main_indicator_checked.set_border_color(lv.color_make(0x21,0x95,0xf6))
+style_wifi_screen_wifi_en_sw_main_indicator_checked.set_border_width(0)
+style_wifi_screen_wifi_en_sw_main_indicator_checked.set_border_opa(255)
+
+# add style for Wifi_screen_wifi_en_sw
+Wifi_screen_wifi_en_sw.add_style(style_wifi_screen_wifi_en_sw_main_indicator_checked, lv.PART.INDICATOR|lv.STATE.CHECKED)
+
+# create style style_wifi_screen_wifi_en_sw_main_knob_default
+style_wifi_screen_wifi_en_sw_main_knob_default = lv.style_t()
+style_wifi_screen_wifi_en_sw_main_knob_default.init()
+style_wifi_screen_wifi_en_sw_main_knob_default.set_radius(100)
+style_wifi_screen_wifi_en_sw_main_knob_default.set_bg_color(lv.color_make(0xff,0xff,0xff))
+style_wifi_screen_wifi_en_sw_main_knob_default.set_bg_grad_color(lv.color_make(0xff,0xff,0xff))
+style_wifi_screen_wifi_en_sw_main_knob_default.set_bg_grad_dir(lv.GRAD_DIR.NONE)
+style_wifi_screen_wifi_en_sw_main_knob_default.set_bg_opa(255)
+style_wifi_screen_wifi_en_sw_main_knob_default.set_border_color(lv.color_make(0x21,0x95,0xf6))
+style_wifi_screen_wifi_en_sw_main_knob_default.set_border_width(0)
+style_wifi_screen_wifi_en_sw_main_knob_default.set_border_opa(255)
+
+# add style for Wifi_screen_wifi_en_sw
+Wifi_screen_wifi_en_sw.add_style(style_wifi_screen_wifi_en_sw_main_knob_default, lv.PART.KNOB|lv.STATE.DEFAULT)
 
 Wifi_screen_label_3 = lv.label(Wifi_screen_cont)
 Wifi_screen_label_3.set_pos(int(20),int(5))
@@ -1014,10 +1011,10 @@ QR_screen_img_1.set_size(100,100)
 QR_screen_img_1.set_scrollbar_mode(lv.SCROLLBAR_MODE.OFF)
 QR_screen_img_1.add_flag(lv.obj.FLAG.CLICKABLE)
 try:
-    with open('C:\\Users\\39810\\Desktop\\DIY_Project\\H7-Mode\\2.Firmware\\LVGL\\CoreH7\\generated\\mPythonImages\\mp-899909521.png','rb') as f:
+    with open('C:\\Users\\39810\\Desktop\\H7-Mode\\2.Firmware\\LVGL\\CoreH7\\generated\\mPythonImages\\mp-1380144639.png','rb') as f:
         QR_screen_img_1_img_data = f.read()
 except:
-    print('Could not open C:\\Users\\39810\\Desktop\\DIY_Project\\H7-Mode\\2.Firmware\\LVGL\\CoreH7\\generated\\mPythonImages\\mp-899909521.png')
+    print('Could not open C:\\Users\\39810\\Desktop\\H7-Mode\\2.Firmware\\LVGL\\CoreH7\\generated\\mPythonImages\\mp-1380144639.png')
     sys.exit()
 
 QR_screen_img_1_img = lv.img_dsc_t({

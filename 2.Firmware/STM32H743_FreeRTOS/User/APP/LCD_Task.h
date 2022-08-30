@@ -2,7 +2,7 @@
  * @Description: LCD显示任务
  * @Autor: Pi
  * @Date: 2022-06-27 15:20:33
- * @LastEditTime: 2022-08-30 19:49:09
+ * @LastEditTime: 2022-08-30 22:57:55
  */
 #ifndef LCD_TASK_H
 #define LCD_TASK_H
@@ -12,7 +12,7 @@
 #include "task.h"
 #include "cmsis_os.h"
 #include "limits.h"
-
+#include "Network_Task.h"
 
 
 /*相关微库*/

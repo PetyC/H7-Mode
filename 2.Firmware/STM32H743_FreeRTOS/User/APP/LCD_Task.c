@@ -2,14 +2,10 @@
  * @Description: LCD显示任务
  * @Autor: Pi
  * @Date: 2022-06-27 15:14:05
- * @LastEditTime: 2022-08-30 20:01:40
+ * @LastEditTime: 2022-08-30 23:16:27
  */
 #include "LCD_Task.h"
 #include "stdio.h"
-
-
-
-
 
 /*FreeRTOS相关变量*/
 extern osSemaphoreId Key_Binary_SemHandle;
@@ -37,22 +33,32 @@ void LCD_Task(void const *argument)
   setup_ui(&guider_ui);
   events_init(&guider_ui);
   
-  //lv_demo_keypad_encoder();
-  
+  /*延时*/
   TickType_t xLastWakeTime = 0;
   xLastWakeTime = xTaskGetTickCount(); 
 
+  /*网络状态事件组消息*/
   uint32_t Network_EventGroup = 0;
+ 
   /* Infinite loop */
   for (;;)
   {
-    xTaskNotifyWait( pdFALSE,    /* Don't clear bits on entry. */
-                  ULONG_MAX,        /* Clear all bits on exit. */
-                  &Network_EventGroup, /* Stores the notified value. */
-                  0);
+    /*如果有任务通知*/
+    if(xTaskNotifyWait( pdFALSE, pdFALSE, &Network_EventGroup, 0) == pdTRUE)    //使用后不清空任务通知
+    {
+      if((Network_EventGroup & NETWORK_CONNECT_BIT0) == 1)    //WIFI连接成功
+      {
+        UI_Wifi_ImagesDispaly(1);
+      }
+      else if((Network_EventGroup & NETWORK_CONNECT_BIT0) != 1)    //WIFI连接断开
+      {
+        UI_Wifi_ImagesDispaly(0);
+      }
+    }
 
-    
-    vTaskDelayUntil( &xLastWakeTime,5);
+
+    vTaskDelayUntil( &xLastWakeTime,10);
+
     lv_task_handler();
     
   }

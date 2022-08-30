@@ -475,6 +475,7 @@
 				},
 				{
 					"name": "wifi_img",
+					"id": "33fzd802",
 					"type": "img",
 					"left": 112,
 					"top": 2,
@@ -501,8 +502,7 @@
 							"image_recolor_opa": 0,
 							"image_opa": 255
 						}
-					],
-					"id": "33fzd802"
+					]
 				}
 			],
 			"style": [
@@ -1908,7 +1908,7 @@
 					"scrollbar_mode": "OFF",
 					"child": [
 						{
-							"name": "sw_1",
+							"name": "wifi_en_sw",
 							"id": "sucf7q3s",
 							"type": "sw",
 							"left": 65,
@@ -1945,7 +1945,7 @@
 								{
 									"part": "LV_PART_MAIN",
 									"state": "LV_STATE_FOCUSED",
-									"disable": true,
+									"disable": false,
 									"bg_color": "#e6e2e6",
 									"bg_grad_color": "#e6e2e6",
 									"bg_grad_dir": "LV_GRAD_DIR_NONE",
@@ -1964,7 +1964,7 @@
 								{
 									"part": "LV_PART_MAIN",
 									"state": "LV_STATE_DISABLED",
-									"disable": true,
+									"disable": false,
 									"bg_color": "#e6e2e6",
 									"bg_grad_color": "#e6e2e6",
 									"bg_grad_dir": "LV_GRAD_DIR_NONE",
@@ -2054,6 +2054,68 @@
 									"border_opa": 255,
 									"border_color": "#2195f6",
 									"radius": 100
+								}
+							],
+							"event": [
+								{
+									"trigger": "value_changed",
+									"dst": "",
+									"action": {
+										"bg_color": {
+											"ische": false,
+											"value": "#000000"
+										},
+										"grad_color": {
+											"ische": false,
+											"value": "#000000"
+										},
+										"bg_opa": {
+											"ische": false,
+											"value": 255
+										},
+										"width": {
+											"ische": false,
+											"value": 50
+										},
+										"height": {
+											"ische": false,
+											"value": 50
+										},
+										"set_text": {
+											"ische": false,
+											"value": "default",
+											"font": 12,
+											"font_family": "simsun"
+										},
+										"position": {
+											"ische": false,
+											"value_x": 0,
+											"value_y": 0
+										},
+										"hidden": {
+											"ische": false
+										},
+										"customer_code": {
+											"ische": true,
+											"code_type": "excute_c_code",
+											"include": "",
+											"code": ""
+										},
+										"move": {
+											"ische": false,
+											"value_x": 0,
+											"value_y": 0,
+											"duration": 1000,
+											"path_type": "linear"
+										},
+										"load_screen": {
+											"ische": false,
+											"duration": 1000,
+											"delay": 1000,
+											"anim_type": "LV_SCR_LOAD_ANIM_NONE",
+											"is_clean": true
+										}
+									}
 								}
 							]
 						},
@@ -2624,7 +2686,7 @@
 							"duration": 100
 						},
 						"default_style": false,
-						"img_path": "C:\\Users\\39810\\Desktop\\DIY_Project\\H7-Mode\\2.Firmware\\LVGL\\CoreH7\\import\\WIFI_discon.png",
+						"img_path": "C:\\Users\\39810\\Desktop\\H7-Mode\\2.Firmware\\LVGL\\CoreH7\\import\\WIFI_discon.png",
 						"color_format": "true-color-alpha",
 						"rotate": 0,
 						"pivot": "0,0",
@@ -3964,7 +4026,7 @@
 						"default_style": false,
 						"child": [
 							{
-								"name": "Wifi_screen_sw_1",
+								"name": "Wifi_screen_wifi_en_sw",
 								"id": "sucf7q3s",
 								"type": "sw",
 								"scrollbar_mode": "OFF",
@@ -4009,7 +4071,7 @@
 									{
 										"part": "LV_PART_MAIN",
 										"state": "LV_STATE_FOCUSED",
-										"disable": true,
+										"disable": false,
 										"bg_color": "#e6e2e6",
 										"bg_grad_color": "#e6e2e6",
 										"bg_grad_dir": "LV_GRAD_DIR_NONE",
@@ -4028,7 +4090,7 @@
 									{
 										"part": "LV_PART_MAIN",
 										"state": "LV_STATE_DISABLED",
-										"disable": true,
+										"disable": false,
 										"bg_color": "#e6e2e6",
 										"bg_grad_color": "#e6e2e6",
 										"bg_grad_dir": "LV_GRAD_DIR_NONE",
@@ -4266,7 +4328,7 @@
 							"duration": 100
 						},
 						"default_style": false,
-						"img_path": "C:\\Users\\39810\\Desktop\\DIY_Project\\H7-Mode\\2.Firmware\\LVGL\\CoreH7\\import\\QR.png",
+						"img_path": "C:\\Users\\39810\\Desktop\\H7-Mode\\2.Firmware\\LVGL\\CoreH7\\import\\QR.png",
 						"color_format": "true-color-alpha",
 						"rotate": 0,
 						"pivot": "0,0",
@@ -4394,6 +4456,15 @@
 				"delay": 0,
 				"anim_type": "LV_SCR_LOAD_ANIM_NONE",
 				"is_clean": true
+			},
+			{
+				"src": "Wifi_screen_wifi_en_sw",
+				"trigger": "value_changed",
+				"dst": "",
+				"action": "customer_code",
+				"code_type": "excute_c_code",
+				"include": "",
+				"code": ""
 			}
 		]
 	},

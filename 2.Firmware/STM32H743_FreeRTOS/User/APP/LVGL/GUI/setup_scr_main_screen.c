@@ -169,36 +169,6 @@ void setup_scr_main_screen(lv_ui *ui){
 	lv_obj_set_style_pad_all(ui->main_screen_demo_btn, 0, LV_STATE_DEFAULT);
 	lv_obj_align(ui->main_screen_demo_btn_label, LV_ALIGN_CENTER, 0, 0);
 
-	//Write codes main_screen_wifi_state_label
-	ui->main_screen_wifi_state_label = lv_label_create(ui->main_screen);
-	lv_obj_set_pos(ui->main_screen_wifi_state_label, 14, 5);
-	lv_obj_set_size(ui->main_screen_wifi_state_label, 100, 15);
-	lv_obj_set_scrollbar_mode(ui->main_screen_wifi_state_label, LV_SCROLLBAR_MODE_OFF);
-	lv_label_set_text(ui->main_screen_wifi_state_label, "WIFI:Connect");
-	lv_label_set_long_mode(ui->main_screen_wifi_state_label, LV_LABEL_LONG_WRAP);
-
-	//Write style state: LV_STATE_DEFAULT for style_main_screen_wifi_state_label_main_main_default
-	static lv_style_t style_main_screen_wifi_state_label_main_main_default;
-	if (style_main_screen_wifi_state_label_main_main_default.prop_cnt > 1)
-		lv_style_reset(&style_main_screen_wifi_state_label_main_main_default);
-	else
-		lv_style_init(&style_main_screen_wifi_state_label_main_main_default);
-	lv_style_set_radius(&style_main_screen_wifi_state_label_main_main_default, 0);
-	lv_style_set_bg_color(&style_main_screen_wifi_state_label_main_main_default, lv_color_make(0x21, 0x95, 0xf6));
-	lv_style_set_bg_grad_color(&style_main_screen_wifi_state_label_main_main_default, lv_color_make(0x21, 0x95, 0xf6));
-	lv_style_set_bg_grad_dir(&style_main_screen_wifi_state_label_main_main_default, LV_GRAD_DIR_NONE);
-	lv_style_set_bg_opa(&style_main_screen_wifi_state_label_main_main_default, 0);
-	lv_style_set_text_color(&style_main_screen_wifi_state_label_main_main_default, lv_color_make(0x00, 0x00, 0x00));
-	lv_style_set_text_font(&style_main_screen_wifi_state_label_main_main_default, &lv_font_simsun_12);
-	lv_style_set_text_letter_space(&style_main_screen_wifi_state_label_main_main_default, 0);
-	lv_style_set_text_line_space(&style_main_screen_wifi_state_label_main_main_default, 0);
-	lv_style_set_text_align(&style_main_screen_wifi_state_label_main_main_default, LV_TEXT_ALIGN_CENTER);
-	lv_style_set_pad_left(&style_main_screen_wifi_state_label_main_main_default, 0);
-	lv_style_set_pad_right(&style_main_screen_wifi_state_label_main_main_default, 0);
-	lv_style_set_pad_top(&style_main_screen_wifi_state_label_main_main_default, 0);
-	lv_style_set_pad_bottom(&style_main_screen_wifi_state_label_main_main_default, 0);
-	lv_obj_add_style(ui->main_screen_wifi_state_label, &style_main_screen_wifi_state_label_main_main_default, LV_PART_MAIN|LV_STATE_DEFAULT);
-
 	//Write codes main_screen_led_1
 	ui->main_screen_led_1 = lv_led_create(ui->main_screen);
 	lv_obj_set_pos(ui->main_screen_led_1, 54, 100);
@@ -207,26 +177,26 @@ void setup_scr_main_screen(lv_ui *ui){
 	lv_led_set_brightness(ui->main_screen_led_1, 0);
 	lv_led_set_color(ui->main_screen_led_1, lv_color_make(0x00, 0xa1, 0xb5));
 
-	//Write codes main_screen_img_1
-	ui->main_screen_img_1 = lv_img_create(ui->main_screen);
-	lv_obj_set_pos(ui->main_screen_img_1, 112, 2);
-	lv_obj_set_size(ui->main_screen_img_1, 15, 14);
-	lv_obj_set_scrollbar_mode(ui->main_screen_img_1, LV_SCROLLBAR_MODE_OFF);
+	//Write codes main_screen_wifi_img
+	ui->main_screen_wifi_img = lv_img_create(ui->main_screen);
+	lv_obj_set_pos(ui->main_screen_wifi_img, 112, 2);
+	lv_obj_set_size(ui->main_screen_wifi_img, 15, 14);
+	lv_obj_set_scrollbar_mode(ui->main_screen_wifi_img, LV_SCROLLBAR_MODE_OFF);
 
-	//Write style state: LV_STATE_DEFAULT for style_main_screen_img_1_main_main_default
-	static lv_style_t style_main_screen_img_1_main_main_default;
-	if (style_main_screen_img_1_main_main_default.prop_cnt > 1)
-		lv_style_reset(&style_main_screen_img_1_main_main_default);
+	//Write style state: LV_STATE_DEFAULT for style_main_screen_wifi_img_main_main_default
+	static lv_style_t style_main_screen_wifi_img_main_main_default;
+	if (style_main_screen_wifi_img_main_main_default.prop_cnt > 1)
+		lv_style_reset(&style_main_screen_wifi_img_main_main_default);
 	else
-		lv_style_init(&style_main_screen_img_1_main_main_default);
-	lv_style_set_img_recolor(&style_main_screen_img_1_main_main_default, lv_color_make(0xff, 0xff, 0xff));
-	lv_style_set_img_recolor_opa(&style_main_screen_img_1_main_main_default, 0);
-	lv_style_set_img_opa(&style_main_screen_img_1_main_main_default, 255);
-	lv_obj_add_style(ui->main_screen_img_1, &style_main_screen_img_1_main_main_default, LV_PART_MAIN|LV_STATE_DEFAULT);
-	lv_obj_add_flag(ui->main_screen_img_1, LV_OBJ_FLAG_CLICKABLE);
-	lv_img_set_src(ui->main_screen_img_1,&_WIFI_con_15x14);
-	lv_img_set_pivot(ui->main_screen_img_1, 0,0);
-	lv_img_set_angle(ui->main_screen_img_1, 0);
+		lv_style_init(&style_main_screen_wifi_img_main_main_default);
+	lv_style_set_img_recolor(&style_main_screen_wifi_img_main_main_default, lv_color_make(0xff, 0xff, 0xff));
+	lv_style_set_img_recolor_opa(&style_main_screen_wifi_img_main_main_default, 0);
+	lv_style_set_img_opa(&style_main_screen_wifi_img_main_main_default, 255);
+	lv_obj_add_style(ui->main_screen_wifi_img, &style_main_screen_wifi_img_main_main_default, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_add_flag(ui->main_screen_wifi_img, LV_OBJ_FLAG_CLICKABLE);
+	lv_img_set_src(ui->main_screen_wifi_img,&_WIFI_discon_15x14);
+	lv_img_set_pivot(ui->main_screen_wifi_img, 0,0);
+	lv_img_set_angle(ui->main_screen_wifi_img, 0);
 
 	//Init events for screen
 	events_init_main_screen(ui);

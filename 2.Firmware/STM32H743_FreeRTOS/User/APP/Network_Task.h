@@ -2,7 +2,7 @@
  * @Description: NetWork相关
  * @Autor: Pi
  * @Date: 2022-08-08 18:24:22
- * @LastEditTime: 2022-08-30 19:49:25
+ * @LastEditTime: 2022-08-30 23:43:11
  */
  
 #ifndef NETWORK_TASK_H
@@ -13,10 +13,12 @@
 #include "FreeRTOS.h"
 #include "task.h"
 #include "cmsis_os.h"
+#include "limits.h"
 
 /*任务通知*/
-#define NETWORK_CONNECT_BIT0  (1)
-#define NETWORK_DISCONNECT_BIT1 (1 << 1)
+#define NETWORK_WIFI_BIT0  (1ul)
+#define NETWORK_CONNECT_BIT0  (1ul << 1)
+
 
 
 /*相关微库*/

@@ -44,6 +44,7 @@
       "xiosbase": "c",
       "xlocale": "c",
       "xstring": "c",
-      "xutility": "c"
+      "xutility": "c",
+      "limits.h": "c"
     }
 }

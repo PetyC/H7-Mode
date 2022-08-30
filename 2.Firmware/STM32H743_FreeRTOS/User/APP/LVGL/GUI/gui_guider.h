@@ -1,4 +1,10 @@
 /*
+ * @Description: 
+ * @Autor: Pi
+ * @Date: 2022-08-26 22:53:22
+ * @LastEditTime: 2022-08-30 23:32:00
+ */
+/*
  * Copyright 2022 NXP
  * SPDX-License-Identifier: MIT
  * The auto-generated can only be used on NXP devices
@@ -21,9 +27,8 @@ typedef struct
 	lv_obj_t *main_screen_wifi_set_btn_label;
 	lv_obj_t *main_screen_demo_btn;
 	lv_obj_t *main_screen_demo_btn_label;
-	lv_obj_t *main_screen_wifi_state_label;
 	lv_obj_t *main_screen_led_1;
-	lv_obj_t *main_screen_img_1;
+	lv_obj_t *main_screen_wifi_img;
 	lv_obj_t *device_screen;
 	bool device_screen_del;
 	lv_obj_t *device_screen_about_tileview;
@@ -48,7 +53,7 @@ typedef struct
 	lv_obj_t *Wifi_screen_return_btn;
 	lv_obj_t *Wifi_screen_return_btn_label;
 	lv_obj_t *Wifi_screen_cont;
-	lv_obj_t *Wifi_screen_sw_1;
+	lv_obj_t *Wifi_screen_wifi_en_sw;
 	lv_obj_t *Wifi_screen_label_3;
 	lv_obj_t *QR_screen;
 	bool QR_screen_del;
@@ -66,6 +71,7 @@ void setup_scr_QR_screen(lv_ui *ui);
 LV_IMG_DECLARE(_QR_100x100);
 LV_IMG_DECLARE(_WIFI_discon_15x14);
 LV_IMG_DECLARE(_WIFI_con_15x14);
+
 #ifdef __cplusplus
 }
 #endif
