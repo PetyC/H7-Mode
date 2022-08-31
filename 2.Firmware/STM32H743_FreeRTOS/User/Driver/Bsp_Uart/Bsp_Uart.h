@@ -2,7 +2,7 @@
  * @Description: 
  * @Autor: Pi
  * @Date: 2022-07-01 17:44:02
- * @LastEditTime: 2022-08-09 19:55:18
+ * @LastEditTime: 2022-09-01 03:01:16
  */
 
 #ifndef DEV_UART_H
@@ -13,10 +13,8 @@
 #include "string.h"
 #include "Fifo.h"
 
-/*是否使用了FreeRTOS*/
-#define USE_FreeRTOS  1
-
-
+/*是否使用FreeRTOS*/
+#define USE_FreeRTOS 1
 
 extern UART_HandleTypeDef huart1;
 extern DMA_HandleTypeDef hdma_usart1_tx;

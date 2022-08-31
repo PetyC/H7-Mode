@@ -125,9 +125,10 @@ int main(void)
   
   QSPI_W25Qx_Init();
 
+  QSPI_FLASH_Test_ReadSpeed();
 
- sfTestReadSpeed();
-//  sfErase();
+  while(1);
+
   /* USER CODE END 2 */
 
   /* Call init function for freertos objects (in freertos.c) */

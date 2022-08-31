@@ -9,6 +9,7 @@
 #if USE_FreeRTOS == 1
 #include "FreeRTOS.h"
 #include "task.h"
+#include "cmsis_os.h"
 #endif
 
 /*内部使用变量*/
@@ -413,5 +414,5 @@ void NetWork_Init(void)
   Bsp_ESP8266_JoinAP(Network.AP.ssid , Network.AP.pwd , 15000);
 
   /*查询网络状态*/
-  Network.AP_Connect = NetWork_QueryLink();
+  Network.AP_Connect = (AP_Connect_E)NetWork_QueryLink();
 }

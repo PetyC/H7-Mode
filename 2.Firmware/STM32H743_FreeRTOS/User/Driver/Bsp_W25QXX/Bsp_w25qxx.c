@@ -330,7 +330,7 @@ void QSPI_W25Qx_Read_Buffer(uint32_t _read_Addr , uint8_t *_pBuf, uint32_t _read
 }
 
 /**
- * @brief 页编程，通过QSPI将数据写入外部FALSH (华邦的W25Q128JV仅仅支持SPI模式写入)
+ * @brief 页编程，通过QSPI将数据写入外部FALSH
  * @param {uint8_t} *_pBuf 需要存入数据的指针
  * @param {uint32_t} _write_Addr 目标区域首地址，即页首地址，比如0，256，512等。
  * @param {uint16_t} _write_Size 数据个数，不能超过页的大小，可以填入（1 ~ 256）
@@ -525,6 +525,8 @@ static void Flash_Error_Handler(void)
 
 
 
+#include "Bsp_Uart.h"
+
 struct 
 {
   double Write_Speed;
@@ -535,17 +537,60 @@ struct
   double Erase_Time;
 }QSPI_FLASH_TestInfo;
 
-#define FLASH_SPEED_TEST_SIZE (16*1024)
+#define FLASH_SPEED_TEST_SIZE (64*1024)
 uint8_t Flash_Speed_TestBuf[FLASH_SPEED_TEST_SIZE];
 
 void QSPI_FLASH_Test_ReadSpeed(void)
-{
- 
+{ 
+
+  char buff[] = "QSPI FLASH速度测试开始\r\n"; 
+  Bsp_UART_Write(&huart1 , (uint8_t *)buff , sizeof(buff));
+  Bsp_UART_Poll_DMA_TX(&huart1);
+
+
+  memset(Flash_Speed_TestBuf , 0x55 , FLASH_SPEED_TEST_SIZE);
   QSPI_FLASH_TestInfo.Read_Speed = 0;
   QSPI_FLASH_TestInfo.Read_Time = 0;
 
   uint32_t Tick_0 = 0;
   uint32_t Tick_1 = 0;
+
+  /*擦除测试*/
+  __set_PRIMASK(1);
+  Tick_0 = HAL_GetTick();
+  __set_PRIMASK(0);
+
+  for (uint32_t Addr = 0; Addr < FLASH_SPEED_TEST_SIZE; Addr += 4096)
+  {
+    QSPI_W25Qx_EraseSector(Addr);
+  }
+ 
+  __set_PRIMASK(1);
+  Tick_1 = HAL_GetTick();
+  __set_PRIMASK(0);
+
+  QSPI_FLASH_TestInfo.Erase_Time = Tick_1 - Tick_0;
+  QSPI_FLASH_TestInfo.Erase_Speed = FLASH_SPEED_TEST_SIZE / (QSPI_FLASH_TestInfo.Erase_Time);
+
+
+
+  /*写入测试*/
+  __set_PRIMASK(1);
+  Tick_0 = HAL_GetTick();
+  __set_PRIMASK(0);
+
+  for (uint32_t Addr = 0; Addr < FLASH_SPEED_TEST_SIZE; Addr += 256)
+	{
+		QSPI_W25Qx_Write_Buffer(Addr ,&Flash_Speed_TestBuf[Addr] , 256 ); 
+	}
+
+  __set_PRIMASK(1);
+  Tick_1 = HAL_GetTick();
+  __set_PRIMASK(0);
+
+  QSPI_FLASH_TestInfo.Write_Time = Tick_1 - Tick_0;
+  QSPI_FLASH_TestInfo.Write_Speed = FLASH_SPEED_TEST_SIZE/ (QSPI_FLASH_TestInfo.Write_Time);
+
 
   /*读取测试*/
   __set_PRIMASK(1);
@@ -565,41 +610,17 @@ void QSPI_FLASH_Test_ReadSpeed(void)
   QSPI_FLASH_TestInfo.Read_Speed = QSPI_FLASH_SIZE/ (QSPI_FLASH_TestInfo.Read_Time);
 
 
-  /*擦除测试*/
-  __set_PRIMASK(1);
-  Tick_0 = HAL_GetTick();
-  __set_PRIMASK(0);
+  char TX_Buff[512] = {0};
 
-  QSPI_W25Qx_EraseChip();
+  uint16_t Tx_Buff_Len = sprintf(TX_Buff , "擦除总数:%d字节\t擦除总用时:%.2fms\t擦除速度:%.2fKb/s\r\n" , (int)(FLASH_SPEED_TEST_SIZE) , QSPI_FLASH_TestInfo.Erase_Time , QSPI_FLASH_TestInfo.Erase_Speed);
+  Tx_Buff_Len += sprintf(&TX_Buff[Tx_Buff_Len] , "写入总数:%.d字节\t写入总用时:%.2fms\t写入速度:%.2fKb/s\r\n" , (int)(FLASH_SPEED_TEST_SIZE) , QSPI_FLASH_TestInfo.Write_Time , QSPI_FLASH_TestInfo.Write_Speed );
+  sprintf(&TX_Buff[Tx_Buff_Len] , "读取总数:%d字节\t读取总用时:%.2fms\t读取速度:%.2fKb/s\r\n" , (int)(QSPI_FLASH_SIZE) , QSPI_FLASH_TestInfo.Read_Time , QSPI_FLASH_TestInfo.Read_Speed);
 
-  __set_PRIMASK(1);
-  Tick_1 = HAL_GetTick();
-  __set_PRIMASK(0);
-
-  QSPI_FLASH_TestInfo.Erase_Time = Tick_1 - Tick_0;
-  QSPI_FLASH_TestInfo.Erase_Speed = QSPI_FLASH_SIZE / QSPI_FLASH_TestInfo.Erase_Time;
-
-
-  /*写入测试*/
-  __set_PRIMASK(1);
-  Tick_0 = HAL_GetTick();
-  __set_PRIMASK(0);
-
-  /*未完善*/
-  for (uint32_t Addr = 0; Addr < QSPI_FLASH_SIZE; Addr += 256)
-	{
-		QSPI_W25Qx_Write_Buffer(Addr ,Flash_Speed_TestBuf , 256 );
-	}
-
-  __set_PRIMASK(1);
-  Tick_1 = HAL_GetTick();
-  __set_PRIMASK(0);
-
-  QSPI_FLASH_TestInfo.Write_Time = Tick_1 - Tick_0;
-  QSPI_FLASH_TestInfo.Write_Speed = QSPI_FLASH_SIZE / QSPI_FLASH_TestInfo.Write_Time;
+  Bsp_UART_Write(&huart1 , (uint8_t *)TX_Buff , sizeof(TX_Buff));
+  Bsp_UART_Poll_DMA_TX(&huart1);
 
   return;
 }
-
+   
 
 

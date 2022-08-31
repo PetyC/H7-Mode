@@ -3,8 +3,8 @@
         {
             "name": "STM32",
             "includePath": [
-                "E:/software/IDE/Keil_v5/ARM/ARMCC/**",
-                //"D:/Software/IDE/Keil5/ARM/ARMCC/**",
+                //"E:/software/IDE/Keil_v5/ARM/ARMCC/**",
+                "D:/Software/IDE/Keil5/ARM/ARMCC/**",
                 "${workspaceFolder}/**",
                 "${workspaceFolder}/User/**",
                 "${workspaceFolder}/Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS"
@@ -19,8 +19,8 @@
             "intelliSenseMode": "${default}",
             "cStandard": "c99",
             "cppStandard": "c++11",
-            "compilerPath": "E:\\software\\Code_Tool\\mingw64\\bin\\gcc.exe"
-            //"compilerPath": "D:\\Software\\CodeTool\\mingw64\\bin\\gcc.exe"
+            //"compilerPath": "E:\\software\\Code_Tool\\mingw64\\bin\\gcc.exe"
+            "compilerPath": "D:\\Software\\CodeTool\\mingw64\\bin\\gcc.exe"
             
         }
     ],

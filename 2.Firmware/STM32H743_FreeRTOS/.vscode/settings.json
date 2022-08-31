@@ -45,6 +45,7 @@
       "xlocale": "c",
       "xstring": "c",
       "xutility": "c",
-      "limits.h": "c"
+      "limits.h": "c",
+      "cstring.h": "c"
     }
 }

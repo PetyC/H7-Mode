@@ -2,13 +2,14 @@
  * @Description: 用于W25Q128JVSSIQ的驱动文件  
  * @Autor: Pi
  * @Date: 2022-04-12 21:18:45
- * @LastEditTime: 2022-08-31 21:04:06
+ * @LastEditTime: 2022-09-01 00:13:19
  */
 #ifndef BSP_W25QXX_H
 #define BSP_W25QXX_H
  
 #include "quadspi.h"
-#include "stdio.h"
+#include <stdio.h>
+#include <string.h>
 
 /*QSPI句柄*/
 #define HQSPI_HANDLE (hqspi)
@@ -86,7 +87,7 @@ uint8_t QSPI_W25Qx_Write_Buffer(uint32_t _write_Addr ,uint8_t *_pBuf, uint16_t _
 /*读出Flash*/
 void QSPI_W25Qx_Read_Buffer(uint32_t _read_Addr , uint8_t *_pBuf, uint32_t _read_Size);
 
-
+/*测试QSPI FALSH速度*/
 void QSPI_FLASH_Test_ReadSpeed(void);
-void sfErase(void);
+ 
 #endif /* BSP_QSPI_W25Q128_H_ */

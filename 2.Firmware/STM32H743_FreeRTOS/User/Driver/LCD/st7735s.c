@@ -4,7 +4,7 @@
 #include "FreeRTOS.h"
 #include "task.h"
 #include "cmsis_os.h"
-#endif
+#endif 
 
 #define LCD_PIX_Len (uint16_t)(X_MAX_PIXEL * Y_MAX_PIXEL)
 //static uint16_t LCD_Buff[LCD_PIX_Len] __attribute__((section(".ARM.__at_0x24000000")));
