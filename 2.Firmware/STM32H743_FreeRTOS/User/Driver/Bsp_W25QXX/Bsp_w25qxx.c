@@ -233,6 +233,55 @@ void QSPI_W25Qx_EraseSector(uint32_t _sectorAddr)
 }
 
 /**
+ * @brief 擦除整个芯片
+ * @return {*}
+ */
+void QSPI_W25Qx_EraseChip(void)
+{
+	QSPI_CommandTypeDef s_command = {0};
+
+	/* 写使能 */
+	QSPI_W25Qx_Write_Enable(&HQSPI_HANDLE);
+
+	/* 基本配置 */
+	s_command.InstructionMode = QSPI_INSTRUCTION_1_LINE;	 // 1线方式发送指令
+	s_command.AddressSize = QSPI_ADDRESS_24_BITS;			 // 24位地址
+	s_command.AlternateByteMode = QSPI_ALTERNATE_BYTES_NONE; //无交替字节
+	s_command.DdrMode = QSPI_DDR_MODE_DISABLE;				 // W25Q128JV不支持DDR模式
+	s_command.DdrHoldHalfCycle = QSPI_DDR_HHC_ANALOG_DELAY;	 // DDR模式，数据输出延迟
+	s_command.SIOOMode = QSPI_SIOO_INST_EVERY_CMD;			 //每次传输都发指令
+
+	/* 擦除扇区配置 */
+	s_command.Instruction = SECTOR_CHIP_CMD;	 //擦除整个芯片指令
+	s_command.AddressMode = QSPI_ADDRESS_1_LINE; // 1线地址方式
+	s_command.DataMode = QSPI_DATA_NONE;		 //没有数据
+	s_command.Address = 0;			            //没有地址
+	s_command.DummyCycles = 0;					 //无空周期
+
+ 
+  FLASH_Status.CMD_Finished = 0;
+
+	/* 发送指令 */
+	if (HAL_QSPI_Command_IT(&HQSPI_HANDLE, &s_command) != HAL_OK)
+	{
+		Flash_Error_Handler();
+	}
+
+	/* 等待命令发送完毕 */
+	while (FLASH_Status.CMD_Finished == 0);
+	FLASH_Status.CMD_Finished = 0;
+
+	/* 等待擦写结束 */
+	FLASH_Status.Flash_Finished = 0;
+	QSPI_W25Qx_AutoPollingMemRead(&HQSPI_HANDLE);
+	while (FLASH_Status.Flash_Finished == 0);
+	FLASH_Status.Flash_Finished = 0;
+
+	
+}
+
+
+/**
  * @brief 连续读取若干字节，字节的个数不能超出芯片容量  (从SPI模式切换到QSPI模式，读取完毕后切换回SPI模式（其他函数仅仅支持SPI模式）。)
  * @param {uint8_t} *_pBuf 读取数据的存放地址
  * @param {uint32_t} _read_Addr 起始的地址
@@ -476,53 +525,81 @@ static void Flash_Error_Handler(void)
 
 
 
-
-uint8_t SpeedTestbuf[16*1024]; /* 仅用于读速度测试目的 */
-
-void sfTestReadSpeed(void)
+struct 
 {
-  static double speed = 0;
-	uint32_t uiAddr = 0;
+  double Write_Speed;
+  double Write_Time;
+  double Read_Speed;
+  double Read_Time;
+  double Erase_Speed;
+  double Erase_Time;
+}QSPI_FLASH_TestInfo;
+
+#define FLASH_SPEED_TEST_SIZE (16*1024)
+uint8_t Flash_Speed_TestBuf[FLASH_SPEED_TEST_SIZE];
+
+void QSPI_FLASH_Test_ReadSpeed(void)
+{
+ 
+  QSPI_FLASH_TestInfo.Read_Speed = 0;
+  QSPI_FLASH_TestInfo.Read_Time = 0;
 
   uint32_t Tick_0 = 0;
   uint32_t Tick_1 = 0;
-  uint32_t Tick = 0;
-  
+
+  /*读取测试*/
+  __set_PRIMASK(1);
   Tick_0 = HAL_GetTick();
- 
-	for (uint32_t i = 0; i < QSPI_FLASH_SIZE / (16*1024); i++, uiAddr += 16*1024)
+ __set_PRIMASK(0);
+
+	for (uint32_t Addr = 0; Addr < QSPI_FLASH_SIZE; Addr += FLASH_SPEED_TEST_SIZE)
 	{
-		QSPI_W25Qx_Read_Buffer(uiAddr, SpeedTestbuf , 16*1024);
+		QSPI_W25Qx_Read_Buffer(Addr, Flash_Speed_TestBuf , FLASH_SPEED_TEST_SIZE);
 	}
 	
+  __set_PRIMASK(1);
   Tick_1 = HAL_GetTick();
-  Tick = Tick_1 - Tick_0;
-  speed = QSPI_FLASH_SIZE/ (Tick);
-  
-  return;
-}
+  __set_PRIMASK(0);
+
+  QSPI_FLASH_TestInfo.Read_Time = Tick_1 - Tick_0;
+  QSPI_FLASH_TestInfo.Read_Speed = QSPI_FLASH_SIZE/ (QSPI_FLASH_TestInfo.Read_Time);
 
 
-
-void sfErase(void)
-{
-
-  static double speed = 0;
-  uint32_t Tick_0 = 0;
-  uint32_t Tick_1 = 0;
-  uint32_t Tick = 0;
-
-	uint32_t uiAddr = 0;
-
+  /*擦除测试*/
+  __set_PRIMASK(1);
   Tick_0 = HAL_GetTick();
-	for (uint32_t i = 0; i < QSPI_FLASH_SIZE / QSPI_SECTOR_SIZE; i++, uiAddr += QSPI_SECTOR_SIZE)
-	{
-		QSPI_W25Qx_EraseSector(uiAddr);
-	}
-  Tick_1 = HAL_GetTick();
-  Tick = Tick_1 - Tick_0;
-  speed = QSPI_FLASH_SIZE/ (Tick);
-  
-  return;
+  __set_PRIMASK(0);
 
+  QSPI_W25Qx_EraseChip();
+
+  __set_PRIMASK(1);
+  Tick_1 = HAL_GetTick();
+  __set_PRIMASK(0);
+
+  QSPI_FLASH_TestInfo.Erase_Time = Tick_1 - Tick_0;
+  QSPI_FLASH_TestInfo.Erase_Speed = QSPI_FLASH_SIZE / QSPI_FLASH_TestInfo.Erase_Time;
+
+
+  /*写入测试*/
+  __set_PRIMASK(1);
+  Tick_0 = HAL_GetTick();
+  __set_PRIMASK(0);
+
+  /*未完善*/
+  for (uint32_t Addr = 0; Addr < QSPI_FLASH_SIZE; Addr += 256)
+	{
+		QSPI_W25Qx_Write_Buffer(Addr ,Flash_Speed_TestBuf , 256 );
+	}
+
+  __set_PRIMASK(1);
+  Tick_1 = HAL_GetTick();
+  __set_PRIMASK(0);
+
+  QSPI_FLASH_TestInfo.Write_Time = Tick_1 - Tick_0;
+  QSPI_FLASH_TestInfo.Write_Speed = QSPI_FLASH_SIZE / QSPI_FLASH_TestInfo.Write_Time;
+
+  return;
 }
+
+
+

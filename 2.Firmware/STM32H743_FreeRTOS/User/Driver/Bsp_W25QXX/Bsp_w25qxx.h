@@ -2,7 +2,7 @@
  * @Description: 用于W25Q128JVSSIQ的驱动文件  
  * @Autor: Pi
  * @Date: 2022-04-12 21:18:45
- * @LastEditTime: 2022-08-31 19:30:56
+ * @LastEditTime: 2022-08-31 21:04:06
  */
 #ifndef BSP_W25QXX_H
 #define BSP_W25QXX_H
@@ -44,6 +44,7 @@ extern QSPI_HandleTypeDef HQSPI_HANDLE;
 
 /* 擦除Flash指令 */
 #define SECTOR_ERASE_CMD                      0x20
+#define SECTOR_CHIP_CMD                       0X60
 
 /* 写使能操作指令 */
 #define WRITE_ENABLE_CMD                      0x06
@@ -76,12 +77,16 @@ void QSPI_W25Qx_Reset_Memory(void);
 /*擦除扇区*/
 void QSPI_W25Qx_EraseSector(uint32_t _SectorAddr);
 
+/*擦除整个芯片*/
+void QSPI_W25Qx_EraseChip(void);
+
 /*写入Flash*/
 uint8_t QSPI_W25Qx_Write_Buffer(uint32_t _write_Addr ,uint8_t *_pBuf, uint16_t _write_Size);
 
 /*读出Flash*/
 void QSPI_W25Qx_Read_Buffer(uint32_t _read_Addr , uint8_t *_pBuf, uint32_t _read_Size);
 
-void sfTestReadSpeed(void);
+
+void QSPI_FLASH_Test_ReadSpeed(void);
 void sfErase(void);
 #endif /* BSP_QSPI_W25Q128_H_ */
