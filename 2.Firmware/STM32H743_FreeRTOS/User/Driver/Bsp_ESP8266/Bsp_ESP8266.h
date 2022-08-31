@@ -2,7 +2,7 @@
  * @Description: 
  * @Autor: Pi
  * @Date: 2022-08-03 16:39:00
- * @LastEditTime: 2022-08-09 01:28:03
+ * @LastEditTime: 2022-08-31 14:32:49
  */
 #ifndef BSP_ESP8266_H
 #define BSP_ESP8266_H
@@ -27,9 +27,6 @@ enum
 };
 
 
-
-
-
 /*AP信息*/
 typedef struct
 {
@@ -39,9 +36,6 @@ typedef struct
 	uint8_t mac[20];	/* MAC地址字符串*/
 	uint8_t ch;			/* 信道 */
 }WIFI_AP_T;
-
-
-
 
 
 /*定时器Handle*/
@@ -81,6 +75,7 @@ uint8_t Bsp_ESP8266_Set_AP_IP(char *_ip);
 uint8_t Bsp_ESP8266_Set_AP_NamePass(char *_name, char *_pwd, uint8_t _ch, uint8_t _ecn);
 uint8_t Bsp_ESP8266_JoinAP(char *_ssid, char *_pwd, uint16_t _timeout);
 int16_t Bsp_ESP8266_ScanAP(WIFI_AP_T *_pList, uint16_t _MaxNum);
+uint8_t Bsp_ESP8266_Set_AutoLink(uint8_t Enable);
 void Bsp_ESP8266_QuitAP(void);
 uint8_t Bsp_ESP8266_GetLocalIP(char *_ip, char *_mac);
 uint8_t Bsp_ESP8266_QueryLink(void);

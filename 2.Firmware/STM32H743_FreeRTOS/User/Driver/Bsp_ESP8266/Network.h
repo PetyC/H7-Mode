@@ -2,7 +2,7 @@
  * @Description: 
  * @Autor: Pi
  * @Date: 2022-08-05 21:54:16
- * @LastEditTime: 2022-08-09 01:29:20
+ * @LastEditTime: 2022-08-31 14:22:20
  */
 #ifndef NETWORK_H
 #define NETWORK_H
@@ -20,19 +20,35 @@ typedef struct
 
 
 /*连接状态*/
-enum
+typedef enum 
 {
   Link = 2,
+  UnLink = 5,
   NetLink = 3,
   UnNetLink = 4,
-  UnLink = 5,
-};
+}AP_Connect_E;
 
-extern uint8_t NetWork_State;
+ 
+/*网络相关结构体*/
+typedef struct 
+{
+  WIFI_Station_T AP;
+  AP_Connect_E AP_Connect;
+}Network_T;
 
 
+extern Network_T Network;
+
+void NetWork_Init(void);
 uint8_t NetWork_APUconfig(void);
 uint8_t NetWork_QueryLink(void);
+
+
+
+
+
+
+
 
 
 #endif

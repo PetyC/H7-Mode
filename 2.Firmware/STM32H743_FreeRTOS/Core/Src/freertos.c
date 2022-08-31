@@ -281,7 +281,7 @@ void Start_LCD_Task(void const * argument)
   /* USER CODE BEGIN Start_LCD_Task */
 
   /* Infinite loop */
-  LCD_Task(argument);
+  //LCD_Task(argument);
   
   /* USER CODE END Start_LCD_Task */
 }

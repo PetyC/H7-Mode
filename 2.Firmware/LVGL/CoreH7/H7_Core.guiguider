@@ -2686,7 +2686,7 @@
 							"duration": 100
 						},
 						"default_style": false,
-						"img_path": "C:\\Users\\39810\\Desktop\\H7-Mode\\2.Firmware\\LVGL\\CoreH7\\import\\WIFI_discon.png",
+						"img_path": "C:\\Users\\39810\\Desktop\\DIY_Project\\H7-Mode\\2.Firmware\\LVGL\\CoreH7\\import\\WIFI_discon.png",
 						"color_format": "true-color-alpha",
 						"rotate": 0,
 						"pivot": "0,0",
@@ -4328,7 +4328,7 @@
 							"duration": 100
 						},
 						"default_style": false,
-						"img_path": "C:\\Users\\39810\\Desktop\\H7-Mode\\2.Firmware\\LVGL\\CoreH7\\import\\QR.png",
+						"img_path": "C:\\Users\\39810\\Desktop\\DIY_Project\\H7-Mode\\2.Firmware\\LVGL\\CoreH7\\import\\QR.png",
 						"color_format": "true-color-alpha",
 						"rotate": 0,
 						"pivot": "0,0",

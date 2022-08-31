@@ -2,7 +2,7 @@
  * @Description:
  * @Autor: Pi
  * @Date: 2022-08-03 16:38:56
- * @LastEditTime: 2022-08-30 23:55:43
+ * @LastEditTime: 2022-08-31 14:34:33
  */
 #include "Bsp_ESP8266.h"
 
@@ -381,6 +381,30 @@ uint8_t Bsp_ESP8266_Set_AP_NamePass(char *_name, char *_pwd, uint8_t _ch, uint8_
   sprintf(cmd_buf, "AT+CWSAP_DEF=\"%s\",\"%s\",%d,%d", _name, _pwd, _ch, _ecn);
   Bsp_ESP8266_SendAT(cmd_buf);
   if (Bsp_ESP8266_WaitResponse("OK\r\n", 500) == 1)
+  {
+    return 1;
+  }
+
+  return 0;
+}
+
+/**
+ * @brief 设置上电是否自动连接WIFI
+ * @param {uint8_t} Enable
+ * @return {*}
+ */
+uint8_t Bsp_ESP8266_Set_AutoLink(uint8_t Enable)
+{
+  if(Enable == 1)
+  {
+    Bsp_ESP8266_SendAT("AT+CWAUTOCONN=1");  
+  }
+  else
+  {
+    Bsp_ESP8266_SendAT("AT+CWAUTOCONN=0");  
+  }
+
+  if (Bsp_ESP8266_WaitResponse("OK\r\n", 1000) == 1)
   {
     return 1;
   }

@@ -34,6 +34,9 @@
 /* USER CODE BEGIN Includes */
 #include "st7735s.h"
 #include "Bsp_ESP8266.h"
+#include "Bsp_w25qxx.h"
+
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -66,6 +69,7 @@ void MX_FREERTOS_Init(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
  
+//static uint8_t FLASH_Buff[256] __attribute__((section(".ARM.__at_0x24001400"))); 
 
 /* USER CODE END 0 */
 
@@ -117,9 +121,13 @@ int main(void)
   /*打开网络超时定时�?*/
   HAL_TIM_Base_Start_IT(&htim13);
   
-  //LCD初始�?
   LCD_Init();
+  
+  QSPI_W25Qx_Init();
 
+
+ sfTestReadSpeed();
+//  sfErase();
   /* USER CODE END 2 */
 
   /* Call init function for freertos objects (in freertos.c) */

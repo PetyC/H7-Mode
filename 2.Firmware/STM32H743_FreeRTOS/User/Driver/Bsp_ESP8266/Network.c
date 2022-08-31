@@ -2,12 +2,17 @@
  * @Description:网络相关
  * @Autor: Pi
  * @Date: 2022-08-05 21:54:09
- * @LastEditTime: 2022-08-09 15:04:47
+ * @LastEditTime: 2022-08-31 15:34:32
  */
 #include "Network.h"
 
+#if USE_FreeRTOS == 1
+#include "FreeRTOS.h"
+#include "task.h"
+#endif
+
 /*内部使用变量*/
-uint8_t NetWork_State = 0;
+Network_T Network;
 
 
 
@@ -16,6 +21,8 @@ uint8_t NetWork_State = 0;
 /*内部使用函数*/
 static uint8_t NetWork_IPD_Remove(uint8_t data, uint8_t *return_data, uint8_t *ID, uint16_t *return_len);
 static uint8_t Networt_APU_DataAnalysis(uint8_t *data, uint16_t length, WIFI_Station_T *Wifi);
+
+
 /**
  * @brief 网络数据处理，剔除+IPD的标号
  * @param {uint8_t} data  接收的数据
@@ -246,11 +253,7 @@ uint16_t Network_Read(uint8_t Network_ID, uint8_t *RX_Buffer, uint16_t RX_Buffer
  */
 uint8_t NetWork_APUconfig(void)
 {
-//  /*重置*/
-//  Bsp_ESP8266_Restore();
- 
   Bsp_ESP8266_Echo(0);
-
 
   /*设置WIFI模式3*/
   if (Bsp_ESP8266_SetWiFiMode(3) == 1)
@@ -325,6 +328,9 @@ uint8_t NetWork_APUconfig(void)
   /*加入WIFI*/
   if(Bsp_ESP8266_JoinAP(WIFI.ssid , WIFI.pwd , 15000) == 0)
   {
+    /*更新信息*/
+    memcpy(Network.AP.ssid , WIFI.ssid , sizeof(WIFI.ssid));
+    memcpy(Network.AP.pwd , WIFI.pwd , sizeof(WIFI.pwd));
     return 0;
   }
       
@@ -339,4 +345,73 @@ uint8_t NetWork_APUconfig(void)
 uint8_t NetWork_QueryLink(void)
 {
   return Bsp_ESP8266_QueryLink();
+}
+
+
+
+void NetWork_Core()
+{
+  char Buff[255];
+
+  while (Bsp_UART_Get_RX_Buff_Occupy(&huart1) != 0)
+  {
+    Bsp_ESP8266_ReadLine(Buff, sizeof(Buff), 1);
+
+    if (memcmp(Buff, "KEY:", 4) == 0) //收到按键消息
+    {
+      uint8_t KEY_Value = str_to_int(&Buff[4]);
+      /*发送按键消息*/
+    }
+    else if ((memcmp(Buff, "WIFI CONNECTED\r\n", 4) == 0) || (memcmp(Buff, "WIFI GOT IP\r\n", 4) == 0)) // WIFI连接成功
+    {
+      Network.AP_Connect = Link;
+    }
+    else if (memcmp(Buff, "WIFI DISCONNECTED\r\n", 4) == 0) // WIFI连接断开
+    {
+      Network.AP_Connect = UnLink;
+    }
+
+    memset(Buff, NULL, sizeof(Buff));
+  }
+
+}
+
+
+/**
+ * @brief 网络初始化
+ * @return {*}
+ */
+void NetWork_Init(void)
+{
+  /*结构体初始化*/
+  Network.AP_Connect = UnLink;
+  memset(Network.AP.pwd , 0 , sizeof(Network.AP.pwd));      //应从Flash中读出保存的WIFI数据
+  memset(Network.AP.ssid , 0 , sizeof(Network.AP.ssid));
+
+  /*ESP8266上电*/
+  Bsp_ESP8266_PowerOn();
+  
+#if USE_FreeRTOS == 1
+  osDelay(2000);
+#else
+  HAL_Delay(2000);
+#endif
+
+  /*关闭回显*/
+  Bsp_ESP8266_Echo(0);
+
+  /*不自动连接WIFI*/
+  Bsp_ESP8266_Set_AutoLink(0);
+
+  /*开启按键功能*/
+  Bsp_ESP8266_KEY_Enable(1);
+
+  /*WIFI模式1*/
+  Bsp_ESP8266_SetWiFiMode(1);
+      
+  /*加入WIFI*/
+  Bsp_ESP8266_JoinAP(Network.AP.ssid , Network.AP.pwd , 15000);
+
+  /*查询网络状态*/
+  Network.AP_Connect = NetWork_QueryLink();
 }
