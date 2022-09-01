@@ -2,7 +2,7 @@
  * @Description: Nand Flash
  * @Autor: Pi
  * @Date: 2022-04-11 16:40:52
- * @LastEditTime: 2022-09-01 19:58:35
+ * @LastEditTime: 2022-09-02 04:13:06
  */
 #include "Bsp_Nand_Flash.h"
 #include <string.h>
@@ -120,9 +120,14 @@ static uint32_t Bsp_Nand_ReadStatus(void)
 #include <stdio.h>
 #include <string.h>
 
-#define NAND_PAGE_SIZE (2048)
-uint8_t Nand_Buff[NAND_PAGE_SIZE];
-uint8_t TX_Buff[15];
+#define NAND_PAGE_SIZE (2048 * 32)
+static  uint8_t Nand_Buff[NAND_PAGE_SIZE];
+static  uint8_t Nand_Buff2[NAND_PAGE_SIZE];
+
+static void Demo_Print(void);
+double Tick_0 = 0;
+double Tick_1 = 0;
+double Tick = 0;
 
 void NAND_Demo(void)
 {
@@ -131,46 +136,97 @@ void NAND_Demo(void)
   Nand_Add.Block = 0;
   Nand_Add.Page = 0;
 
+  HAL_StatusTypeDef Status = HAL_ERROR;
+
   /*擦除数据*/
-  HAL_NAND_Erase_Block(&NAND_HANDLE , &Nand_Add);
-
-  /*读取数据*/
-  HAL_NAND_Read_Page_8b(&hnand1, &Nand_Add, Nand_Buff, 1);
-  
-
-  for(uint16_t i = 0; i < NAND_PAGE_SIZE; i++)
+  for(uint8_t i = 0 ; i<32 ; i++)
   {
-    sprintf((char *)TX_Buff , "Data[%d]=0x%02X " , i ,Nand_Buff[i]);
-    Bsp_UART_Write(&huart1 , TX_Buff , sizeof(TX_Buff));
-    Bsp_UART_Poll_DMA_TX(&huart1);
-
-    if(i % 10 == 0 && i != 0)
-    {
-      Bsp_UART_Write(&huart1 , "\r\n" , 2);
-    }
-    if(Bsp_UART_Get_TX_Buff_Free(&huart1) <= 512)
-    {
-      Bsp_UART_Poll_DMA_TX(&huart1);
-      HAL_Delay(10);
-    }
+    Nand_Add.Page = i;
+    Status = HAL_NAND_Erase_Block(&NAND_HANDLE , &Nand_Add);
   }
+  Nand_Add.Page = 0;
 
-  Bsp_UART_Poll_DMA_TX(&huart1);
-  
+  /*准备写入数据*/
   for(uint16_t i = 0; i < NAND_PAGE_SIZE; i++)
   {
     Nand_Buff[i] = i & 0x00FF;
   }
 
-  HAL_NAND_Write_Page_8b(&hnand1, &Nand_Add, Nand_Buff, 1);
+  /*写入数据*/
+  __set_PRIMASK(1);
+  Tick_0 = HAL_GetTick();
+  Status = HAL_NAND_Write_Page_8b(&hnand1, &Nand_Add, Nand_Buff, 32);
+  Tick_1 = HAL_GetTick();
+  __set_PRIMASK(0);
 
-  memset(Nand_Buff, 0, NAND_PAGE_SIZE);
 
-  HAL_NAND_Read_Page_8b(&hnand1, &Nand_Add, Nand_Buff, 1);
+
+  Tick = Tick_1 - Tick_0;
+  uint8_t TX_Buff[128] = {0};
+  uint8_t len = 0;
+  len = sprintf((char *)TX_Buff , "写入总用时:%f\r\n" , Tick );
+  Bsp_UART_Write(&huart1 , TX_Buff , len);
+  memset(Nand_Buff2, 0, NAND_PAGE_SIZE);
+
+  __set_PRIMASK(1);
+  Tick_0 = HAL_GetTick();
+  Status = HAL_NAND_Read_Page_8b(&hnand1, &Nand_Add, Nand_Buff2, 32);
+  Tick_1 = HAL_GetTick();
+  __set_PRIMASK(0);
   
-
+  Tick = Tick_1 - Tick_0;
+  len = sprintf((char *)TX_Buff , "读取总用时:%f\r\n" , Tick );
+  Bsp_UART_Write(&huart1 , TX_Buff , len);
+  //Demo_Print();
+  
+  for(uint32_t i = 0 ; i < NAND_PAGE_SIZE; i++)
+  {
+    if(Nand_Buff2[i] != Nand_Buff[i])
+    {
+      while(1);
+      len = sprintf((char *)TX_Buff , "写入数据出现错误\r\n" );
+      Bsp_UART_Write(&huart1 , TX_Buff , len); 
+      Bsp_UART_Poll_DMA_TX(&huart1);
+    }
+  }
+ 
+  len = sprintf((char *)TX_Buff , "写入数据无错误\r\n" );
+  Bsp_UART_Write(&huart1 , TX_Buff , len); 
+  Bsp_UART_Poll_DMA_TX(&huart1);
 }
 
 
  
+static void Demo_Print(void)
+{
+  uint8_t TX_Buff[128] = {0};
 
+  for(uint16_t i = 0; i < NAND_PAGE_SIZE; i++)
+  {
+    uint16_t len = sprintf((char *)TX_Buff , "Data[%04d]=0x%02X " , i ,Nand_Buff2[i]);
+    Bsp_UART_Write(&huart1 , TX_Buff , len);
+
+    if((i+1) % 5 == 0 && i != 0)
+    {
+      Bsp_UART_Write(&huart1 , "\r\n" , 2);
+    }
+
+    if(Bsp_UART_Get_TX_Buff_Occupy(&huart1) >= 1024)
+    {
+      Bsp_UART_Poll_DMA_TX(&huart1);
+      HAL_Delay(10);
+    }
+
+    memset(TX_Buff , 0 , sizeof(TX_Buff));
+  }
+
+
+  while(Bsp_UART_Get_TX_Buff_Occupy(&huart1) != 0)
+  {
+    Bsp_UART_Poll_DMA_TX(&huart1);
+    HAL_Delay(10);
+  }
+  
+  Bsp_UART_Write(&huart1 , "\r\n" , 2);
+  Bsp_UART_Poll_DMA_TX(&huart1);
+}

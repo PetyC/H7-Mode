@@ -46,30 +46,30 @@ void MX_FMC_Init(void)
   hnand1.Instance = FMC_NAND_DEVICE;
   /* hnand1.Init */
   hnand1.Init.NandBank = FMC_NAND_BANK3;
-  hnand1.Init.Waitfeature = FMC_NAND_PCC_WAIT_FEATURE_DISABLE;
+  hnand1.Init.Waitfeature = FMC_NAND_WAIT_FEATURE_ENABLE;
   hnand1.Init.MemoryDataWidth = FMC_NAND_MEM_BUS_WIDTH_8;
-  hnand1.Init.EccComputation = FMC_NAND_ECC_DISABLE;
+  hnand1.Init.EccComputation = FMC_NAND_ECC_ENABLE;
   hnand1.Init.ECCPageSize = FMC_NAND_ECC_PAGE_SIZE_2048BYTE;
   hnand1.Init.TCLRSetupTime = 0;
-  hnand1.Init.TARSetupTime = 2-1;
+  hnand1.Init.TARSetupTime = 0;
   /* hnand1.Config */
   hnand1.Config.PageSize = 2048;
   hnand1.Config.SpareAreaSize = 64;
-  hnand1.Config.BlockSize = (2048+64)*64;
+  hnand1.Config.BlockSize = 64;
   hnand1.Config.BlockNbr = 2048;
   hnand1.Config.PlaneNbr = 2;
   hnand1.Config.PlaneSize = 4096;
   hnand1.Config.ExtraCommandEnable = DISABLE;
   /* ComSpaceTiming */
-  ComSpaceTiming.SetupTime = 3-1;
-  ComSpaceTiming.WaitSetupTime = 5-1;
-  ComSpaceTiming.HoldSetupTime = 4-1;
-  ComSpaceTiming.HiZSetupTime = 3-1;
+  ComSpaceTiming.SetupTime = 4;
+  ComSpaceTiming.WaitSetupTime = 4;
+  ComSpaceTiming.HoldSetupTime = 3;
+  ComSpaceTiming.HiZSetupTime = 4;
   /* AttSpaceTiming */
-  AttSpaceTiming.SetupTime = 3-1;
-  AttSpaceTiming.WaitSetupTime = 5-1;
-  AttSpaceTiming.HoldSetupTime = 4-1;
-  AttSpaceTiming.HiZSetupTime = 3-1;
+  AttSpaceTiming.SetupTime = 4;
+  AttSpaceTiming.WaitSetupTime = 4;
+  AttSpaceTiming.HoldSetupTime = 3;
+  AttSpaceTiming.HiZSetupTime = 4;
 
   if (HAL_NAND_Init(&hnand1, &ComSpaceTiming, &AttSpaceTiming) != HAL_OK)
   {
@@ -167,6 +167,9 @@ static void HAL_FMC_MspInit(void){
 
   HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
 
+  /* Peripheral interrupt init */
+  HAL_NVIC_SetPriority(FMC_IRQn, 5, 0);
+  HAL_NVIC_EnableIRQ(FMC_IRQn);
   /* USER CODE BEGIN FMC_MspInit 1 */
 
   /* USER CODE END FMC_MspInit 1 */
@@ -220,6 +223,8 @@ static void HAL_FMC_MspDeInit(void){
 
   HAL_GPIO_DeInit(GPIOC, GPIO_PIN_8);
 
+  /* Peripheral interrupt DeInit */
+  HAL_NVIC_DisableIRQ(FMC_IRQn);
   /* USER CODE BEGIN FMC_MspDeInit 1 */
 
   /* USER CODE END FMC_MspDeInit 1 */

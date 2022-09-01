@@ -32,9 +32,9 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "st7735s.h"
-#include "Bsp_ESP8266.h"
-#include "Bsp_w25qxx.h"
+//#include "st7735s.h"
+//#include "Bsp_ESP8266.h"
+//#include "Bsp_w25qxx.h"
 #include "Bsp_Nand_Flash.h"
 
 /* USER CODE END Includes */
@@ -119,19 +119,21 @@ int main(void)
   MX_TIM13_Init();
   MX_ADC3_Init();
   /* USER CODE BEGIN 2 */
-  /*MCU系统占用�?*/
+  /*MCU系统占用�??*/
   HAL_TIM_Base_Start_IT(&htim14);
 
-  /*打开网络超时定时�?*/
+  /*打开网络超时定时�??*/
   HAL_TIM_Base_Start_IT(&htim13);
   
-  LCD_Init();
+ // LCD_Init();
   
-  QSPI_W25Qx_Init();
+ // QSPI_W25Qx_Init();
   
   Bsp_Nand_Init();
   
   NAND_Demo();
+  
+  while(1);
   /* USER CODE END 2 */
 
   /* Call init function for freertos objects (in freertos.c) */
