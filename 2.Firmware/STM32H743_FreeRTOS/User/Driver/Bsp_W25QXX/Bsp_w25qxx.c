@@ -524,7 +524,7 @@ static void Flash_Error_Handler(void)
 }
 
 
-
+#if 0
 #include "Bsp_Uart.h"
 
 struct 
@@ -621,6 +621,7 @@ void QSPI_FLASH_Test_ReadSpeed(void)
 
   return;
 }
+#endif
    
 
 

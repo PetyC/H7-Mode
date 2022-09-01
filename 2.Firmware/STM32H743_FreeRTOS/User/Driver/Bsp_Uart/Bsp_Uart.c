@@ -7,9 +7,9 @@
 #include "Bsp_Uart.h"
 
 /* 串口缓存大小 */
-#define UART1_TX_BUF_SIZE 1024
+#define UART1_TX_BUF_SIZE 2048
 #define UART1_RX_BUF_SIZE (1024 * 2)
-#define UART1_DMA_TX_BUF_SIZE 1024
+#define UART1_DMA_TX_BUF_SIZE 2048
 #define UART1_DMA_RX_BUF_SIZE (1024 * 2)
 
 /* 串口缓存 */
