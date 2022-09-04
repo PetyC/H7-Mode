@@ -126,7 +126,7 @@ lv_base_dir_t _lv_bidi_detect_base_dir(const char * txt)
  * Get the logical position of a character in a line
  * @param str_in the input string. Can be only one line.
  * @param bidi_txt internally the text is bidi processed which buffer can be get here.
- * If not required anymore has to freed with `lv_free()`
+ * If not required anymore has to freed with `lv_mem_free()`
  * Can be `NULL` is unused
  * @param len length of the line in character count
  * @param base_dir base direction of the text: `LV_BASE_DIR_LTR` or `LV_BASE_DIR_RTL`
@@ -138,12 +138,12 @@ uint16_t _lv_bidi_get_logical_pos(const char * str_in, char ** bidi_txt, uint32_
                                   uint32_t visual_pos, bool * is_rtl)
 {
     uint32_t pos_conv_len = get_txt_len(str_in, len);
-    char * buf = lv_malloc(len + 1);
+    char * buf = lv_mem_buf_get(len + 1);
     if(buf == NULL) return (uint16_t) -1;
 
-    uint16_t * pos_conv_buf = lv_malloc(pos_conv_len * sizeof(uint16_t));
+    uint16_t * pos_conv_buf = lv_mem_buf_get(pos_conv_len * sizeof(uint16_t));
     if(pos_conv_buf == NULL) {
-        lv_free(buf);
+        lv_mem_buf_release(buf);
         return (uint16_t) -1;
     }
 
@@ -153,9 +153,9 @@ uint16_t _lv_bidi_get_logical_pos(const char * str_in, char ** bidi_txt, uint32_
 
     if(is_rtl) *is_rtl = IS_RTL_POS(pos_conv_buf[visual_pos]);
 
-    if(bidi_txt == NULL) lv_free(buf);
+    if(bidi_txt == NULL) lv_mem_buf_release(buf);
     uint16_t res = GET_POS(pos_conv_buf[visual_pos]);
-    lv_free(pos_conv_buf);
+    lv_mem_buf_release(pos_conv_buf);
     return res;
 }
 
@@ -163,7 +163,7 @@ uint16_t _lv_bidi_get_logical_pos(const char * str_in, char ** bidi_txt, uint32_
  * Get the visual position of a character in a line
  * @param str_in the input string. Can be only one line.
  * @param bidi_txt internally the text is bidi processed which buffer can be get here.
- * If not required anymore has to freed with `lv_free()`
+ * If not required anymore has to freed with `lv_mem_free()`
  * Can be `NULL` is unused
  * @param len length of the line in character count
  * @param base_dir base direction of the text: `LV_BASE_DIR_LTR` or `LV_BASE_DIR_RTL`
@@ -175,12 +175,12 @@ uint16_t _lv_bidi_get_visual_pos(const char * str_in, char ** bidi_txt, uint16_t
                                  uint32_t logical_pos, bool * is_rtl)
 {
     uint32_t pos_conv_len = get_txt_len(str_in, len);
-    char * buf = lv_malloc(len + 1);
+    char * buf = lv_mem_buf_get(len + 1);
     if(buf == NULL) return (uint16_t) -1;
 
-    uint16_t * pos_conv_buf = lv_malloc(pos_conv_len * sizeof(uint16_t));
+    uint16_t * pos_conv_buf = lv_mem_buf_get(pos_conv_len * sizeof(uint16_t));
     if(pos_conv_buf == NULL) {
-        lv_free(buf);
+        lv_mem_buf_release(buf);
         return (uint16_t) -1;
     }
 
@@ -192,14 +192,14 @@ uint16_t _lv_bidi_get_visual_pos(const char * str_in, char ** bidi_txt, uint16_t
         if(GET_POS(pos_conv_buf[i]) == logical_pos) {
 
             if(is_rtl) *is_rtl = IS_RTL_POS(pos_conv_buf[i]);
-            lv_free(pos_conv_buf);
+            lv_mem_buf_release(pos_conv_buf);
 
-            if(bidi_txt == NULL) lv_free(buf);
+            if(bidi_txt == NULL) lv_mem_buf_release(buf);
             return i;
         }
     }
-    lv_free(pos_conv_buf);
-    if(bidi_txt == NULL) lv_free(buf);
+    lv_mem_buf_release(pos_conv_buf);
+    if(bidi_txt == NULL) lv_mem_buf_release(buf);
     return (uint16_t) -1;
 }
 
@@ -339,7 +339,7 @@ static uint32_t lv_bidi_get_next_paragraph(const char * txt)
 
 /**
  * Get the direction of a character
- * @param letter a Unicode character
+ * @param letter an Unicode character
  * @return `LV_BASE_DIR_RTL/LTR/WEAK/NEUTRAL`
  */
 static lv_base_dir_t lv_bidi_get_letter_dir(uint32_t letter)
@@ -352,7 +352,7 @@ static lv_base_dir_t lv_bidi_get_letter_dir(uint32_t letter)
 }
 /**
  * Tell whether a character is weak or not
- * @param letter a Unicode character
+ * @param letter an Unicode character
  * @return true/false
  */
 static bool lv_bidi_letter_is_weak(uint32_t letter)
@@ -371,7 +371,7 @@ static bool lv_bidi_letter_is_weak(uint32_t letter)
 }
 /**
  * Tell whether a character is RTL or not
- * @param letter a Unicode character
+ * @param letter an Unicode character
  * @return true/false
  */
 static bool lv_bidi_letter_is_rtl(uint32_t letter)
@@ -389,7 +389,7 @@ static bool lv_bidi_letter_is_rtl(uint32_t letter)
 
 /**
  * Tell whether a character is neutral or not
- * @param letter a Unicode character
+ * @param letter an Unicode character
  * @return true/false
  */
 static bool lv_bidi_letter_is_neutral(uint32_t letter)

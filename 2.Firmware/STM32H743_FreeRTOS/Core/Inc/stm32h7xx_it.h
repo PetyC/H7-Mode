@@ -59,10 +59,12 @@ void SPI1_IRQHandler(void);
 void USART1_IRQHandler(void);
 void TIM8_UP_TIM13_IRQHandler(void);
 void TIM8_TRG_COM_TIM14_IRQHandler(void);
+void FMC_IRQHandler(void);
 void QUADSPI_IRQHandler(void);
 void OTG_FS_IRQHandler(void);
 void TIM17_IRQHandler(void);
 void MDMA_IRQHandler(void);
+void ADC3_IRQHandler(void);
 /* USER CODE BEGIN EFP */
 
 /* USER CODE END EFP */

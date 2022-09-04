@@ -56,6 +56,8 @@
 /* USER CODE END 0 */
 
 /* External variables --------------------------------------------------------*/
+extern ADC_HandleTypeDef hadc3;
+extern NAND_HandleTypeDef hnand1;
 extern MDMA_HandleTypeDef hmdma_quadspi_fifo_th;
 extern QSPI_HandleTypeDef hqspi;
 extern DMA_HandleTypeDef hdma_spi1_tx;
@@ -269,6 +271,20 @@ void TIM8_TRG_COM_TIM14_IRQHandler(void)
 }
 
 /**
+  * @brief This function handles FMC global interrupt.
+  */
+void FMC_IRQHandler(void)
+{
+  /* USER CODE BEGIN FMC_IRQn 0 */
+
+  /* USER CODE END FMC_IRQn 0 */
+  HAL_NAND_IRQHandler(&hnand1);
+  /* USER CODE BEGIN FMC_IRQn 1 */
+
+  /* USER CODE END FMC_IRQn 1 */
+}
+
+/**
   * @brief This function handles QUADSPI global interrupt.
   */
 void QUADSPI_IRQHandler(void)
@@ -322,6 +338,20 @@ void MDMA_IRQHandler(void)
   /* USER CODE BEGIN MDMA_IRQn 1 */
 
   /* USER CODE END MDMA_IRQn 1 */
+}
+
+/**
+  * @brief This function handles ADC3 global interrupt.
+  */
+void ADC3_IRQHandler(void)
+{
+  /* USER CODE BEGIN ADC3_IRQn 0 */
+
+  /* USER CODE END ADC3_IRQn 0 */
+  HAL_ADC_IRQHandler(&hadc3);
+  /* USER CODE BEGIN ADC3_IRQn 1 */
+
+  /* USER CODE END ADC3_IRQn 1 */
 }
 
 /* USER CODE BEGIN 1 */

@@ -2,7 +2,7 @@
  * @Description: LCD显示任务
  * @Autor: Pi
  * @Date: 2022-06-27 15:14:05
- * @LastEditTime: 2022-08-26 17:27:53
+ * @LastEditTime: 2022-08-30 23:16:27
  */
 #include "LCD_Task.h"
 #include "stdio.h"
@@ -11,8 +11,7 @@
 extern osSemaphoreId Key_Binary_SemHandle;
 extern osSemaphoreId LCD_BinarySemHandle;
 
-extern lv_ui guider_ui;
-
+#include "lv_demo_keypad_encoder.h"
 /**
  * @brief LCD任务
  * @param {void*} argument
@@ -33,14 +32,35 @@ void LCD_Task(void const *argument)
   /*初始化自定义UI*/
   setup_ui(&guider_ui);
   events_init(&guider_ui);
+  
+  /*延时*/
+  TickType_t xLastWakeTime = 0;
+  xLastWakeTime = xTaskGetTickCount(); 
 
-
+  /*网络状态事件组消息*/
+  uint32_t Network_EventGroup = 0;
+ 
   /* Infinite loop */
   for (;;)
   {
-    
+    /*如果有任务通知*/
+    if(xTaskNotifyWait( pdFALSE, pdFALSE, &Network_EventGroup, 0) == pdTRUE)    //使用后不清空任务通知
+    {
+      if((Network_EventGroup & NETWORK_CONNECT_BIT0) == 1)    //WIFI连接成功
+      {
+        UI_Wifi_ImagesDispaly(1);
+      }
+      else if((Network_EventGroup & NETWORK_CONNECT_BIT0) != 1)    //WIFI连接断开
+      {
+        UI_Wifi_ImagesDispaly(0);
+      }
+    }
+
+
+    vTaskDelayUntil( &xLastWakeTime,10);
+
     lv_task_handler();
-    osDelay(10);
+    
   }
 }
 

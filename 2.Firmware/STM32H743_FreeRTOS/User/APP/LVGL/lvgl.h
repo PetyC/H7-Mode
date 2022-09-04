@@ -13,10 +13,10 @@ extern "C" {
 /***************************
  * CURRENT VERSION OF LVGL
  ***************************/
-#define LVGL_VERSION_MAJOR 9
-#define LVGL_VERSION_MINOR 0
+#define LVGL_VERSION_MAJOR 8
+#define LVGL_VERSION_MINOR 2
 #define LVGL_VERSION_PATCH 0
-#define LVGL_VERSION_INFO "dev"
+#define LVGL_VERSION_INFO ""
 
 /*********************
  *      INCLUDES
@@ -43,69 +43,35 @@ extern "C" {
 #include "src/font/lv_font_loader.h"
 #include "src/font/lv_font_fmt_txt.h"
 
-#include "src/widgets/animimg/lv_animimg.h"
-#include "src/widgets/arc/lv_arc.h"
-#include "src/widgets/bar/lv_bar.h"
-#include "src/widgets/btn/lv_btn.h"
-#include "src/widgets/btnmatrix/lv_btnmatrix.h"
-#include "src/widgets/calendar/lv_calendar.h"
-#include "src/widgets/canvas/lv_canvas.h"
-#include "src/widgets/chart/lv_chart.h"
-#include "src/widgets/checkbox/lv_checkbox.h"
-#include "src/widgets/colorwheel/lv_colorwheel.h"
-#include "src/widgets/dropdown/lv_dropdown.h"
-#include "src/widgets/img/lv_img.h"
-#include "src/widgets/imgbtn/lv_imgbtn.h"
-#include "src/widgets/keyboard/lv_keyboard.h"
-#include "src/widgets/label/lv_label.h"
-#include "src/widgets/led/lv_led.h"
-#include "src/widgets/line/lv_line.h"
-#include "src/widgets/list/lv_list.h"
-#include "src/widgets/menu/lv_menu.h"
-#include "src/widgets/meter/lv_meter.h"
-#include "src/widgets/msgbox/lv_msgbox.h"
-#include "src/widgets/roller/lv_roller.h"
-#include "src/widgets/slider/lv_slider.h"
-#include "src/widgets/span/lv_span.h"
-#include "src/widgets/spinbox/lv_spinbox.h"
-#include "src/widgets/spinner/lv_spinner.h"
-#include "src/widgets/switch/lv_switch.h"
-#include "src/widgets/table/lv_table.h"
-#include "src/widgets/tabview/lv_tabview.h"
-#include "src/widgets/textarea/lv_textarea.h"
-#include "src/widgets/tileview/lv_tileview.h"
-#include "src/widgets/win/lv_win.h"
-
-#include "src/others/snapshot/lv_snapshot.h"
-#include "src/others/monkey/lv_monkey.h"
-#include "src/others/gridnav/lv_gridnav.h"
-#include "src/others/fragment/lv_fragment.h"
-#include "src/others/imgfont/lv_imgfont.h"
-#include "src/others/msg/lv_msg.h"
-#include "src/others/ime/lv_ime_pinyin.h"
-
-#include "src/libs/bmp/lv_bmp.h"
-#include "src/libs/fsdrv/lv_fsdrv.h"
-#include "src/libs/png/lv_png.h"
-#include "src/libs/gif/lv_gif.h"
-#include "src/libs/qrcode/lv_qrcode.h"
-#include "src/libs/sjpg/lv_sjpg.h"
-#include "src/libs/freetype/lv_freetype.h"
-#include "src/libs/rlottie/lv_rlottie.h"
-#include "src/libs/ffmpeg/lv_ffmpeg.h"
-
-#include "src/layouts/flex/lv_flex.h"
-#include "src/layouts/grid/lv_grid.h"
+#include "src/widgets/lv_arc.h"
+#include "src/widgets/lv_btn.h"
+#include "src/widgets/lv_img.h"
+#include "src/widgets/lv_label.h"
+#include "src/widgets/lv_line.h"
+#include "src/widgets/lv_table.h"
+#include "src/widgets/lv_checkbox.h"
+#include "src/widgets/lv_bar.h"
+#include "src/widgets/lv_slider.h"
+#include "src/widgets/lv_btnmatrix.h"
+#include "src/widgets/lv_dropdown.h"
+#include "src/widgets/lv_roller.h"
+#include "src/widgets/lv_textarea.h"
+#include "src/widgets/lv_canvas.h"
+#include "src/widgets/lv_switch.h"
 
 #include "src/draw/lv_draw.h"
-
-#include "src/themes/lv_themes.h"
 
 #include "src/lv_api_map.h"
 
 /*-----------------
  * EXTRAS
  *----------------*/
+#include "src/extra/lv_extra.h"
+#include "src/extra/widgets/lv_widgets.h"
+#include "src/extra/layouts/lv_layouts.h"
+#include "src/extra/themes/lv_themes.h"
+#include "src/extra/others/lv_others.h"
+#include "src/extra/libs/lv_libs.h"
 
 /*********************
  *      DEFINES

@@ -25,9 +25,11 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "Default_Task.h"
 #include "LCD_Task.h"
 #include "KEY_Task.h"
 #include "Network_Task.h"
+#include "Temper_Task.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -53,7 +55,10 @@ osThreadId defaultTaskHandle;
 osThreadId KEY_TaskHandle;
 osThreadId LCD_TaskHandle;
 osThreadId Network_TaskHandle;
+osThreadId Temper_TaskHandle;
 osMessageQId KEY_QueueHandle;
+osMessageQId Temper_QueueHandle;
+osMessageQId Network_QueueHandle;
 osMutexId Uart_MutexHandle;
 osSemaphoreId Key_Binary_SemHandle;
 osSemaphoreId Network_BinarySemHandle;
@@ -68,6 +73,7 @@ void StartDefaultTask(void const * argument);
 void Start_KEY_Task(void const * argument);
 void Start_LCD_Task(void const * argument);
 void Start_Network_Task(void const * argument);
+void Start_Temper_Task(void const * argument);
 
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
 
@@ -125,7 +131,7 @@ __weak void vApplicationStackOverflowHook(xTaskHandle xTask, signed char *pcTask
 static StaticTask_t xIdleTaskTCBBuffer;
 static StackType_t xIdleStack[configMINIMAL_STACK_SIZE];
 
-void vApplicationGetIdleTaskMemory(StaticTask_t **ppxIdleTaskTCBBuffer, StackType_t **ppxIdleTaskStackBuffer, uint32_t *pulIdleTaskStackSize)
+void vApplicationGetIdleTaskMemory( StaticTask_t **ppxIdleTaskTCBBuffer, StackType_t **ppxIdleTaskStackBuffer, uint32_t *pulIdleTaskStackSize )
 {
   *ppxIdleTaskTCBBuffer = &xIdleTaskTCBBuffer;
   *ppxIdleTaskStackBuffer = &xIdleStack[0];
@@ -138,7 +144,7 @@ void vApplicationGetIdleTaskMemory(StaticTask_t **ppxIdleTaskTCBBuffer, StackTyp
 static StaticTask_t xTimerTaskTCBBuffer;
 static StackType_t xTimerStack[configTIMER_TASK_STACK_DEPTH];
 
-void vApplicationGetTimerTaskMemory(StaticTask_t **ppxTimerTaskTCBBuffer, StackType_t **ppxTimerTaskStackBuffer, uint32_t *pulTimerTaskStackSize)
+void vApplicationGetTimerTaskMemory( StaticTask_t **ppxTimerTaskTCBBuffer, StackType_t **ppxTimerTaskStackBuffer, uint32_t *pulTimerTaskStackSize )
 {
   *ppxTimerTaskTCBBuffer = &xTimerTaskTCBBuffer;
   *ppxTimerTaskStackBuffer = &xTimerStack[0];
@@ -188,8 +194,16 @@ void MX_FREERTOS_Init(void) {
 
   /* Create the queue(s) */
   /* definition and creation of KEY_Queue */
-  osMessageQDef(KEY_Queue, 3, uint8_t);
+  osMessageQDef(KEY_Queue, 1, uint8_t);
   KEY_QueueHandle = osMessageCreate(osMessageQ(KEY_Queue), NULL);
+
+  /* definition and creation of Temper_Queue */
+  osMessageQDef(Temper_Queue, 1, uint16_t);
+  Temper_QueueHandle = osMessageCreate(osMessageQ(Temper_Queue), NULL);
+
+  /* definition and creation of Network_Queue */
+  osMessageQDef(Network_Queue, 16, uint8_t);
+  Network_QueueHandle = osMessageCreate(osMessageQ(Network_Queue), NULL);
 
   /* USER CODE BEGIN RTOS_QUEUES */
   /* add queues, ... */
@@ -201,16 +215,20 @@ void MX_FREERTOS_Init(void) {
   defaultTaskHandle = osThreadCreate(osThread(defaultTask), NULL);
 
   /* definition and creation of KEY_Task */
-  osThreadDef(KEY_Task, Start_KEY_Task, osPriorityAboveNormal, 0, 256);
+  osThreadDef(KEY_Task, Start_KEY_Task, osPriorityAboveNormal, 0, 128);
   KEY_TaskHandle = osThreadCreate(osThread(KEY_Task), NULL);
 
   /* definition and creation of LCD_Task */
-  osThreadDef(LCD_Task, Start_LCD_Task, osPriorityNormal, 0, 2048);
+  osThreadDef(LCD_Task, Start_LCD_Task, osPriorityNormal, 0, 1024);
   LCD_TaskHandle = osThreadCreate(osThread(LCD_Task), NULL);
 
   /* definition and creation of Network_Task */
-  osThreadDef(Network_Task, Start_Network_Task, osPriorityIdle, 0, 512);
+  osThreadDef(Network_Task, Start_Network_Task, osPriorityLow, 0, 512);
   Network_TaskHandle = osThreadCreate(osThread(Network_Task), NULL);
+
+  /* definition and creation of Temper_Task */
+  osThreadDef(Temper_Task, Start_Temper_Task, osPriorityLow, 0, 128);
+  Temper_TaskHandle = osThreadCreate(osThread(Temper_Task), NULL);
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
@@ -230,11 +248,7 @@ void StartDefaultTask(void const * argument)
 {
   /* USER CODE BEGIN StartDefaultTask */
   /* Infinite loop */
-  for (;;)
-  {
-    HAL_GPIO_TogglePin(LED1_GPIO_Port, LED1_Pin);
-    osDelay(800);
-  }
+  Default_Task(argument);
   /* USER CODE END StartDefaultTask */
 }
 
@@ -267,7 +281,7 @@ void Start_LCD_Task(void const * argument)
   /* USER CODE BEGIN Start_LCD_Task */
 
   /* Infinite loop */
-  LCD_Task(argument);
+  //LCD_Task(argument);
   
   /* USER CODE END Start_LCD_Task */
 }
@@ -285,6 +299,21 @@ void Start_Network_Task(void const * argument)
   /* Infinite loop */
     Network_Task(argument);
   /* USER CODE END Start_Network_Task */
+}
+
+/* USER CODE BEGIN Header_Start_Temper_Task */
+/**
+* @brief Function implementing the Temper_Task thread.
+* @param argument: Not used
+* @retval None
+*/
+/* USER CODE END Header_Start_Temper_Task */
+void Start_Temper_Task(void const * argument)
+{
+  /* USER CODE BEGIN Start_Temper_Task */
+  /* Infinite loop */
+  Temper_Task(argument);
+  /* USER CODE END Start_Temper_Task */
 }
 
 /* Private application code --------------------------------------------------*/

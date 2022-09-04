@@ -40,20 +40,14 @@
         /* platform-specific printf format for int32_t, usually "d" or "ld" */
         #define LV_PRId32 PRId32
         #define LV_PRIu32 PRIu32
-        #define LV_PRIx32 PRIx32
-        #define LV_PRIX32 PRIX32
     #else
         #define LV_PRId32 "d"
         #define LV_PRIu32 "u"
-        #define LV_PRIx32 "x"
-        #define LV_PRIX32 "X"
     #endif
 #else
     /* hope this is correct for ports without __has_include or without inttypes.h */
     #define LV_PRId32 "d"
     #define LV_PRIu32 "u"
-    #define LV_PRIx32 "x"
-    #define LV_PRIX32 "X"
 #endif
 
 #ifdef __cplusplus
@@ -61,6 +55,9 @@ extern "C" {
 #endif
 
 #include "../lv_conf_internal.h"
+
+#if LV_SPRINTF_CUSTOM == 0
+
 #include <stdarg.h>
 #include <stddef.h>
 
@@ -71,12 +68,22 @@ typedef struct {
     va_list * va;
 } lv_vaformat_t;
 
-int lv_snprintf_builtin(char * buffer, size_t count, const char * format, ...);
-int lv_vsnprintf_builtin(char * buffer, size_t count, const char * format, va_list va);
+/**
+ * Tiny snprintf/vsnprintf implementation
+ * \param buffer A pointer to the buffer where to store the formatted string
+ * \param count The maximum number of characters to store in the buffer, including a terminating null character
+ * \param format A string that specifies the format of the output
+ * \param va A value identifying a variable arguments list
+ * \return The number of characters that COULD have been written into the buffer, not counting the terminating
+ *         null character. A value equal or larger than count indicates truncation. Only when the returned value
+ *         is non-negative and less than count, the string has been completely written.
+ */
+int  lv_snprintf(char * buffer, size_t count, const char * format, ...) LV_FORMAT_ATTRIBUTE(3, 4);
+int lv_vsnprintf(char * buffer, size_t count, const char * format, va_list va) LV_FORMAT_ATTRIBUTE(3, 0);
 
-#define lv_snprintf LV_SNPRINTF
-#define lv_vsnprintf LV_VSNPRINTF
-
+#else
+#include LV_SPRINTF_INCLUDE
+#endif
 
 #ifdef __cplusplus
 } /*extern "C"*/

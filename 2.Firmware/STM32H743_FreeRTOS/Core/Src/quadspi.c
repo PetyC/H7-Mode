@@ -42,8 +42,8 @@ void MX_QUADSPI_Init(void)
   hqspi.Init.ClockPrescaler = 2-1;
   hqspi.Init.FifoThreshold = 32;
   hqspi.Init.SampleShifting = QSPI_SAMPLE_SHIFTING_HALFCYCLE;
-  hqspi.Init.FlashSize = 23+1;
-  hqspi.Init.ChipSelectHighTime = QSPI_CS_HIGH_TIME_2_CYCLE;
+  hqspi.Init.FlashSize = 24-1;
+  hqspi.Init.ChipSelectHighTime = QSPI_CS_HIGH_TIME_1_CYCLE;
   hqspi.Init.ClockMode = QSPI_CLOCK_MODE_0;
   hqspi.Init.FlashID = QSPI_FLASH_ID_1;
   hqspi.Init.DualFlash = QSPI_DUALFLASH_DISABLE;
@@ -65,13 +65,13 @@ void HAL_QSPI_MspInit(QSPI_HandleTypeDef* qspiHandle)
   if(qspiHandle->Instance==QUADSPI)
   {
   /* USER CODE BEGIN QUADSPI_MspInit 0 */
-
+  __HAL_RCC_MDMA_CLK_ENABLE();
   /* USER CODE END QUADSPI_MspInit 0 */
 
   /** Initializes the peripherals clock
   */
     PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_QSPI;
-    PeriphClkInitStruct.QspiClockSelection = RCC_QSPICLKSOURCE_PLL;
+    PeriphClkInitStruct.QspiClockSelection = RCC_QSPICLKSOURCE_D1HCLK;
     if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct) != HAL_OK)
     {
       Error_Handler();
@@ -132,7 +132,7 @@ void HAL_QSPI_MspInit(QSPI_HandleTypeDef* qspiHandle)
     hmdma_quadspi_fifo_th.Instance = MDMA_Channel1;
     hmdma_quadspi_fifo_th.Init.Request = MDMA_REQUEST_QUADSPI_FIFO_TH;
     hmdma_quadspi_fifo_th.Init.TransferTriggerMode = MDMA_BUFFER_TRANSFER;
-    hmdma_quadspi_fifo_th.Init.Priority = MDMA_PRIORITY_LOW;
+    hmdma_quadspi_fifo_th.Init.Priority = MDMA_PRIORITY_HIGH;
     hmdma_quadspi_fifo_th.Init.Endianness = MDMA_LITTLE_ENDIANNESS_PRESERVE;
     hmdma_quadspi_fifo_th.Init.SourceInc = MDMA_SRC_INC_BYTE;
     hmdma_quadspi_fifo_th.Init.DestinationInc = MDMA_DEST_INC_DISABLE;

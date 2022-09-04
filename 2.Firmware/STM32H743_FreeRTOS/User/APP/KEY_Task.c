@@ -2,7 +2,7 @@
  * @Description: KEY按键任务
  * @Autor: Pi
  * @Date: 2022-06-27 18:29:29
- * @LastEditTime: 2022-08-24 01:34:57
+ * @LastEditTime: 2022-08-27 22:11:22
  */
 #include "KEY_Task.h"
 
@@ -10,7 +10,6 @@ extern UART_HandleTypeDef huart1;
 
 /*FreeRTOS相关变量*/
 extern osSemaphoreId Key_Binary_SemHandle;
-
 
 /**
  * @brief KEY按键任务，按下打印任务相关信息
@@ -20,6 +19,7 @@ void KEY_Task(void const *argument)
 {
   /* USER CODE BEGIN Start_KEY_Task */
 //    char pcWriteBuffer[512];
+ 
   /* Infinite loop */
   for (;;)
   {

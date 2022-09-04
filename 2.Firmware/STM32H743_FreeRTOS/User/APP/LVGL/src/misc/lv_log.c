@@ -22,14 +22,6 @@
  *      DEFINES
  *********************/
 
-#if LV_LOG_USE_TIMESTAMP
-    #define LOG_TIMESTAMP_FMT  "\t(%" LV_PRId32 ".%03" LV_PRId32 ", +%" LV_PRId32 ")\t"
-    #define LOG_TIMESTAMP_EXPR t / 1000, t % 1000, t - last_log_time,
-#else
-    #define LOG_TIMESTAMP_FMT
-    #define LOG_TIMESTAMP_EXPR
-#endif
-
 /**********************
  *      TYPEDEFS
  **********************/
@@ -75,9 +67,7 @@ void _lv_log_add(lv_log_level_t level, const char * file, int line, const char *
 {
     if(level >= _LV_LOG_LEVEL_NUM) return; /*Invalid level*/
 
-#if LV_LOG_USE_TIMESTAMP
     static uint32_t last_log_time = 0;
-#endif
 
     if(level >= LV_LOG_LEVEL) {
         va_list args;
@@ -91,52 +81,43 @@ void _lv_log_add(lv_log_level_t level, const char * file, int line, const char *
                 break;
             }
         }
-#if LV_LOG_USE_TIMESTAMP
+
         uint32_t t = lv_tick_get();
-#endif
         static const char * lvl_prefix[] = {"Trace", "Info", "Warn", "Error", "User"};
 
 #if LV_LOG_PRINTF
-        printf("[%s]" LOG_TIMESTAMP_FMT " %s: ",
-               lvl_prefix[level], LOG_TIMESTAMP_EXPR func);
+        printf("[%s]\t(%" LV_PRId32 ".%03" LV_PRId32 ", +%" LV_PRId32 ")\t %s: ",
+               lvl_prefix[level], t / 1000, t % 1000, t - last_log_time, func);
         vprintf(format, args);
         printf(" \t(in %s line #%d)\n", &file[p], line);
 #else
         if(custom_print_cb) {
             char buf[512];
+#if LV_SPRINTF_CUSTOM
             char msg[256];
             lv_vsnprintf(msg, sizeof(msg), format, args);
-            lv_snprintf(buf, sizeof(buf), "[%s]" LOG_TIMESTAMP_FMT " %s: %s \t(in %s line #%d)\n",
-                        lvl_prefix[level], LOG_TIMESTAMP_EXPR func, msg, &file[p], line);
+            lv_snprintf(buf, sizeof(buf), "[%s]\t(%" LV_PRId32 ".%03" LV_PRId32 ", +%" LV_PRId32 ")\t %s: %s \t(in %s line #%d)\n",
+                        lvl_prefix[level], t / 1000, t % 1000, t - last_log_time, func, msg, &file[p], line);
+#else
+            lv_vaformat_t vaf = {format, &args};
+            lv_snprintf(buf, sizeof(buf), "[%s]\t(%" LV_PRId32 ".%03" LV_PRId32 ", +%" LV_PRId32 ")\t %s: %pV \t(in %s line #%d)\n",
+                        lvl_prefix[level], t / 1000, t % 1000, t - last_log_time, func, (void *)&vaf, &file[p], line);
+#endif
             custom_print_cb(buf);
         }
 #endif
 
-#if LV_LOG_USE_TIMESTAMP
         last_log_time = t;
-#endif
         va_end(args);
     }
 }
 
-void lv_log(const char * format, ...)
+void lv_log(const char * buf)
 {
-    if(LV_LOG_LEVEL >= LV_LOG_LEVEL_NONE) return; /* disable log */
-
-    va_list args;
-    va_start(args, format);
-
 #if LV_LOG_PRINTF
-    vprintf(format, args);
-#else
-    if(custom_print_cb) {
-        char buf[512];
-        lv_vsnprintf(buf, sizeof(buf), format, args);
-        custom_print_cb(buf);
-    }
+    puts(buf);
 #endif
-
-    va_end(args);
+    if(custom_print_cb) custom_print_cb(buf);
 }
 
 /**********************
