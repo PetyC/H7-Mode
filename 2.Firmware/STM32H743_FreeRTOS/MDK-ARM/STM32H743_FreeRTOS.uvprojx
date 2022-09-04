@@ -10,13 +10,13 @@
       <TargetName>STM32H743_FreeRTOS</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
-      <pCCUsed>5060750::V5.06 update 6 (build 750)::.\ARMCC</pCCUsed>
+      <pCCUsed>5060960::V5.06 update 7 (build 960)::.\ARMCC</pCCUsed>
       <uAC6>0</uAC6>
       <TargetOption>
         <TargetCommonOption>
           <Device>STM32H743VITx</Device>
           <Vendor>STMicroelectronics</Vendor>
-          <PackID>Keil.STM32H7xx_DFP.2.8.0</PackID>
+          <PackID>Keil.STM32H7xx_DFP.3.0.0</PackID>
           <PackURL>http://www.keil.com/pack/</PackURL>
           <Cpu>IRAM(0x20000000-0x2001FFFF) IRAM2(0x24000000-0x2407FFFF) IROM(0x8000000-0x81FFFFF) CLOCK(12000000) FPU3(DFPU) CPUTYPE("Cortex-M7") ELITTLE TZ</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
@@ -186,7 +186,6 @@
             <RvdsVP>3</RvdsVP>
             <RvdsMve>0</RvdsMve>
             <RvdsCdeCp>0</RvdsCdeCp>
-            <nBranchProt>0</nBranchProt>
             <hadIRAM2>1</hadIRAM2>
             <hadIROM2>0</hadIROM2>
             <StupSel>8</StupSel>
@@ -340,7 +339,7 @@
               <MiscControls>--locale=english</MiscControls>
               <Define>USE_HAL_DRIVER,STM32H743xx,NDEBUG</Define>
               <Undefine></Undefine>
-              <IncludePath>../Core/Inc;../Drivers/STM32H7xx_HAL_Driver/Inc;../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy;../Middlewares/Third_Party/FreeRTOS/Source/include;../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F;../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../Drivers/CMSIS/Include;../User/Driver/LCD;../User/APP;../User/Driver/Bsp_ESP8266;../User/Driver/Bsp_Uart;../User/APP/LVGL;../User/APP/LVGL/src;../User/APP/LVGL/porting;../User/APP/LVGL/src/font;../User/APP/LVGL/GUI/custom;../User/APP/LVGL/GUI/guider_customer_fonts;../User/APP/LVGL/GUI/guider_fonts;../User/APP/LVGL/GUI;../User/APP/LVGL/demos/keypad_encoder;../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS;../User/Driver/Bsp_W25QXX;../User/Driver/Bsp_Nand_Flash</IncludePath>
+              <IncludePath>../Core/Inc;../Drivers/STM32H7xx_HAL_Driver/Inc;../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy;../Middlewares/Third_Party/FreeRTOS/Source/include;../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F;../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../Drivers/CMSIS/Include;../User/APP;../User/APP/LVGL;../User/APP/LVGL/src;../User/APP/LVGL/porting;../User/APP/LVGL/src/font;../User/APP/LVGL/GUI/custom;../User/APP/LVGL/GUI/guider_customer_fonts;../User/APP/LVGL/GUI/guider_fonts;../User/APP/LVGL/GUI;../User/APP/LVGL/demos/keypad_encoder;../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS;..\User\Driver\include;..\User\Driver\Bsp_ESP8266</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -753,76 +752,6 @@
               <FileName>Temper_Task.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\User\APP\Temper_Task.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>User/Drive/UART</GroupName>
-          <Files>
-            <File>
-              <FileName>Bsp_Uart.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User\Driver\Bsp_Uart\Bsp_Uart.c</FilePath>
-            </File>
-            <File>
-              <FileName>Fifo.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User\Driver\Bsp_Uart\Fifo.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>User/Drive/ESP8266</GroupName>
-          <Files>
-            <File>
-              <FileName>Bsp_ESP8266.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User\Driver\Bsp_ESP8266\Bsp_ESP8266.c</FilePath>
-            </File>
-            <File>
-              <FileName>cString.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User\Driver\Bsp_ESP8266\cString.c</FilePath>
-            </File>
-            <File>
-              <FileName>Network.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User\Driver\Bsp_ESP8266\Network.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>User/Drive/NandFlash</GroupName>
-          <Files>
-            <File>
-              <FileName>Bsp_Nand_Flash.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User\Driver\Bsp_Nand_Flash\Bsp_Nand_Flash.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>User/Drive/W25qxx</GroupName>
-          <Files>
-            <File>
-              <FileName>Bsp_w25qxx.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User\Driver\Bsp_W25QXX\Bsp_w25qxx.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>User/LCD</GroupName>
-          <Files>
-            <File>
-              <FileName>bsp_st7735s.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User\Driver\LCD\bsp_st7735s.c</FilePath>
-            </File>
-            <File>
-              <FileName>st7735s.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User\Driver\LCD\st7735s.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -2380,9 +2309,6 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>Lvgl_GUI_guider_customer_fonts</GroupName>
-        </Group>
-        <Group>
           <GroupName>Lvgl_GUI_guider_fonts</GroupName>
           <Files>
             <File>
@@ -2414,6 +2340,56 @@
               <FileName>_WIFI_discon_15x14.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\User\APP\LVGL\GUI\images\_WIFI_discon_15x14.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>BSP</GroupName>
+          <Files>
+            <File>
+              <FileName>Bsp_Nand_Flash.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\Driver\src\Bsp_Nand_Flash.c</FilePath>
+            </File>
+            <File>
+              <FileName>Bsp_st7735s.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\Driver\src\Bsp_st7735s.c</FilePath>
+            </File>
+            <File>
+              <FileName>Bsp_st7735s_interface.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\Driver\src\Bsp_st7735s_interface.c</FilePath>
+            </File>
+            <File>
+              <FileName>Bsp_Uart.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\Driver\src\Bsp_Uart.c</FilePath>
+            </File>
+            <File>
+              <FileName>Bsp_Uart_Fifo.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\Driver\src\Bsp_Uart_Fifo.c</FilePath>
+            </File>
+            <File>
+              <FileName>Bsp_w25qxx.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\Driver\src\Bsp_w25qxx.c</FilePath>
+            </File>
+            <File>
+              <FileName>Bsp_ESP8266.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\Driver\src\Bsp_ESP8266.c</FilePath>
+            </File>
+            <File>
+              <FileName>Bsp_ESP8266_cString.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\Driver\src\Bsp_ESP8266_cString.c</FilePath>
+            </File>
+            <File>
+              <FileName>Bsp_ESP8266_Network.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\Driver\src\Bsp_ESP8266_Network.c</FilePath>
             </File>
           </Files>
         </Group>

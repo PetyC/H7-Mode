@@ -22,7 +22,7 @@
 
 /*BSP相关文件*/
 #include "Bsp_st7735s.h"
-#include "st7735s.h"
+ 
 
 #include "lvgl.h"
 #include "lv_port_disp.h"

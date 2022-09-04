@@ -14,7 +14,7 @@
 
 /*User*/
 #include "Bsp_st7735s.h"
-#include "st7735s.h"
+#include "BSP_st7735s.h"
 /*********************
  *      DEFINES
  *********************/

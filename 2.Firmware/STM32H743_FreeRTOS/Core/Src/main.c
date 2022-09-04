@@ -33,8 +33,8 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 //#include "st7735s.h"
-//#include "Bsp_ESP8266.h"
-//#include "Bsp_w25qxx.h"
+#include "Bsp_ESP8266.h"
+#include "Bsp_w25qxx.h"
 #include "Bsp_Nand_Flash.h"
 
 /* USER CODE END Includes */
@@ -131,7 +131,7 @@ int main(void)
   
   Bsp_Nand_Init();
   
-  NAND_Demo();
+
   
   while(1);
   /* USER CODE END 2 */
