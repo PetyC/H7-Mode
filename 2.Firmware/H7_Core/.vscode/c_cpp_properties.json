@@ -1,0 +1,38 @@
+{
+    "configurations": [
+        {
+            "name": "STM32",
+            "includePath": [
+                "D:/Software/IDE/Keil_v5/ARM/ARMCC/include/**",
+                "D:/Software/IDE/Keil_v5/ARM/ARMCLANG/include/**",
+                "${workspaceFolder}/**",
+                "${workspaceFolder}/User/**",
+                "${workspaceFolder}\\RTE\\_Target_1",
+                "${workspaceFolder}/STM32CubeMX/STCubeGenerated/Inc/**",
+                "D:\\Software\\IDE\\Keil_v5\\Packs\\ARM\\CMSIS-FreeRTOS\\10.3.1\\Source\\include/**",
+                "D:\\Software\\IDE\\Keil_v5\\Packs\\ARM\\CMSIS-FreeRTOS\\10.3.1\\CMSIS\\RTOS2\\FreeRTOS\\Include/**",
+                "D:\\Software\\IDE\\Keil_v5\\Packs\\ARM\\CMSIS-FreeRTOS\\10.3.1\\Source\\portable\\GCC\\ARM_CM7\\r0p1",
+                "D:\\Software\\IDE\\Keil_v5\\Packs\\Keil\\STM32H7xx_DFP\\3.0.0\\Drivers\\STM32H7xx_HAL_Driver\\Inc/**",
+                "D:\\Software\\IDE\\Keil_v5\\Packs\\Keil\\STM32H7xx_DFP\\3.0.0\\Drivers\\CMSIS\\Device\\ST\\STM32H7xx\\Include/**",
+                "D:\\Software\\IDE\\Keil_v5\\Packs\\ARM\\CMSIS-FreeRTOS\\10.3.1\\CMSIS\\RTOS2\\FreeRTOS\\Include1/**",
+                "D:\\Software\\IDE\\Keil_v5\\Packs\\ARM\\CMSIS\\5.8.0\\CMSIS\\RTOS2\\Include/**",
+                "D:\\Software\\IDE\\Keil_v5\\Packs\\ARM\\CMSIS\\5.9.0\\CMSIS\\Core\\Include/**",
+                "D:\\Software\\IDE\\Keil_v5\\Packs\\Keil\\ARM_Compiler\\1.6.3\\Include/**"
+ 
+
+            ],
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE",
+                "USE_HAL_DRIVER",
+                "STM32H743xx"
+            ],
+            "intelliSenseMode": "${default}",
+            "cStandard": "gnu99",
+            "cppStandard": "c++11",
+            "compilerPath": "D:\\Software\\CodeTool\\mingw64\\bin\\gcc.exe"
+        }
+    ],
+    "version": 4
+}

@@ -1,0 +1,17 @@
+{
+  "files.associations": {
+    "freertos.h": "c",
+    "freertosconfig.h": "c",
+    "led_task.h": "c",
+    "atomic": "c",
+    "cstdint": "c",
+    "array": "c",
+    "string_view": "c",
+    "initializer_list": "c",
+    "utility": "c",
+    "deque": "c",
+    "queue": "c",
+    "string": "c",
+    "vector": "c"
+  }
+}
