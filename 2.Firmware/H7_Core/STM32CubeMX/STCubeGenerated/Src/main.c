@@ -32,7 +32,7 @@
 #include "Bsp_w25qxx.h"
 #include "Freertos_Init.h"
 /* USER CODE END Includes */
- 
+
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
 

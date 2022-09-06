@@ -12,6 +12,25 @@
     "deque": "c",
     "queue": "c",
     "string": "c",
-    "vector": "c"
+    "vector": "c",
+    "freertos_init.h": "c",
+    "bitset": "c",
+    "format": "c",
+    "list": "c",
+    "type_traits": "c",
+    "xhash": "c",
+    "xstring": "c",
+    "xtree": "c",
+    "xutility": "c",
+    "map": "c",
+    "__hash_table": "c",
+    "__split_buffer": "c",
+    "__tree": "c",
+    "iterator": "c",
+    "unordered_map": "c",
+    "uart_task.h": "c",
+    "main.h": "c",
+    "stm32h7xx_hal.h": "c",
+    "stm32h7xx_hal_conf.h": "c"
   }
 }

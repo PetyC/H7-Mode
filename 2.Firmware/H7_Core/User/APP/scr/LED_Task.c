@@ -6,7 +6,6 @@
  */
 #include "LED_Task.h"
 
-
 osThreadId_t LED_TaskHandle;
 const osThreadAttr_t LEDTask_attributes = {
   .name = "LED_Task",
@@ -28,6 +27,7 @@ void LED_Task(void *argument)
 {
   for (;;)
   {
+		
     HAL_GPIO_TogglePin(LED2_GPIO_Port , LED2_Pin);
     osDelay(800);
   }
