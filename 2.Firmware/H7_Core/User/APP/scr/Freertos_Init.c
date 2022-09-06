@@ -49,7 +49,10 @@ void Freertos_Init(void)
    /*创建默认任务*/
   Default_TaskHandle = osThreadNew(Default_Task, NULL, &DefaultTask_attributes);
   
+	
   osKernelStart();
+	
 
+	
   while (1);
 }

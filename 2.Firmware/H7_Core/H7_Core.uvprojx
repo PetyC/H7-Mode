@@ -211,7 +211,7 @@
             <Ra2Chk>0</Ra2Chk>
             <Ra3Chk>0</Ra3Chk>
             <Im1Chk>1</Im1Chk>
-            <Im2Chk>0</Im2Chk>
+            <Im2Chk>1</Im2Chk>
             <OnChipMemories>
               <Ocm1>
                 <Type>0</Type>
@@ -328,7 +328,7 @@
             <uC99>0</uC99>
             <uGnu>0</uGnu>
             <useXO>0</useXO>
-            <v6Lang>4</v6Lang>
+            <v6Lang>3</v6Lang>
             <v6LangP>3</v6LangP>
             <vShortEn>1</vShortEn>
             <vShortWch>1</vShortWch>
@@ -606,20 +606,20 @@
           <targetInfo name="H7_Core"/>
         </targetInfos>
       </component>
-      <component Cbundle="MDK-Plus" Cclass="File System" Cgroup="CORE" Cvariant="LFN Debug" Cvendor="Keil" Cversion="6.14.1" condition="CMSIS Core with RTOS and File System I/O and Event Recorder">
-        <package name="MDK-Middleware" schemaVersion="1.4" url="http://www.keil.com/pack/" vendor="Keil" version="7.13.0"/>
+      <component Cbundle="MDK-Plus" Cclass="File System" Cgroup="CORE" Cvariant="LFN Debug" Cvendor="Keil" Cversion="6.15.0" condition="CMSIS Core with RTOS and File System I/O and Event Recorder">
+        <package name="MDK-Middleware" schemaVersion="1.7.7" url="https://www.keil.com/pack/" vendor="Keil" version="7.15.0"/>
         <targetInfos>
           <targetInfo name="H7_Core"/>
         </targetInfos>
       </component>
-      <component Cbundle="MDK-Plus" Cclass="File System" Cgroup="Drive" Csub="NAND" Cvendor="Keil" Cversion="6.14.1" condition="File System and NAND Driver" maxInstances="2">
-        <package name="MDK-Middleware" schemaVersion="1.4" url="http://www.keil.com/pack/" vendor="Keil" version="7.13.0"/>
+      <component Cbundle="MDK-Plus" Cclass="File System" Cgroup="Drive" Csub="NAND" Cvendor="Keil" Cversion="6.15.0" condition="File System and NAND Driver" maxInstances="2">
+        <package name="MDK-Middleware" schemaVersion="1.7.7" url="https://www.keil.com/pack/" vendor="Keil" version="7.15.0"/>
         <targetInfos>
           <targetInfo name="H7_Core"/>
         </targetInfos>
       </component>
       <component Capiversion="2.1.0" Cclass="CMSIS Driver" Cgroup="NAND" Csub="Memory Bus" Cvendor="Keil" Cversion="1.1.0" condition="CMSIS Core">
-        <package name="CMSIS-Driver" schemaVersion="1.4.9" url="http://www.keil.com/pack/" vendor="ARM" version="2.6.1"/>
+        <package name="CMSIS-Driver" schemaVersion="1.7.7" url="https://www.keil.com/pack/" vendor="ARM" version="2.7.2"/>
         <targetInfos>
           <targetInfo name="H7_Core"/>
         </targetInfos>
@@ -707,7 +707,7 @@
       <file attr="config" category="header" name="Config\NAND_MemBus_Config.h" version="1.0.0">
         <instance index="0">RTE\CMSIS_Driver\NAND_MemBus_Config.h</instance>
         <component Capiversion="2.1.0" Cclass="CMSIS Driver" Cgroup="NAND" Csub="Memory Bus" Cvendor="Keil" Cversion="1.1.0" condition="CMSIS Core"/>
-        <package name="CMSIS-Driver" schemaVersion="1.4.9" url="http://www.keil.com/pack/" vendor="ARM" version="2.6.1"/>
+        <package name="CMSIS-Driver" schemaVersion="1.7.7" url="https://www.keil.com/pack/" vendor="ARM" version="2.7.2"/>
         <targetInfos>
           <targetInfo name="H7_Core"/>
         </targetInfos>
@@ -738,24 +738,24 @@
       </file>
       <file attr="config" category="source" name="FileSystem\Config\FS_Config.c" version="6.3.0">
         <instance index="0">RTE\File_System\FS_Config.c</instance>
-        <component Cbundle="MDK-Plus" Cclass="File System" Cgroup="CORE" Cvariant="LFN Debug" Cvendor="Keil" Cversion="6.14.1" condition="CMSIS Core with RTOS and File System I/O and Event Recorder"/>
-        <package name="MDK-Middleware" schemaVersion="1.4" url="http://www.keil.com/pack/" vendor="Keil" version="7.13.0"/>
+        <component Cbundle="MDK-Plus" Cclass="File System" Cgroup="CORE" Cvariant="LFN Debug" Cvendor="Keil" Cversion="6.15.0" condition="CMSIS Core with RTOS and File System I/O and Event Recorder"/>
+        <package name="MDK-Middleware" schemaVersion="1.7.7" url="https://www.keil.com/pack/" vendor="Keil" version="7.15.0"/>
         <targetInfos>
           <targetInfo name="H7_Core"/>
         </targetInfos>
       </file>
       <file attr="config" category="header" name="FileSystem\Config\FS_Config_NAND.h" version="6.3.0">
         <instance index="0">RTE\File_System\FS_Config_NAND_0.h</instance>
-        <component Cbundle="MDK-Plus" Cclass="File System" Cgroup="Drive" Csub="NAND" Cvendor="Keil" Cversion="6.14.1" condition="File System and NAND Driver" maxInstances="2"/>
-        <package name="MDK-Middleware" schemaVersion="1.4" url="http://www.keil.com/pack/" vendor="Keil" version="7.13.0"/>
+        <component Cbundle="MDK-Plus" Cclass="File System" Cgroup="Drive" Csub="NAND" Cvendor="Keil" Cversion="6.15.0" condition="File System and NAND Driver" maxInstances="2"/>
+        <package name="MDK-Middleware" schemaVersion="1.7.7" url="https://www.keil.com/pack/" vendor="Keil" version="7.15.0"/>
         <targetInfos>
           <targetInfo name="H7_Core"/>
         </targetInfos>
       </file>
       <file attr="config" category="source" name="FileSystem\Config\FS_Debug.c" version="1.0.0">
         <instance index="0">RTE\File_System\FS_Debug.c</instance>
-        <component Cbundle="MDK-Plus" Cclass="File System" Cgroup="CORE" Cvariant="LFN Debug" Cvendor="Keil" Cversion="6.14.1" condition="CMSIS Core with RTOS and File System I/O and Event Recorder"/>
-        <package name="MDK-Middleware" schemaVersion="1.4" url="http://www.keil.com/pack/" vendor="Keil" version="7.13.0"/>
+        <component Cbundle="MDK-Plus" Cclass="File System" Cgroup="CORE" Cvariant="LFN Debug" Cvendor="Keil" Cversion="6.15.0" condition="CMSIS Core with RTOS and File System I/O and Event Recorder"/>
+        <package name="MDK-Middleware" schemaVersion="1.7.7" url="https://www.keil.com/pack/" vendor="Keil" version="7.15.0"/>
         <targetInfos>
           <targetInfo name="H7_Core"/>
         </targetInfos>

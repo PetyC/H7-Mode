@@ -2,7 +2,7 @@
  * @Description: Nand Flash
  * @Autor: Pi
  * @Date: 2022-04-11 16:40:52
- * @LastEditTime: 2022-09-02 04:13:06
+ * @LastEditTime: 2022-09-07 01:14:59
  */
 #include "Bsp_Nand_Flash.h"
 #include <string.h>
@@ -115,6 +115,30 @@ static uint32_t Bsp_Nand_ReadStatus(void)
 }
 
 
+HAL_StatusTypeDef Bsp_Nand_Flash_Erase(void)
+{
+  NAND_AddressTypeDef Nand_Add = {0,0,0};
+  HAL_StatusTypeDef Status = HAL_ERROR;
+
+  for(uint16_t i = 0 ; i < NAND_HANDLE.Config.BlockNbr ; i++)
+  {
+    Nand_Add.Block = i;
+    Status = HAL_NAND_Erase_Block(&NAND_HANDLE , &Nand_Add);
+  }
+
+  Nand_Add.Plane = 1;
+  Nand_Add.Block = 0;
+  for(uint16_t i = 0 ; i < NAND_HANDLE.Config.BlockNbr ; i++)
+  {
+    Nand_Add.Block = i;
+    Status = HAL_NAND_Erase_Block(&NAND_HANDLE , &Nand_Add);
+  }
+
+
+  return Status;
+}
+	
+  
 #if 0
 #include "Bsp_Uart.h"
 #include <stdio.h>

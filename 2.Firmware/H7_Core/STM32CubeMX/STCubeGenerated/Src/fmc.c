@@ -38,7 +38,7 @@ void MX_FMC_Init(void)
   FMC_NAND_PCC_TimingTypeDef AttSpaceTiming = {0};
 
   /* USER CODE BEGIN FMC_Init 1 */
-
+    __HAL_RCC_FMC_CLK_ENABLE();
   /* USER CODE END FMC_Init 1 */
 
   /** Perform the NAND1 memory initialization sequence
@@ -46,7 +46,7 @@ void MX_FMC_Init(void)
   hnand1.Instance = FMC_NAND_DEVICE;
   /* hnand1.Init */
   hnand1.Init.NandBank = FMC_NAND_BANK3;
-  hnand1.Init.Waitfeature = FMC_NAND_WAIT_FEATURE_ENABLE;
+  hnand1.Init.Waitfeature = FMC_NAND_WAIT_FEATURE_DISABLE;   
   hnand1.Init.MemoryDataWidth = FMC_NAND_MEM_BUS_WIDTH_8;
   hnand1.Init.EccComputation = FMC_NAND_ECC_DISABLE;
   hnand1.Init.ECCPageSize = FMC_NAND_ECC_PAGE_SIZE_2048BYTE;

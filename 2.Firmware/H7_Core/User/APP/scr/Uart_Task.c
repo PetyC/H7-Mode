@@ -2,7 +2,7 @@
  * @Description:串口任务
  * @Autor: Pi
  * @Date: 2022-09-06 04:01:54
- * @LastEditTime: 2022-09-06 16:13:13
+ * @LastEditTime: 2022-09-07 00:24:20
  */
 #include "Uart_Task.h"
 
@@ -12,11 +12,12 @@ osThreadId_t Uart_TaskHandle;
 const osThreadAttr_t UartTask_attributes = {
     .name = "Uart_Task",
     .stack_size = 1024 * 4,
-    .priority = (osPriority_t)osPriorityHigh,
+    .priority = (osPriority_t)osPriorityHigh3,
 };
 
+#include "Bsp_Nand_Flash.h"
+#include "bsp_fmc_nand_flash.h"
 
-extern void ViewSDCapacity(void);
 	
 
 /**
@@ -31,7 +32,9 @@ void Uart_Task(void *argument)
   uint8_t buff[255];
   static uint32_t count;
 	
-	//ViewSDCapacity();
+  Bsp_Nand_Init();
+
+	ViewSDCapacity();
 	
   for (;;)
   {
