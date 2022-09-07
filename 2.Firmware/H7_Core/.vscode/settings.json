@@ -31,6 +31,7 @@
     "uart_task.h": "c",
     "main.h": "c",
     "stm32h7xx_hal.h": "c",
-    "stm32h7xx_hal_conf.h": "c"
+    "stm32h7xx_hal_conf.h": "c",
+    "stdio.h": "c"
   }
 }

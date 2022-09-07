@@ -100,7 +100,7 @@ int main(void)
   MX_FMC_Init();
   MX_TIM1_Init();
   /* USER CODE BEGIN 2 */
-	QSPI_W25Qx_Init();
+	//QSPI_W25Qx_Init();
 
 	
 	Freertos_Init();

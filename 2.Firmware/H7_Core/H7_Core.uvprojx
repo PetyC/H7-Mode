@@ -468,11 +468,6 @@
               <FileType>1</FileType>
               <FilePath>.\User\Driver\src\Bsp_w25qxx.c</FilePath>
             </File>
-            <File>
-              <FileName>bsp_fmc_nand_flash.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\User\Driver\src\bsp_fmc_nand_flash.c</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -518,6 +513,41 @@
   </Targets>
 
   <RTE>
+    <packages>
+      <filter>
+        <targetInfos/>
+      </filter>
+      <package name="CMSIS-Driver" schemaVersion="1.7.7" url="https://www.keil.com/pack/" vendor="ARM" version="2.7.2">
+        <targetInfos>
+          <targetInfo name="H7_Core" versionMatchMode="fixed"/>
+        </targetInfos>
+      </package>
+      <package name="CMSIS-FreeRTOS" schemaVersion="1.4" url="http://www.keil.com/pack/" vendor="ARM" version="10.4.6">
+        <targetInfos>
+          <targetInfo name="H7_Core" versionMatchMode="fixed"/>
+        </targetInfos>
+      </package>
+      <package name="CMSIS" schemaVersion="1.7.7" url="http://www.keil.com/pack/" vendor="ARM" version="5.9.0">
+        <targetInfos>
+          <targetInfo name="H7_Core" versionMatchMode="fixed"/>
+        </targetInfos>
+      </package>
+      <package name="ARM_Compiler" schemaVersion="1.7.7" url="https://www.keil.com/pack/" vendor="Keil" version="1.7.2">
+        <targetInfos>
+          <targetInfo name="H7_Core" versionMatchMode="fixed"/>
+        </targetInfos>
+      </package>
+      <package name="MDK-Middleware" schemaVersion="1.7.7" url="https://www.keil.com/pack/" vendor="Keil" version="7.15.0">
+        <targetInfos>
+          <targetInfo name="H7_Core" versionMatchMode="fixed"/>
+        </targetInfos>
+      </package>
+      <package name="STM32H7xx_DFP" schemaVersion="1.7.2" url="http://www.keil.com/pack/" vendor="Keil" version="3.0.0">
+        <targetInfos>
+          <targetInfo name="H7_Core" versionMatchMode="fixed"/>
+        </targetInfos>
+      </package>
+    </packages>
     <gpdscs>
       <gpdsc name="STM32CubeMX\FrameworkCubeMX.gpdsc">
         <targetInfos>

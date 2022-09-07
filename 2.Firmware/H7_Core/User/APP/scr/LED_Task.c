@@ -11,6 +11,7 @@ const osThreadAttr_t LEDTask_attributes = {
   .name = "LED_Task",
   .stack_size = 128 * 4,
   .priority = (osPriority_t) osPriorityNormal,
+	.attr_bits = osThreadDetached,
 };
 
 
