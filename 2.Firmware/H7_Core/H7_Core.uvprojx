@@ -337,7 +337,7 @@
             <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls></MiscControls>
-              <Define>STM32H743xx</Define>
+              <Define></Define>
               <Undefine></Undefine>
               <IncludePath>.\STM32CubeMX\STCubeGenerated\Inc;.\User\Driver\include;.\User\APP\include;.\RTE\File_System</IncludePath>
             </VariousControls>
@@ -488,6 +488,11 @@
               <FileType>1</FileType>
               <FilePath>.\User\APP\scr\Uart_Task.c</FilePath>
             </File>
+            <File>
+              <FileName>Test_Task.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\User\APP\scr\Test_Task.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -630,7 +635,7 @@
           <targetInfo name="H7_Core"/>
         </targetInfos>
       </component>
-      <component Cbundle="ARM Compiler" Cclass="Compiler" Cgroup="I/O" Csub="STDOUT" Cvariant="EVR" Cvendor="Keil" Cversion="1.2.0" condition="ARMCC Cortex-M with EVR">
+      <component Cbundle="ARM Compiler" Cclass="Compiler" Cgroup="I/O" Csub="STDOUT" Cvariant="User" Cvendor="Keil" Cversion="1.2.0" condition="ARMCC Cortex-M">
         <package name="ARM_Compiler" schemaVersion="1.7.7" url="https://www.keil.com/pack/" vendor="Keil" version="1.7.2"/>
         <targetInfos>
           <targetInfo name="H7_Core"/>
@@ -848,5 +853,14 @@
       </file>
     </files>
   </RTE>
+
+  <LayerInfo>
+    <Layers>
+      <Layer>
+        <LayName>H7_Core</LayName>
+        <LayPrjMark>1</LayPrjMark>
+      </Layer>
+    </Layers>
+  </LayerInfo>
 
 </Project>

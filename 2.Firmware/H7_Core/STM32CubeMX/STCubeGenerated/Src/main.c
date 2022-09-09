@@ -98,7 +98,7 @@ int main(void)
   MX_MDMA_Init();
   MX_QUADSPI_Init();
   MX_FMC_Init();
-  MX_TIM1_Init();
+//  MX_TIM1_Init();
   /* USER CODE BEGIN 2 */
 	//QSPI_W25Qx_Init();
 

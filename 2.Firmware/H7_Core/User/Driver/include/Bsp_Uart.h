@@ -2,7 +2,7 @@
  * @Description: 
  * @Autor: Pi
  * @Date: 2022-07-01 17:44:02
- * @LastEditTime: 2022-09-01 03:01:16
+ * @LastEditTime: 2022-09-09 19:54:54
  */
 
 #ifndef DEV_UART_H
@@ -12,7 +12,7 @@
 #include "usart.h"
 #include "string.h"
 #include "Bsp_Uart_Fifo.h"
- 
+
 /*是否使用FreeRTOS*/
 //#define USE_FreeRTOS 0
 

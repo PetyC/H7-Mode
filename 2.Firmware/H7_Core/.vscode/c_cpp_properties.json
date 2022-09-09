@@ -1,7 +1,7 @@
 {
   "env": {
-    //"Keil_v5_Path": "E:/software/IDE/Keil_v5", //填写自己的MDK目录
-    "Keil_v5_Path":"D:/Software/IDE/Keil_v5",
+    "Keil_v5_Path": "E:/software/IDE/Keil_v5", //填写自己的MDK目录
+    //"Keil_v5_Path":"D:/Software/IDE/Keil_v5",
     "User_includePath": [
       "${Keil_v5_Path}/ARM/ARMCC/include/**",
       "${Keil_v5_Path}/ARM/ARMCLANG/include/**",

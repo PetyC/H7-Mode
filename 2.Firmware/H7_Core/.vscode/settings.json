@@ -32,6 +32,11 @@
     "main.h": "c",
     "stm32h7xx_hal.h": "c",
     "stm32h7xx_hal_conf.h": "c",
-    "stdio.h": "c"
+    "stdio.h": "c",
+    "test_task.h": "c",
+    "chrono": "c",
+    "xlocale": "c",
+    "__locale": "c",
+    "bsp_nand_flash.h": "c"
   }
 }
