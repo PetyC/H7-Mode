@@ -468,6 +468,16 @@
               <FileType>1</FileType>
               <FilePath>.\User\Driver\src\Bsp_w25qxx.c</FilePath>
             </File>
+            <File>
+              <FileName>Bsp_st7735s.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\User\Driver\src\Bsp_st7735s.c</FilePath>
+            </File>
+            <File>
+              <FileName>Bsp_st7735s_interface.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\User\Driver\src\Bsp_st7735s_interface.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -492,6 +502,11 @@
               <FileName>Test_Task.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\User\APP\scr\Test_Task.c</FilePath>
+            </File>
+            <File>
+              <FileName>User_FlashFS.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\User\APP\scr\User_FlashFS.c</FilePath>
             </File>
           </Files>
         </Group>

@@ -31,18 +31,19 @@ void Uart_Task(void *argument)
 
   for (;;)
   {
-    /*
+    
     size = Bsp_UART_Read(&huart1, buff, 255);
 
     if (size > 0)
     {
       Bsp_UART_Write(&huart1, buff, size);
+			
       Bsp_UART_Poll_DMA_TX(&huart1);
     }
-    */
-
-    printf("OK!\r\n");
     
-    osDelay(1500);
+
+    //printf("OK!\r\n");
+    
+    osDelay(5);
   }
 }

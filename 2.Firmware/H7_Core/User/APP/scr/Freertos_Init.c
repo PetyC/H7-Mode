@@ -2,7 +2,7 @@
  * @Description:Freertos任务初始化
  * @Autor: Pi
  * @Date: 2022-09-06 01:28:00
- * @LastEditTime: 2022-09-08 17:47:42
+ * @LastEditTime: 2022-09-10 02:42:31
  */
 #include "freertos_Init.h"
 
@@ -115,10 +115,11 @@ void Freertos_Init(void)
 	/* 使能 D-Cache */
 	SCB_EnableDCache();
 	
-//#ifdef RTE_Compiler_EventRecorder
-//  EventRecorderInitialize(EventRecordAll, 1U);
-//  EventRecorderStart();
-//#endif
+#ifdef RTE_Compiler_EventRecorder
+  EventRecorderInitialize(EventRecordAll, 1U);
+  EventRecorderStart();
+#endif
+
   /*挂起滴答定时器*/
   HAL_SuspendTick();
 

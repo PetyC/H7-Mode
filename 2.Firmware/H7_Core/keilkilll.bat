@@ -24,10 +24,8 @@ del *.iex /s
 del *.htm /s
 del *.sct /s
 del *.map /s
-
+del *.scvd /s
 del *.39810 /s
-del *.uvoptx /s
-
 
 rd /s/q DebugConfig
 rd /s/q Listings

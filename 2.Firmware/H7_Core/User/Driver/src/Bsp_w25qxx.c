@@ -535,22 +535,17 @@ struct
   double Read_Time;
   double Erase_Speed;
   double Erase_Time;
-}QSPI_FLASH_TestInfo;
+}QSPI_FLASH_TestInfo = {0,0,0,0,0,0};
 
-#define FLASH_SPEED_TEST_SIZE (64*1024)
+#define FLASH_SPEED_TEST_SIZE (32*1024)
 uint8_t Flash_Speed_TestBuf[FLASH_SPEED_TEST_SIZE];
 
 void QSPI_FLASH_Test_ReadSpeed(void)
 { 
-
-  char buff[] = "QSPI FLASH速度测试开始\r\n"; 
-  Bsp_UART_Write(&huart1 , (uint8_t *)buff , sizeof(buff));
-  Bsp_UART_Poll_DMA_TX(&huart1);
-
-
+	printf("\r\n\r\n");
+  printf("QSPI FLASH速度测试开始\r\n");
+	
   memset(Flash_Speed_TestBuf , 0x55 , FLASH_SPEED_TEST_SIZE);
-  QSPI_FLASH_TestInfo.Read_Speed = 0;
-  QSPI_FLASH_TestInfo.Read_Time = 0;
 
   uint32_t Tick_0 = 0;
   uint32_t Tick_1 = 0;
@@ -572,7 +567,7 @@ void QSPI_FLASH_Test_ReadSpeed(void)
   QSPI_FLASH_TestInfo.Erase_Time = Tick_1 - Tick_0;
   QSPI_FLASH_TestInfo.Erase_Speed = FLASH_SPEED_TEST_SIZE / (QSPI_FLASH_TestInfo.Erase_Time);
 
-
+  printf("擦除总数:%d字节\t擦除总用时:%.2fms\t擦除速度:%.2fKb/s\r\n" ,(int)(FLASH_SPEED_TEST_SIZE) , QSPI_FLASH_TestInfo.Erase_Time , QSPI_FLASH_TestInfo.Erase_Speed);
 
   /*写入测试*/
   __set_PRIMASK(1);
@@ -591,6 +586,7 @@ void QSPI_FLASH_Test_ReadSpeed(void)
   QSPI_FLASH_TestInfo.Write_Time = Tick_1 - Tick_0;
   QSPI_FLASH_TestInfo.Write_Speed = FLASH_SPEED_TEST_SIZE/ (QSPI_FLASH_TestInfo.Write_Time);
 
+  printf("写入总数:%.d字节\t写入总用时:%.2fms\t写入速度:%.2fKb/s\r\n" , (int)(FLASH_SPEED_TEST_SIZE) , QSPI_FLASH_TestInfo.Write_Time , QSPI_FLASH_TestInfo.Write_Speed);
 
   /*读取测试*/
   __set_PRIMASK(1);
@@ -609,15 +605,17 @@ void QSPI_FLASH_Test_ReadSpeed(void)
   QSPI_FLASH_TestInfo.Read_Time = Tick_1 - Tick_0;
   QSPI_FLASH_TestInfo.Read_Speed = QSPI_FLASH_SIZE/ (QSPI_FLASH_TestInfo.Read_Time);
 
+  printf("读取总数:%d字节\t读取总用时:%.2fms\t读取速度:%.2fKb/s\r\n" , (int)(QSPI_FLASH_SIZE) , QSPI_FLASH_TestInfo.Read_Time , QSPI_FLASH_TestInfo.Read_Speed);
 
+#if 0
   char TX_Buff[512] = {0};
-
   uint16_t Tx_Buff_Len = sprintf(TX_Buff , "擦除总数:%d字节\t擦除总用时:%.2fms\t擦除速度:%.2fKb/s\r\n" , (int)(FLASH_SPEED_TEST_SIZE) , QSPI_FLASH_TestInfo.Erase_Time , QSPI_FLASH_TestInfo.Erase_Speed);
   Tx_Buff_Len += sprintf(&TX_Buff[Tx_Buff_Len] , "写入总数:%.d字节\t写入总用时:%.2fms\t写入速度:%.2fKb/s\r\n" , (int)(FLASH_SPEED_TEST_SIZE) , QSPI_FLASH_TestInfo.Write_Time , QSPI_FLASH_TestInfo.Write_Speed );
   sprintf(&TX_Buff[Tx_Buff_Len] , "读取总数:%d字节\t读取总用时:%.2fms\t读取速度:%.2fKb/s\r\n" , (int)(QSPI_FLASH_SIZE) , QSPI_FLASH_TestInfo.Read_Time , QSPI_FLASH_TestInfo.Read_Speed);
+  printf("%s" , (char *)TX_Buff);
+#endif
 
-  Bsp_UART_Write(&huart1 , (uint8_t *)TX_Buff , sizeof(TX_Buff));
-  Bsp_UART_Poll_DMA_TX(&huart1);
+  printf("\r\n\r\n");
 
   return;
 }

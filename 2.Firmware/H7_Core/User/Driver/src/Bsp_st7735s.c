@@ -3,7 +3,7 @@
 #if USE_FreeRTOS == 1
 #include "FreeRTOS.h"
 #include "task.h"
-#include "cmsis_os.h"
+#include "cmsis_os2.h"
 #endif 
 
 #define LCD_PIX_Len (uint16_t)(X_MAX_PIXEL * Y_MAX_PIXEL)

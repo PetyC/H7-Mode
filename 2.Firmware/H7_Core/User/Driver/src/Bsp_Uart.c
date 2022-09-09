@@ -2,7 +2,7 @@
  * @Description:
  * @Autor: Pi
  * @Date: 2022-04-14 16:11:43
- * @LastEditTime: 2022-09-09 19:51:36
+ * @LastEditTime: 2022-09-10 02:42:11
  */
 #include "Bsp_Uart.h"
 
@@ -532,25 +532,14 @@ void Bsp_UART_RX_Enable(UART_HandleTypeDef *huart, uint8_t Enable)
 
 
 
-#if 1
-/*
-*********************************************************************************************************
-*	函 数 名: fputc
-*	功能说明: 重定义putc函数，这样可以使用printf函数从串口1打印输出
-*	形    参: 无
-*	返 回 值: 无
-*********************************************************************************************************
-*/
+/**
+ * @brief Event Recorder 重定向 可以使用printf函数从串口1打印输出
+ * @param {int} ch
+ * @return {*}
+ */
 int stdout_putchar (int ch)
 {
-#if 1	/* 将需要printf的字符通过串口中断FIFO发送出去，printf函数会立即返回 */
- 
-	HAL_UART_Transmit(&huart1 , (uint8_t *)&ch , 1 , 0XFF);
+	HAL_UART_Transmit(&huart1 , (uint8_t *)&ch , 1 , 0xff);
 	return ch;
-#else	/* 采用阻塞方式发送每个字符,等待数据发送完毕 */
-
-
-	return ch;
-#endif
 }
-#endif
+

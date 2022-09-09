@@ -9,9 +9,9 @@
 #if USE_FreeRTOS == 1
 #include "FreeRTOS.h"
 #include "task.h"
-#include "cmsis_os.h"
+#include "cmsis_os2.h"
 
-extern osSemaphoreId LCD_BinarySemHandle;
+//extern osSemaphoreId LCD_BinarySemHandle;
 
 #else
 /*发送完成标志*/
@@ -189,7 +189,7 @@ uint8_t Bsp_LCD_TX_InquireFinish(void)
   }
 #else
 
-  osSemaphoreWait(LCD_BinarySemHandle, osWaitForever);
+  //osSemaphoreWait(LCD_BinarySemHandle, osWaitForever);
 
   return 1;
 
@@ -208,7 +208,7 @@ void HAL_SPI_TxCpltCallback(SPI_HandleTypeDef *hspi)
 #if (USE_FreeRTOS == 0)
     LCD_TX_DMA_FLAG = 1;
 #else
-    osSemaphoreRelease(LCD_BinarySemHandle);
+   // osSemaphoreRelease(LCD_BinarySemHandle);
     portYIELD_FROM_ISR(pdTRUE);
 #endif
   }
