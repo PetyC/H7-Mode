@@ -26,12 +26,11 @@ void Uart_Task(void *argument)
 {
 
   uint32_t size;
-  uint8_t buff[255];
-  static uint32_t count;
 
   for (;;)
   {
-    
+     uint8_t buff[255];
+		
     size = Bsp_UART_Read(&huart1, buff, 255);
 
     if (size > 0)
@@ -40,9 +39,6 @@ void Uart_Task(void *argument)
 			
       Bsp_UART_Poll_DMA_TX(&huart1);
     }
-    
-
-    //printf("OK!\r\n");
     
     osDelay(5);
   }

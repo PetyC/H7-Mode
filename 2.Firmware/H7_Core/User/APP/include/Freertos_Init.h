@@ -29,6 +29,7 @@
 #include "LED_Task.h"
 #include "Uart_Task.h"
 #include "Test_Task.h"
+#include "USB_Task.h"
 
 /*Freertos初始化*/
 void Freertos_Init(void);

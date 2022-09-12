@@ -170,6 +170,11 @@ void QSPI_W25Qx_Reset_Memory(void)
 	/* 发送复位命令 */
 	s_command.Instruction = RESET_MEMORY_CMD; //复位命令
 
+	for(uint32_t i = 0 ; i < 3000; i++ )
+	{
+		 __NOP();
+	}
+	
 	/* 发送复位使能命令 */
 	if (HAL_QSPI_Command(&HQSPI_HANDLE, &s_command, HAL_QPSI_TIMEOUT_DEFAULT_VALUE) != HAL_OK)
 	{

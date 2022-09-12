@@ -37,6 +37,11 @@
     "chrono": "c",
     "xlocale": "c",
     "__locale": "c",
-    "bsp_nand_flash.h": "c"
+    "bsp_nand_flash.h": "c",
+    "rl_usb.h": "c",
+    "usb_os.h": "c",
+    "usb_task.h": "c",
+    "bsp_uart.h": "c",
+    "user_flashfs.h": "c"
   }
 }

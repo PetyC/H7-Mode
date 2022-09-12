@@ -19,7 +19,9 @@
       "${workspaceFolder}/User/Driver/include/**",
       "${workspaceFolder}/User/APP/include/**",
       "${workspaceFolder}/RTE/RTOS/**",
-      "${Keil_v5_Path}/Packs/Keil/MDK-Middleware/7.13.0/FileSystem/Include/**"
+      "${workspaceFolder}/RTE/_H7_Core/**",
+      "${Keil_v5_Path}/Packs/Keil/MDK-Middleware/7.13.0/FileSystem/Include/**",
+      "${Keil_v5_Path}/Packs/Keil/MDK-Middleware/7.15.0/USB/Include/**"
     ],
     "User_compilerPath": "${Keil_v5_Path}/ARM/ARMCLANG/bin/armclang.exe"
   },

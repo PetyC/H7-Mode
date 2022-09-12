@@ -2,7 +2,7 @@
  * @Description:Freertos任务初始化
  * @Autor: Pi
  * @Date: 2022-09-06 01:28:00
- * @LastEditTime: 2022-09-10 02:42:31
+ * @LastEditTime: 2022-09-10 16:48:36
  */
 #include "freertos_Init.h"
 
@@ -99,6 +99,9 @@ static void Create_Task(void)
 
   /*测试任务*/
   Test_TaskHandle = osThreadNew(Test_Task, NULL, &TestTask_attributes);
+	
+	/*USB任务*/
+	//USB_TaskHandle = osThreadNew(USB_Task, NULL, &USBTask_attributes);
 }
 
 /**

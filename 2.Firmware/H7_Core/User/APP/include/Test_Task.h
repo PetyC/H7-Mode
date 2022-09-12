@@ -18,6 +18,10 @@
 #include "Bsp_w25qxx.h"
 #include "Bsp_st7735s.h"
 
+
+#include "User_FlashFS.h"
+#include "rl_usb.h"
+
 /*Freertos句柄*/
 extern osThreadId_t Test_TaskHandle;
 extern const osThreadAttr_t TestTask_attributes;
