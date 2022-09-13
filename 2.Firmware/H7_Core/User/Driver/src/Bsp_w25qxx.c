@@ -543,8 +543,12 @@ struct
 }QSPI_FLASH_TestInfo = {0,0,0,0,0,0};
 
 #define FLASH_SPEED_TEST_SIZE (32*1024)
-uint8_t Flash_Speed_TestBuf[FLASH_SPEED_TEST_SIZE];
-
+uint8_t Flash_Speed_TestBuf[FLASH_SPEED_TEST_SIZE];   
+//uint8_t Flash_Speed_TestBuf[FLASH_SPEED_TEST_SIZE] __attribute__((section(".ARM.__at_0x20000000")))   //指定AXI域 速度最快
+/**
+ * @brief QSPI FLASH速度测试
+ * @return {*}
+ */
 void QSPI_FLASH_Test_ReadSpeed(void)
 { 
 	printf("\r\n\r\n");

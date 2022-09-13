@@ -2,7 +2,7 @@
  * @Description:Freertos任务初始化
  * @Autor: Pi
  * @Date: 2022-09-06 01:28:00
- * @LastEditTime: 2022-09-13 15:40:49
+ * @LastEditTime: 2022-09-13 19:49:54
  */
 #include "freertos_Init.h"
 
@@ -18,71 +18,65 @@ void DWT_Init(void)
   DEM_CR |= (unsigned int)DEM_CR_TRCENA;
   DWT_CYCCNT = (unsigned int)0u;
   DWT_CR |= (unsigned int)DWT_CR_CYCCNTENA;
-
 }
-/*
-*********************************************************************************************************
-*	函 数 名: MPU_Config
-*	功能说明: 配置MPU
-*	形    参: 无
-*	返 回 值: 无
-*********************************************************************************************************
-*/
-static void MPU_Config( void )
+
+/**
+ * @brief 配置MPU
+ * @return {*}
+ */
+static void MPU_Config(void)
 {
-	MPU_Region_InitTypeDef MPU_InitStruct;
+  MPU_Region_InitTypeDef MPU_InitStruct;
 
-	/* 禁止 MPU */
-	HAL_MPU_Disable();
+  /* 禁止 MPU */
+  HAL_MPU_Disable();
 
-	/* 配置AXI SRAM的MPU属性为Write through, read allocate，no write allocate */
-	MPU_InitStruct.Enable           = MPU_REGION_ENABLE;
-	MPU_InitStruct.BaseAddress      = 0x24000000;
-	MPU_InitStruct.Size             = MPU_REGION_SIZE_512KB;
-	MPU_InitStruct.AccessPermission = MPU_REGION_FULL_ACCESS;
-	MPU_InitStruct.IsBufferable     = MPU_ACCESS_NOT_BUFFERABLE;
-	MPU_InitStruct.IsCacheable      = MPU_ACCESS_CACHEABLE;
-	MPU_InitStruct.IsShareable      = MPU_ACCESS_NOT_SHAREABLE;
-	MPU_InitStruct.Number           = MPU_REGION_NUMBER0;
-	MPU_InitStruct.TypeExtField     = MPU_TEX_LEVEL0;
-	MPU_InitStruct.SubRegionDisable = 0x00;
-	MPU_InitStruct.DisableExec      = MPU_INSTRUCTION_ACCESS_ENABLE;
-
-	HAL_MPU_ConfigRegion(&MPU_InitStruct);
-	
 #if 1
-	/* 配置FMC扩展IO的MPU属性为Device或者Strongly Ordered */
-	MPU_InitStruct.Enable           = MPU_REGION_ENABLE;
-	MPU_InitStruct.BaseAddress      = 0x60000000;
-	MPU_InitStruct.Size             = ARM_MPU_REGION_SIZE_64KB;	
-	MPU_InitStruct.AccessPermission = MPU_REGION_FULL_ACCESS;
-	MPU_InitStruct.IsBufferable     = MPU_ACCESS_BUFFERABLE;
-	MPU_InitStruct.IsCacheable      = MPU_ACCESS_NOT_CACHEABLE;	/* 不能用MPU_ACCESS_CACHEABLE，会出现2次CS、WE信号 */
-	MPU_InitStruct.IsShareable      = MPU_ACCESS_NOT_SHAREABLE;
-	MPU_InitStruct.Number           = MPU_REGION_NUMBER1;
-	MPU_InitStruct.TypeExtField     = MPU_TEX_LEVEL0;
-	MPU_InitStruct.SubRegionDisable = 0x00;
-	MPU_InitStruct.DisableExec      = MPU_INSTRUCTION_ACCESS_ENABLE;
-	
-	HAL_MPU_ConfigRegion(&MPU_InitStruct);
+  /* 配置AXI SRAM的MPU属性为Write through, read allocate，no write allocate */
+  MPU_InitStruct.Enable = MPU_REGION_ENABLE;
+  MPU_InitStruct.BaseAddress = 0x24000000;
+  MPU_InitStruct.Size = MPU_REGION_SIZE_512KB;
+  MPU_InitStruct.AccessPermission = MPU_REGION_FULL_ACCESS;
+  MPU_InitStruct.IsBufferable = MPU_ACCESS_NOT_BUFFERABLE;
+  MPU_InitStruct.IsCacheable = MPU_ACCESS_CACHEABLE;
+  MPU_InitStruct.IsShareable = MPU_ACCESS_NOT_SHAREABLE;
+  MPU_InitStruct.Number = MPU_REGION_NUMBER0;
+  MPU_InitStruct.TypeExtField = MPU_TEX_LEVEL0;
+  MPU_InitStruct.SubRegionDisable = 0x00;
+  MPU_InitStruct.DisableExec = MPU_INSTRUCTION_ACCESS_ENABLE;
+#else
+  /*Normal 性能最差 但可以随意操作SRAM */
+  MPU_InitStruct.Enable = MPU_REGION_ENABLE;
+  MPU_InitStruct.BaseAddress = 0x24000000;
+  MPU_InitStruct.Size = MPU_REGION_SIZE_512KB;
+  MPU_InitStruct.AccessPermission = MPU_REGION_FULL_ACCESS;
+  MPU_InitStruct.IsBufferable = MPU_ACCESS_NOT_BUFFERABLE;
+  MPU_InitStruct.IsCacheable = MPU_ACCESS_NOT_CACHEABLE;
+  MPU_InitStruct.IsShareable = MPU_ACCESS_NOT_SHAREABLE;
+  MPU_InitStruct.Number = MPU_REGION_NUMBER0;
+  MPU_InitStruct.TypeExtField = MPU_TEX_LEVEL1;
+  MPU_InitStruct.SubRegionDisable = 0x00;
+  MPU_InitStruct.DisableExec = MPU_INSTRUCTION_ACCESS_ENABLE;
 #endif
-	
-	/* 用于NAND Flash */
-	MPU_InitStruct.Enable           = MPU_REGION_ENABLE;
-	MPU_InitStruct.BaseAddress      = 0x80000000;
-	MPU_InitStruct.Size             = MPU_REGION_SIZE_512MB;	// MPU_REGION_SIZE_512MB;
-	MPU_InitStruct.AccessPermission = MPU_REGION_FULL_ACCESS;
-	MPU_InitStruct.IsBufferable     = MPU_ACCESS_BUFFERABLE;
-	MPU_InitStruct.IsCacheable      = MPU_ACCESS_NOT_CACHEABLE;
-	MPU_InitStruct.IsShareable      = MPU_ACCESS_NOT_SHAREABLE;
-	MPU_InitStruct.Number           = MPU_REGION_NUMBER2;
-	MPU_InitStruct.TypeExtField     = MPU_TEX_LEVEL0;
-	MPU_InitStruct.SubRegionDisable = 0x00;
-	MPU_InitStruct.DisableExec      = MPU_INSTRUCTION_ACCESS_ENABLE;
-	HAL_MPU_ConfigRegion(&MPU_InitStruct);
 
-	/*使能 MPU */
-	HAL_MPU_Enable(MPU_PRIVILEGED_DEFAULT);
+  HAL_MPU_ConfigRegion(&MPU_InitStruct);
+
+  /* 用于NAND Flash */
+  MPU_InitStruct.Enable = MPU_REGION_ENABLE;
+  MPU_InitStruct.BaseAddress = 0x80000000;
+  MPU_InitStruct.Size = MPU_REGION_SIZE_512MB;
+  MPU_InitStruct.AccessPermission = MPU_REGION_FULL_ACCESS;
+  MPU_InitStruct.IsBufferable = MPU_ACCESS_BUFFERABLE;
+  MPU_InitStruct.IsCacheable = MPU_ACCESS_NOT_CACHEABLE;
+  MPU_InitStruct.IsShareable = MPU_ACCESS_NOT_SHAREABLE;
+  MPU_InitStruct.Number = MPU_REGION_NUMBER1;
+  MPU_InitStruct.TypeExtField = MPU_TEX_LEVEL0;
+  MPU_InitStruct.SubRegionDisable = 0x00;
+  MPU_InitStruct.DisableExec = MPU_INSTRUCTION_ACCESS_ENABLE;
+  HAL_MPU_ConfigRegion(&MPU_InitStruct);
+
+  /*使能 MPU */
+  HAL_MPU_Enable(MPU_PRIVILEGED_DEFAULT);
 }
 /**
  * @brief 用于创建其他任务
@@ -99,9 +93,9 @@ static void Create_Task(void)
 
   /*测试任务*/
   Test_TaskHandle = osThreadNew(Test_Task, NULL, &TestTask_attributes);
-	
-	/*USB任务*/
-	//USB_TaskHandle = osThreadNew(USB_Task, NULL, &USBTask_attributes);
+
+  /*USB任务*/
+  // USB_TaskHandle = osThreadNew(USB_Task, NULL, &USBTask_attributes);
 }
 
 /**
@@ -110,14 +104,14 @@ static void Create_Task(void)
  */
 void Freertos_Init(void)
 {
-	MPU_Config();
-	
-	/* 使能 I-Cache */
-	SCB_EnableICache();
+  MPU_Config();
 
-	/* 使能 D-Cache */
-	SCB_EnableDCache();
-	
+  /* 使能 I-Cache */
+  SCB_EnableICache();
+
+  /* 使能 D-Cache */
+  SCB_EnableDCache();
+
 #ifdef RTE_Compiler_EventRecorder
   EventRecorderInitialize(EventRecordAll, 1U);
   EventRecorderStart();
@@ -131,9 +125,9 @@ void Freertos_Init(void)
 
   /*恢复滴答定时器*/
   HAL_ResumeTick();
-	
-	//DWT_Init();
-	
+
+  // DWT_Init();
+
   /*创建任务*/
   Create_Task();
 
@@ -141,6 +135,5 @@ void Freertos_Init(void)
 
   for (;;)
   {
-
   };
 }

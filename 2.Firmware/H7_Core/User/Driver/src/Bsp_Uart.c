@@ -7,9 +7,9 @@
 #include "Bsp_Uart.h"
 
 /* 串口缓存大小 */
-#define UART1_TX_BUF_SIZE 2048
+#define UART1_TX_BUF_SIZE (1024)
 #define UART1_RX_BUF_SIZE (1024)
-#define UART1_DMA_TX_BUF_SIZE 2048
+#define UART1_DMA_TX_BUF_SIZE (1024)
 #define UART1_DMA_RX_BUF_SIZE (1024)
 
 /* 串口缓存 */
@@ -162,7 +162,10 @@ static void Bsp_UART_RxHalfCplt_Callback(UART_HandleTypeDef *huart)
 
     /*获取接收数据量*/
     recv_size = recv_total_size - Uart_Dev_0.last_dmarx_size;
-
+		
+		/*Cache 数据一致性处理*/
+		SCB_CleanInvalidateDCache();
+		
     fifo_write(&Uart_Dev_0.rx_fifo, (const uint8_t *)&(Uart_Dev_0.dmarx_buf[Uart_Dev_0.last_dmarx_size]), recv_size);
 
     /*更新本次接收的数据长度*/
@@ -184,7 +187,10 @@ static void Bsp_UART_RxCplt_Callback(UART_HandleTypeDef *huart)
 
     /*接收数据长度*/
     recv_size = Uart_Dev_0.dmarx_buf_size - Uart_Dev_0.last_dmarx_size;
-
+		
+		/*Cache 数据一致性处理*/
+		SCB_CleanInvalidateDCache();
+		
     /*接着上次写入数据后面继续写入*/
     fifo_write(&Uart_Dev_0.rx_fifo, (const uint8_t *)&(Uart_Dev_0.dmarx_buf[Uart_Dev_0.last_dmarx_size]), recv_size);
 
@@ -211,7 +217,10 @@ static void Bsp_UART_IDLE_Callback(UART_HandleTypeDef *huart)
     recv_total_size = Uart_Dev_0.dmarx_buf_size - recv;
     
     recv_size = recv_total_size - Uart_Dev_0.last_dmarx_size;
-
+		
+		/*Cache 数据一致性处理*/
+		SCB_CleanInvalidateDCache();
+		
     fifo_write(&Uart_Dev_0.rx_fifo, (const uint8_t *)&(Uart_Dev_0.dmarx_buf[Uart_Dev_0.last_dmarx_size]), recv_size);
 
     Uart_Dev_0.last_dmarx_size = recv_total_size;

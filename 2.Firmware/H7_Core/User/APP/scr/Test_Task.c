@@ -2,7 +2,7 @@
  * @Description:
  * @Autor: Pi
  * @Date: 2022-09-08 14:31:33
- * @LastEditTime: 2022-09-13 16:09:27
+ * @LastEditTime: 2022-09-13 16:56:34
  */
 #include "Test_Task.h"
 
@@ -33,9 +33,9 @@ void Test_Task(void *argument)
  // User_FlashFS_WriteFileTest();
   
   /*QSPI*/
-  //QSPI_W25Qx_Init();
+  QSPI_W25Qx_Init();
 
-  //QSPI_FLASH_Test_ReadSpeed();
+  QSPI_FLASH_Test_ReadSpeed();
   
 	/*USB Drivers*/
 	USBD_Initialize(0U);                 
