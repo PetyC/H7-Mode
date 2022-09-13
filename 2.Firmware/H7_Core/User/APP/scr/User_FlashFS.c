@@ -2,7 +2,7 @@
  * @Description: FLASHFS文件系统相关操作
  * @Autor: Pi
  * @Date: 2022-09-09 19:17:35
- * @LastEditTime: 2022-09-10 03:33:00
+ * @LastEditTime: 2022-09-13 14:17:55
  */
 #include "User_FlashFS.h"
 
@@ -238,14 +238,7 @@ void User_FlashFS_WriteFileTest(void)
   for (i = 0; i < TEST_FILE_LEN / BUF_SIZE; i++)
   {
     bw = fwrite(g_TestBuf, sizeof(uint8_t), BUF_SIZE, fout);
-    if (bw == BUF_SIZE)
-    {
-      if (((i + 1) % 8) == 0)
-      {
-        printf(".");
-      }
-    }
-    else
+    if (bw != BUF_SIZE)
     {
       err = 1;
       printf("%s文件写失败\r\n", TestFileName);
@@ -257,7 +250,7 @@ void User_FlashFS_WriteFileTest(void)
   if (err == 0)
   {
     timelen = (runtime2 - runtime1);
-    printf("\r\n  写耗时 : %dms   平均写速度 : %dB/S (%dKB/S)\r\n",
+    printf("写耗时 : %dms   平均写速度 : %dB/S (%dKB/S)\r\n",
            timelen,
            (TEST_FILE_LEN * 1000) / timelen,
            ((TEST_FILE_LEN / 1024) * 1000) / timelen);
@@ -290,10 +283,6 @@ void User_FlashFS_WriteFileTest(void)
     bw = fread(g_TestBuf, sizeof(uint8_t), BUF_SIZE, fout);
     if (bw == BUF_SIZE)
     {
-      if (((i + 1) % 8) == 0)
-      {
-        printf(".");
-      }
       /* 比较写入的数据是否正确，此语句会导致读卡速度结果降低 */
       for (k = 0; k < sizeof(g_TestBuf); k++)
       {
@@ -321,7 +310,7 @@ void User_FlashFS_WriteFileTest(void)
   if (err == 0)
   {
     timelen = (runtime2 - runtime1);
-    printf("\r\n  读耗时 : %dms   平均读速度 : %dB/S (%dKB/S)\r\n", timelen,
+    printf("读耗时 : %dms   平均读速度 : %dB/S (%dKB/S)\r\n", timelen,
            (TEST_FILE_LEN * 1000) / timelen, ((TEST_FILE_LEN / 1024) * 1000) / timelen);
   }
 

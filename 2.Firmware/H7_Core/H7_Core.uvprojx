@@ -526,6 +526,9 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>::USB</GroupName>
+        </Group>
+        <Group>
           <GroupName>::CMSIS</GroupName>
         </Group>
         <Group>
@@ -542,9 +545,6 @@
         </Group>
         <Group>
           <GroupName>::RTOS</GroupName>
-        </Group>
-        <Group>
-          <GroupName>::USB</GroupName>
         </Group>
       </Groups>
     </Target>

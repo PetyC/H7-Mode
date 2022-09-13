@@ -2,7 +2,7 @@
  * @Description:
  * @Autor: Pi
  * @Date: 2022-09-08 14:31:33
- * @LastEditTime: 2022-09-10 18:45:13
+ * @LastEditTime: 2022-09-13 16:09:27
  */
 #include "Test_Task.h"
 
@@ -25,19 +25,21 @@ void Test_Task(void *argument)
 {
   /*NAND*/
   Bsp_Nand_Init();
-//	
-//	User_FlashFS_Load();
 	
-//	User_FlashFS_ViewCapacity();
+	User_FlashFS_Load();
+	
+	//User_FlashFS_ViewCapacity();
 
  // User_FlashFS_WriteFileTest();
   
   /*QSPI*/
-  QSPI_W25Qx_Init();
+  //QSPI_W25Qx_Init();
 
-//  QSPI_FLASH_Test_ReadSpeed();
+  //QSPI_FLASH_Test_ReadSpeed();
   
 	/*USB Drivers*/
+	USBD_Initialize(0U);                 
+	USBD_Connect   (0U); 
 
 	
  

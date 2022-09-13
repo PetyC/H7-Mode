@@ -2,7 +2,7 @@
  * @Description:Freertos任务初始化
  * @Autor: Pi
  * @Date: 2022-09-06 01:28:00
- * @LastEditTime: 2022-09-10 16:48:36
+ * @LastEditTime: 2022-09-13 15:40:49
  */
 #include "freertos_Init.h"
 
@@ -35,7 +35,6 @@ static void MPU_Config( void )
 	/* 禁止 MPU */
 	HAL_MPU_Disable();
 
-	
 	/* 配置AXI SRAM的MPU属性为Write through, read allocate，no write allocate */
 	MPU_InitStruct.Enable           = MPU_REGION_ENABLE;
 	MPU_InitStruct.BaseAddress      = 0x24000000;
@@ -51,7 +50,7 @@ static void MPU_Config( void )
 
 	HAL_MPU_ConfigRegion(&MPU_InitStruct);
 	
-	
+#if 1
 	/* 配置FMC扩展IO的MPU属性为Device或者Strongly Ordered */
 	MPU_InitStruct.Enable           = MPU_REGION_ENABLE;
 	MPU_InitStruct.BaseAddress      = 0x60000000;
@@ -66,6 +65,7 @@ static void MPU_Config( void )
 	MPU_InitStruct.DisableExec      = MPU_INSTRUCTION_ACCESS_ENABLE;
 	
 	HAL_MPU_ConfigRegion(&MPU_InitStruct);
+#endif
 	
 	/* 用于NAND Flash */
 	MPU_InitStruct.Enable           = MPU_REGION_ENABLE;
@@ -112,7 +112,7 @@ void Freertos_Init(void)
 {
 	MPU_Config();
 	
-		/* 使能 I-Cache */
+	/* 使能 I-Cache */
 	SCB_EnableICache();
 
 	/* 使能 D-Cache */

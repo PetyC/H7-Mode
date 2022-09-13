@@ -2,7 +2,7 @@
  * @Description: 
  * @Autor: Pi
  * @Date: 2022-09-10 04:30:49
- * @LastEditTime: 2022-09-10 18:45:23
+ * @LastEditTime: 2022-09-13 14:21:46
  */
 #include "USB_Task.h"
 
@@ -18,6 +18,11 @@ const osThreadAttr_t USBTask_attributes = {
 };
 
 
+/**
+ * @brief USB任务
+ * @param {void} *argument
+ * @return {*}
+ */
 void USB_Task(void *argument)
 {
 	/*USB Drivers*/
