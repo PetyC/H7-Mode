@@ -2,7 +2,7 @@
  * @Description:Freertos任务初始化
  * @Autor: Pi
  * @Date: 2022-09-06 01:28:00
- * @LastEditTime: 2022-09-13 19:49:54
+ * @LastEditTime: 2022-09-19 16:31:17
  */
 #include "freertos_Init.h"
 
@@ -24,7 +24,7 @@ void DWT_Init(void)
  * @brief 配置MPU
  * @return {*}
  */
-static void MPU_Config(void)
+void MPU_Config(void)
 {
   MPU_Region_InitTypeDef MPU_InitStruct;
 
@@ -78,6 +78,19 @@ static void MPU_Config(void)
   /*使能 MPU */
   HAL_MPU_Enable(MPU_PRIVILEGED_DEFAULT);
 }
+
+/**
+ * @brief 创建相关信号量
+ * @return {*}
+ */
+static void Create_Sem(void)
+{
+  /*LCD二进制信号量*/
+  LCD_BinarySemHandle = osSemaphoreNew(1, 1, &LCD_BinarySem_attributes);
+
+}
+
+
 /**
  * @brief 用于创建其他任务
  * @return {*}
@@ -94,8 +107,6 @@ static void Create_Task(void)
   /*测试任务*/
   Test_TaskHandle = osThreadNew(Test_Task, NULL, &TestTask_attributes);
 
-  /*USB任务*/
-  // USB_TaskHandle = osThreadNew(USB_Task, NULL, &USBTask_attributes);
 }
 
 /**
@@ -104,6 +115,7 @@ static void Create_Task(void)
  */
 void Freertos_Init(void)
 {
+	/*配置MPU相关*/
   MPU_Config();
 
   /* 使能 I-Cache */
@@ -127,6 +139,9 @@ void Freertos_Init(void)
   HAL_ResumeTick();
 
   // DWT_Init();
+  
+  /*创建信号量*/
+  Create_Sem();
 
   /*创建任务*/
   Create_Task();

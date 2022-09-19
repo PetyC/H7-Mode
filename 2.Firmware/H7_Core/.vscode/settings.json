@@ -42,6 +42,9 @@
     "usb_os.h": "c",
     "usb_task.h": "c",
     "bsp_uart.h": "c",
-    "user_flashfs.h": "c"
+    "user_flashfs.h": "c",
+    "task.h": "c",
+    "bsp_st7735s.h": "c",
+    "task_public.h": "c"
   }
 }

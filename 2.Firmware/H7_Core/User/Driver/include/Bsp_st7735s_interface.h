@@ -2,7 +2,7 @@
  * @Description:
  * @Autor: Pi
  * @Date: 2022-08-18 18:50:27
- * @LastEditTime: 2022-09-01 03:01:02
+ * @LastEditTime: 2022-09-19 15:52:41
  */
 #ifndef BSP_ST7735S_INTERFACE_H_
 #define BSP_ST7735S_INTERFACE_H_
@@ -25,13 +25,6 @@ extern DMA_HandleTypeDef DMA_HANDLE;
 extern TIM_HandleTypeDef TIM_HANDLE;
 #define TIM_CHANNEL TIM_CHANNEL_1
 
-/*IO操作*/
-#define LCD_RES_Low()  LCD_RES_GPIO_Port->BSRR = (uint32_t)LCD_RES_Pin << 16U
-#define LCD_RES_High() LCD_RES_GPIO_Port->BSRR = LCD_RES_Pin
-
-#define LCD_DC_Low()   LCD_DC_GPIO_Port->BSRR = (uint32_t)LCD_DC_Pin << 16U
-#define LCD_DC_High()  LCD_DC_GPIO_Port->BSRR = LCD_DC_Pin
-
 /*屏幕分辨率*/
 #define X_MAX_PIXEL 128
 #define Y_MAX_PIXEL 128
@@ -41,6 +34,14 @@ extern TIM_HandleTypeDef TIM_HANDLE;
 
 /*是否使用FreeRTOS*/
 #define USE_FreeRTOS 1
+
+/*IO操作*/
+#define LCD_RES_Low()  LCD_RES_GPIO_Port->BSRR = (uint32_t)LCD_RES_Pin << 16U
+#define LCD_RES_High() LCD_RES_GPIO_Port->BSRR = LCD_RES_Pin
+
+#define LCD_DC_Low()   LCD_DC_GPIO_Port->BSRR = (uint32_t)LCD_DC_Pin << 16U
+#define LCD_DC_High()  LCD_DC_GPIO_Port->BSRR = LCD_DC_Pin
+
 
 /*LCD背光接口*/
 void Bsp_LCD_BacklightPct(uint8_t pct);

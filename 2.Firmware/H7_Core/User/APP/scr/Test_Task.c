@@ -26,7 +26,7 @@ void Test_Task(void *argument)
   /*NAND*/
   Bsp_Nand_Init();
 	
-	User_FlashFS_Load();
+	//User_FlashFS_Load();
 	
 	//User_FlashFS_ViewCapacity();
 
@@ -35,7 +35,7 @@ void Test_Task(void *argument)
   /*QSPI*/
   QSPI_W25Qx_Init();
 
-  QSPI_FLASH_Test_ReadSpeed();
+ // QSPI_FLASH_Test_ReadSpeed();
   
 	/*USB Drivers*/
 	USBD_Initialize(0U);                 

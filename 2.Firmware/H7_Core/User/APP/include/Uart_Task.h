@@ -2,15 +2,13 @@
  * @Description: 
  * @Autor: Pi
  * @Date: 2022-09-06 04:01:57
- * @LastEditTime: 2022-09-06 16:09:54
+ * @LastEditTime: 2022-09-19 16:29:33
  */
 #ifndef UART_TASK_H
 #define UART_TASK_H
 
-#include "FreeRTOS.h"
-#include "task.h"
-#include "cmsis_os2.h"
-#include "main.h"
+#include "Task_Public.h"
+
 
 #include "Bsp_Uart.h"
 

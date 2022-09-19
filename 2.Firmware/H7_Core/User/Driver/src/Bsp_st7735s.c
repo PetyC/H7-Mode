@@ -1,11 +1,5 @@
 #include "Bsp_st7735s.h"
 
-#if USE_FreeRTOS == 1
-#include "FreeRTOS.h"
-#include "task.h"
-#include "cmsis_os2.h"
-#endif 
-
 #define LCD_PIX_Len (uint16_t)(X_MAX_PIXEL * Y_MAX_PIXEL)
 //static uint16_t LCD_Buff[LCD_PIX_Len] __attribute__((section(".ARM.__at_0x24000000")));
 
@@ -44,7 +38,6 @@ void LCD_Init(void)
   Bsp_LCD_Delay(120);
 
   /*ST7735S Frame Rate*/
- 
   Bsp_LCD_SendCmd_8B(0xB1);
   Bsp_LCD_SendData_8B(0x02);
   Bsp_LCD_SendData_8B(0x35);
@@ -297,19 +290,10 @@ void LCD_FillColor_DMA(uint16_t x_start, uint16_t y_start, uint16_t x_end, uint1
 
 
   /*等待发送完成*/
-#if (USE_FreeRTOS == 0)
-    Bsp_LCD_Send_DMA((uint8_t *)data, (width * height));
-    while (Bsp_LCD_TX_InquireFinish() == 0);
-#else
-  taskENTER_CRITICAL();
   Bsp_LCD_Send_DMA((uint8_t *)data, (width * height));
-  taskEXIT_CRITICAL();
+ 
+  while (Bsp_LCD_TX_InquireFinish() == 0);
 
-
-
-  Bsp_LCD_TX_InquireFinish();
-
-#endif
 
 
   /*发送完毕后拉低命令引脚*/

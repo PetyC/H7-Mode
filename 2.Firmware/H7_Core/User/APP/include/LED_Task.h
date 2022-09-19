@@ -2,16 +2,13 @@
  * @Description: 
  * @Autor: Pi
  * @Date: 2022-09-06 03:34:41
- * @LastEditTime: 2022-09-06 03:40:29
+ * @LastEditTime: 2022-09-19 16:29:51
  */
 #ifndef LED_TASK_H_
 #define LED_TASK_H_
 
 
-#include "FreeRTOS.h"
-#include "task.h"
-#include "cmsis_os2.h"
-#include "main.h"
+#include "Task_Public.h"
 
 
 /*任务句柄*/

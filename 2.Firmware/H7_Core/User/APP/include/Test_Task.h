@@ -2,16 +2,13 @@
  * @Description: 
  * @Autor: Pi
  * @Date: 2022-09-08 14:31:41
- * @LastEditTime: 2022-09-10 03:00:30
+ * @LastEditTime: 2022-09-19 16:29:55
  */
 #ifndef TEST_TASK_H_
 #define TEST_TASK_H_
 
 
-#include "FreeRTOS.h"
-#include "task.h"
-#include "cmsis_os2.h"
-#include "main.h"
+#include "Task_Public.h"
 
 /*相关驱动*/
 #include "Bsp_Nand_Flash.h"

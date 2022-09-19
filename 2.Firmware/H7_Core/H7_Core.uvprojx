@@ -339,7 +339,7 @@
               <MiscControls></MiscControls>
               <Define></Define>
               <Undefine></Undefine>
-              <IncludePath>.\STM32CubeMX\STCubeGenerated\Inc;.\User\Driver\include;.\User\APP\include;.\RTE\File_System</IncludePath>
+              <IncludePath>.\STM32CubeMX\STCubeGenerated\Inc;.\User\Driver\include;.\User\APP\include;.\RTE\File_System;.\User\KEIL_HardFaulthandler</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -380,6 +380,116 @@
         </TargetArmAds>
       </TargetOption>
       <Groups>
+        <Group>
+          <GroupName>:STM32CubeMX:Common Sources</GroupName>
+          <Files>
+            <File>
+              <FileName>main.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\STM32CubeMX\STCubeGenerated\Src\main.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32h7xx_it.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\STM32CubeMX\STCubeGenerated\Inc\stm32h7xx_it.h</FilePath>
+            </File>
+            <File>
+              <FileName>stm32h7xx_it.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\STM32CubeMX\STCubeGenerated\Src\stm32h7xx_it.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>APP</GroupName>
+          <Files>
+            <File>
+              <FileName>Freertos_Init.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\User\APP\scr\Freertos_Init.c</FilePath>
+            </File>
+            <File>
+              <FileName>LED_Task.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\User\APP\scr\LED_Task.c</FilePath>
+            </File>
+            <File>
+              <FileName>Uart_Task.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\User\APP\scr\Uart_Task.c</FilePath>
+            </File>
+            <File>
+              <FileName>Test_Task.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\User\APP\scr\Test_Task.c</FilePath>
+            </File>
+            <File>
+              <FileName>User_FlashFS.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\User\APP\scr\User_FlashFS.c</FilePath>
+            </File>
+            <File>
+              <FileName>USBD_User_MSC_0.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\User\APP\scr\USBD_User_MSC_0.c</FilePath>
+            </File>
+            <File>
+              <FileName>LCD_Task.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\User\APP\scr\LCD_Task.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Driver</GroupName>
+          <Files>
+            <File>
+              <FileName>Bsp_Nand_Flash.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\User\Driver\src\Bsp_Nand_Flash.c</FilePath>
+            </File>
+            <File>
+              <FileName>Bsp_Uart.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\User\Driver\src\Bsp_Uart.c</FilePath>
+            </File>
+            <File>
+              <FileName>Bsp_Uart_Fifo.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\User\Driver\src\Bsp_Uart_Fifo.c</FilePath>
+            </File>
+            <File>
+              <FileName>Bsp_w25qxx.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\User\Driver\src\Bsp_w25qxx.c</FilePath>
+            </File>
+            <File>
+              <FileName>Bsp_st7735s.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\User\Driver\src\Bsp_st7735s.c</FilePath>
+            </File>
+            <File>
+              <FileName>Bsp_st7735s_interface.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\User\Driver\src\Bsp_st7735s_interface.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Segger</GroupName>
+          <Files>
+            <File>
+              <FileName>HardFaultHandler.S</FileName>
+              <FileType>2</FileType>
+              <FilePath>.\User\Segger\HardFaultHandler.S</FilePath>
+            </File>
+            <File>
+              <FileName>SEGGER_HardFaultHandler.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\User\Segger\SEGGER_HardFaultHandler.c</FilePath>
+            </File>
+          </Files>
+        </Group>
         <Group>
           <GroupName>HAL</GroupName>
           <Files>
@@ -427,101 +537,6 @@
               <FileName>usb_otg.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\STM32CubeMX\STCubeGenerated\Src\usb_otg.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>:STM32CubeMX:Common Sources</GroupName>
-          <Files>
-            <File>
-              <FileName>main.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\STM32CubeMX\STCubeGenerated\Src\main.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32h7xx_it.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\STM32CubeMX\STCubeGenerated\Inc\stm32h7xx_it.h</FilePath>
-            </File>
-            <File>
-              <FileName>stm32h7xx_it.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\STM32CubeMX\STCubeGenerated\Src\stm32h7xx_it.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Driver</GroupName>
-          <Files>
-            <File>
-              <FileName>Bsp_Nand_Flash.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\User\Driver\src\Bsp_Nand_Flash.c</FilePath>
-            </File>
-            <File>
-              <FileName>Bsp_Uart.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\User\Driver\src\Bsp_Uart.c</FilePath>
-            </File>
-            <File>
-              <FileName>Bsp_Uart_Fifo.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\User\Driver\src\Bsp_Uart_Fifo.c</FilePath>
-            </File>
-            <File>
-              <FileName>Bsp_w25qxx.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\User\Driver\src\Bsp_w25qxx.c</FilePath>
-            </File>
-            <File>
-              <FileName>Bsp_st7735s.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\User\Driver\src\Bsp_st7735s.c</FilePath>
-            </File>
-            <File>
-              <FileName>Bsp_st7735s_interface.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\User\Driver\src\Bsp_st7735s_interface.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>APP</GroupName>
-          <Files>
-            <File>
-              <FileName>Freertos_Init.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\User\APP\scr\Freertos_Init.c</FilePath>
-            </File>
-            <File>
-              <FileName>LED_Task.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\User\APP\scr\LED_Task.c</FilePath>
-            </File>
-            <File>
-              <FileName>Uart_Task.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\User\APP\scr\Uart_Task.c</FilePath>
-            </File>
-            <File>
-              <FileName>Test_Task.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\User\APP\scr\Test_Task.c</FilePath>
-            </File>
-            <File>
-              <FileName>User_FlashFS.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\User\APP\scr\User_FlashFS.c</FilePath>
-            </File>
-            <File>
-              <FileName>USB_Task.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\User\APP\scr\USB_Task.c</FilePath>
-            </File>
-            <File>
-              <FileName>USBD_User_MSC_0.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\User\APP\scr\USBD_User_MSC_0.c</FilePath>
             </File>
           </Files>
         </Group>

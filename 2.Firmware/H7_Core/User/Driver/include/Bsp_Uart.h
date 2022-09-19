@@ -2,7 +2,7 @@
  * @Description: 
  * @Autor: Pi
  * @Date: 2022-07-01 17:44:02
- * @LastEditTime: 2022-09-10 16:55:01
+ * @LastEditTime: 2022-09-19 18:17:48
  */
 
 #ifndef DEV_UART_H
@@ -16,9 +16,20 @@
 /*是否使用FreeRTOS*/
 #define USE_FreeRTOS 1
 
-extern UART_HandleTypeDef huart1;
-extern DMA_HandleTypeDef hdma_usart1_tx;
-extern DMA_HandleTypeDef hdma_usart1_rx;
+/*是否使能CaChe*/
+#define USE_CACHE 1
+
+/*UART句柄*/
+#define UART1_HANDLE (huart1)
+extern UART_HandleTypeDef UART1_HANDLE;
+
+/*DMA句柄*/
+#define UART1_TX_DMA_HANDLE (hdma_usart1_tx)
+extern DMA_HandleTypeDef UART1_TX_DMA_HANDLE;
+
+/*DMA句柄*/
+#define UART1_RX_DMA_HANDLE (hdma_usart1_rx)
+extern DMA_HandleTypeDef UART1_RX_DMA_HANDLE;
 
 
 
@@ -41,11 +52,13 @@ typedef struct
 /*放入相应串口初始化处*/
 void Bsp_UART_Init(UART_HandleTypeDef *huart);
 
-/*串口设备复位*/
-void Uart_UART_MspDeInit(UART_HandleTypeDef *huart);
-
 /*放入相应中断函数里*/
 void Bsp_UART_IRQHandler(UART_HandleTypeDef *huart);
+
+/*串口设备复位*/
+void Bsp_UART_MspDeInit(UART_HandleTypeDef *huart);
+
+
 
 
 /*串口读写函数*/

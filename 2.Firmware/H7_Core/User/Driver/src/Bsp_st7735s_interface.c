@@ -2,7 +2,7 @@
  * @Description:
  * @Autor: Pi
  * @Date: 2022-08-18 18:50:19
- * @LastEditTime: 2022-09-01 03:00:58
+ * @LastEditTime: 2022-09-19 16:23:30
  */
 #include "bsp_st7735s_interface.h"
 
@@ -11,7 +11,7 @@
 #include "task.h"
 #include "cmsis_os2.h"
 
-//extern osSemaphoreId LCD_BinarySemHandle;
+extern osSemaphoreId_t LCD_BinarySemHandle;
 
 #else
 /*发送完成标志*/
@@ -87,7 +87,14 @@ void Bsp_LCD_SendData_16B(uint16_t data)
  */
 void Bsp_LCD_Send_DMA(uint8_t *data, uint16_t len)
 {
+#if USE_FreeRTOS == 1
+  //taskENTER_CRITICAL();
   HAL_SPI_Transmit_DMA(&SPI_HANDLE, data, len);
+  //taskEXIT_CRITICAL();
+#else
+  HAL_SPI_Transmit_DMA(&SPI_HANDLE, data, len);
+#endif
+
 }
 
 /**
@@ -120,7 +127,7 @@ void Bsp_LCD_DMA_SetMemInc(uint8_t Enable)
   }
 
   __HAL_RCC_DMA1_CLK_ENABLE();
-  HAL_DMA_Init(&hdma_spi1_tx);
+  HAL_DMA_Init(&DMA_HANDLE);
 }
 
 /**
@@ -131,7 +138,7 @@ void Bsp_LCD_SPI_SET16B(void)
 {
   SPI1->CFG1 = SPI1->CFG1 & ~(0X1F);
   SPI1->CFG1 = SPI1->CFG1 | (0X0F);
-  hspi1.Init.DataSize = SPI_DATASIZE_16BIT;
+  SPI_HANDLE.Init.DataSize = SPI_DATASIZE_16BIT;
 }
 
 /**
@@ -142,7 +149,7 @@ void Bsp_LCD_SPI_SET8B(void)
 {
   SPI1->CFG1 = SPI1->CFG1 & ~(0X1F);
   SPI1->CFG1 = SPI1->CFG1 | (0X07);
-  hspi1.Init.DataSize = SPI_DATASIZE_8BIT;
+  SPI_HANDLE.Init.DataSize = SPI_DATASIZE_8BIT;
 }
 
 /**
@@ -188,13 +195,12 @@ uint8_t Bsp_LCD_TX_InquireFinish(void)
     return 1;
   }
 #else
-
-  //osSemaphoreWait(LCD_BinarySemHandle, osWaitForever);
-
+  osSemaphoreAcquire(LCD_BinarySemHandle, osWaitForever);
   return 1;
 
 #endif
 }
+
 
 /**
  * @brief SPI发送完成中断
@@ -208,7 +214,7 @@ void HAL_SPI_TxCpltCallback(SPI_HandleTypeDef *hspi)
 #if (USE_FreeRTOS == 0)
     LCD_TX_DMA_FLAG = 1;
 #else
-   // osSemaphoreRelease(LCD_BinarySemHandle);
+    osSemaphoreRelease(LCD_BinarySemHandle);
     portYIELD_FROM_ISR(pdTRUE);
 #endif
   }
