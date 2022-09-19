@@ -78,7 +78,7 @@ void HAL_SPI_MspInit(SPI_HandleTypeDef* spiHandle)
   if(spiHandle->Instance==SPI1)
   {
   /* USER CODE BEGIN SPI1_MspInit 0 */
-
+		__HAL_RCC_DMA1_CLK_ENABLE();
   /* USER CODE END SPI1_MspInit 0 */
 
   /** Initializes the peripherals clock

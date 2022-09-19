@@ -2,7 +2,7 @@
  * @Description:
  * @Autor: Pi
  * @Date: 2022-08-18 18:50:19
- * @LastEditTime: 2022-09-19 16:23:30
+ * @LastEditTime: 2022-09-19 23:12:26
  */
 #include "bsp_st7735s_interface.h"
 
@@ -25,7 +25,12 @@ uint8_t LCD_TX_DMA_FLAG = 0;
  */
 void Bsp_LCD_Delay(uint16_t delay)
 {
+#if USE_FreeRTOS == 1
+  osDelay(delay);
+#else
   HAL_Delay(delay);
+#endif
+
 }
 
 /**
@@ -88,9 +93,9 @@ void Bsp_LCD_SendData_16B(uint16_t data)
 void Bsp_LCD_Send_DMA(uint8_t *data, uint16_t len)
 {
 #if USE_FreeRTOS == 1
-  //taskENTER_CRITICAL();
+  taskENTER_CRITICAL();
   HAL_SPI_Transmit_DMA(&SPI_HANDLE, data, len);
-  //taskEXIT_CRITICAL();
+  taskEXIT_CRITICAL();
 #else
   HAL_SPI_Transmit_DMA(&SPI_HANDLE, data, len);
 #endif

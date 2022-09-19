@@ -2,7 +2,7 @@
  * @Description: 
  * @Autor: Pi
  * @Date: 2022-09-08 14:31:41
- * @LastEditTime: 2022-09-19 16:29:55
+ * @LastEditTime: 2022-09-19 23:10:54
  */
 #ifndef TEST_TASK_H_
 #define TEST_TASK_H_
@@ -13,7 +13,6 @@
 /*相关驱动*/
 #include "Bsp_Nand_Flash.h"
 #include "Bsp_w25qxx.h"
-#include "Bsp_st7735s.h"
 
 
 #include "User_FlashFS.h"

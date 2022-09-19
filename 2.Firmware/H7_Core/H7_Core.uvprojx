@@ -328,7 +328,7 @@
             <uC99>0</uC99>
             <uGnu>0</uGnu>
             <useXO>0</useXO>
-            <v6Lang>3</v6Lang>
+            <v6Lang>4</v6Lang>
             <v6LangP>3</v6LangP>
             <vShortEn>1</vShortEn>
             <vShortWch>1</vShortWch>
@@ -596,6 +596,11 @@
         </targetInfos>
       </package>
       <package name="STM32H7xx_DFP" schemaVersion="1.7.2" url="http://www.keil.com/pack/" vendor="Keil" version="3.0.0">
+        <targetInfos>
+          <targetInfo name="H7_Core" versionMatchMode="fixed"/>
+        </targetInfos>
+      </package>
+      <package name="lvgl" schemaVersion="1.4" url="https://raw.githubusercontent.com/lvgl/lvgl/master/env_support/cmsis-pack/" vendor="LVGL" version="1.0.8">
         <targetInfos>
           <targetInfo name="H7_Core" versionMatchMode="fixed"/>
         </targetInfos>

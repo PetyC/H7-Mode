@@ -2,7 +2,7 @@
  * @Description:
  * @Autor: Pi
  * @Date: 2022-09-08 14:31:33
- * @LastEditTime: 2022-09-13 16:56:34
+ * @LastEditTime: 2022-09-19 23:10:36
  */
 #include "Test_Task.h"
 
@@ -15,7 +15,7 @@ const osThreadAttr_t TestTask_attributes = {
 };
 
 
- 
+
 /**
  * @brief 测试任务
  * @param {void} *argument
@@ -36,15 +36,11 @@ void Test_Task(void *argument)
   QSPI_W25Qx_Init();
 
  // QSPI_FLASH_Test_ReadSpeed();
-  
+
 	/*USB Drivers*/
 	USBD_Initialize(0U);                 
 	USBD_Connect   (0U); 
 
-	
- 
-	/*LCD*/
-	LCD_Init();
 	
   for (;;)
   {

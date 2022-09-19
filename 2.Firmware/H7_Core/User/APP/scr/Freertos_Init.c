@@ -86,7 +86,7 @@ void MPU_Config(void)
 static void Create_Sem(void)
 {
   /*LCD二进制信号量*/
-  LCD_BinarySemHandle = osSemaphoreNew(1, 1, &LCD_BinarySem_attributes);
+  LCD_BinarySemHandle = osSemaphoreNew(1, 0, &LCD_BinarySem_attributes);
 
 }
 
@@ -107,6 +107,8 @@ static void Create_Task(void)
   /*测试任务*/
   Test_TaskHandle = osThreadNew(Test_Task, NULL, &TestTask_attributes);
 
+  /*LCD任务*/
+  LCD_TaskHandle  =  osThreadNew(LCD_Task, NULL, &LCDTask_attributes);
 }
 
 /**
@@ -147,7 +149,7 @@ void Freertos_Init(void)
   Create_Task();
 
   osKernelStart();
-
+																				
   for (;;)
   {
   };

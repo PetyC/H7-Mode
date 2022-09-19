@@ -2,15 +2,13 @@
  * @Description: 
  * @Autor: Pi
  * @Date: 2022-09-06 03:37:47
- * @LastEditTime: 2022-09-19 19:26:02
+ * @LastEditTime: 2022-09-19 23:28:28
  */
 #ifndef FREERTOS_INIT_H_
 #define FREERTOS_INIT_H_
 
 /*FreeRTOS相关头文件*/
-#include "FreeRTOS.h"
-#include "task.h"
-#include "cmsis_os2.h"
+#include "Task_Public.h"
 
 /*C库相关*/
 #include  <stdio.h>
