@@ -9,6 +9,12 @@
 
 #include "Task_Public.h"
 #include "Bsp_st7735s.h"
+#include "lvgl.h"
+#include "lv_port_disp.h"
+#include "lv_port_indev.h"
+#include "gui_guider.h"
+#include "events_init.h"
+#include "custom.h"
 
 extern osThreadId_t LCD_TaskHandle;
 extern const osThreadAttr_t LCDTask_attributes;

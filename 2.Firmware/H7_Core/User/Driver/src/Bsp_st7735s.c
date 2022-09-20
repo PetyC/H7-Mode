@@ -274,7 +274,7 @@ void LCD_FillColor(uint16_t x_start, uint16_t y_start, uint16_t x_end, uint16_t 
  * @param {uint16_t} data
  * @return {*}
  */
-void LCD_FillColor_DMA(uint16_t x_start, uint16_t y_start, uint16_t x_end, uint16_t y_end, uint16_t color)
+void LCD_FillColor_DMA(uint16_t x_start, uint16_t y_start, uint16_t x_end, uint16_t y_end, uint16_t *color)
 {
   LCD_SetRegion(x_start, y_start, x_end, y_end);
 
@@ -289,7 +289,7 @@ void LCD_FillColor_DMA(uint16_t x_start, uint16_t y_start, uint16_t x_end, uint1
   Bsp_LCD_DMA_SetMemInc(0);
   Bsp_LCD_SPI_SET16B();
 	
-  Bsp_LCD_Send_DMA((uint8_t *)&color, (width * height));
+  Bsp_LCD_Send_DMA((uint8_t *)color, (width * height));
 
 	/*等待发送完成*/
   while (Bsp_LCD_TX_InquireFinish() == 0);
