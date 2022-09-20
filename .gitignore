@@ -1,10 +1,7 @@
 *.DB
 *.DB-shm
 *.DB-wal
- *.uvoptx
 *.39810
 DebugConfig
-RTE
 *.cp
 *.HEX
-*.uvoptx
