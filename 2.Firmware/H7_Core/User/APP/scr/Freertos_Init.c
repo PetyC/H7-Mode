@@ -2,7 +2,7 @@
  * @Description:Freertos任务初始化
  * @Autor: Pi
  * @Date: 2022-09-06 01:28:00
- * @LastEditTime: 2022-09-19 16:31:17
+ * @LastEditTime: 2022-09-22 20:00:46
  */
 #include "freertos_Init.h"
 
@@ -90,6 +90,16 @@ static void Create_Sem(void)
 
 }
 
+/**
+ * @brief 创建相关消息队列
+ * @return {*}
+ */
+static void Create_Queue(void)
+{
+  /*按键消息*/
+  KEY_QueueHandle = osMessageQueueNew (3, sizeof(uint8_t), &KEY_Queue_attributes);
+
+}
 
 /**
  * @brief 用于创建其他任务
@@ -109,6 +119,10 @@ static void Create_Task(void)
 
   /*LCD任务*/
   LCD_TaskHandle  =  osThreadNew(LCD_Task, NULL, &LCDTask_attributes);
+
+  /*网络任务*/
+  NetWork_TaskHandle = osThreadNew(NetWork_Task, NULL, &NetWorkTask_attributes);
+ 
 }
 
 /**
@@ -145,6 +159,10 @@ void Freertos_Init(void)
   /*创建信号量*/
   Create_Sem();
 
+  /*创建消息队列*/
+  Create_Queue();
+
+  
   /*创建任务*/
   Create_Task();
 

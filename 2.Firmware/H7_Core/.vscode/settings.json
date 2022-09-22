@@ -45,6 +45,10 @@
     "user_flashfs.h": "c",
     "task.h": "c",
     "bsp_st7735s.h": "c",
-    "task_public.h": "c"
+    "task_public.h": "c",
+    "xiosbase": "c",
+    "lcd_task.h": "c",
+    "lvgl.h": "c",
+    "network_task.h": "c"
   }
 }

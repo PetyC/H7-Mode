@@ -339,7 +339,7 @@
               <MiscControls></MiscControls>
               <Define></Define>
               <Undefine></Undefine>
-              <IncludePath>.\STM32CubeMX\STCubeGenerated\Inc;.\User\Driver\include;.\User\APP\include;.\RTE\File_System;.\User\KEIL_HardFaulthandler;.\User\Lvgl;.\User\Lvgl\src;.\User\Lvgl\porting;.\User\Lvgl\GUI;.\User\Lvgl\GUI\custom;.\User\Lvgl\GUI\guider_customer_fonts;.\User\Lvgl\GUI\guider_fonts;.\User\Lvgl\GUI\images;.\User\Lvgl\src\font</IncludePath>
+              <IncludePath>.\STM32CubeMX\STCubeGenerated\Inc;.\User\Driver\include;.\User\APP\include;.\RTE\File_System;.\User\KEIL_HardFaulthandler;.\User\Lvgl;.\User\Lvgl\src;.\User\Lvgl\porting;.\User\Lvgl\GUI;.\User\Lvgl\GUI\custom;.\User\Lvgl\GUI\guider_customer_fonts;.\User\Lvgl\GUI\guider_fonts;.\User\Lvgl\GUI\images;.\User\Lvgl\src\font;.\User\Lvgl\demos\benchmark\assets;.\User\Lvgl\demos\benchmark</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -437,6 +437,11 @@
               <FileName>LCD_Task.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\User\APP\scr\LCD_Task.c</FilePath>
+            </File>
+            <File>
+              <FileName>Network_Task.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\User\APP\scr\Network_Task.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1502,6 +1507,61 @@
               <FileName>lv_font_simsun_12.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\User\Lvgl\GUI\guider_fonts\lv_font_simsun_12.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Lvgl_Demo</GroupName>
+          <Files>
+            <File>
+              <FileName>lv_demo_benchmark.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\User\Lvgl\demos\benchmark\lv_demo_benchmark.c</FilePath>
+            </File>
+            <File>
+              <FileName>lv_demo_benchmark.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\User\Lvgl\demos\benchmark\lv_demo_benchmark.h</FilePath>
+            </File>
+            <File>
+              <FileName>img_benchmark_cogwheel_alpha16.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\User\Lvgl\demos\benchmark\assets\img_benchmark_cogwheel_alpha16.c</FilePath>
+            </File>
+            <File>
+              <FileName>img_benchmark_cogwheel_argb.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\User\Lvgl\demos\benchmark\assets\img_benchmark_cogwheel_argb.c</FilePath>
+            </File>
+            <File>
+              <FileName>img_benchmark_cogwheel_chroma_keyed.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\User\Lvgl\demos\benchmark\assets\img_benchmark_cogwheel_chroma_keyed.c</FilePath>
+            </File>
+            <File>
+              <FileName>img_benchmark_cogwheel_indexed16.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\User\Lvgl\demos\benchmark\assets\img_benchmark_cogwheel_indexed16.c</FilePath>
+            </File>
+            <File>
+              <FileName>img_benchmark_cogwheel_rgb.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\User\Lvgl\demos\benchmark\assets\img_benchmark_cogwheel_rgb.c</FilePath>
+            </File>
+            <File>
+              <FileName>lv_font_bechmark_montserrat_12_compr_az.c.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\User\Lvgl\demos\benchmark\assets\lv_font_bechmark_montserrat_12_compr_az.c.c</FilePath>
+            </File>
+            <File>
+              <FileName>lv_font_bechmark_montserrat_16_compr_az.c.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\User\Lvgl\demos\benchmark\assets\lv_font_bechmark_montserrat_16_compr_az.c.c</FilePath>
+            </File>
+            <File>
+              <FileName>lv_font_bechmark_montserrat_28_compr_az.c.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\User\Lvgl\demos\benchmark\assets\lv_font_bechmark_montserrat_28_compr_az.c.c</FilePath>
             </File>
           </Files>
         </Group>

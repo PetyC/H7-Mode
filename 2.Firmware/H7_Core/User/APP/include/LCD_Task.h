@@ -2,12 +2,13 @@
  * @Description: 
  * @Autor: Pi
  * @Date: 2022-09-10 04:30:53
- * @LastEditTime: 2022-09-19 16:30:44
+ * @LastEditTime: 2022-09-22 19:54:26
  */
 #ifndef LCD_TASK_H_
 #define LCD_TASK_H_
 
 #include "Task_Public.h"
+
 #include "Bsp_st7735s.h"
 #include "lvgl.h"
 #include "lv_port_disp.h"

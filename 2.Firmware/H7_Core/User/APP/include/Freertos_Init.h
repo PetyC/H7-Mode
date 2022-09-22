@@ -2,7 +2,7 @@
  * @Description: 
  * @Autor: Pi
  * @Date: 2022-09-06 03:37:47
- * @LastEditTime: 2022-09-19 23:28:28
+ * @LastEditTime: 2022-09-22 19:57:10
  */
 #ifndef FREERTOS_INIT_H_
 #define FREERTOS_INIT_H_
@@ -28,7 +28,7 @@
 #include "Uart_Task.h"
 #include "Test_Task.h"
 #include "LCD_Task.h"
-
+#include "Network_Task.h"
 
 /*Freertos初始化*/
 void Freertos_Init(void);
