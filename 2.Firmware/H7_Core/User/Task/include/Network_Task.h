@@ -9,6 +9,8 @@
 
 #include "Task_Public.h"
 
+#include "Network.h"
+
 extern osThreadId_t NetWork_TaskHandle;
 extern const osThreadAttr_t NetWorkTask_attributes;
 

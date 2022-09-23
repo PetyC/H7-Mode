@@ -73,9 +73,9 @@ void lv_port_indev_init(void)
 #include "FreeRTOS.h"
 #include "task.h"
 #include "cmsis_os2.h"
-#if 0
-extern osMessageQId_t KEY_QueueHandle;
-#endif
+
+extern osMessageQueueId_t KEY_QueueHandle;
+
 /*Initialize your keypad*/
 static void encoder_init(void)
 {
@@ -85,24 +85,17 @@ static void encoder_init(void)
 /*Will be called by the library to read the encoder*/
 static void encoder_read(lv_indev_drv_t *indev_drv, lv_indev_data_t *data)
 {
-#if 0
+
   static uint32_t last_key = 0;
   uint8_t act_enc = 0;
-
-  osEvent Even = osMessageGet(KEY_QueueHandle, 0);
-
-  if (osEventMessage == Even.status)
-  {
-    act_enc = Even.value.v;
-  }
-  else
+	
+  if (osOK != osMessageQueueGet(KEY_QueueHandle, &act_enc, NULL, NULL))
   {
     act_enc = 0;
   }
-
-  if (act_enc != 0)
-  {
-    switch (act_enc)
+	else
+	{
+		switch (act_enc)
     {
     case 1:
       act_enc = LV_KEY_DOWN; //  LV_KEY_RIGHT LV_KEY_DOWN
@@ -120,9 +113,10 @@ static void encoder_read(lv_indev_drv_t *indev_drv, lv_indev_data_t *data)
       break;
     }
     last_key = (uint32_t)act_enc;
-  }
+	}
+
   data->key = last_key;
-#endif
+
 }
 
 #else /*Enable this file at the top*/

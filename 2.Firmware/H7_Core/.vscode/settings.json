@@ -49,6 +49,27 @@
     "xiosbase": "c",
     "lcd_task.h": "c",
     "lvgl.h": "c",
-    "network_task.h": "c"
+    "network_task.h": "c",
+    "bit": "c",
+    "charconv": "c",
+    "compare": "c",
+    "cstddef": "c",
+    "functional": "c",
+    "limits": "c",
+    "memory": "c",
+    "mutex": "c",
+    "sstream": "c",
+    "system_error": "c",
+    "xlocbuf": "c",
+    "xlocmon": "c",
+    "xloctime": "c",
+    "istream": "c",
+    "streambuf": "c",
+    "ios": "c",
+    "locale": "c",
+    "new": "c",
+    "bsp_esp8266_cstring.h": "c",
+    "string.h": "c",
+    "ctype.h": "c"
   }
 }

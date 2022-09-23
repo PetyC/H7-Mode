@@ -31,6 +31,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "Freertos_Init.h"
+#include "Bsp_ESP8266.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -101,6 +102,7 @@ int main(void)
   MX_FMC_Init();
   MX_TIM1_Init();
   MX_USB_OTG_FS_PCD_Init();
+  MX_TIM13_Init();
   /* USER CODE BEGIN 2 */
 	
 	Freertos_Init();
@@ -201,7 +203,10 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
     HAL_IncTick();
   }
   /* USER CODE BEGIN Callback 1 */
-
+  if(htim->Instance ==TIM13)
+  {
+    Bsp_ESP8266_Timer();
+  }
   /* USER CODE END Callback 1 */
 }
 

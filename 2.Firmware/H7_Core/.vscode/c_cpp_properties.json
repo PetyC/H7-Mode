@@ -18,6 +18,7 @@
       "${workspaceFolder}/STM32CubeMX/STCubeGenerated/Inc/**",
       "${workspaceFolder}/User/Driver/include/**",
       "${workspaceFolder}/User/APP/include/**",
+      "${workspaceFolder}/User/Task/include/**",
       "${workspaceFolder}/User/Lvgl/**",
       "${workspaceFolder}/RTE/RTOS/**",
       "${workspaceFolder}/RTE/_H7_Core/**",

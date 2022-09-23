@@ -2,7 +2,7 @@
  * @Description: 
  * @Autor: Pi
  * @Date: 2022-07-01 17:44:02
- * @LastEditTime: 2022-09-19 18:17:48
+ * @LastEditTime: 2022-09-23 14:37:44
  */
 
 #ifndef DEV_UART_H
@@ -91,6 +91,6 @@ void Bsp_UART_Clear_RX_Buffer(UART_HandleTypeDef *huart);
 void Bsp_UART_RX_Enable(UART_HandleTypeDef *huart , uint8_t Enable);
 
 /*串口波特率设置*/
-void Bsp_UART_Set_BRR(UART_HandleTypeDef *huart , uint8_t Sw);
+void Bsp_UART_Set_BRR(UART_HandleTypeDef *huart, uint32_t BaudRate);
 
 #endif

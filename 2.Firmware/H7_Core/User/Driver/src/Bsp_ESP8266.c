@@ -1,18 +1,15 @@
 /*
- * @Description:
+ * @Description:ESP8266驱动，需要提供一个定时器
  * @Autor: Pi
  * @Date: 2022-08-03 16:38:56
- * @LastEditTime: 2022-09-01 03:01:26
+ * @LastEditTime: 2022-09-23 15:30:55
  */
 #include "Bsp_ESP8266.h"
-
 
 #if USE_FreeRTOS == 1
 #include "FreeRTOS.h"
 #include "task.h"
 #endif
-
-
 
 struct
 {
@@ -21,15 +18,6 @@ struct
   uint8_t Flag;
   uint8_t Enable;
 } ESP8266_Timer = {0};
-
-
-
-
-
-/*内部使用函数*/
-uint8_t Bsp_ESP8266_Timer_Check(void);
-void Bsp_ESP8266_Timer_Start(uint16_t Timerout);
-
 
 /**
  * @brief 定时器服务函数
@@ -46,7 +34,7 @@ void Bsp_ESP8266_Timer(void)
       ESP8266_Timer.Flag = 1;
       ESP8266_Timer.Enable = 0;
       HAL_TIM_Base_Stop(&TIMER_HANDLE);
-      __HAL_TIM_SetCounter(&TIMER_HANDLE , 0);
+      __HAL_TIM_SetCounter(&TIMER_HANDLE, 0);
     }
   }
 }
@@ -70,7 +58,7 @@ uint8_t Bsp_ESP8266_Timer_Check(void)
 
 /**
  * @brief 定时器使能
- * @param {uint8_t} Timerout   0:关中断
+ * @param {uint8_t} Timerout   0:关中断  其他:开中断
  * @return {*}
  */
 void Bsp_ESP8266_Timer_Start(uint16_t Timerout)
@@ -81,7 +69,7 @@ void Bsp_ESP8266_Timer_Start(uint16_t Timerout)
     ESP8266_Timer.Max = Timerout;
     ESP8266_Timer.Enable = 1;
     /*开中断*/
-    __HAL_TIM_CLEAR_FLAG(&TIMER_HANDLE , TIM_FLAG_UPDATE);
+    __HAL_TIM_CLEAR_FLAG(&TIMER_HANDLE, TIM_FLAG_UPDATE);
     HAL_TIM_Base_Start_IT(&TIMER_HANDLE);
   }
   else
@@ -90,20 +78,9 @@ void Bsp_ESP8266_Timer_Start(uint16_t Timerout)
     ESP8266_Timer.Enable = 0;
     /*关中断*/
     HAL_TIM_Base_Stop(&TIMER_HANDLE);
-    __HAL_TIM_SetCounter(&TIMER_HANDLE , 0);
+    __HAL_TIM_SetCounter(&TIMER_HANDLE, 0);
   }
 }
-
-
-/**
- * @brief 初始化ESP8266
- * @return {*}
- */
-void Bsp_ESP8266_Init(void)
-{
-  
-}
-
 
 /**
  * @brief 给ESP8266模块上电
@@ -111,20 +88,17 @@ void Bsp_ESP8266_Init(void)
  */
 void Bsp_ESP8266_PowerOn(void)
 {
-  Bsp_UART_Set_BRR(&huart1, 1);
+  Bsp_UART_Set_BRR(&huart1, 74880);
 
   HAL_GPIO_WritePin(ESP_POW_GPIO_Port, ESP_POW_Pin, GPIO_PIN_SET);
-
+  
   Bsp_ESP8266_WaitResponse("csum 0xdb\r\n", 3000);
 
-  Bsp_UART_Set_BRR(&huart1, 0);
+  Bsp_UART_Set_BRR(&huart1, 115200);
 
-  if (Bsp_ESP8266_WaitResponse("ready\r\n", 3000) == 1)
-  {
-//    while (1);
-  }
+  Bsp_ESP8266_WaitResponse("ready\r\n", 3000);
 
-  Bsp_ESP8266_Clear_RxBuffer();     //防止还有杂乱数据
+  Bsp_ESP8266_Clear_RxBuffer(); //防止还有杂乱数据
 }
 
 /**
@@ -142,8 +116,8 @@ void Bsp_ESP8266_PowerOff(void)
  */
 void Bsp_ESP8266_Restore(void)
 {
-  Bsp_UART_RX_Enable(&huart1 , 0);
-  Bsp_ESP8266_SendAT("AT+RESTORE");  
+  Bsp_UART_RX_Enable(&huart1, 0);
+  Bsp_ESP8266_SendAT("AT+RESTORE");
 
 #if USE_FreeRTOS == 1
   vTaskDelay(1000);
@@ -151,7 +125,7 @@ void Bsp_ESP8266_Restore(void)
   HAL_Delay(1000);
 #endif
 
-  Bsp_UART_RX_Enable(&huart1 , 1);
+  Bsp_UART_RX_Enable(&huart1, 1);
 }
 
 /**
@@ -176,20 +150,17 @@ uint8_t Bsp_ESP8266_WaitResponse(char *_pAckStr, uint16_t _usTimeOut)
   /* _usTimeOut == 0 表示无限等待 */
   if (_usTimeOut > 0)
   {
-    Bsp_ESP8266_Timer_Start(_usTimeOut / 100); /* 使用定时器，作为超时控制 */
+    Bsp_ESP8266_Timer_Start(_usTimeOut); /* 使用定时器，作为超时控制 */
   }
 
   while (1)
   {
-    // bsp_Idle(); /* CPU空闲执行的操作， 见 bsp.c 和 bsp.h 文件 */
-
-   
     if (Bsp_ESP8266_Timer_Check() == 0)
     {
       ret = 1; /* 超时 */
       break;
     }
-    
+
     /*判断是否收到消息*/
     if (Bsp_UART_Read(&huart1, &ucData, 1))
     {
@@ -211,7 +182,7 @@ uint8_t Bsp_ESP8266_WaitResponse(char *_pAckStr, uint16_t _usTimeOut)
   }
 
   /*关中断*/
-  if(ret == 0)
+  if (ret == 0)
   {
     Bsp_ESP8266_Timer_Start(0);
   }
@@ -245,7 +216,7 @@ uint16_t Bsp_ESP8266_ReadLine(char *_pBuf, uint16_t _usBufSize, uint16_t _usTime
     if (Bsp_ESP8266_Timer_Check() == 0)
     {
       _pBuf[pos] = 0; /* 结尾加0， 便于函数调用者识别字符串结束 */
-      ret = pos;       
+      ret = pos;
       break;
     }
 
@@ -267,16 +238,9 @@ uint16_t Bsp_ESP8266_ReadLine(char *_pBuf, uint16_t _usBufSize, uint16_t _usTime
 
   /*关中断*/
   Bsp_ESP8266_Timer_Start(0);
-  
-  
+
   return ret;
 }
-
-
-
-
-
-
 
 /**
  * @brief 向模块发送AT命令。 本函数自动在AT字符串口增加<\r\n>字符
@@ -300,7 +264,6 @@ void Bsp_ESP8266_Clear_RxBuffer(void)
   Bsp_UART_Get_RX_Buff_Occupy(&huart1);
 }
 
-
 /**
  * @brief 设置WiFi模块工作模式
  * @param {uint8_t} _mode 1 = Station模式,  2 = AP模式,  3 = AP兼Station模式
@@ -314,7 +277,7 @@ uint8_t Bsp_ESP8266_SetWiFiMode(uint8_t _mode)
   {
     _mode = 3;
   }
-  sprintf(cmd_buf, "AT+CWMODE_DEF=%d", _mode);
+  sprintf(cmd_buf, "AT+CWMODE=%d", _mode);
   Bsp_ESP8266_SendAT(cmd_buf);
   if (Bsp_ESP8266_WaitResponse("OK\r\n", 2000) == 1)
   {
@@ -396,13 +359,13 @@ uint8_t Bsp_ESP8266_Set_AP_NamePass(char *_name, char *_pwd, uint8_t _ch, uint8_
  */
 uint8_t Bsp_ESP8266_Set_AutoLink(uint8_t Enable)
 {
-  if(Enable == 1)
+  if (Enable == 1)
   {
-    Bsp_ESP8266_SendAT("AT+CWAUTOCONN=1");  
+    Bsp_ESP8266_SendAT("AT+CWAUTOCONN=1");
   }
   else
   {
-    Bsp_ESP8266_SendAT("AT+CWAUTOCONN=0");  
+    Bsp_ESP8266_SendAT("AT+CWAUTOCONN=0");
   }
 
   if (Bsp_ESP8266_WaitResponse("OK\r\n", 1000) == 1)
@@ -413,7 +376,6 @@ uint8_t Bsp_ESP8266_Set_AutoLink(uint8_t Enable)
   return 0;
 }
 
-
 /**
  * @brief 是否开启回显
  * @param {uint8_t} Enable  1:开启  0:关闭
@@ -421,21 +383,21 @@ uint8_t Bsp_ESP8266_Set_AutoLink(uint8_t Enable)
  */
 uint8_t Bsp_ESP8266_Echo(uint8_t Enable)
 {
- 
-  if(Enable == 1)
+
+  if (Enable == 1)
   {
-    Bsp_ESP8266_SendAT("ATE1");  
+    Bsp_ESP8266_SendAT("ATE1");
   }
   else
   {
-    Bsp_ESP8266_SendAT("ATE0");  
+    Bsp_ESP8266_SendAT("ATE0");
   }
 
   if (Bsp_ESP8266_WaitResponse("OK\r\n", 1000) == 1)
   {
     return 1;
   }
-  
+
   return 0;
 }
 
@@ -446,14 +408,14 @@ uint8_t Bsp_ESP8266_Echo(uint8_t Enable)
  */
 uint8_t Bsp_ESP8266_Auto_LinkWifi(uint8_t Enable)
 {
- 
-  if(Enable == 1)
+
+  if (Enable == 1)
   {
-    Bsp_ESP8266_SendAT("AT+CWAUTOCONN=1");  
+    Bsp_ESP8266_SendAT("AT+CWAUTOCONN=1");
   }
   else
   {
-    Bsp_ESP8266_SendAT("AT+CWAUTOCONN=0");  
+    Bsp_ESP8266_SendAT("AT+CWAUTOCONN=0");
   }
 
   if (Bsp_ESP8266_WaitResponse("OK\r\n", 1000) == 1)
@@ -463,7 +425,6 @@ uint8_t Bsp_ESP8266_Auto_LinkWifi(uint8_t Enable)
 
   return 0;
 }
-
 
 /**
  * @brief 按键反馈功能使能
@@ -472,13 +433,13 @@ uint8_t Bsp_ESP8266_Auto_LinkWifi(uint8_t Enable)
  */
 uint8_t Bsp_ESP8266_KEY_Enable(uint8_t Enable)
 {
-    if(Enable == 1)
+  if (Enable == 1)
   {
-    Bsp_ESP8266_SendAT("AT+KEY=1");  
+    Bsp_ESP8266_SendAT("AT+KEY=1");
   }
   else
   {
-    Bsp_ESP8266_SendAT("AT+KEY=0");  
+    Bsp_ESP8266_SendAT("AT+KEY=0");
   }
 
   if (Bsp_ESP8266_WaitResponse("OK\r\n", 1000) == 1)
@@ -488,7 +449,6 @@ uint8_t Bsp_ESP8266_KEY_Enable(uint8_t Enable)
 
   return 0;
 }
-
 
 /**
  * @brief 创建TCP服务器。 必须在连接到AP之后才行。 需要先启用多连接
@@ -525,7 +485,7 @@ uint8_t Bsp_ESP8266_CreateTCPServer(uint16_t _TcpPort)
  * @param {uint16_t} _LaocalPort  UDP本地端口号
  * @return {uint8_t}1 表示失败。 0表示成功
  */
-uint8_t Bsp_ESP8266_CreateUDPServer(uint8_t _id, uint16_t _Far_Port , uint16_t _LaocalPort)
+uint8_t Bsp_ESP8266_CreateUDPServer(uint8_t _id, uint16_t _Far_Port, uint16_t _LaocalPort)
 {
   char cmd_buf[64];
 
@@ -537,7 +497,7 @@ uint8_t Bsp_ESP8266_CreateUDPServer(uint8_t _id, uint16_t _Far_Port , uint16_t _
 
   /* 多连接 UDP */
   // AT+CIPSTART=0,"UDP","255.255.255.255",8080,8080,0
-  sprintf(cmd_buf, "AT+CIPSTART=%d,\"UDP\",\"255.255.255.255\",%d,%d,2", _id,_Far_Port ,_LaocalPort);
+  sprintf(cmd_buf, "AT+CIPSTART=%d,\"UDP\",\"255.255.255.255\",%d,%d,2", _id, _Far_Port, _LaocalPort);
 
   // AT+CIPSTART="UDP","255.255.255.255",8080,8080,1
   // sprintf(cmd_buf, "AT+CIPSTART=\"UDP\",\"255.255.255.255\",8080,%d,2", _LaocalPort);
@@ -599,7 +559,7 @@ uint8_t Bsp_ESP8266_LinkTCPServer(uint8_t _id, char *_server_ip, uint16_t _TcpPo
 uint8_t Bsp_ESP8266_SendTcpUdp(uint8_t _id, uint8_t *_databuf, uint16_t _len)
 {
   char buf[32];
- 
+
   if (_len > 2048)
   {
     _len = 2048;
@@ -642,8 +602,8 @@ void Bsp_ESP8266_CloseTcpUdp(uint8_t _id)
 
 /**
  * @brief 查询本机IP地址和MAC
- * @param {char} *_ip 
- * @param {char} *_mac  
+ * @param {char} *_ip
+ * @param {char} *_mac
  * @return {uint8_t} 0:成功   1:失败
  */
 uint8_t Bsp_ESP8266_GetLocalIP(char *_ip, char *_mac)
@@ -716,7 +676,7 @@ uint8_t Bsp_ESP8266_JoinAP(char *_ssid, char *_pwd, uint16_t _timeout)
   char buf[100];
   uint8_t ret;
 
-  sprintf(buf, "AT+CWJAP_DEF=\"%s\",\"%s\"", _ssid, _pwd);
+  sprintf(buf, "AT+CWJAP=\"%s\",\"%s\"", _ssid, _pwd);
   Bsp_ESP8266_SendAT(buf);
 
   ret = Bsp_ESP8266_WaitResponse("OK\r\n", _timeout);
@@ -724,7 +684,6 @@ uint8_t Bsp_ESP8266_JoinAP(char *_ssid, char *_pwd, uint16_t _timeout)
   {
     return 1;
   }
-
 
   return 0;
 }
@@ -825,43 +784,34 @@ int16_t Bsp_ESP8266_ScanAP(WIFI_AP_T *_pList, uint16_t _MaxNum)
   return count;
 }
 
-
 /**
  * @brief 查询当前连接状态
  * @return {*}
  */
 uint8_t Bsp_ESP8266_QueryLink(void)
 {
-  char Buff[32]={0};
+  char Buff[32] = {0};
   char *p;
   uint8_t state = 0;
   Bsp_ESP8266_SendAT("AT+CIPSTATUS");
 
-
-  for(uint8_t i = 0 ; i < 4 ; i++)
+  for (uint8_t i = 0; i < 4; i++)
   {
     Bsp_ESP8266_ReadLine(Buff, sizeof(Buff), 2000);
 
-    if(memcmp(Buff , "STATUS:" , 7) == 0)
+    if (memcmp(Buff, "STATUS:", 7) == 0)
     {
       p = Buff;
-      p = strchr(Buff, ':');    //搜索到冒号
+      p = strchr(Buff, ':'); //搜索到冒号
       p++;
       state = str_to_int(p);
     }
 
-    if(memcmp(Buff , "OK\r\n" , 4) == 0)
+    if (memcmp(Buff, "OK\r\n", 4) == 0)
     {
       break;
     }
-
   }
 
-  
   return state;
 }
-
-
-
-
-

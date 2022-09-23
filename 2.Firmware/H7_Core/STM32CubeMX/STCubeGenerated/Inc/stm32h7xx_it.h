@@ -56,6 +56,7 @@ void DMA1_Stream1_IRQHandler(void);
 void DMA1_Stream2_IRQHandler(void);
 void SPI1_IRQHandler(void);
 void USART1_IRQHandler(void);
+void TIM8_UP_TIM13_IRQHandler(void);
 void QUADSPI_IRQHandler(void);
 void TIM17_IRQHandler(void);
 void MDMA_IRQHandler(void);

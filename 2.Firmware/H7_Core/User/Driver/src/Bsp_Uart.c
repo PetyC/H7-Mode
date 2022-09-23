@@ -2,7 +2,7 @@
  * @Description:
  * @Autor: Pi
  * @Date: 2022-04-14 16:11:43
- * @LastEditTime: 2022-09-19 20:00:38
+ * @LastEditTime: 2022-09-23 14:37:16
  */
 #include "Bsp_Uart.h"
 
@@ -37,10 +37,6 @@ static void Bsp_UART_TX_Cplt_Callback(UART_HandleTypeDef *huart);
 volatile static UBaseType_t uxSavedInterruptStatus = 0;
 
 #endif
-
-
-
-
 
 /* fifo上锁函数 */
 static void fifo_lock(void)
@@ -87,13 +83,8 @@ static void Uart_Device_init(UART_HandleTypeDef *huart)
 
     /* 只需配置接收模式DMA，发送模式需发送数据时才配置 */
     HAL_UART_Receive_DMA(&UART1_HANDLE, Uart_Dev_0.dmarx_buf, sizeof(s_uart1_dmarx_buf));
- 
   }
 }
-
-
-
-
 
 /**
  *
@@ -154,9 +145,9 @@ static void Bsp_UART_RxHalfCplt_Callback(UART_HandleTypeDef *huart)
     recv_size = recv_total_size - Uart_Dev_0.last_dmarx_size;
 
 #if USE_CACHE == 1
-		/*Cache 数据一致性处理*/
-		SCB_CleanInvalidateDCache();
-#endif		
+    /*Cache 数据一致性处理*/
+    SCB_CleanInvalidateDCache();
+#endif
 
     fifo_write(&Uart_Dev_0.rx_fifo, (const uint8_t *)&(Uart_Dev_0.dmarx_buf[Uart_Dev_0.last_dmarx_size]), recv_size);
 
@@ -179,12 +170,12 @@ static void Bsp_UART_RxCplt_Callback(UART_HandleTypeDef *huart)
 
     /*接收数据长度*/
     recv_size = Uart_Dev_0.dmarx_buf_size - Uart_Dev_0.last_dmarx_size;
-		
+
 #if USE_CACHE == 1
-		/*Cache 数据一致性处理*/
-		SCB_CleanInvalidateDCache();
-#endif		
-		
+    /*Cache 数据一致性处理*/
+    SCB_CleanInvalidateDCache();
+#endif
+
     /*接着上次写入数据后面继续写入*/
     fifo_write(&Uart_Dev_0.rx_fifo, (const uint8_t *)&(Uart_Dev_0.dmarx_buf[Uart_Dev_0.last_dmarx_size]), recv_size);
 
@@ -205,18 +196,18 @@ static void Bsp_UART_IDLE_Callback(UART_HandleTypeDef *huart)
     uint16_t recv_total_size;
     uint16_t recv_size;
     uint16_t recv;
-    
+
     recv = __HAL_DMA_GET_COUNTER(&UART1_RX_DMA_HANDLE);
     /*DMA通道接收总数据大小*/
     recv_total_size = Uart_Dev_0.dmarx_buf_size - recv;
-    
+
     recv_size = recv_total_size - Uart_Dev_0.last_dmarx_size;
-		
+
 #if USE_CACHE == 1
-		/*Cache 数据一致性处理*/
-		SCB_CleanInvalidateDCache();
-#endif		
-		
+    /*Cache 数据一致性处理*/
+    SCB_CleanInvalidateDCache();
+#endif
+
     fifo_write(&Uart_Dev_0.rx_fifo, (const uint8_t *)&(Uart_Dev_0.dmarx_buf[Uart_Dev_0.last_dmarx_size]), recv_size);
 
     Uart_Dev_0.last_dmarx_size = recv_total_size;
@@ -249,10 +240,8 @@ void Bsp_UART_Init(UART_HandleTypeDef *huart)
   Uart_Device_init(huart);
 
   __HAL_UART_ENABLE_IT(huart, UART_IT_IDLE); //开启空闲中断
-	
-  __HAL_UART_CLEAR_IDLEFLAG(huart);          //清除空闲中断标志 否者上电会进入中断
-	
 
+  __HAL_UART_CLEAR_IDLEFLAG(huart); //清除空闲中断标志 否者上电会进入中断
 }
 
 /**
@@ -284,7 +273,7 @@ void Bsp_UART_IRQHandler(UART_HandleTypeDef *huart)
   {
     if (__HAL_UART_GET_FLAG(huart, UART_FLAG_IDLE) == SET) //判断是否是空闲中断
     {
-      if(__HAL_DMA_GET_COUNTER(&UART1_RX_DMA_HANDLE) != UART1_DMA_RX_BUF_SIZE)    //只有当DMA中存有数据时才进入
+      if (__HAL_DMA_GET_COUNTER(&UART1_RX_DMA_HANDLE) != UART1_DMA_RX_BUF_SIZE) //只有当DMA中存有数据时才进入
       {
         __HAL_UART_CLEAR_IDLEFLAG(huart); //清除空闲中断标志（否则会一直不断进入中断）
 
@@ -292,15 +281,11 @@ void Bsp_UART_IRQHandler(UART_HandleTypeDef *huart)
       }
       else
       {
-				__HAL_UART_CLEAR_IDLEFLAG(huart); 
+        __HAL_UART_CLEAR_IDLEFLAG(huart);
       }
     }
   }
 }
-
-
-
-
 
 /**
  * @brief 获得TX已用BUF空间大小
@@ -369,11 +354,10 @@ uint16_t Bsp_UART_Get_RX_Buff_Free(UART_HandleTypeDef *huart)
  */
 void Bsp_UART_Clear_RX_Buffer(UART_HandleTypeDef *huart)
 {
-  if(huart == &UART1_HANDLE)
+  if (huart == &UART1_HANDLE)
   {
     fifo_clear(&Uart_Dev_0.rx_fifo);
   }
-
 }
 
 /**
@@ -453,7 +437,6 @@ void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart)
   Bsp_UART_TX_Cplt_Callback(huart);
 }
 
-
 /**
  * @brief 串口错误回调中断
  * @param {UART_HandleTypeDef} *huart
@@ -461,7 +444,7 @@ void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart)
  */
 void HAL_UART_ErrorCallback(UART_HandleTypeDef *huart)
 {
-  if(huart == &UART1_HANDLE)
+  if (huart == &UART1_HANDLE)
   {
     /*
     switch(huart->ErrorCode)
@@ -469,7 +452,7 @@ void HAL_UART_ErrorCallback(UART_HandleTypeDef *huart)
     case HAL_UART_ERROR_NONE:
 
       break;
-      
+
     case HAL_UART_ERROR_PE:
 
       break;
@@ -500,18 +483,17 @@ void HAL_UART_ErrorCallback(UART_HandleTypeDef *huart)
     __HAL_UART_CLEAR_FLAG(huart, UART_FLAG_FE);
     __HAL_UART_CLEAR_FLAG(huart, UART_FLAG_NE);
     __HAL_UART_CLEAR_FLAG(huart, UART_FLAG_ORE);
-
   }
 }
 
-
 /**
  * @brief 串口波特率设置
- * @param {uint8_t} Sw    0:115200    1:74880
+ * @param {uint32_t} 波特率
  * @return {*}
  */
-void Bsp_UART_Set_BRR(UART_HandleTypeDef *huart, uint8_t Sw)
+void Bsp_UART_Set_BRR(UART_HandleTypeDef *huart, uint32_t BaudRate)
 {
+#if 0
   if (huart != &UART1_HANDLE)
   {
     return;
@@ -537,7 +519,10 @@ void Bsp_UART_Set_BRR(UART_HandleTypeDef *huart, uint8_t Sw)
 
   /*串口使能*/
   USART1->CR1 |= (uint32_t)(1 << 0);
-  ;
+#endif
+   
+  UART1_HANDLE.Init.BaudRate = BaudRate;
+  HAL_UART_Init(&UART1_HANDLE);
 }
 
 /**
@@ -565,16 +550,13 @@ void Bsp_UART_RX_Enable(UART_HandleTypeDef *huart, uint8_t Enable)
   }
 }
 
-
-
 /**
  * @brief Event Recorder 重定向 可以使用printf函数从串口1打印输出
  * @param {int} ch
  * @return {*}
  */
-int stdout_putchar (int ch)
+int stdout_putchar(int ch)
 {
-	HAL_UART_Transmit(&UART1_HANDLE , (uint8_t *)&ch , 1 , 0xff);
-	return ch;
+  HAL_UART_Transmit(&UART1_HANDLE, (uint8_t *)&ch, 1, 0xff);
+  return ch;
 }
-

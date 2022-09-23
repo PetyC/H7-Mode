@@ -2,7 +2,7 @@
  * @Description:
  * @Autor: Pi
  * @Date: 2022-09-10 04:30:49
- * @LastEditTime: 2022-09-22 19:49:32
+ * @LastEditTime: 2022-09-23 13:36:52
  */
 #include "LCD_Task.h"
 
@@ -20,7 +20,7 @@ const osSemaphoreAttr_t LCD_BinarySem_attributes = {
     .name = "LCD_BinarySem"};
 
 		
-#include "lv_demo_benchmark.h"
+//#include "lv_demo_benchmark.h"
 		
 /**
  * @brief LCD任务
@@ -32,29 +32,29 @@ void LCD_Task(void *argument)
   /*初始化LCD*/
   LCD_Init();
 	
-	
+
 	/*初始化LVGL*/
 	lv_init();
 	/*初始化显示*/
 	lv_port_disp_init();
-#if 0
+ 
 	/*初始化输入设备*/
 	lv_port_indev_init();
-	
+#if 0		
 	  /*初始化自定义UI*/
   setup_ui(&guider_ui);
   events_init(&guider_ui);
-#endif	
+
 	
 	lv_demo_benchmark();
-	
+#endif		
 	/*延时*/
   TickType_t xLastWakeTime = 0;
   xLastWakeTime = xTaskGetTickCount(); 
 	
   for (;;)
   {
-    
+     
 		vTaskDelayUntil( &xLastWakeTime,10);
 
 		lv_task_handler();

@@ -1,14 +1,10 @@
 /*
- * @Description: 
+ * @Description:字符串处理功能
  * @Autor: Pi
  * @Date: 2022-08-05 19:40:12
- * @LastEditTime: 2022-09-05 03:15:45
+ * @LastEditTime: 2022-09-23 14:09:40
  */
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <ctype.h>
-#include "BSP_ESP8266_cString.h"
+#include "cString.h"
 
 char *StringStr = NULL;
 void cStringFree(void)
@@ -89,36 +85,6 @@ char *StrBetwString(char *Str, char *StrBegin, char *StrEnd)
   else
     return NULL;
 }
-
-/**舍弃
- * @brief  分割字符串
- * @param  src        源字符串
- * @param  separator  分割
- * @param  dest       接收子串的数组
- * @param  num        子字符串的个数
- * @retval None
- * @example split("42,uioj,dk4,56",",",temp,&cnt);  temp[0]=42,...temp[3]=56  cnt=4
- **/
-/*
-void split(char *src,const char *separator,char **dest,int *num)
-{
-  char *pNext;
-  int count = 0;
-  if (src == NULL || strlen(src) == 0)
-    return;
-  if (separator == NULL || strlen(separator) == 0)
-    return;
-  pNext = (char *)strtok(src,separator);
-  while(pNext != NULL)
-  {
-    if(dest != NULL)
-    *dest++ = pNext;
-    ++count;
-    pNext = (char *)strtok(NULL,separator);
-  }
-  *num = count;
-}
-*/
 
 /**
  * @brief  分割字符串
@@ -269,10 +235,7 @@ uint8_t net_dns_str_ip(const char *str, void *ip)
   return 1;
 }
 
-
-
 /****************************************************************************************************/
-
 
 /**
  * @brief 将整数转换为ASCII数组。支持负数。
@@ -283,45 +246,44 @@ uint8_t net_dns_str_ip(const char *str, void *ip)
  */
 void int_to_str(int _iNumber, char *_pBuf, unsigned char _len)
 {
-	unsigned char i;
-	int iTemp;
+  unsigned char i;
+  int iTemp;
 
-	if (_iNumber < 0)	/* 负数 */
-	{
-		iTemp = -_iNumber;	/* 转为正数 */
-	}
-	else
-	{
-		iTemp = _iNumber;
-	}
+  if (_iNumber < 0) /* 负数 */
+  {
+    iTemp = -_iNumber; /* 转为正数 */
+  }
+  else
+  {
+    iTemp = _iNumber;
+  }
 
-	memset(_pBuf, ' ',_len);
+  memset(_pBuf, ' ', _len);
 
-	/* 将整数转换为ASCII字符串 */
-	for (i = 0; i < _len; i++)
-	{
-		_pBuf[_len - 1 - i] = (iTemp % 10) + '0';
-		iTemp = iTemp / 10;
-		if (iTemp == 0)
-		{
-			break;
-		}
-	}
-	_pBuf[_len] = 0;
+  /* 将整数转换为ASCII字符串 */
+  for (i = 0; i < _len; i++)
+  {
+    _pBuf[_len - 1 - i] = (iTemp % 10) + '0';
+    iTemp = iTemp / 10;
+    if (iTemp == 0)
+    {
+      break;
+    }
+  }
+  _pBuf[_len] = 0;
 
-	if (_iNumber < 0)	/* 负数 */
-	{
-		for (i = 0; i < _len; i++)
-		{
-			if ((_pBuf[i] == ' ') && (_pBuf[i + 1] != ' '))
-			{
-				_pBuf[i] = '-';
-				break;
-			}
-		}
-	}
+  if (_iNumber < 0) /* 负数 */
+  {
+    for (i = 0; i < _len; i++)
+    {
+      if ((_pBuf[i] == ' ') && (_pBuf[i + 1] != ' '))
+      {
+        _pBuf[i] = '-';
+        break;
+      }
+    }
+  }
 }
-
 
 /**
  * @brief 将ASCII码字符串转换成整数。 遇到小数点自动越过。
@@ -330,48 +292,46 @@ void int_to_str(int _iNumber, char *_pBuf, unsigned char _len)
  */
 int str_to_int(char *_pStr)
 {
-	unsigned char flag;
-	char *p;
-	int ulInt;
-	unsigned char  i;
-	unsigned char  ucTemp;
+  unsigned char flag;
+  char *p;
+  int ulInt;
+  unsigned char i;
+  unsigned char ucTemp;
 
-	p = _pStr;
-	if (*p == '-')
-	{
-		flag = 1;	/* 负数 */
-		p++;
-	}
-	else
-	{
-		flag = 0;
-	}
+  p = _pStr;
+  if (*p == '-')
+  {
+    flag = 1; /* 负数 */
+    p++;
+  }
+  else
+  {
+    flag = 0;
+  }
 
-	ulInt = 0;
-	for (i = 0; i < 15; i++)
-	{
-		ucTemp = *p;
-		if (ucTemp == '.')	/* 遇到小数点，自动跳过1个字节 */
-		{
-			p++;
-			ucTemp = *p;
-		}
-		if ((ucTemp >= '0') && (ucTemp <= '9'))
-		{
-			ulInt = ulInt * 10 + (ucTemp - '0');
-			p++;
-		}
-		else
-		{
-			break;
-		}
-	}
+  ulInt = 0;
+  for (i = 0; i < 15; i++)
+  {
+    ucTemp = *p;
+    if (ucTemp == '.') /* 遇到小数点，自动跳过1个字节 */
+    {
+      p++;
+      ucTemp = *p;
+    }
+    if ((ucTemp >= '0') && (ucTemp <= '9'))
+    {
+      ulInt = ulInt * 10 + (ucTemp - '0');
+      p++;
+    }
+    else
+    {
+      break;
+    }
+  }
 
-	if (flag == 1)
-	{
-		return -ulInt;
-	}
-	return ulInt;
+  if (flag == 1)
+  {
+    return -ulInt;
+  }
+  return ulInt;
 }
-
-

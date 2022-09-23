@@ -313,7 +313,7 @@
           </ArmAdsMisc>
           <Cads>
             <interw>1</interw>
-            <Optim>3</Optim>
+            <Optim>1</Optim>
             <oTime>0</oTime>
             <SplitLS>0</SplitLS>
             <OneElfS>1</OneElfS>
@@ -339,7 +339,7 @@
               <MiscControls></MiscControls>
               <Define></Define>
               <Undefine></Undefine>
-              <IncludePath>.\STM32CubeMX\STCubeGenerated\Inc;.\User\Driver\include;.\User\APP\include;.\RTE\File_System;.\User\KEIL_HardFaulthandler;.\User\Lvgl;.\User\Lvgl\src;.\User\Lvgl\porting;.\User\Lvgl\GUI;.\User\Lvgl\GUI\custom;.\User\Lvgl\GUI\guider_customer_fonts;.\User\Lvgl\GUI\guider_fonts;.\User\Lvgl\GUI\images;.\User\Lvgl\src\font;.\User\Lvgl\demos\benchmark\assets;.\User\Lvgl\demos\benchmark</IncludePath>
+              <IncludePath>.\STM32CubeMX\STCubeGenerated\Inc;.\User\Driver\include;.\User\Task\include;.\User\APP\include;.\RTE\File_System;.\User\KEIL_HardFaulthandler;.\User\Lvgl;.\User\Lvgl\src;.\User\Lvgl\porting;.\User\Lvgl\GUI;.\User\Lvgl\GUI\custom;.\User\Lvgl\GUI\guider_customer_fonts;.\User\Lvgl\GUI\guider_fonts;.\User\Lvgl\GUI\images;.\User\Lvgl\src\font;.\User\Lvgl\demos\benchmark\assets;.\User\Lvgl\demos\benchmark</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -401,28 +401,43 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>APP</GroupName>
+          <GroupName>Task</GroupName>
           <Files>
             <File>
               <FileName>Freertos_Init.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\User\APP\scr\Freertos_Init.c</FilePath>
+              <FilePath>.\User\Task\scr\Freertos_Init.c</FilePath>
+            </File>
+            <File>
+              <FileName>LCD_Task.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\User\Task\scr\LCD_Task.c</FilePath>
             </File>
             <File>
               <FileName>LED_Task.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\User\APP\scr\LED_Task.c</FilePath>
+              <FilePath>.\User\Task\scr\LED_Task.c</FilePath>
             </File>
             <File>
-              <FileName>Uart_Task.c</FileName>
+              <FileName>Network_Task.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\User\APP\scr\Uart_Task.c</FilePath>
+              <FilePath>.\User\Task\scr\Network_Task.c</FilePath>
             </File>
             <File>
               <FileName>Test_Task.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\User\APP\scr\Test_Task.c</FilePath>
+              <FilePath>.\User\Task\scr\Test_Task.c</FilePath>
             </File>
+            <File>
+              <FileName>Uart_Task.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\User\Task\scr\Uart_Task.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>App</GroupName>
+          <Files>
             <File>
               <FileName>User_FlashFS.c</FileName>
               <FileType>1</FileType>
@@ -434,14 +449,9 @@
               <FilePath>.\User\APP\scr\USBD_User_MSC_0.c</FilePath>
             </File>
             <File>
-              <FileName>LCD_Task.c</FileName>
+              <FileName>Network.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\User\APP\scr\LCD_Task.c</FilePath>
-            </File>
-            <File>
-              <FileName>Network_Task.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\User\APP\scr\Network_Task.c</FilePath>
+              <FilePath>.\User\APP\scr\Network.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -477,6 +487,21 @@
               <FileName>Bsp_st7735s_interface.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\User\Driver\src\Bsp_st7735s_interface.c</FilePath>
+            </File>
+            <File>
+              <FileName>Bsp_ESP8266.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\User\Driver\src\Bsp_ESP8266.c</FilePath>
+            </File>
+            <File>
+              <FileName>cString.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\User\Driver\src\cString.c</FilePath>
+            </File>
+            <File>
+              <FileName>Bsp_MCU_Flash.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\User\Driver\src\Bsp_MCU_Flash.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1689,6 +1714,12 @@
           <targetInfo name="H7_Core"/>
         </targetInfos>
       </component>
+      <component Cbundle="FreeRTOS" Cclass="RTOS" Cgroup="Message Buffer" Cvendor="ARM" Cversion="10.4.6" condition="FreeRTOS Message Buffer">
+        <package name="CMSIS-FreeRTOS" schemaVersion="1.4" url="http://www.keil.com/pack/" vendor="ARM" version="10.4.6"/>
+        <targetInfos>
+          <targetInfo name="H7_Core"/>
+        </targetInfos>
+      </component>
       <component Cbundle="FreeRTOS" Cclass="RTOS" Cgroup="Timers" Cvendor="ARM" Cversion="10.4.6" condition="FreeRTOS Timers">
         <package name="CMSIS-FreeRTOS" schemaVersion="1.4" url="http://www.keil.com/pack/" vendor="ARM" version="10.4.6"/>
         <targetInfos>
@@ -1780,6 +1811,12 @@
         </targetInfos>
       </component>
       <component Cclass="Device" Cgroup="STM32Cube HAL" Csub="DMA" Cvendor="Keil" Cversion="1.9.0" condition="STM32H7 HAL">
+        <package name="STM32H7xx_DFP" schemaVersion="1.7.2" url="http://www.keil.com/pack/" vendor="Keil" version="3.0.0"/>
+        <targetInfos>
+          <targetInfo name="H7_Core"/>
+        </targetInfos>
+      </component>
+      <component Cclass="Device" Cgroup="STM32Cube HAL" Csub="Flash" Cvendor="Keil" Cversion="1.9.0" condition="STM32H7 HAL">
         <package name="STM32H7xx_DFP" schemaVersion="1.7.2" url="http://www.keil.com/pack/" vendor="Keil" version="3.0.0"/>
         <targetInfos>
           <targetInfo name="H7_Core"/>

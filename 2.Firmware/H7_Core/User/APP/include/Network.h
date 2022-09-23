@@ -1,14 +1,13 @@
 /*
- * @Description: 
+ * @Description:提供相关网络功能
  * @Autor: Pi
  * @Date: 2022-08-05 21:54:16
- * @LastEditTime: 2022-09-05 03:15:19
+ * @LastEditTime: 2022-09-23 14:47:59
  */
-#ifndef BSP_ESP8266_NETWORK_H
-#define BSP_ESP8266_NETWORK_H
+#ifndef NETWORK_H_
+#define NETWORK_H_
 
 #include "main.h"
-#include "BSP_ESP8266_cString.h"
 #include "Bsp_ESP8266.h"
 
 /*Station信息*/

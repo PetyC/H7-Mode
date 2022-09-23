@@ -24,6 +24,8 @@
 #define RTE_RTOS_FreeRTOS_EVENTGROUPS   /* RTOS FreeRTOS Event Groups */
 /* ARM.FreeRTOS::RTOS:Heap:Heap_4:10.4.6 */
 #define RTE_RTOS_FreeRTOS_HEAP_4        /* RTOS FreeRTOS Heap 4 */
+/* ARM.FreeRTOS::RTOS:Message Buffer:10.4.6 */
+#define RTE_RTOS_FreeRTOS_MESSAGE_BUFFER /* RTOS FreeRTOS Message Buffers */
 /* ARM.FreeRTOS::RTOS:Timers:10.4.6 */
 #define RTE_RTOS_FreeRTOS_TIMERS        /* RTOS FreeRTOS Timers */
 /* ARM::CMSIS:RTOS2:FreeRTOS:Cortex-M:10.4.6 */
@@ -67,6 +69,8 @@
 #define RTE_DEVICE_HAL_CORTEX
 /* Keil::Device:STM32Cube HAL:DMA:1.9.0 */
 #define RTE_DEVICE_HAL_DMA
+/* Keil::Device:STM32Cube HAL:Flash:1.9.0 */
+#define RTE_DEVICE_HAL_FLASH
 /* Keil::Device:STM32Cube HAL:GPIO:1.9.0 */
 #define RTE_DEVICE_HAL_GPIO
 /* Keil::Device:STM32Cube HAL:MDMA:1.9.0 */
