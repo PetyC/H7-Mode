@@ -1,7 +1,6 @@
 #include "Bsp_MCU_Flash.h"
 #include "string.h"
 
-
 /*内部调用的函数*/
 static uint16_t Bsp_MCU_FLASH_Get_Sector(uint32_t addr);
 
@@ -46,13 +45,12 @@ static uint16_t Bsp_MCU_FLASH_Get_Sector(uint32_t addr)
     return FLASH_SECTOR_7;
 }
 
-
 /**
  * @brief 比较Flash指定地址的数据
  * @param {uint32_t} ReadAddr   Flash地址
  * @param {uint8_t} *pBuffer    比较的数据
  * @param {uint32_t} pBuffer_Len  数据大小(单位字节)
- * @return {uint8_t} 			
+ * @return {uint8_t}
  *                    MCU_FLASH_IS_EQU		  0   Flash内容和待写入的数据相等，不需要擦除和写操作
  *		              	MCU_FLASH_REQ_WRITE		1	Flash不需要擦除，直接写
  *		                MCU_FLASH_REQ_ERASE		2	Flash需要先擦除,再写
@@ -67,10 +65,10 @@ static uint8_t Bsp_MCU_Flash_Compare(uint32_t ReadAddr, uint8_t *pBuffer, uint32
   }
 
   /* 长度为0时返回正确 */
-	if (pBuffer_Len == 0)
-	{
-		return MCU_FLASH_IS_EQU;
-	}
+  if (pBuffer_Len == 0)
+  {
+    return MCU_FLASH_IS_EQU;
+  }
 
   /* 相等标志 默认相等*/
   uint8_t Equ_Flag = 1;
@@ -78,41 +76,38 @@ static uint8_t Bsp_MCU_Flash_Compare(uint32_t ReadAddr, uint8_t *pBuffer, uint32
 
   /*遍历读取数据判断状态*/
   for (uint32_t i = 0; i < pBuffer_Len; i++)
-	{
-		Temp_Byte = *(uint8_t *)ReadAddr;
+  {
+    Temp_Byte = *(uint8_t *)ReadAddr;
 
-		if (Temp_Byte != *pBuffer)
-		{
-			if (Temp_Byte != 0xFF)
-			{
+    if (Temp_Byte != *pBuffer)
+    {
+      if (Temp_Byte != 0xFF)
+      {
         /* 需要擦除后再写 */
-				return MCU_FLASH_REQ_ERASE;	
-			}
-			else
-			{
+        return MCU_FLASH_REQ_ERASE;
+      }
+      else
+      {
         /* 不相等，需要写 */
-				Equ_Flag = 0;	
-			}
-		}
+        Equ_Flag = 0;
+      }
+    }
 
-		ReadAddr++;
-		pBuffer++;
-	}
+    ReadAddr++;
+    pBuffer++;
+  }
 
   if (Equ_Flag == 1)
-	{
+  {
     /* Flash内容和待写入的数据相等，不需要擦除和写操作 */
-		return MCU_FLASH_IS_EQU;	
-	}
-	else
-	{
+    return MCU_FLASH_IS_EQU;
+  }
+  else
+  {
     /* Flash不需要擦除，直接写 */
-		return MCU_FLASH_REQ_WRITE;	
-	}
-
+    return MCU_FLASH_REQ_WRITE;
+  }
 }
-
-
 
 /**
  * @brief 读取CPU Flash的内容
@@ -130,24 +125,18 @@ uint8_t Bsp_MCU_FLASH_Read(uint32_t ReadAddr, uint8_t *pBuffer, uint32_t pBuffer
   }
 
   /* 长度为0时不继续操作,否则起始地址为奇地址会出错 */
-	if (pBuffer_Len == 0)
-	{
-		return 1;
-	}
+  if (pBuffer_Len == 0)
+  {
+    return 1;
+  }
 
   for (uint32_t i = 0; i < pBuffer_Len; i++)
-	{
-		*pBuffer++ = *(uint8_t *)ReadAddr++;
-	}
-	
-	return 0;
+  {
+    *pBuffer++ = *(uint8_t *)ReadAddr++;
+  }
 
+  return 0;
 }
-
-
-
-
-
 
 /**
  * @brief 擦除地址所在扇区
@@ -182,7 +171,7 @@ uint8_t Bsp_MCU_Flash_Erase(uint32_t Addr, uint32_t Sectors_Number)
 
   FlashEraseInit.Banks = BANK_Number;                       //操作BANK
   FlashEraseInit.TypeErase = FLASH_TYPEERASE_SECTORS;       //擦除类型，扇区擦除
-  FlashEraseInit.Sector = Bsp_MCU_FLASH_Get_Sector(Addr);      //要擦除的扇区
+  FlashEraseInit.Sector = Bsp_MCU_FLASH_Get_Sector(Addr);   //要擦除的扇区
   FlashEraseInit.NbSectors = Sectors_Number;                //擦除页数
   FlashEraseInit.VoltageRange = FLASH_VOLTAGE_RANGE_3;      //电压范围，VCC=2.7~3.6V之间!!
   FLASH_WaitForLastOperation(FLASH_WAITETIME, BANK_Number); //等待上次操作完成
@@ -230,28 +219,26 @@ uint8_t Bsp_MCU_Flash_Write(uint32_t Write_Addr, uint8_t *pBuffer, uint32_t pBuf
     return 0;
   }
 
-
   /*判断FLash状态*/
-  uint8_t MCU_FLASH_State = Bsp_MCU_Flash_Compare(Write_Addr , pBuffer , pBuffer_Len);
+  uint8_t MCU_FLASH_State = Bsp_MCU_Flash_Compare(Write_Addr, pBuffer, pBuffer_Len);
 
   if (MCU_FLASH_State == MCU_FLASH_IS_EQU)
-	{
-		return 0;
-	}
-
+  {
+    return 0;
+  }
 
   __set_PRIMASK(1); //关闭STM32总中断
 
   HAL_FLASH_Unlock(); //解锁
 
   /*pBuffer 字节转换为字  32Byte = 1 word*/
-  for(uint32_t i = 0 ;i < pBuffer_Len / 32 ; i++)
+  for (uint32_t i = 0; i < pBuffer_Len / 32; i++)
   {
     /*uint64_t 占用8字节，4*8字节 = 32字节 = 1字 */
     uint64_t FlashWord[4];
     /*char 占用1字节，32个字节即为1字*/
     memcpy((char *)FlashWord, pBuffer, 32);
-		pBuffer += 32;
+    pBuffer += 32;
 
     /*一次写入1字*/
     if (HAL_FLASH_Program(FLASH_TYPEPROGRAM_FLASHWORD, Write_Addr, (uint64_t)((uint32_t)FlashWord)) != HAL_OK) //以字(32位)写入数据
@@ -261,15 +248,14 @@ uint8_t Bsp_MCU_Flash_Write(uint32_t Write_Addr, uint8_t *pBuffer, uint32_t pBuf
       return 1;         //写入异常
     }
 
-    Write_Addr += 32; //地址递增32位即1字
+    Write_Addr += 32;                                          //地址递增32位即1字
     FLASH_WaitForLastOperation(FLASH_WAITETIME, FLASH_BANK_1); //等待上次操作完成
   }
 
-
   /*写入数据长度不是32字节的整数倍则后续补0*/
-  if(pBuffer_Len % 32 != 0)
+  if (pBuffer_Len % 32 != 0)
   {
-    uint64_t FlashWord[4] = {0,0,0,0};
+    uint64_t FlashWord[4] = {0, 0, 0, 0};
     memcpy((char *)FlashWord, pBuffer, pBuffer_Len % 32);
 
     if (HAL_FLASH_Program(FLASH_TYPEPROGRAM_FLASHWORD, Write_Addr, (uint64_t)((uint32_t)FlashWord)) != HAL_OK)
@@ -278,9 +264,7 @@ uint8_t Bsp_MCU_Flash_Write(uint32_t Write_Addr, uint8_t *pBuffer, uint32_t pBuf
       __set_PRIMASK(0); //打开STM32总中断
       return 1;         //写入异常
     }
-
   }
-
 
   HAL_FLASH_Lock(); //上锁
 

@@ -2,7 +2,7 @@
  * @Description:Freertos任务初始化
  * @Autor: Pi
  * @Date: 2022-09-06 01:28:00
- * @LastEditTime: 2022-09-23 17:09:03
+ * @LastEditTime: 2022-10-09 00:40:55
  */
 #include "freertos_Init.h"
 
@@ -35,8 +35,8 @@ void MPU_Config(void)
   MPU_InitStruct.BaseAddress = 0x24000000;
   MPU_InitStruct.Size = MPU_REGION_SIZE_512KB;
   MPU_InitStruct.AccessPermission = MPU_REGION_FULL_ACCESS;
-	MPU_InitStruct.SubRegionDisable = 0x00;
-	MPU_InitStruct.DisableExec = MPU_INSTRUCTION_ACCESS_ENABLE;
+  MPU_InitStruct.SubRegionDisable = 0x00;
+  MPU_InitStruct.DisableExec = MPU_INSTRUCTION_ACCESS_ENABLE;
 #if 1
   /* 配置AXI SRAM的MPU属性为Write through, read allocate，no write allocate */
   MPU_InitStruct.IsBufferable = MPU_ACCESS_NOT_BUFFERABLE;
@@ -81,7 +81,6 @@ static void Create_Sem(void)
 {
   /*LCD二进制信号量*/
   LCD_BinarySemHandle = osSemaphoreNew(1, 0, &LCD_BinarySem_attributes);
-
 }
 
 /**
@@ -92,7 +91,6 @@ static void Create_Queue(void)
 {
   /*按键消息*/
   KEY_QueueHandle = osMessageQueueNew(1, sizeof(uint8_t), &KEY_Queue_attributes);
-
 }
 
 /**
@@ -106,17 +104,16 @@ static void Create_Task(void)
   LED_TaskHandle = osThreadNew(LED_Task, NULL, &LEDTask_attributes);
 
   /*串口任务*/
-//  Uart_TaskHandle = osThreadNew(Uart_Task, NULL, &UartTask_attributes);
+  Uart_TaskHandle = osThreadNew(Uart_Task, NULL, &UartTask_attributes);
 
   /*测试任务*/
   Test_TaskHandle = osThreadNew(Test_Task, NULL, &TestTask_attributes);
 
   /*LCD任务*/
-//  LCD_TaskHandle  =  osThreadNew(LCD_Task, NULL, &LCDTask_attributes);
+  //LCD_TaskHandle  =  osThreadNew(LCD_Task, NULL, &LCDTask_attributes);
 
   /*网络任务*/
   NetWork_TaskHandle = osThreadNew(NetWork_Task, NULL, &NetWorkTask_attributes);
- 
 }
 
 /**
@@ -125,7 +122,7 @@ static void Create_Task(void)
  */
 void Freertos_Init(void)
 {
-	/*配置MPU相关*/
+  /*配置MPU相关*/
   MPU_Config();
 
   /* 使能 I-Cache */
@@ -149,19 +146,18 @@ void Freertos_Init(void)
   HAL_ResumeTick();
 
   // DWT_Init();
-  
+
   /*创建信号量*/
   Create_Sem();
 
   /*创建消息队列*/
   Create_Queue();
 
-  
   /*创建任务*/
   Create_Task();
 
   osKernelStart();
-																				
+
   for (;;)
   {
   };

@@ -60,16 +60,23 @@ void MX_FMC_Init(void)
   hnand1.Config.PlaneNbr = 2;
   hnand1.Config.PlaneSize = 4096;
   hnand1.Config.ExtraCommandEnable = DISABLE;
+//  hnand1.Config.PageSize = 4096;
+//  hnand1.Config.SpareAreaSize = 224;
+//  hnand1.Config.BlockSize = 64;
+//  hnand1.Config.BlockNbr = 1024;
+//  hnand1.Config.PlaneNbr = 2;
+//  hnand1.Config.PlaneSize = 2048;
+//  hnand1.Config.ExtraCommandEnable = DISABLE;
   /* ComSpaceTiming */
-  ComSpaceTiming.SetupTime = 3;
+  ComSpaceTiming.SetupTime = 3;          
   ComSpaceTiming.WaitSetupTime = 3;
   ComSpaceTiming.HoldSetupTime = 2;
-  ComSpaceTiming.HiZSetupTime = 3;
+  ComSpaceTiming.HiZSetupTime = 3;  
   /* AttSpaceTiming */
-  AttSpaceTiming.SetupTime = 3;
+  AttSpaceTiming.SetupTime = 3;          
   AttSpaceTiming.WaitSetupTime = 3;
   AttSpaceTiming.HoldSetupTime = 2;
-  AttSpaceTiming.HiZSetupTime = 3;
+  AttSpaceTiming.HiZSetupTime = 3;  
 
   if (HAL_NAND_Init(&hnand1, &ComSpaceTiming, &AttSpaceTiming) != HAL_OK)
   {

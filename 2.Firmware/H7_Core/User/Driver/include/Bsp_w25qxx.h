@@ -2,7 +2,7 @@
  * @Description: 用于W25Q128JVSSIQ的驱动文件  
  * @Autor: Pi
  * @Date: 2022-04-12 21:18:45
- * @LastEditTime: 2022-09-01 14:51:08
+ * @LastEditTime: 2022-10-09 00:48:47
  */
 #ifndef BSP_W25QXX_H
 #define BSP_W25QXX_H
@@ -18,7 +18,7 @@ extern QSPI_HandleTypeDef HQSPI_HANDLE;
 
 
 /*用户自定义数据*/
-#define FLASH_BEGIN_ADDR 0x00000                    //FLASH起始地址
+#define FLASH_BEGIN_ADDR                 0x00000     //FLASH起始地址
 
 /*W25Q128 芯片相关参数*/
 #define QSPI_FLASH_SIZE                  0x1000000 /* 128 MBits => 16MBytes */
@@ -29,7 +29,6 @@ extern QSPI_HandleTypeDef HQSPI_HANDLE;
 
 
 /*  W25Q128JVSSIQ 指令  */
-
 /* 复位操作 */
 #define RESET_ENABLE_CMD                      0x66
 #define RESET_MEMORY_CMD                      0x99

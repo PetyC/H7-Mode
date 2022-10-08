@@ -70,6 +70,8 @@
     "new": "c",
     "bsp_esp8266_cstring.h": "c",
     "string.h": "c",
-    "ctype.h": "c"
+    "ctype.h": "c",
+    "bsp_st7735s_interface.h": "c",
+    "iap.h": "c"
   }
 }

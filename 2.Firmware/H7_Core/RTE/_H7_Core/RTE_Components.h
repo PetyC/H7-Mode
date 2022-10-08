@@ -63,6 +63,8 @@
         #define RTE_Drivers_USBD1               /* Driver USBD1 */
 /* Keil::Device:STM32Cube Framework:STM32CubeMX:2.0.0 */
 #define RTE_DEVICE_FRAMEWORK_CUBE_MX
+/* Keil::Device:STM32Cube HAL:CRC:1.9.0 */
+#define RTE_DEVICE_HAL_CRC
 /* Keil::Device:STM32Cube HAL:Common:1.9.0 */
 #define RTE_DEVICE_HAL_COMMON
 /* Keil::Device:STM32Cube HAL:Cortex:1.9.0 */

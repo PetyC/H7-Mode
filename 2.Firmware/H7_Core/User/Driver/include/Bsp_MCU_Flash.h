@@ -2,7 +2,7 @@
  * @Description: 
  * @Autor: Pi
  * @Date: 2022-04-20 00:11:15
- * @LastEditTime: 2022-09-23 16:21:50
+ * @LastEditTime: 2022-10-09 00:44:22
  */
 #ifndef BSP_MCU_FLASH_H_
 #define BSP_MCU_FLASH_H_
@@ -22,8 +22,8 @@
 #define MCU_FLASH_SECTOR_SIZE	(uint32_t)(128 * 1024)		    /* 扇区大小，字节 */
 
 
-//STM32H7 FLASH 扇区的起始地址
-//BANK1
+/*STM32H7 FLASH 扇区的起始地址*/
+/*BANK1*/
 #define ADDR_FLASH_SECTOR_0_BANK1     ((uint32_t)0x08000000) //扇区0起始地址, 128 Kbytes  
 #define ADDR_FLASH_SECTOR_1_BANK1     ((uint32_t)0x08020000) //扇区0起始地址, 128 Kbytes  
 #define ADDR_FLASH_SECTOR_2_BANK1     ((uint32_t)0x08040000) //扇区0起始地址, 128 Kbytes  
@@ -33,7 +33,7 @@
 #define ADDR_FLASH_SECTOR_6_BANK1     ((uint32_t)0x080C0000) //扇区0起始地址, 128 Kbytes  
 #define ADDR_FLASH_SECTOR_7_BANK1     ((uint32_t)0x080E0000) //扇区0起始地址, 128 Kbytes  
 
-//BANK2 
+/*BANK2*/ 
 #define ADDR_FLASH_SECTOR_0_BANK2     ((uint32_t)0x08100000) //扇区0起始地址, 128 Kbytes  
 #define ADDR_FLASH_SECTOR_1_BANK2     ((uint32_t)0x08120000) //扇区0起始地址, 128 Kbytes  
 #define ADDR_FLASH_SECTOR_2_BANK2     ((uint32_t)0x08140000) //扇区0起始地址, 128 Kbytes  
@@ -52,9 +52,11 @@
 /* 函数参数错误 */
 #define MCU_FLASH_PARAM_ERR		3	
 
-
-uint8_t Bsp_MCU_FLASH_Read(uint32_t ReadAddr, uint8_t *pBuffer, uint32_t pBuffer_Len);   //从指定地址开始读出指定长度的数据
-uint8_t Bsp_MCU_Flash_Erase(uint32_t Addr, uint32_t Sectors_Number);                     //擦除某页数据
-uint8_t Bsp_MCU_Flash_Write(uint32_t Write_Addr, uint8_t *pBuffer, uint32_t pBuffer_Len);   	//从指定地址开始写入指定长度的数据
+/*从指定地址开始读出指定长度的数据*/
+uint8_t Bsp_MCU_FLASH_Read(uint32_t ReadAddr, uint8_t *pBuffer, uint32_t pBuffer_Len);   
+/*擦除某页数据*/
+uint8_t Bsp_MCU_Flash_Erase(uint32_t Addr, uint32_t Sectors_Number);            
+/*从指定地址开始写入指定长度的数据*/         
+uint8_t Bsp_MCU_Flash_Write(uint32_t Write_Addr, uint8_t *pBuffer, uint32_t pBuffer_Len);   	
 
 #endif

@@ -2,7 +2,7 @@
  * @Description:
  * @Autor: Pi
  * @Date: 2022-08-18 18:50:27
- * @LastEditTime: 2022-09-19 15:52:41
+ * @LastEditTime: 2022-10-09 00:41:31
  */
 #ifndef BSP_ST7735S_INTERFACE_H_
 #define BSP_ST7735S_INTERFACE_H_

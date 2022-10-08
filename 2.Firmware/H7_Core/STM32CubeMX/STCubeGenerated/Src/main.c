@@ -18,6 +18,7 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "crc.h"
 #include "dma.h"
 #include "mdma.h"
 #include "quadspi.h"
@@ -103,8 +104,9 @@ int main(void)
   MX_TIM1_Init();
   MX_USB_OTG_FS_PCD_Init();
   MX_TIM13_Init();
+  MX_CRC_Init();
   /* USER CODE BEGIN 2 */
-	
+	Bsp_Nand_Init();
 	Freertos_Init();
   /* USER CODE END 2 */
 
