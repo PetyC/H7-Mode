@@ -33,6 +33,7 @@
 /* USER CODE BEGIN Includes */
 #include "Freertos_Init.h"
 #include "Bsp_ESP8266.h"
+ 
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -106,8 +107,8 @@ int main(void)
   MX_TIM13_Init();
   MX_CRC_Init();
   /* USER CODE BEGIN 2 */
-	Bsp_Nand_Init();
-	Freertos_Init();
+ 
+  Freertos_Init();
   /* USER CODE END 2 */
 
   /* Infinite loop */

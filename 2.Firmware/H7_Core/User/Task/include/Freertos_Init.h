@@ -2,7 +2,7 @@
  * @Description: 
  * @Autor: Pi
  * @Date: 2022-09-06 03:37:47
- * @LastEditTime: 2022-09-22 19:57:10
+ * @LastEditTime: 2022-10-10 18:04:47
  */
 #ifndef FREERTOS_INIT_H_
 #define FREERTOS_INIT_H_
@@ -13,9 +13,6 @@
 /*C库相关*/
 #include  <stdio.h>
  
-/*工程相关*/
-#include "main.h"
-
 
 /*Event Recorder调试组件*/
 #ifdef RTE_Compiler_EventRecorder
@@ -29,6 +26,15 @@
 #include "Test_Task.h"
 #include "LCD_Task.h"
 #include "Network_Task.h"
+#include "IAP_Task.h"
+
+
+/*底层头文件*/
+#include "User_config.h"
+
+/*BSP驱动*/
+#include "Bsp_DWT.h"
+#include "Bsp_MPU.h"
 
 /*Freertos初始化*/
 void Freertos_Init(void);

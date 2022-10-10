@@ -313,7 +313,7 @@
           </ArmAdsMisc>
           <Cads>
             <interw>1</interw>
-            <Optim>1</Optim>
+            <Optim>2</Optim>
             <oTime>0</oTime>
             <SplitLS>0</SplitLS>
             <OneElfS>1</OneElfS>
@@ -433,6 +433,11 @@
               <FileType>1</FileType>
               <FilePath>.\User\Task\scr\Uart_Task.c</FilePath>
             </File>
+            <File>
+              <FileName>IAP_Task.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\User\Task\scr\IAP_Task.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -512,6 +517,16 @@
               <FileName>Bsp_MCU_Flash.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\User\Driver\src\Bsp_MCU_Flash.c</FilePath>
+            </File>
+            <File>
+              <FileName>Bsp_DWT.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\User\Driver\src\Bsp_DWT.c</FilePath>
+            </File>
+            <File>
+              <FileName>Bsp_MPU.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\User\Driver\src\Bsp_MPU.c</FilePath>
             </File>
           </Files>
         </Group>

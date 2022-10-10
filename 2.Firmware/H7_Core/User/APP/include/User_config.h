@@ -2,13 +2,14 @@
  * @Description:系统配置文件
  * @Autor: Pi
  * @Date: 2022-07-14 15:41:48
- * @LastEditTime: 2022-10-09 00:50:07
+ * @LastEditTime: 2022-10-10 19:07:41
  */
 #ifndef USER_CONFIG_H
 #define USER_CONFIG_H
 
 #include "main.h"
 #include "Bsp_w25qxx.h"
+
 
 typedef struct
 {
@@ -32,7 +33,8 @@ typedef struct
 
 extern Config_Str System_Config;
 
-/*初始化Boot*/
+
+/*初始化系统配置*/
 void User_Config_Init(void);
 
 /*重新写入Config到FLASH*/
