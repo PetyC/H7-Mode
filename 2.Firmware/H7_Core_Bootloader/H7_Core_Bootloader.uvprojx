@@ -339,7 +339,7 @@
               <MiscControls></MiscControls>
               <Define></Define>
               <Undefine></Undefine>
-              <IncludePath>.\STM32CubeMX\STCubeGenerated\Inc</IncludePath>
+              <IncludePath>.\STM32CubeMX\STCubeGenerated\Inc;.\User\Driver\include;.\User\APP\include</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -397,6 +397,81 @@
               <FileName>stm32h7xx_it.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\STM32CubeMX\STCubeGenerated\Src\stm32h7xx_it.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>App</GroupName>
+          <Files>
+            <File>
+              <FileName>IAP.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\User\APP\scr\IAP.c</FilePath>
+            </File>
+            <File>
+              <FileName>Network.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\User\APP\scr\Network.c</FilePath>
+            </File>
+            <File>
+              <FileName>User_config.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\User\APP\scr\User_config.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Driver</GroupName>
+          <Files>
+            <File>
+              <FileName>Bsp_DWT.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\User\Driver\src\Bsp_DWT.c</FilePath>
+            </File>
+            <File>
+              <FileName>Bsp_ESP8266.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\User\Driver\src\Bsp_ESP8266.c</FilePath>
+            </File>
+            <File>
+              <FileName>Bsp_MCU_Flash.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\User\Driver\src\Bsp_MCU_Flash.c</FilePath>
+            </File>
+            <File>
+              <FileName>Bsp_MPU.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\User\Driver\src\Bsp_MPU.c</FilePath>
+            </File>
+            <File>
+              <FileName>Bsp_st7735s.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\User\Driver\src\Bsp_st7735s.c</FilePath>
+            </File>
+            <File>
+              <FileName>Bsp_st7735s_interface.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\User\Driver\src\Bsp_st7735s_interface.c</FilePath>
+            </File>
+            <File>
+              <FileName>Bsp_Uart.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\User\Driver\src\Bsp_Uart.c</FilePath>
+            </File>
+            <File>
+              <FileName>Bsp_Uart_Fifo.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\User\Driver\src\Bsp_Uart_Fifo.c</FilePath>
+            </File>
+            <File>
+              <FileName>Bsp_w25qxx.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\User\Driver\src\Bsp_w25qxx.c</FilePath>
+            </File>
+            <File>
+              <FileName>cString.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\User\Driver\src\cString.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -497,6 +572,12 @@
         </targetInfos>
       </component>
       <component Cclass="Device" Cgroup="STM32Cube HAL" Csub="DMA" Cvendor="Keil" Cversion="1.9.0" condition="STM32H7 HAL">
+        <package name="STM32H7xx_DFP" schemaVersion="1.7.2" url="http://www.keil.com/pack/" vendor="Keil" version="3.0.0"/>
+        <targetInfos>
+          <targetInfo name="H7_Core_Bootloader"/>
+        </targetInfos>
+      </component>
+      <component Cclass="Device" Cgroup="STM32Cube HAL" Csub="Flash" Cvendor="Keil" Cversion="1.9.0" condition="STM32H7 HAL">
         <package name="STM32H7xx_DFP" schemaVersion="1.7.2" url="http://www.keil.com/pack/" vendor="Keil" version="3.0.0"/>
         <targetInfos>
           <targetInfo name="H7_Core_Bootloader"/>

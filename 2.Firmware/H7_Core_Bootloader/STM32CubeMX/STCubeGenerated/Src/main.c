@@ -29,7 +29,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "User_config.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -98,8 +98,9 @@ int main(void)
   MX_USART1_UART_Init();
   MX_DMA_Init();
   MX_CRC_Init();
+  MX_TIM13_Init();
   /* USER CODE BEGIN 2 */
-
+  User_Config_Init();
   /* USER CODE END 2 */
 
   /* Infinite loop */
