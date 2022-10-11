@@ -30,6 +30,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "User_config.h"
+#include "Demo_IAP.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -70,7 +71,7 @@ void SystemClock_Config(void);
 int main(void)
 {
   /* USER CODE BEGIN 1 */
-
+ 
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -100,13 +101,14 @@ int main(void)
   MX_CRC_Init();
   MX_TIM13_Init();
   /* USER CODE BEGIN 2 */
-  User_Config_Init();
+  User_App_Jump_Demo();
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+		User_App_Jump_Set_Demo();
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
