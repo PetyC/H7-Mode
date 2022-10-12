@@ -313,7 +313,7 @@
           </ArmAdsMisc>
           <Cads>
             <interw>1</interw>
-            <Optim>1</Optim>
+            <Optim>7</Optim>
             <oTime>0</oTime>
             <SplitLS>0</SplitLS>
             <OneElfS>1</OneElfS>
@@ -370,7 +370,7 @@
             <TextAddressRange>0x08000000</TextAddressRange>
             <DataAddressRange>0x20000000</DataAddressRange>
             <pXoBase></pXoBase>
-            <ScatterFile>.\Objects\H7_Core_Bootloader.sct</ScatterFile>
+            <ScatterFile>.\H7_Core_Bootloader.sct</ScatterFile>
             <IncludeLibs></IncludeLibs>
             <IncludeLibsPath></IncludeLibsPath>
             <Misc></Misc>
@@ -409,14 +409,14 @@
               <FilePath>.\User\APP\scr\Network.c</FilePath>
             </File>
             <File>
-              <FileName>User_config.c</FileName>
+              <FileName>System_Config.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\User\APP\scr\User_config.c</FilePath>
+              <FilePath>.\User\APP\scr\System_Config.c</FilePath>
             </File>
             <File>
-              <FileName>User_Boot.c</FileName>
+              <FileName>IAP.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\User\APP\scr\User_Boot.c</FilePath>
+              <FilePath>.\User\APP\scr\IAP.c</FilePath>
             </File>
           </Files>
         </Group>

@@ -76,6 +76,9 @@
     "bsp_w25qxx.h": "c",
     "user_config.h": "c",
     "bsp_mpu.h": "c",
-    "user_boot.h": "c"
+    "user_boot.h": "c",
+    "system_config.h": "c",
+    "quadspi.h": "c",
+    "bsp_mcu_flash.h": "c"
   }
 }
