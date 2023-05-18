@@ -40,11 +40,11 @@ void NetWork_Task(void *argument)
 
     if(Network.AP_Connect == Link)
     {
-      HAL_GPIO_WritePin(LED2_GPIO_Port , LED2_Pin , GPIO_PIN_RESET);
+      HAL_GPIO_WritePin(LED1_GPIO_Port , LED1_Pin , GPIO_PIN_SET);    
     }
     else
     {
-      HAL_GPIO_WritePin(LED2_GPIO_Port , LED2_Pin , GPIO_PIN_SET);
+      HAL_GPIO_WritePin(LED1_GPIO_Port , LED1_Pin , GPIO_PIN_RESET);
     }
   }
 }

@@ -37,16 +37,16 @@ static void Create_Task(void)
   LED_TaskHandle = osThreadNew(LED_Task, NULL, &LEDTask_attributes);
 
   /*串口任务*/
-  Uart_TaskHandle = osThreadNew(Uart_Task, NULL, &UartTask_attributes);
+  //Uart_TaskHandle = osThreadNew(Uart_Task, NULL, &UartTask_attributes);
 
   /*测试任务*/
-  Test_TaskHandle = osThreadNew(Test_Task, NULL, &TestTask_attributes);
+  //Test_TaskHandle = osThreadNew(Test_Task, NULL, &TestTask_attributes);
 
   /*LCD任务*/
-  // LCD_TaskHandle  =  osThreadNew(LCD_Task, NULL, &LCDTask_attributes);
+  LCD_TaskHandle  =  osThreadNew(LCD_Task, NULL, &LCDTask_attributes);
 
   /*网络任务*/
-  //NetWork_TaskHandle = osThreadNew(NetWork_Task, NULL, &NetWorkTask_attributes);
+  NetWork_TaskHandle = osThreadNew(NetWork_Task, NULL, &NetWorkTask_attributes);
 
   /*更新检测任务*/
   IAP_TaskHandle = osThreadNew(IAP_Task, NULL, &IAPTask_attributes);

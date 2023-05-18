@@ -40,13 +40,13 @@ void LCD_Task(void *argument)
  
 	/*初始化输入设备*/
 	lv_port_indev_init();
-#if 0		
+#if 1		
 	  /*初始化自定义UI*/
   setup_ui(&guider_ui);
   events_init(&guider_ui);
 
 	
-	lv_demo_benchmark();
+	 
 #endif		
 	/*延时*/
   TickType_t xLastWakeTime = 0;
@@ -57,6 +57,8 @@ void LCD_Task(void *argument)
      
 		vTaskDelayUntil( &xLastWakeTime,10);
 
-		lv_task_handler();
+		lv_task_handler();    
+		
+		UI_Wifi_ImagesDispaly(1);
   };
 }

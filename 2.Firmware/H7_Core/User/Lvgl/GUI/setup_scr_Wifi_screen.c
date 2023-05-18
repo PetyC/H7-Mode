@@ -67,7 +67,7 @@ void setup_scr_Wifi_screen(lv_ui *ui){
 	lv_obj_set_pos(ui->Wifi_screen_label_2, 0, 25);
 	lv_obj_set_size(ui->Wifi_screen_label_2, 128, 15);
 	lv_obj_set_scrollbar_mode(ui->Wifi_screen_label_2, LV_SCROLLBAR_MODE_OFF);
-	lv_label_set_text(ui->Wifi_screen_label_2, "已连接WIFI:");
+	lv_label_set_text(ui->Wifi_screen_label_2, "连接WIFI:");
 	lv_label_set_long_mode(ui->Wifi_screen_label_2, LV_LABEL_LONG_WRAP);
 
 	//Write style state: LV_STATE_DEFAULT for style_wifi_screen_label_2_main_main_default
