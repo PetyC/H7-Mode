@@ -71,6 +71,7 @@ void Error_Handler(void);
 #define ESP_POW_GPIO_Port GPIOD
 #define LCD_BLK_Pin GPIO_PIN_8
 #define LCD_BLK_GPIO_Port GPIOA
+
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */

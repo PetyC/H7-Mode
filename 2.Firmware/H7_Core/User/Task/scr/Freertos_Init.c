@@ -49,7 +49,7 @@ static void Create_Task(void)
   NetWork_TaskHandle = osThreadNew(NetWork_Task, NULL, &NetWorkTask_attributes);
 
   /*更新检测任务*/
-  IAP_TaskHandle = osThreadNew(IAP_Task, NULL, &IAPTask_attributes);
+  //IAP_TaskHandle = osThreadNew(IAP_Task, NULL, &IAPTask_attributes);
 }
 
 /**
@@ -59,7 +59,7 @@ static void Create_Task(void)
 void Freertos_Init(void)
 {
   /*配置MPU相关*/
-  //Bsp_MPU_Config();
+  Bsp_MPU_Config();
 
   /*EventRecorder相关配置*/
 #ifdef RTE_Compiler_EventRecorder

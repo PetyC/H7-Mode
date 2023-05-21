@@ -15,6 +15,11 @@ extern "C" {
 
 typedef struct
 {
+	lv_obj_t *start_screen;
+	bool start_screen_del;
+	lv_obj_t *start_screen_schedule_bar;
+	lv_obj_t *start_screen_label_1;
+	lv_obj_t *start_screen_label_2;
 	lv_obj_t *main_screen;
 	bool main_screen_del;
 	lv_obj_t *main_screen_wifi_set_btn;
@@ -58,6 +63,7 @@ typedef struct
 void init_scr_del_flag(lv_ui *ui);
 void setup_ui(lv_ui *ui);
 extern lv_ui guider_ui;
+void setup_scr_start_screen(lv_ui *ui);
 void setup_scr_main_screen(lv_ui *ui);
 void setup_scr_device_screen(lv_ui *ui);
 void setup_scr_Wifi_screen(lv_ui *ui);

@@ -88,6 +88,7 @@ void Bsp_ESP8266_Timer_Start(uint16_t Timerout)
  */
 void Bsp_ESP8266_PowerOn(void)
 {
+#if 1
   Bsp_UART_Set_BRR(&huart1, 74880);
 
   HAL_GPIO_WritePin(ESP_POW_GPIO_Port, ESP_POW_Pin, GPIO_PIN_SET);
@@ -99,6 +100,11 @@ void Bsp_ESP8266_PowerOn(void)
   Bsp_ESP8266_WaitResponse("ready\r\n", 3000);
 
   Bsp_ESP8266_Clear_RxBuffer(); //防止还有杂乱数据
+#else
+	HAL_GPIO_WritePin(ESP_POW_GPIO_Port, ESP_POW_Pin, GPIO_PIN_SET);
+	HAL_Delay(1500);
+	Bsp_ESP8266_Clear_RxBuffer(); //防止还有杂乱数据
+#endif
 }
 
 /**

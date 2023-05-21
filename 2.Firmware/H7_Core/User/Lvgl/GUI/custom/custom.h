@@ -30,6 +30,7 @@ void encoder_wifi_init(void);
 void encoder_qr_init(void);
 void encoder_device_init(void);
 
+void UI_Start_Schedule_Bar_Set(uint8_t num);
 
 void UI_Wifi_ImagesDispaly(uint8_t Enagle);
 

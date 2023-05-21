@@ -11,7 +11,7 @@
 #include "main.h"
 #include "usart.h"
 #include "string.h"
-#include "Bsp_Uart_Fifo.h"
+#include "Bsp_Fifo.h"
 
 /*是否使用FreeRTOS*/
 #define USE_FreeRTOS 1

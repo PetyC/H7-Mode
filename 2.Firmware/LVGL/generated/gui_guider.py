@@ -133,6 +133,114 @@ def ta_event_cb(e,kb):
         kb.add_flag(lv.obj.FLAG.HIDDEN)
 
 
+start_screen = lv.obj()
+start_screen.set_scrollbar_mode(lv.SCROLLBAR_MODE.OFF)
+# create style style_start_screen_main_main_default
+style_start_screen_main_main_default = lv.style_t()
+style_start_screen_main_main_default.init()
+style_start_screen_main_main_default.set_bg_color(lv.color_make(0xff,0xff,0xff))
+style_start_screen_main_main_default.set_bg_opa(255)
+
+# add style for start_screen
+start_screen.add_style(style_start_screen_main_main_default, lv.PART.MAIN|lv.STATE.DEFAULT)
+
+start_screen_schedule_bar = lv.bar(start_screen)
+start_screen_schedule_bar.set_pos(int(4),int(100))
+start_screen_schedule_bar.set_size(120,10)
+start_screen_schedule_bar.set_scrollbar_mode(lv.SCROLLBAR_MODE.OFF)
+start_screen_schedule_bar.set_style_anim_time(1000, 0)
+start_screen_schedule_bar.set_mode(lv.bar.MODE.NORMAL)
+start_screen_schedule_bar.set_value(1, lv.ANIM.ON)
+# create style style_start_screen_schedule_bar_main_main_default
+style_start_screen_schedule_bar_main_main_default = lv.style_t()
+style_start_screen_schedule_bar_main_main_default.init()
+style_start_screen_schedule_bar_main_main_default.set_radius(10)
+style_start_screen_schedule_bar_main_main_default.set_bg_color(lv.color_make(0x21,0x95,0xf6))
+style_start_screen_schedule_bar_main_main_default.set_bg_grad_color(lv.color_make(0x21,0x95,0xf6))
+style_start_screen_schedule_bar_main_main_default.set_bg_grad_dir(lv.GRAD_DIR.NONE)
+style_start_screen_schedule_bar_main_main_default.set_bg_opa(60)
+
+# add style for start_screen_schedule_bar
+start_screen_schedule_bar.add_style(style_start_screen_schedule_bar_main_main_default, lv.PART.MAIN|lv.STATE.DEFAULT)
+
+# create style style_start_screen_schedule_bar_main_indicator_default
+style_start_screen_schedule_bar_main_indicator_default = lv.style_t()
+style_start_screen_schedule_bar_main_indicator_default.init()
+style_start_screen_schedule_bar_main_indicator_default.set_radius(10)
+style_start_screen_schedule_bar_main_indicator_default.set_bg_color(lv.color_make(0x21,0x95,0xf6))
+style_start_screen_schedule_bar_main_indicator_default.set_bg_grad_color(lv.color_make(0x21,0x95,0xf6))
+style_start_screen_schedule_bar_main_indicator_default.set_bg_grad_dir(lv.GRAD_DIR.NONE)
+style_start_screen_schedule_bar_main_indicator_default.set_bg_opa(255)
+
+# add style for start_screen_schedule_bar
+start_screen_schedule_bar.add_style(style_start_screen_schedule_bar_main_indicator_default, lv.PART.INDICATOR|lv.STATE.DEFAULT)
+
+start_screen_label_1 = lv.label(start_screen)
+start_screen_label_1.set_pos(int(14),int(30))
+start_screen_label_1.set_size(100,20)
+start_screen_label_1.set_scrollbar_mode(lv.SCROLLBAR_MODE.OFF)
+start_screen_label_1.set_text("H7-Mode")
+start_screen_label_1.set_long_mode(lv.label.LONG.WRAP)
+# create style style_start_screen_label_1_main_main_default
+style_start_screen_label_1_main_main_default = lv.style_t()
+style_start_screen_label_1_main_main_default.init()
+style_start_screen_label_1_main_main_default.set_radius(0)
+style_start_screen_label_1_main_main_default.set_bg_color(lv.color_make(0x21,0x95,0xf6))
+style_start_screen_label_1_main_main_default.set_bg_grad_color(lv.color_make(0x21,0x95,0xf6))
+style_start_screen_label_1_main_main_default.set_bg_grad_dir(lv.GRAD_DIR.NONE)
+style_start_screen_label_1_main_main_default.set_bg_opa(0)
+style_start_screen_label_1_main_main_default.set_text_color(lv.color_make(0x00,0x00,0x00))
+try:
+    style_start_screen_label_1_main_main_default.set_text_font(lv.font_simsun_20)
+except AttributeError:
+    try:
+        style_start_screen_label_1_main_main_default.set_text_font(lv.font_montserrat_20)
+    except AttributeError:
+        style_start_screen_label_1_main_main_default.set_text_font(lv.font_montserrat_16)
+style_start_screen_label_1_main_main_default.set_text_letter_space(2)
+style_start_screen_label_1_main_main_default.set_text_line_space(0)
+style_start_screen_label_1_main_main_default.set_text_align(lv.TEXT_ALIGN.CENTER)
+style_start_screen_label_1_main_main_default.set_pad_left(0)
+style_start_screen_label_1_main_main_default.set_pad_right(0)
+style_start_screen_label_1_main_main_default.set_pad_top(0)
+style_start_screen_label_1_main_main_default.set_pad_bottom(0)
+
+# add style for start_screen_label_1
+start_screen_label_1.add_style(style_start_screen_label_1_main_main_default, lv.PART.MAIN|lv.STATE.DEFAULT)
+
+start_screen_label_2 = lv.label(start_screen)
+start_screen_label_2.set_pos(int(14),int(88))
+start_screen_label_2.set_size(100,10)
+start_screen_label_2.set_scrollbar_mode(lv.SCROLLBAR_MODE.OFF)
+start_screen_label_2.set_text("加载中")
+start_screen_label_2.set_long_mode(lv.label.LONG.WRAP)
+# create style style_start_screen_label_2_main_main_default
+style_start_screen_label_2_main_main_default = lv.style_t()
+style_start_screen_label_2_main_main_default.init()
+style_start_screen_label_2_main_main_default.set_radius(0)
+style_start_screen_label_2_main_main_default.set_bg_color(lv.color_make(0x21,0x95,0xf6))
+style_start_screen_label_2_main_main_default.set_bg_grad_color(lv.color_make(0x21,0x95,0xf6))
+style_start_screen_label_2_main_main_default.set_bg_grad_dir(lv.GRAD_DIR.NONE)
+style_start_screen_label_2_main_main_default.set_bg_opa(0)
+style_start_screen_label_2_main_main_default.set_text_color(lv.color_make(0x00,0x00,0x00))
+try:
+    style_start_screen_label_2_main_main_default.set_text_font(lv.font_simsun_10)
+except AttributeError:
+    try:
+        style_start_screen_label_2_main_main_default.set_text_font(lv.font_montserrat_10)
+    except AttributeError:
+        style_start_screen_label_2_main_main_default.set_text_font(lv.font_montserrat_16)
+style_start_screen_label_2_main_main_default.set_text_letter_space(2)
+style_start_screen_label_2_main_main_default.set_text_line_space(0)
+style_start_screen_label_2_main_main_default.set_text_align(lv.TEXT_ALIGN.CENTER)
+style_start_screen_label_2_main_main_default.set_pad_left(0)
+style_start_screen_label_2_main_main_default.set_pad_right(0)
+style_start_screen_label_2_main_main_default.set_pad_top(0)
+style_start_screen_label_2_main_main_default.set_pad_bottom(0)
+
+# add style for start_screen_label_2
+start_screen_label_2.add_style(style_start_screen_label_2_main_main_default, lv.PART.MAIN|lv.STATE.DEFAULT)
+
 main_screen = lv.obj()
 main_screen.set_scrollbar_mode(lv.SCROLLBAR_MODE.OFF)
 # create style style_main_screen_main_main_default
@@ -324,10 +432,10 @@ main_screen_wifi_img.set_size(15,14)
 main_screen_wifi_img.set_scrollbar_mode(lv.SCROLLBAR_MODE.OFF)
 main_screen_wifi_img.add_flag(lv.obj.FLAG.CLICKABLE)
 try:
-    with open('C:\\Users\\39810\\Desktop\\H7-Mode\\2.Firmware\\LVGL\\CoreH7\\generated\\mPythonImages\\mp571497797.png','rb') as f:
+    with open('C:\\Users\\39810\\Desktop\\H7-Mode\\2.Firmware\\LVGL\\generated\\mPythonImages\\mp237037509.png','rb') as f:
         main_screen_wifi_img_img_data = f.read()
 except:
-    print('Could not open C:\\Users\\39810\\Desktop\\H7-Mode\\2.Firmware\\LVGL\\CoreH7\\generated\\mPythonImages\\mp571497797.png')
+    print('Could not open C:\\Users\\39810\\Desktop\\H7-Mode\\2.Firmware\\LVGL\\generated\\mPythonImages\\mp237037509.png')
     sys.exit()
 
 main_screen_wifi_img_img = lv.img_dsc_t({
@@ -1011,10 +1119,10 @@ QR_screen_img_1.set_size(100,100)
 QR_screen_img_1.set_scrollbar_mode(lv.SCROLLBAR_MODE.OFF)
 QR_screen_img_1.add_flag(lv.obj.FLAG.CLICKABLE)
 try:
-    with open('C:\\Users\\39810\\Desktop\\H7-Mode\\2.Firmware\\LVGL\\CoreH7\\generated\\mPythonImages\\mp-1380144639.png','rb') as f:
+    with open('C:\\Users\\39810\\Desktop\\H7-Mode\\2.Firmware\\LVGL\\generated\\mPythonImages\\mp1838870401.png','rb') as f:
         QR_screen_img_1_img_data = f.read()
 except:
-    print('Could not open C:\\Users\\39810\\Desktop\\H7-Mode\\2.Firmware\\LVGL\\CoreH7\\generated\\mPythonImages\\mp-1380144639.png')
+    print('Could not open C:\\Users\\39810\\Desktop\\H7-Mode\\2.Firmware\\LVGL\\generated\\mPythonImages\\mp1838870401.png')
     sys.exit()
 
 QR_screen_img_1_img = lv.img_dsc_t({
@@ -1109,7 +1217,7 @@ main_screen_demo_btn.add_event_cb(lambda e: main_screen_demo_btn_clicked_1_event
 # content from custom.py
 
 # Load the default screen
-lv.scr_load(main_screen)
+lv.scr_load(start_screen)
 
 while SDL.check():
     time.sleep_ms(5)

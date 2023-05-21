@@ -269,22 +269,11 @@ void Bsp_UART_MspDeInit(UART_HandleTypeDef *huart)
  */
 void Bsp_UART_IRQHandler(UART_HandleTypeDef *huart)
 {
-  if (huart == &UART1_HANDLE)
-  {
-    if (__HAL_UART_GET_FLAG(huart, UART_FLAG_IDLE) == SET) //判断是否是空闲中断
-    {
-      if (__HAL_DMA_GET_COUNTER(&UART1_RX_DMA_HANDLE) != UART1_DMA_RX_BUF_SIZE) //只有当DMA中存有数据时才进入
-      {
-        __HAL_UART_CLEAR_IDLEFLAG(huart); //清除空闲中断标志（否则会一直不断进入中断）
-
-        Bsp_UART_IDLE_Callback(huart);
-      }
-      else
-      {
-        __HAL_UART_CLEAR_IDLEFLAG(huart);
-      }
-    }
-  }
+	if (__HAL_UART_GET_FLAG(huart, UART_FLAG_IDLE) == SET) //判断是否是空闲中断
+	{
+			__HAL_UART_CLEAR_IDLEFLAG(huart); //清除空闲中断标志（否则会一直不断进入中断）
+			Bsp_UART_IDLE_Callback(huart);
+	}
 }
 
 /**

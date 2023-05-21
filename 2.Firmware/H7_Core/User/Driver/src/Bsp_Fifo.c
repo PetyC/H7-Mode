@@ -2,14 +2,14 @@
  * @Description: FIFO缓存
  * @Autor: Pi
  * @Date: 2022-04-24 14:59:17
- * @LastEditTime: 2022-08-09 19:52:52
+ * @LastEditTime: 2022-12-08 15:44:21
  */
 
-#include <stdint.h>
+ 
 #include <stdbool.h>
 #include <string.h>
-#include "BSP_UART_fifo.h"
 #include <stddef.h>
+#include "BSP_fifo.h"
 
 /**
   * @brief  注册一个fifo

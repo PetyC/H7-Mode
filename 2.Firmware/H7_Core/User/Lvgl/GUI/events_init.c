@@ -12,7 +12,7 @@
 void events_init(lv_ui *ui)
 {
   custom_init(ui);
-  encoder_main_init();
+  //encoder_main_init();
 }
 
 static void main_screen_wifi_set_btn_event_handler(lv_event_t *e)

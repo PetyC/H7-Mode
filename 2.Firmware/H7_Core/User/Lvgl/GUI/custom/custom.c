@@ -119,8 +119,17 @@ void encoder_device_init(void)
   
 }
 
-
-
+/**
+* @brief 开机进度条控制
+ * @param {uint8_t} num
+ * @return {*}
+ */
+void UI_Start_Schedule_Bar_Set(uint8_t num)
+{
+	lv_bar_set_value(guider_ui.start_screen_schedule_bar, 25, LV_ANIM_ON);
+	lv_bar_set_value(guider_ui.start_screen_schedule_bar, 50, LV_ANIM_ON);
+	
+}
 
 /**
  * @brief Wifi连接状态图标控制

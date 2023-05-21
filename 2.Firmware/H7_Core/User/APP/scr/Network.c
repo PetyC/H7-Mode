@@ -385,7 +385,7 @@ void NetWork_Init(void)
   Bsp_ESP8266_SetWiFiMode(1);
       
   /*加入WIFI*/
-  Bsp_ESP8266_JoinAP(Network.AP.pwd ,Network.AP.ssid, 15000);
+  Bsp_ESP8266_JoinAP(Network.AP.pwd ,Network.AP.ssid, 2000);
 
   /*查询网络状态*/
   Network.AP_Connect = (AP_Connect_E)NetWork_QueryLink();

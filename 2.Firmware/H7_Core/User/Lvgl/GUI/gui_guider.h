@@ -1,11 +1,5 @@
 /*
- * @Description: 
- * @Autor: Pi
- * @Date: 2022-08-26 22:53:22
- * @LastEditTime: 2022-08-30 23:32:00
- */
-/*
- * Copyright 2022 NXP
+ * Copyright 2023 NXP
  * SPDX-License-Identifier: MIT
  * The auto-generated can only be used on NXP devices
  */
@@ -21,6 +15,11 @@ extern "C" {
 
 typedef struct
 {
+	lv_obj_t *start_screen;
+	bool start_screen_del;
+	lv_obj_t *start_screen_schedule_bar;
+	lv_obj_t *start_screen_label_1;
+	lv_obj_t *start_screen_label_2;
 	lv_obj_t *main_screen;
 	bool main_screen_del;
 	lv_obj_t *main_screen_wifi_set_btn;
@@ -64,6 +63,7 @@ typedef struct
 void init_scr_del_flag(lv_ui *ui);
 void setup_ui(lv_ui *ui);
 extern lv_ui guider_ui;
+void setup_scr_start_screen(lv_ui *ui);
 void setup_scr_main_screen(lv_ui *ui);
 void setup_scr_device_screen(lv_ui *ui);
 void setup_scr_Wifi_screen(lv_ui *ui);
@@ -71,7 +71,6 @@ void setup_scr_QR_screen(lv_ui *ui);
 LV_IMG_DECLARE(_QR_100x100);
 LV_IMG_DECLARE(_WIFI_discon_15x14);
 LV_IMG_DECLARE(_WIFI_con_15x14);
-
 #ifdef __cplusplus
 }
 #endif

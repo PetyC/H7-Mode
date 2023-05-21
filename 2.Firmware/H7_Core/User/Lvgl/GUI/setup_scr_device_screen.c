@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 NXP
+ * Copyright 2023 NXP
  * SPDX-License-Identifier: MIT
  * The auto-generated can only be used on NXP devices
  */
@@ -57,11 +57,8 @@ void setup_scr_device_screen(lv_ui *ui){
 	lv_style_set_bg_opa(&style_device_screen_about_tileview_main_scrollbar_default, 255);
 	lv_obj_add_style(ui->device_screen_about_tileview, &style_device_screen_about_tileview_main_scrollbar_default, LV_PART_SCROLLBAR|LV_STATE_DEFAULT);
 
-	//Update pos for widget device_screen_about_tileview
-	lv_obj_update_layout(ui->device_screen_about_tileview);
-
 	//add new tile about_tileview_about_name_0
-	ui->about_tileview_about_name_0 = lv_tileview_add_tile(ui->device_screen_about_tileview, 0, 0, LV_DIR_TOP);  //LV_DIR_TOP
+	ui->about_tileview_about_name_0 = lv_tileview_add_tile(ui->device_screen_about_tileview, 0, 0, LV_DIR_BOTTOM);
 
 	//Write codes device_screen_label_3
 	ui->device_screen_label_3 = lv_label_create(ui->about_tileview_about_name_0);
@@ -262,7 +259,7 @@ void setup_scr_device_screen(lv_ui *ui){
 	lv_obj_add_style(ui->device_screen_label_1, &style_device_screen_label_1_main_main_default, LV_PART_MAIN|LV_STATE_DEFAULT);
 
 	//add new tile about_tileview_about_name_1
-	ui->about_tileview_about_name_1 = lv_tileview_add_tile(ui->device_screen_about_tileview, 0 , 1, LV_DIR_TOP);//LV_DIR_BOTTOM
+	ui->about_tileview_about_name_1 = lv_tileview_add_tile(ui->device_screen_about_tileview, 0 , 1, LV_DIR_TOP);
 
 	//Write codes device_screen_return_btn
 	ui->device_screen_return_btn = lv_btn_create(ui->about_tileview_about_name_1);

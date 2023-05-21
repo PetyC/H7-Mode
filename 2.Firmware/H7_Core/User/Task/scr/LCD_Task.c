@@ -21,6 +21,7 @@ const osSemaphoreAttr_t LCD_BinarySem_attributes = {
 
 		
 //#include "lv_demo_benchmark.h"
+lv_ui guider_ui;	
 		
 /**
  * @brief LCD任务
@@ -45,8 +46,12 @@ void LCD_Task(void *argument)
   setup_ui(&guider_ui);
   events_init(&guider_ui);
 
-	
-	 
+//	for(uint8_t i = 0 ; i <= 100 ; i++)
+//	{
+//		UI_Start_Schedule_Bar_Set(i);
+//		osDelay(50);
+//	} 
+
 #endif		
 	/*延时*/
   TickType_t xLastWakeTime = 0;
@@ -59,6 +64,6 @@ void LCD_Task(void *argument)
 
 		lv_task_handler();    
 		
-		UI_Wifi_ImagesDispaly(1);
+		//UI_Wifi_ImagesDispaly(1);
   };
 }

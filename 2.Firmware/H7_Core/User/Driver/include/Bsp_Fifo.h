@@ -2,13 +2,12 @@
  * @Description: FIFO缓存
  * @Autor: Pi
  * @Date: 2022-04-24 14:59:32
- * @LastEditTime: 2022-08-09 19:53:43
+ * @LastEditTime: 2022-12-08 15:44:28
  */
 
-#ifndef BSP_UART_FIFO_H_
-#define BSP_UART_FIFO_H_
+#ifndef BSP_FIFO_H
+#define BSP_FIFO_H
 
-#include <stdbool.h>
 #include <stdint.h>
 
 typedef void (*lock_fun)(void);

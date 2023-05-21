@@ -313,7 +313,7 @@
           </ArmAdsMisc>
           <Cads>
             <interw>1</interw>
-            <Optim>2</Optim>
+            <Optim>4</Optim>
             <oTime>0</oTime>
             <SplitLS>0</SplitLS>
             <OneElfS>1</OneElfS>
@@ -484,11 +484,6 @@
               <FilePath>.\User\Driver\src\Bsp_Uart.c</FilePath>
             </File>
             <File>
-              <FileName>Bsp_Uart_Fifo.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\User\Driver\src\Bsp_Uart_Fifo.c</FilePath>
-            </File>
-            <File>
               <FileName>Bsp_w25qxx.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\User\Driver\src\Bsp_w25qxx.c</FilePath>
@@ -527,6 +522,11 @@
               <FileName>Bsp_MPU.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\User\Driver\src\Bsp_MPU.c</FilePath>
+            </File>
+            <File>
+              <FileName>Bsp_Fifo.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\User\Driver\src\Bsp_Fifo.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1513,6 +1513,11 @@
               <FileType>1</FileType>
               <FilePath>.\User\Lvgl\GUI\setup_scr_Wifi_screen.c</FilePath>
             </File>
+            <File>
+              <FileName>setup_scr_start_screen.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\User\Lvgl\GUI\setup_scr_start_screen.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1562,6 +1567,16 @@
               <FileName>lv_font_simsun_12.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\User\Lvgl\GUI\guider_fonts\lv_font_simsun_12.c</FilePath>
+            </File>
+            <File>
+              <FileName>lv_font_simsun_10.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\User\Lvgl\GUI\guider_fonts\lv_font_simsun_10.c</FilePath>
+            </File>
+            <File>
+              <FileName>lv_font_simsun_20.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\User\Lvgl\GUI\guider_fonts\lv_font_simsun_20.c</FilePath>
             </File>
           </Files>
         </Group>
