@@ -58,7 +58,7 @@ void setup_scr_start_screen(lv_ui *ui){
 	lv_style_set_bg_grad_dir(&style_start_screen_schedule_bar_main_indicator_default, LV_GRAD_DIR_NONE);
 	lv_style_set_bg_opa(&style_start_screen_schedule_bar_main_indicator_default, 255);
 	lv_obj_add_style(ui->start_screen_schedule_bar, &style_start_screen_schedule_bar_main_indicator_default, LV_PART_INDICATOR|LV_STATE_DEFAULT);
-	lv_obj_set_style_anim_time(ui->start_screen_schedule_bar, 10000, 0);
+	lv_obj_set_style_anim_time(ui->start_screen_schedule_bar, 8000, 0);
 	lv_bar_set_mode(ui->start_screen_schedule_bar, LV_BAR_MODE_NORMAL);
 	lv_bar_set_value(ui->start_screen_schedule_bar, 100, LV_ANIM_ON);
 
@@ -121,4 +121,7 @@ void setup_scr_start_screen(lv_ui *ui){
 	lv_style_set_pad_top(&style_start_screen_label_2_main_main_default, 0);
 	lv_style_set_pad_bottom(&style_start_screen_label_2_main_main_default, 0);
 	lv_obj_add_style(ui->start_screen_label_2, &style_start_screen_label_2_main_main_default, LV_PART_MAIN|LV_STATE_DEFAULT);
+
+
+	events_init_start_screen(ui);
 }

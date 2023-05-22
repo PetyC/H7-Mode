@@ -2,7 +2,7 @@
  * @Description:网络相关
  * @Autor: Pi
  * @Date: 2022-08-05 21:54:09
- * @LastEditTime: 2022-09-23 15:30:05
+ * @LastEditTime: 2023-05-23 03:03:20
  */
 #include "Network.h"
 
@@ -360,8 +360,8 @@ void NetWork_Init(void)
   memset(Network.AP.pwd , 0 , sizeof(Network.AP.pwd));      //应从Flash中读出保存的WIFI数据
   memset(Network.AP.ssid , 0 , sizeof(Network.AP.ssid));
 
-  memcpy(Network.AP.pwd , "Mate" , 4);
-  memcpy(Network.AP.ssid , "23333333" , 8);
+  memcpy(Network.AP.ssid , "Mate" , 4);
+  memcpy(Network.AP.pwd , "23333333" , 8);
 
   /*ESP8266上电*/
   Bsp_ESP8266_PowerOn();
@@ -385,7 +385,7 @@ void NetWork_Init(void)
   Bsp_ESP8266_SetWiFiMode(1);
       
   /*加入WIFI*/
-  Bsp_ESP8266_JoinAP(Network.AP.pwd ,Network.AP.ssid, 2000);
+  Bsp_ESP8266_JoinAP(Network.AP.ssid ,Network.AP.pwd , 4000);        
 
   /*查询网络状态*/
   Network.AP_Connect = (AP_Connect_E)NetWork_QueryLink();

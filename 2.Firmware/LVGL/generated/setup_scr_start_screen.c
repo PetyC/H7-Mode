@@ -58,30 +58,6 @@ void setup_scr_start_screen(lv_ui *ui){
 	lv_style_set_bg_grad_dir(&style_start_screen_schedule_bar_main_indicator_default, LV_GRAD_DIR_NONE);
 	lv_style_set_bg_opa(&style_start_screen_schedule_bar_main_indicator_default, 255);
 	lv_obj_add_style(ui->start_screen_schedule_bar, &style_start_screen_schedule_bar_main_indicator_default, LV_PART_INDICATOR|LV_STATE_DEFAULT);
-
-	//Update pos for widget start_screen_schedule_bar
-	lv_obj_update_layout(ui->start_screen_schedule_bar);
-
-	//Write animation: start_screen_schedule_barmove in x direction
-	lv_anim_t start_screen_schedule_bar_x;
-	lv_anim_init(&start_screen_schedule_bar_x);
-	lv_anim_set_var(&start_screen_schedule_bar_x, ui->start_screen_schedule_bar);
-	lv_anim_set_time(&start_screen_schedule_bar_x, 1000);
-	lv_anim_set_exec_cb(&start_screen_schedule_bar_x, (lv_anim_exec_xcb_t)lv_obj_set_x);
-	lv_anim_set_values(&start_screen_schedule_bar_x, lv_obj_get_x(ui->start_screen_schedule_bar), 0);
-	lv_anim_set_path_cb(&start_screen_schedule_bar_x, lv_anim_path_linear);
-	lv_anim_start(&start_screen_schedule_bar_x);
-
-	//Write animation: start_screen_schedule_barmove in y direction
-	lv_anim_t start_screen_schedule_bar_y;
-	lv_anim_init(&start_screen_schedule_bar_y);
-	lv_anim_set_var(&start_screen_schedule_bar_y, ui->start_screen_schedule_bar);
-	lv_anim_set_time(&start_screen_schedule_bar_y, 1000);
-	lv_anim_set_exec_cb(&start_screen_schedule_bar_y, (lv_anim_exec_xcb_t)lv_obj_set_y);
-	lv_anim_set_values(&start_screen_schedule_bar_y, lv_obj_get_y(ui->start_screen_schedule_bar), 0);
-	lv_anim_set_path_cb(&start_screen_schedule_bar_y, lv_anim_path_linear);
-	lv_anim_start(&start_screen_schedule_bar_y);
-
 	lv_obj_set_style_anim_time(ui->start_screen_schedule_bar, 1000, 0);
 	lv_bar_set_mode(ui->start_screen_schedule_bar, LV_BAR_MODE_NORMAL);
 	lv_bar_set_value(ui->start_screen_schedule_bar, 1, LV_ANIM_ON);

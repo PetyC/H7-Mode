@@ -2,7 +2,7 @@
  * @Description:
  * @Autor: Pi
  * @Date: 2022-08-26 22:53:22
- * @LastEditTime: 2022-08-30 23:32:31
+ * @LastEditTime: 2023-05-23 03:12:57
  */
 // SPDX-License-Identifier: MIT
 // Copyright 2020 NXP
@@ -62,6 +62,12 @@ void encoder_init(void)
   lv_indev_set_group(indev_encoder, encoder_group);
 }
 
+
+#include "FreeRTOS.h"
+#include "task.h"
+#include "cmsis_os2.h"
+extern osSemaphoreId_t Network_QueueHandle;
+
 /**
  * @brief 主菜单按键组初始化
  * @return {*}
@@ -75,7 +81,23 @@ void encoder_main_init(void)
   lv_group_add_obj(encoder_group, guider_ui.main_screen_wifi_set_btn);
   lv_group_add_obj(encoder_group, guider_ui.main_screen_demo_btn);
 
+  uint8_t network_sta = 0;
+  
+  if(osMessageQueueGet(Network_QueueHandle , &network_sta , 0 , 0) == osOK)
+  {
+    if(network_sta == 2)
+    {
+      UI_Wifi_ImagesDispaly(1);
+    }
+    else
+    {
+      UI_Wifi_ImagesDispaly(0);
+    }
+    
+  }
 }
+
+
 
 /**
  * @brief wifi界面按键初始化
@@ -89,6 +111,9 @@ void encoder_wifi_init(void)
   lv_group_add_obj(encoder_group, guider_ui.Wifi_screen_wifi_en_sw);
   lv_group_add_obj(encoder_group, guider_ui.Wifi_screen_APU_btn);
   lv_group_add_obj(encoder_group, guider_ui.Wifi_screen_return_btn);
+
+
+  
 }
 
 /**
@@ -101,7 +126,7 @@ void encoder_qr_init(void)
   lv_group_remove_all_objs(encoder_group);
 }
 
-void ta_event_cb(lv_event_t * e);
+void ta_event_cb(lv_event_t *e);
 
 /**
  * @brief 设备信息界面按键初始化
@@ -111,24 +136,20 @@ void encoder_device_init(void)
 {
   /*移除原先所有对象*/
   lv_group_remove_all_objs(encoder_group);
-  
+
   lv_group_add_obj(encoder_group, guider_ui.device_screen_about_tileview);
-  
   lv_group_add_obj(encoder_group, guider_ui.device_screen_check_btn);
   lv_group_add_obj(encoder_group, guider_ui.device_screen_return_btn);
-  
 }
 
 /**
-* @brief 开机进度条控制
+ * @brief 开机进度条控制
  * @param {uint8_t} num
  * @return {*}
  */
 void UI_Start_Schedule_Bar_Set(uint8_t num)
 {
-	lv_bar_set_value(guider_ui.start_screen_schedule_bar, 25, LV_ANIM_ON);
-	lv_bar_set_value(guider_ui.start_screen_schedule_bar, 50, LV_ANIM_ON);
-	
+  lv_bar_set_value(guider_ui.start_screen_schedule_bar, num, LV_ANIM_OFF);
 }
 
 /**
@@ -138,7 +159,7 @@ void UI_Start_Schedule_Bar_Set(uint8_t num)
  */
 void UI_Wifi_ImagesDispaly(uint8_t Enagle)
 {
-  if(Enagle == 1)
+  if (Enagle == 1)
   {
     lv_img_set_src(guider_ui.main_screen_wifi_img, &_WIFI_con_15x14);
   }
@@ -149,13 +170,20 @@ void UI_Wifi_ImagesDispaly(uint8_t Enagle)
 }
 
 
-
+extern uint8_t s_wifi_set;
 /**
  * @brief WIFI设置界面初始化
  * @return {*}
  */
 void UI_Wifi_Set_ScreenInit(void)
 {
-  lv_obj_add_state(  guider_ui.Wifi_screen_wifi_en_sw , LV_STATE_CHECKED );
- 
+
+  if(s_wifi_set == 1)
+  {
+    lv_obj_add_state(guider_ui.Wifi_screen_wifi_en_sw, LV_STATE_CHECKED);
+  }
+  else
+  {
+    lv_obj_clear_state(guider_ui.Wifi_screen_wifi_en_sw, LV_STATE_CHECKED);
+  }
 }

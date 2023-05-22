@@ -58,8 +58,8 @@ void setup_scr_device_screen(lv_ui *ui){
 	lv_obj_add_style(ui->device_screen_about_tileview, &style_device_screen_about_tileview_main_scrollbar_default, LV_PART_SCROLLBAR|LV_STATE_DEFAULT);
 
 	//add new tile about_tileview_about_name_0
-	ui->about_tileview_about_name_0 = lv_tileview_add_tile(ui->device_screen_about_tileview, 0, 0, LV_DIR_BOTTOM);
-
+	ui->about_tileview_about_name_0 = lv_tileview_add_tile(ui->device_screen_about_tileview, 0, 0, LV_DIR_TOP);
+ 
 	//Write codes device_screen_label_3
 	ui->device_screen_label_3 = lv_label_create(ui->about_tileview_about_name_0);
 	lv_obj_set_pos(ui->device_screen_label_3, 0, 90);

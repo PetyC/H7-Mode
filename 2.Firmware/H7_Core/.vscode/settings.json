@@ -76,6 +76,7 @@
     "bsp_w25qxx.h": "c",
     "user_config.h": "c",
     "bsp_mpu.h": "c",
-    "cmsis_os2.h": "c"
+    "cmsis_os2.h": "c",
+    "typeinfo": "c"
   }
 }

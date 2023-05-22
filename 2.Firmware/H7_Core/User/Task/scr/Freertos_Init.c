@@ -14,6 +14,7 @@ static void Create_Sem(void)
 {
   /*LCD二进制信号量*/
   LCD_BinarySemHandle = osSemaphoreNew(1, 0, &LCD_BinarySem_attributes);
+ 
 }
 
 /**
@@ -24,6 +25,12 @@ static void Create_Queue(void)
 {
   /*按键消息*/
   KEY_QueueHandle = osMessageQueueNew(1, sizeof(uint8_t), &KEY_Queue_attributes);
+		
+	Network_QueueHandle = osMessageQueueNew(1, sizeof(uint8_t), &Network_Queue_attributes);
+ 
+	Wifi_Set_QueueHandle = osMessageQueueNew(1, sizeof(uint8_t), &Wifi_Set_attributes);
+	
+
 }
 
 /**

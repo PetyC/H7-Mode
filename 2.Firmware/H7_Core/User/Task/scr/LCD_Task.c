@@ -2,7 +2,7 @@
  * @Description:
  * @Autor: Pi
  * @Date: 2022-09-10 04:30:49
- * @LastEditTime: 2022-09-23 13:36:52
+ * @LastEditTime: 2023-05-23 03:13:55
  */
 #include "LCD_Task.h"
 
@@ -19,7 +19,9 @@ osSemaphoreId_t LCD_BinarySemHandle;
 const osSemaphoreAttr_t LCD_BinarySem_attributes = {
     .name = "LCD_BinarySem"};
 
-		
+extern osSemaphoreId_t Network_QueueHandle;
+
+
 //#include "lv_demo_benchmark.h"
 lv_ui guider_ui;	
 		
@@ -46,11 +48,6 @@ void LCD_Task(void *argument)
   setup_ui(&guider_ui);
   events_init(&guider_ui);
 
-//	for(uint8_t i = 0 ; i <= 100 ; i++)
-//	{
-//		UI_Start_Schedule_Bar_Set(i);
-//		osDelay(50);
-//	} 
 
 #endif		
 	/*延时*/
@@ -63,7 +60,5 @@ void LCD_Task(void *argument)
 		vTaskDelayUntil( &xLastWakeTime,10);
 
 		lv_task_handler();    
-		
-		//UI_Wifi_ImagesDispaly(1);
   };
 }

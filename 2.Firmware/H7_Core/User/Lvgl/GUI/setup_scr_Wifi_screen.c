@@ -97,7 +97,7 @@ void setup_scr_Wifi_screen(lv_ui *ui){
 	lv_obj_set_pos(ui->Wifi_screen_wifi_name_now_label, 4, 45);
 	lv_obj_set_size(ui->Wifi_screen_wifi_name_now_label, 120, 15);
 	lv_obj_set_scrollbar_mode(ui->Wifi_screen_wifi_name_now_label, LV_SCROLLBAR_MODE_OFF);
-	lv_label_set_text(ui->Wifi_screen_wifi_name_now_label, "Moujiti");
+	lv_label_set_text(ui->Wifi_screen_wifi_name_now_label, "Mate");
 	lv_label_set_long_mode(ui->Wifi_screen_wifi_name_now_label, LV_LABEL_LONG_WRAP);
 
 	//Write style state: LV_STATE_DEFAULT for style_wifi_screen_wifi_name_now_label_main_main_default
